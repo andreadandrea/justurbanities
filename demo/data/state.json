@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "comment": "Stato iniziale — nomi dalla Variable List (Documento operativo §6). Risorse 0-100.",
+  "resources": {
+    "trust": 50,
+    "care": 50,
+    "commons": 50,
+    "voice": 50,
+    "resilience": 50,
+    "fragmentationGlobal": 50
+  },
+  "flags": {
+    "gameStarted": false,
+    "communityCenterVisited": false,
+    "annaIntroDone": false,
+    "benIntroDone": false,
+    "giorgiaIntroDone": false,
+    "sigridIntroDone": false,
+    "rubenIntroDone": false,
+    "aminIntroDone": false,
+    "mapUnlocked": false,
+    "logbookUnlocked": false,
+    "fragmentationIntroduced": false,
+    "collectiveResourcesIntroduced": false,
+    "alexandriaMessageReceived": false
+  },
+  "counters": {
+    "npcIntroCount": 0
+  }
+}
