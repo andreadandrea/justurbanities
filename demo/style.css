@@ -3,6 +3,7 @@
    All values come from design-tokens.css (no hardcoded values).
    Component classes: .ju-<component>, states: is-* / data-*.
    ============================================================ */
+@import url("assets/fonts/fonts.css");
 @import url("design-tokens.css");
 
 /* ---------- Base ---------- */
@@ -10,7 +11,11 @@
 
 body {
   margin: 0;
-  background: var(--c-surface-2);
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -10%, var(--c-cream) 0%, transparent 60%),
+    linear-gradient(180deg, var(--c-surface-2), var(--c-surface-3));
+  background-attachment: fixed;
   color: var(--c-ink);
   font-family: var(--font-ui);
   font-size: var(--fs-300);
@@ -49,7 +54,7 @@ select:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: var(--s-3);
-  margin-bottom: var(--s-3);
+  margin-bottom: var(--s-4);
 }
 
 .ju-title {
@@ -57,6 +62,13 @@ select:focus-visible {
   font-family: var(--font-display);
   font-size: var(--fs-600);
   font-weight: var(--fw-black);
+  letter-spacing: 0.01em;
+  color: var(--c-ink);
+}
+
+.ju-title::before {
+  content: "◆ ";
+  color: var(--c-terracotta);
 }
 
 .ju-topbar__controls {
@@ -70,49 +82,61 @@ select:focus-visible {
   align-items: center;
   gap: var(--s-2);
   font-size: var(--fs-200);
+  font-weight: var(--fw-semibold);
+  color: var(--c-ink-muted);
 }
 
 .ju-lang__select {
   min-height: var(--target-min);
-  padding: var(--s-1) var(--s-2);
-  font-family: var(--font-ui);
-  font-size: var(--fs-300);
-  color: var(--c-ink);
-  background: var(--c-surface);
-  border: var(--bw) solid var(--c-line);
-  border-radius: var(--r-md);
-}
-
-.ju-btn {
-  min-height: var(--target-min);
-  min-width: var(--target-min);
-  padding: var(--s-2) var(--s-4);
+  padding: var(--s-1) var(--s-3);
   font-family: var(--font-ui);
   font-size: var(--fs-300);
   font-weight: var(--fw-semibold);
   color: var(--c-ink);
   background: var(--c-surface);
   border: var(--bw) solid var(--c-line);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-md);
+  box-shadow: var(--e-1);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 
-.ju-btn:hover { background: var(--c-surface-3); border-color: var(--c-ochre); }
+.ju-btn {
+  min-height: var(--target-min);
+  min-width: var(--target-min);
+  padding: var(--s-2) var(--s-5);
+  font-family: var(--font-ui);
+  font-size: var(--fs-300);
+  font-weight: var(--fw-bold);
+  color: var(--c-ink);
+  background: var(--c-surface);
+  border: var(--bw) solid var(--c-line);
+  border-radius: var(--r-pill);
+  box-shadow: var(--e-1);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+
+.ju-btn:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-ochre);
+  box-shadow: var(--e-2);
+}
 
 .ju-btn--primary {
   background: var(--c-orange);
   border-color: var(--c-rust);
-  color: var(--c-ink);
 }
 
-.ju-btn--primary:hover { background: var(--c-ochre); }
+.ju-btn--primary:hover { background: var(--c-ochre); border-color: var(--c-rust); }
 
 /* ---------- Stage (16:9 scene) ---------- */
 .ju-stage {
   position: relative;
   aspect-ratio: 16 / 9;
-  border-radius: var(--r-lg);
+  border: var(--bw-thick) solid var(--c-surface);
+  border-radius: var(--r-xl);
   overflow: hidden;
   background: var(--c-surface-3);
   box-shadow: var(--e-3);
@@ -129,12 +153,35 @@ select:focus-visible {
   transition: filter var(--dur-colour) var(--ease-in-out);
 }
 
-.ju-bg.is-placeholder[data-bg="community_center_hall"] {
-  background-image: linear-gradient(165deg, var(--c-cream), var(--c-ochre) 45%, var(--c-terracotta) 80%, var(--c-rust));
+/* Soft vignette over any background */
+.ju-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, transparent 55%, var(--c-overlay) 140%);
+  pointer-events: none;
 }
 
+/* Hall: warm wall, window glows, terracotta floor */
+.ju-bg.is-placeholder[data-bg="community_center_hall"] {
+  background-image:
+    radial-gradient(circle at 22% 18%, var(--c-cream) 0%, transparent 26%),
+    radial-gradient(circle at 76% 14%, var(--c-cream) 0%, transparent 30%),
+    linear-gradient(transparent 64%, var(--c-rust) 64.4%, var(--c-terracotta) 78%, var(--c-rust) 100%),
+    repeating-linear-gradient(90deg, transparent 0%, transparent 7%, var(--c-ochre) 7%, var(--c-ochre) 7.4%, transparent 7.4%, transparent 14%),
+    linear-gradient(172deg, var(--c-cream) 0%, var(--c-ochre) 55%, var(--c-terracotta) 130%);
+}
+
+/* City map: cold blueprint grid with disconnected districts */
 .ju-bg.is-placeholder[data-bg="city_map"] {
-  background-image: linear-gradient(165deg, var(--c-frag-white), var(--c-frag-bluegrey) 55%, var(--c-frag-purple));
+  background-image:
+    radial-gradient(circle at 30% 38%, var(--c-frag-green) 0%, transparent 12%),
+    radial-gradient(circle at 68% 30%, var(--c-frag-red) 0%, transparent 10%),
+    radial-gradient(circle at 55% 66%, var(--c-frag-purple) 0%, transparent 16%),
+    radial-gradient(circle at 82% 70%, var(--c-frag-grey) 0%, transparent 11%),
+    repeating-linear-gradient(0deg, var(--c-frag-grey) 0, var(--c-frag-grey) var(--bw), transparent var(--bw), transparent var(--s-8)),
+    repeating-linear-gradient(90deg, var(--c-frag-grey) 0, var(--c-frag-grey) var(--bw), transparent var(--bw), transparent var(--s-8)),
+    linear-gradient(160deg, var(--c-frag-bluegrey), var(--c-frag-purple) 120%);
 }
 
 .ju-bg.is-placeholder {
@@ -144,15 +191,16 @@ select:focus-visible {
 .ju-bg__label {
   display: none;
   position: absolute;
-  top: var(--s-3);
+  bottom: var(--s-2);
   right: var(--s-3);
-  padding: var(--s-1) var(--s-2);
+  z-index: var(--z-scene);
+  padding: 0 var(--s-2);
   font-family: var(--font-mono);
   font-size: var(--fs-100);
   color: var(--c-ink-muted);
   background: var(--c-surface);
-  border: var(--bw) dashed var(--c-line);
   border-radius: var(--r-sm);
+  opacity: 0.55;
 }
 
 .ju-bg.is-placeholder .ju-bg__label { display: inline-block; }
@@ -167,44 +215,51 @@ select:focus-visible {
   96% { filter: saturate(0.5); transform: none; }
 }
 
-/* ---------- HUD: resource meters ---------- */
+/* ---------- HUD: resource meters (one compact panel) ---------- */
 .ju-hud {
   position: absolute;
   top: var(--s-3);
   left: var(--s-3);
   z-index: var(--z-hud);
   display: flex;
+  align-items: stretch;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  background: var(--c-surface);
+  border: var(--bw) solid var(--c-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--e-2);
+  max-width: 78%;
   flex-wrap: wrap;
-  gap: var(--s-2);
-  max-width: 72%;
 }
 
 .ju-meter {
   display: grid;
   grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "icon label delta"
+    "bar  bar   bar";
   align-items: center;
-  gap: var(--s-1) var(--s-2);
-  padding: var(--s-1) var(--s-2);
-  background: var(--c-surface);
-  border: var(--bw) solid var(--c-line);
-  border-radius: var(--r-md);
-  box-shadow: var(--e-1);
+  column-gap: var(--s-1);
+  row-gap: var(--s-1);
   font-size: var(--fs-100);
+  min-width: calc(var(--s-10) + var(--s-6));
 }
 
-/* Fragmentation: cold palette + dashed border = non-colour cue */
+/* Fragmentation: separated, dashed = non-colour cue */
 .ju-meter[data-res="fragmentationGlobal"] {
-  border-style: dashed;
-  border-color: var(--c-frag-bluegrey);
-  background: var(--c-frag-white);
+  border-left: var(--bw) dashed var(--c-frag-bluegrey);
+  padding-left: var(--s-3);
 }
 
-.ju-meter__icon { font-size: var(--fs-200); }
+.ju-meter__icon { grid-area: icon; font-size: var(--fs-200); }
 
 .ju-meter__label {
-  font-weight: var(--fw-semibold);
+  grid-area: label;
+  font-weight: var(--fw-bold);
   color: var(--c-ink-muted);
   white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
 .ju-meter__value {
@@ -213,8 +268,8 @@ select:focus-visible {
 }
 
 .ju-meter__track {
-  grid-column: 1 / -1;
-  height: var(--s-2);
+  grid-area: bar;
+  height: var(--s-1);
   background: var(--c-surface-3);
   border-radius: var(--r-pill);
   overflow: hidden;
@@ -243,28 +298,29 @@ select:focus-visible {
 }
 
 .ju-meter__delta {
+  grid-area: delta;
   font-family: var(--font-mono);
   font-weight: var(--fw-bold);
-  min-width: var(--s-6);
   text-align: right;
 }
 
 .ju-meter__delta.is-up   { color: var(--c-success); }
 .ju-meter__delta.is-down { color: var(--c-danger); }
 
-/* ---------- Portrait frame ---------- */
+/* ---------- Portrait frame (polaroid-style) ---------- */
 .ju-portrait-frame {
   position: absolute;
-  left: var(--s-5);
-  bottom: 31%;
+  left: var(--s-6);
+  bottom: 30%;
   z-index: var(--z-portrait);
-  width: 17%;
+  width: 18%;
   aspect-ratio: 3 / 4;
   overflow: hidden;
   background: var(--c-surface-2);
-  border: var(--bw-thick) solid var(--c-surface);
+  border: var(--s-1) solid var(--c-surface);
   border-radius: var(--r-lg);
-  box-shadow: var(--e-2);
+  box-shadow: var(--e-3);
+  transform: rotate(-2deg);
 }
 
 .ju-portrait {
@@ -278,79 +334,99 @@ select:focus-visible {
 /* ---------- Dialogue box ---------- */
 .ju-dialogue {
   position: absolute;
-  left: var(--s-4);
-  right: var(--s-4);
-  bottom: var(--s-4);
+  left: var(--s-5);
+  right: var(--s-5);
+  bottom: var(--s-5);
   z-index: var(--z-dialogue);
-  min-height: 26%;
-  max-height: 62%;
+  min-height: 24%;
+  max-height: 60%;
   overflow-y: auto;
-  padding: var(--s-4) var(--s-5);
+  padding: var(--s-5) var(--s-6) var(--s-4);
   background: var(--c-surface);
   border: var(--bw) solid var(--c-line);
   border-radius: var(--r-xl);
-  box-shadow: var(--e-2);
+  box-shadow: var(--e-3);
 }
 
+/* Speaker chip riding the top edge of the box */
 .ju-dialogue__header {
-  display: flex;
+  position: absolute;
+  top: 0;
+  left: var(--s-6);
+  transform: translateY(-50%);
+  display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  margin-bottom: var(--s-2);
+  padding: var(--s-1) var(--s-4);
+  background: var(--c-terracotta);
+  border: var(--bw) solid var(--c-surface);
+  border-radius: var(--r-pill);
+  box-shadow: var(--e-1);
 }
 
 .ju-speaker {
   font-family: var(--font-display);
-  font-size: var(--fs-500);
+  font-size: var(--fs-300);
   font-weight: var(--fw-bold);
-  color: var(--c-rust);
+  color: var(--c-cream);
+  letter-spacing: 0.02em;
 }
 
-.ju-dialogue__badge { font-size: var(--fs-300); }
+.ju-dialogue__badge { font-size: var(--fs-200); line-height: var(--lh-tight); }
 
 .ju-text {
-  margin: 0;
+  margin: var(--s-2) 0 0;
   font-size: var(--fs-400);
   line-height: var(--lh-relaxed);
 }
 
-/* Variant: narration — no speaker, centered, serif voice */
-.ju-dialogue[data-type="narration"],
-.ju-dialogue[data-type="end"] {
+/* Variant: narration — serif voice, centered, parchment */
+.ju-dialogue[data-type="narration"] {
   background: var(--c-surface-2);
   text-align: center;
 }
 
 .ju-dialogue[data-type="narration"] .ju-text {
+  max-width: 85%;
+  margin-inline: auto;
   font-family: var(--font-display);
   font-style: italic;
-  color: var(--c-ink);
+  font-size: var(--fs-400);
 }
 
 /* Variant: system toast */
 .ju-dialogue[data-type="system"] {
-  background: var(--c-surface-3);
+  background: var(--c-surface-2);
   border-color: var(--c-info);
   border-left-width: var(--s-1);
 }
 
-.ju-dialogue[data-type="system"] .ju-speaker {
-  color: var(--c-info);
-  font-family: var(--font-ui);
-  font-size: var(--fs-200);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
+.ju-dialogue[data-type="system"] .ju-dialogue__header {
+  background: var(--c-info);
 }
 
-/* Variant: in-world message — distinct visual, explicit sender */
+.ju-dialogue[data-type="system"] .ju-speaker {
+  font-family: var(--font-ui);
+  font-size: var(--fs-100);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ju-dialogue[data-type="system"] .ju-text {
+  font-size: var(--fs-300);
+  color: var(--c-ink-muted);
+  font-weight: var(--fw-semibold);
+}
+
+/* Variant: in-world message — letter-like, explicit sender */
 .ju-dialogue[data-type="message"] {
   background: var(--c-frag-white);
-  border-color: var(--c-voice);
-  border-style: double;
-  border-width: var(--bw-thick);
+  border: var(--bw-thick) double var(--c-voice);
 }
 
-.ju-dialogue[data-type="message"] .ju-speaker { color: var(--c-voice); }
+.ju-dialogue[data-type="message"] .ju-dialogue__header {
+  background: var(--c-voice);
+}
 
 /* Variant: hub */
 .ju-dialogue[data-type="hub"] .ju-text { font-weight: var(--fw-semibold); }
@@ -360,10 +436,13 @@ select:focus-visible {
   display: flex;
   flex-direction: column;
   gap: var(--s-2);
-  margin-top: var(--s-3);
+  margin-top: var(--s-4);
 }
 
 .ju-choice {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
   min-height: var(--target-min);
   padding: var(--s-2) var(--s-4);
   font-family: var(--font-ui);
@@ -375,12 +454,30 @@ select:focus-visible {
   border: var(--bw) solid var(--c-line);
   border-radius: var(--r-md);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  transition: background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
 }
 
-.ju-choice:hover { background: var(--c-surface-3); border-color: var(--c-ochre); }
+.ju-choice::before {
+  content: "▸";
+  color: var(--c-terracotta);
+  font-size: var(--fs-300);
+}
 
-.ju-choice:active { background: var(--c-cream); border-color: var(--c-terracotta); }
+.ju-choice:hover {
+  background: var(--c-surface);
+  border-color: var(--c-ochre);
+  transform: translateX(var(--s-1));
+  box-shadow: var(--e-1);
+}
+
+.ju-choice:active {
+  background: var(--c-cream);
+  border-color: var(--c-terracotta);
+  transform: translateX(var(--s-1));
+}
 
 /* ---------- Continue ---------- */
 .ju-dialogue__footer {
@@ -391,7 +488,7 @@ select:focus-visible {
 
 .ju-continue {
   min-height: var(--target-min);
-  padding: var(--s-2) var(--s-5);
+  padding: var(--s-2) var(--s-6);
   font-family: var(--font-ui);
   font-size: var(--fs-300);
   font-weight: var(--fw-bold);
@@ -399,11 +496,15 @@ select:focus-visible {
   background: var(--c-ochre);
   border: var(--bw) solid var(--c-rust);
   border-radius: var(--r-pill);
+  box-shadow: var(--e-1);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease);
+  transition: background var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
 }
 
-.ju-continue:hover { background: var(--c-orange); }
+.ju-continue::after { content: " →"; }
+
+.ju-continue:hover { background: var(--c-orange); box-shadow: var(--e-2); }
 
 /* ---------- End screen ---------- */
 .ju-end {
@@ -420,6 +521,7 @@ select:focus-visible {
   padding: var(--s-8);
   text-align: center;
   background: var(--c-surface);
+  border-top: var(--s-2) solid var(--c-terracotta);
   border-radius: var(--r-xl);
   box-shadow: var(--e-3);
 }
@@ -441,12 +543,13 @@ select:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .ju-bg.is-glitch { animation: none; }
   .ju-bg, .ju-meter__fill, .ju-btn, .ju-choice, .ju-continue { transition: none; }
+  .ju-choice:hover, .ju-choice:active { transform: none; }
 }
 
 /* ---------- Small screens: keep stage usable ---------- */
 @media (max-width: 720px) {
   .ju-stage { aspect-ratio: auto; min-height: 70vh; }
-  .ju-hud { max-width: 100%; position: static; padding: var(--s-2); }
+  .ju-hud { max-width: 100%; position: static; margin: var(--s-2); }
   .ju-portrait-frame { display: none; }
   .ju-dialogue { position: static; margin: var(--s-2); max-height: none; }
 }
