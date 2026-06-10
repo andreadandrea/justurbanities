@@ -22,6 +22,9 @@ body {
   line-height: var(--lh-normal);
 }
 
+/* The hidden attribute must always win over component display rules */
+[hidden] { display: none !important; }
+
 .ju-visually-hidden {
   position: absolute;
   width: var(--s-1);
