@@ -331,6 +331,7 @@
     endScreen.hidden = true;
     dialogue.hidden = false;
     dialogue.dataset.type = node.type;
+    dialogue.dataset.node = node.id;
 
     // Portrait
     var frame = $('portrait-frame');

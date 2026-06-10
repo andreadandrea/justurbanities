@@ -1,8 +1,60 @@
 {
   "$schema": "scene graph — vedi demo/CLAUDE.md per il contratto dati",
-  "version": "0.1.0",
-  "start": "p00_narration",
+  "version": "0.2.0",
+  "start": "char_select",
   "nodes": [
+    {
+      "id": "char_select",
+      "type": "hub",
+      "bg": "community_center_hall",
+      "choices": [
+        {
+          "id": "char_select.choice.0",
+          "next": "p00_narration",
+          "effects": {
+            "set": {
+              "playerCharacter": "maya"
+            }
+          }
+        },
+        {
+          "id": "char_select.choice.1",
+          "next": "p00_narration",
+          "effects": {
+            "set": {
+              "playerCharacter": "samir"
+            }
+          }
+        },
+        {
+          "id": "char_select.choice.2",
+          "next": "p00_narration",
+          "effects": {
+            "set": {
+              "playerCharacter": "elena"
+            }
+          }
+        },
+        {
+          "id": "char_select.choice.3",
+          "next": "p00_narration",
+          "effects": {
+            "set": {
+              "playerCharacter": "luca"
+            }
+          }
+        },
+        {
+          "id": "char_select.choice.4",
+          "next": "p00_narration",
+          "effects": {
+            "set": {
+              "playerCharacter": "custom"
+            }
+          }
+        }
+      ]
+    },
     {
       "id": "p00_narration",
       "type": "narration",
@@ -641,6 +693,375 @@
     },
     {
       "id": "end_prologue",
+      "type": "narration",
+      "bg": "community_center_hall",
+      "speaker": "narrator",
+      "next": "route_router"
+    },
+    {
+      "id": "route_router",
+      "type": "hub",
+      "bg": "city_map",
+      "choices": [
+        {
+          "id": "route_router.choice.0",
+          "next": "maya_r1",
+          "requires": [
+            {
+              "var": "playerCharacter",
+              "eq": "maya"
+            }
+          ]
+        },
+        {
+          "id": "route_router.choice.1",
+          "next": "samir_r1",
+          "requires": [
+            {
+              "var": "playerCharacter",
+              "eq": "samir"
+            }
+          ]
+        },
+        {
+          "id": "route_router.choice.2",
+          "next": "elena_r1",
+          "requires": [
+            {
+              "var": "playerCharacter",
+              "eq": "elena"
+            }
+          ]
+        },
+        {
+          "id": "route_router.choice.3",
+          "next": "luca_r1",
+          "requires": [
+            {
+              "var": "playerCharacter",
+              "eq": "luca"
+            }
+          ]
+        },
+        {
+          "id": "route_router.choice.4",
+          "next": "custom_r1",
+          "requires": [
+            {
+              "var": "playerCharacter",
+              "eq": "custom"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maya_r1",
+      "type": "narration",
+      "bg": "street_evening",
+      "speaker": "narrator",
+      "next": "maya_r2"
+    },
+    {
+      "id": "maya_r2",
+      "type": "dialogue",
+      "bg": "street_evening",
+      "speaker": "maya",
+      "portrait": "assets/char/MAYA.png",
+      "next": "maya_r3"
+    },
+    {
+      "id": "maya_r3",
+      "type": "dialogue",
+      "bg": "street_evening",
+      "speaker": "maya",
+      "portrait": "assets/char/MAYA.png",
+      "choices": [
+        {
+          "id": "maya_r3.choice.0",
+          "next": "maya_r4",
+          "effects": {
+            "inc": {
+              "voice": 5
+            }
+          }
+        },
+        {
+          "id": "maya_r3.choice.1",
+          "next": "maya_r4",
+          "effects": {
+            "inc": {
+              "resilience": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "maya_r4",
+      "type": "narration",
+      "bg": "street_evening",
+      "speaker": "narrator",
+      "next": "sys_maya_arrived"
+    },
+    {
+      "id": "sys_maya_arrived",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "c2_end",
+      "effects": {
+        "set": {
+          "mayaArrivedAssembly": true
+        }
+      }
+    },
+    {
+      "id": "samir_r1",
+      "type": "narration",
+      "bg": "workplace",
+      "speaker": "narrator",
+      "next": "samir_r2"
+    },
+    {
+      "id": "samir_r2",
+      "type": "dialogue",
+      "bg": "workplace",
+      "speaker": "samir",
+      "portrait": "assets/char/SAMIR.png",
+      "next": "samir_r3"
+    },
+    {
+      "id": "samir_r3",
+      "type": "dialogue",
+      "bg": "workplace",
+      "speaker": "samir",
+      "portrait": "assets/char/SAMIR.png",
+      "choices": [
+        {
+          "id": "samir_r3.choice.0",
+          "next": "samir_r4",
+          "effects": {
+            "inc": {
+              "trust": 5
+            }
+          }
+        },
+        {
+          "id": "samir_r3.choice.1",
+          "next": "samir_r4",
+          "effects": {
+            "inc": {
+              "resilience": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "samir_r4",
+      "type": "narration",
+      "bg": "workplace",
+      "speaker": "narrator",
+      "next": "sys_samir_arrived"
+    },
+    {
+      "id": "sys_samir_arrived",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "c2_end",
+      "effects": {
+        "set": {
+          "samirArrivedAssembly": true
+        }
+      }
+    },
+    {
+      "id": "elena_r1",
+      "type": "narration",
+      "bg": "town_hall_office",
+      "speaker": "narrator",
+      "next": "elena_r2"
+    },
+    {
+      "id": "elena_r2",
+      "type": "dialogue",
+      "bg": "town_hall_office",
+      "speaker": "elena",
+      "portrait": "assets/char/ELENA.png",
+      "next": "elena_r3"
+    },
+    {
+      "id": "elena_r3",
+      "type": "dialogue",
+      "bg": "town_hall_office",
+      "speaker": "elena",
+      "portrait": "assets/char/ELENA.png",
+      "choices": [
+        {
+          "id": "elena_r3.choice.0",
+          "next": "elena_r4",
+          "effects": {
+            "inc": {
+              "trust": 5
+            }
+          }
+        },
+        {
+          "id": "elena_r3.choice.1",
+          "next": "elena_r4",
+          "effects": {
+            "inc": {
+              "voice": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "elena_r4",
+      "type": "narration",
+      "bg": "town_hall_office",
+      "speaker": "narrator",
+      "next": "sys_elena_arrived"
+    },
+    {
+      "id": "sys_elena_arrived",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "c2_end",
+      "effects": {
+        "set": {
+          "elenaArrivedAssembly": true
+        }
+      }
+    },
+    {
+      "id": "luca_r1",
+      "type": "narration",
+      "bg": "playground",
+      "speaker": "narrator",
+      "next": "luca_r2"
+    },
+    {
+      "id": "luca_r2",
+      "type": "dialogue",
+      "bg": "playground",
+      "speaker": "luca",
+      "portrait": "assets/char/LUCA.png",
+      "next": "luca_r3"
+    },
+    {
+      "id": "luca_r3",
+      "type": "dialogue",
+      "bg": "playground",
+      "speaker": "luca",
+      "portrait": "assets/char/LUCA.png",
+      "choices": [
+        {
+          "id": "luca_r3.choice.0",
+          "next": "luca_r4",
+          "effects": {
+            "inc": {
+              "care": 5
+            }
+          }
+        },
+        {
+          "id": "luca_r3.choice.1",
+          "next": "luca_r4",
+          "effects": {
+            "inc": {
+              "commons": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "luca_r4",
+      "type": "narration",
+      "bg": "playground",
+      "speaker": "narrator",
+      "next": "sys_luca_arrived"
+    },
+    {
+      "id": "sys_luca_arrived",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "c2_end",
+      "effects": {
+        "set": {
+          "lucaArrivedAssembly": true
+        }
+      }
+    },
+    {
+      "id": "custom_r1",
+      "type": "narration",
+      "bg": "community_center_hall",
+      "speaker": "narrator",
+      "next": "custom_r2"
+    },
+    {
+      "id": "custom_r2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "custom_r3"
+    },
+    {
+      "id": "custom_r3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "custom_r3.choice.0",
+          "next": "custom_r4",
+          "effects": {
+            "inc": {
+              "voice": 3
+            }
+          }
+        },
+        {
+          "id": "custom_r3.choice.1",
+          "next": "custom_r4",
+          "effects": {
+            "inc": {
+              "commons": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "custom_r4",
+      "type": "narration",
+      "bg": "community_center_hall",
+      "speaker": "narrator",
+      "next": "sys_custom_arrived"
+    },
+    {
+      "id": "sys_custom_arrived",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "c2_end",
+      "effects": {
+        "set": {
+          "customArrivedAssembly": true
+        }
+      }
+    },
+    {
+      "id": "c2_end",
       "type": "end",
       "bg": "community_center_hall",
       "speaker": "narrator"

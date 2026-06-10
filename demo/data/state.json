@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "comment": "Stato iniziale — nomi dalla Variable List (Documento operativo §6). Risorse 0-100.",
   "resources": {
     "trust": 50,
@@ -22,7 +22,13 @@
     "logbookUnlocked": false,
     "fragmentationIntroduced": false,
     "collectiveResourcesIntroduced": false,
-    "alexandriaMessageReceived": false
+    "alexandriaMessageReceived": false,
+    "playerCharacter": "",
+    "mayaArrivedAssembly": false,
+    "samirArrivedAssembly": false,
+    "elenaArrivedAssembly": false,
+    "lucaArrivedAssembly": false,
+    "customArrivedAssembly": false
   },
   "counters": {
     "npcIntroCount": 0
