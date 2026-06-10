@@ -76,6 +76,29 @@ EOF
 
 E un playthrough manuale completo: prologo → parla con Anna → 3+ NPC → mappa → risorse → messaggio Alexandria → schermata finale, in IT e in EN, con tastiera sola e con `prefers-reduced-motion` attivo.
 
+## Decisioni implementative (Ciclo 1)
+
+- **`data-embed.js` (generato, non editare a mano):** Chrome blocca `fetch()` di JSON da `file://`. Il motore prova prima `fetch` dei file in `data/` (fonte canonica) e, se fallisce, usa `window.JU_DATA` da `data-embed.js`. Dopo OGNI modifica a `data/*` rigenerare con:
+
+```bash
+python3 - <<'EOF'
+import json, os
+out={'scenes':json.load(open('data/scenes.json')),
+     'state':json.load(open('data/state.json')),
+     'locales':{}}
+for f in sorted(os.listdir('data/locales')):
+    if f.endswith('.json'):
+        out['locales'][f[:-5]]=json.load(open(f'data/locales/{f}'))
+src='/* AUTO-GENERATED from data/*.json — do not edit by hand.\n   Regenerate with the command in CLAUDE.md ("Decisioni implementative").\n   Fallback for file:// where fetch() of local JSON is blocked. */\nwindow.JU_DATA = '+json.dumps(out,ensure_ascii=False)+';\n'
+open('data-embed.js','w').write(src)
+EOF
+```
+
+- **Switcher lingua:** mostra solo le lingue il cui file locale è effettivamente presente/caricato; quando arrivano `it/pl/sv/ro.json` basta rigenerare `data-embed.js` e compaiono da sole.
+- **Effetti applicati una sola volta:** gli `effects` di un nodo si applicano all'ingresso e lo stato viene salvato DOPO; al reload il nodo corrente viene ri-renderizzato senza riapplicarli.
+- **Ritratti/sfondi mancanti:** `onerror` sull'immagine nasconde la cornice ritratto; per gli sfondi un probe una-tantum su `assets/bg/<id>.png` decide immagine vera vs placeholder CSS (con etichetta `id` visibile solo sul placeholder).
+- **Glitch mappa:** classe `is-glitch` sul layer sfondo quando il nodo corrente è `map_8`; animazione disattivata sotto `prefers-reduced-motion`.
+
 ## Riferimenti (cartella padre, sola lettura)
 
 `Design System - Justurbanities.md` (componenti P0, pattern, a11y) · `Piano di Lavoro - Demo Web.md` (visione generale) · `Documento operativo.docx` §3–6 (fonte dei dati) · `Visual Bible.docx` (stile).
