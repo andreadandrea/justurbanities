@@ -99,6 +99,13 @@ EOF
 - **Ritratti/sfondi mancanti:** `onerror` sull'immagine nasconde la cornice ritratto; per gli sfondi un probe una-tantum su `assets/bg/<id>.png` decide immagine vera vs placeholder CSS (con etichetta `id` visibile solo sul placeholder).
 - **Glitch mappa:** classe `is-glitch` sul layer sfondo quando il nodo corrente è `map_8`; animazione disattivata sotto `prefers-reduced-motion`.
 
+## Ciclo 2 — Same City, Different Routes (in corso)
+
+- **Flusso esteso:** `char_select` (nuovo start, selezione personaggio) → prologo invariato → `end_prologue` (ora narration) → `route_router` (hub: visibile solo il percorso del personaggio scelto via `requires` su `playerCharacter`) → percorso di 5 nodi (`<char>_r1..r4` + `sys_<char>_arrived`) → `c2_end`.
+- **Stato:** `flags.playerCharacter` (stringa: `maya|samir|elena|luca|custom`) + 5 flag `<char>ArrivedAssembly`. La scelta in `<char>_r3` modifica le risorse (`inc`).
+- **⚠️ Testi EN dei percorsi = BOZZA** scritta da Claude in attesa del Dialogue Script ufficiale (Documento operativo §3): sostituirli vuol dire solo aggiornare le chiavi nei locales e rigenerare `data-embed.js` — zero modifiche al codice. Stessa cosa per i personaggi Maya/Samir/Luca (archetipi provvisori).
+- **Ritratti attesi:** `assets/char/MAYA.png`, `SAMIR.png`, `LUCA.png` (oltre agli 8 del prologo). Sfondi nuovi: `street_evening`, `workplace`, `town_hall_office`, `playground` (placeholder CSS già pronti).
+
 ## Riferimenti (cartella padre, sola lettura)
 
 `Design System - Justurbanities.md` (componenti P0, pattern, a11y) · `Piano di Lavoro - Demo Web.md` (visione generale) · `Documento operativo.docx` §3–6 (fonte dei dati) · `Visual Bible.docx` (stile).

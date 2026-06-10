@@ -184,6 +184,39 @@ select:focus-visible {
     linear-gradient(160deg, var(--c-frag-bluegrey), var(--c-frag-purple) 120%);
 }
 
+/* Route backgrounds (Ciclo 2) */
+.ju-bg.is-placeholder[data-bg="street_evening"] {
+  background-image:
+    radial-gradient(circle at 18% 30%, var(--c-ochre) 0%, transparent 8%),
+    radial-gradient(circle at 52% 26%, var(--c-ochre) 0%, transparent 7%),
+    radial-gradient(circle at 84% 32%, var(--c-ochre) 0%, transparent 8%),
+    linear-gradient(transparent 68%, var(--c-frag-purple) 68.4%, var(--c-frag-bluegrey) 100%),
+    linear-gradient(178deg, var(--c-petrol) 0%, var(--c-frag-purple) 75%);
+}
+
+.ju-bg.is-placeholder[data-bg="workplace"] {
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0%, transparent 11%, var(--c-concrete) 11%, var(--c-concrete) 11.5%, transparent 11.5%, transparent 22%),
+    linear-gradient(transparent 70%, var(--c-concrete) 70.4%, var(--c-frag-grey) 100%),
+    linear-gradient(170deg, var(--c-frag-white) 0%, var(--c-concrete) 90%);
+}
+
+.ju-bg.is-placeholder[data-bg="town_hall_office"] {
+  background-image:
+    radial-gradient(circle at 80% 20%, var(--c-cream) 0%, transparent 30%),
+    repeating-linear-gradient(0deg, transparent 0%, transparent 16%, var(--c-petrol) 16%, var(--c-petrol) 16.4%, transparent 16.4%, transparent 32%),
+    linear-gradient(transparent 72%, var(--c-petrol) 72.4%, var(--c-frag-bluegrey) 100%),
+    linear-gradient(170deg, var(--c-frag-white) 0%, var(--c-petrol) 130%);
+}
+
+.ju-bg.is-placeholder[data-bg="playground"] {
+  background-image:
+    radial-gradient(circle at 78% 18%, var(--c-ochre) 0%, transparent 18%),
+    radial-gradient(circle at 24% 70%, var(--c-sage) 0%, transparent 24%),
+    linear-gradient(transparent 66%, var(--c-sage) 66.4%, var(--c-commons) 100%),
+    linear-gradient(170deg, var(--c-cream) 0%, var(--c-sage) 120%);
+}
+
 .ju-bg.is-placeholder {
   background-image: linear-gradient(165deg, var(--c-cream), var(--c-concrete));
 }
@@ -430,6 +463,39 @@ select:focus-visible {
 
 /* Variant: hub */
 .ju-dialogue[data-type="hub"] .ju-text { font-weight: var(--fw-semibold); }
+
+/* Character selection: card grid, taller box */
+.ju-dialogue[data-node="char_select"] {
+  max-height: 76%;
+  text-align: center;
+}
+
+.ju-dialogue[data-node="char_select"] .ju-text {
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-bold);
+}
+
+.ju-dialogue[data-node="char_select"] .ju-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+  text-align: left;
+}
+
+.ju-dialogue[data-node="char_select"] .ju-choice {
+  padding: var(--s-3) var(--s-4);
+  border-width: var(--bw);
+  border-radius: var(--r-lg);
+  background: var(--c-surface-2);
+}
+
+.ju-dialogue[data-node="char_select"] .ju-choice:hover {
+  transform: none;
+  background: var(--c-cream);
+  border-color: var(--c-terracotta);
+  box-shadow: var(--e-2);
+}
 
 /* ---------- Choices ---------- */
 .ju-choices {
