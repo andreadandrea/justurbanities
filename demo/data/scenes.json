@@ -1,0 +1,649 @@
+{
+  "$schema": "scene graph — vedi demo/CLAUDE.md per il contratto dati",
+  "version": "0.1.0",
+  "start": "p00_narration",
+  "nodes": [
+    {
+      "id": "p00_narration",
+      "type": "narration",
+      "bg": "community_center_hall",
+      "speaker": "narrator",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "communityCenterVisited": true,
+          "gameStarted": true
+        }
+      }
+    },
+    {
+      "id": "hub",
+      "type": "hub",
+      "bg": "community_center_hall",
+      "choices": [
+        {
+          "id": "hub.choice.0",
+          "next": "anna_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.1",
+          "next": "ben_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "benIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.2",
+          "next": "giorgia_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "giorgiaIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.3",
+          "next": "sigrid_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "sigridIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.4",
+          "next": "ruben_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "rubenIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.5",
+          "next": "amin_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "aminIntroDone",
+              "eq": false
+            }
+          ]
+        },
+        {
+          "id": "hub.choice.6",
+          "next": "map_1",
+          "requires": [
+            {
+              "var": "annaIntroDone",
+              "eq": true
+            },
+            {
+              "var": "npcIntroCount",
+              "gte": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anna_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "anna_1.choice.0",
+          "next": "anna_2"
+        }
+      ]
+    },
+    {
+      "id": "anna_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "anna_2.choice.0",
+          "next": "anna_3"
+        }
+      ]
+    },
+    {
+      "id": "anna_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "anna_3.choice.0",
+          "next": "anna_4"
+        }
+      ]
+    },
+    {
+      "id": "anna_4",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "sys_logbook"
+    },
+    {
+      "id": "sys_logbook",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "logbookUnlocked": true,
+          "annaIntroDone": true
+        }
+      }
+    },
+    {
+      "id": "ben_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ben",
+      "portrait": "assets/char/BEN.png",
+      "choices": [
+        {
+          "id": "ben_1.choice.0",
+          "next": "ben_2"
+        }
+      ]
+    },
+    {
+      "id": "ben_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ben",
+      "portrait": "assets/char/BEN.png",
+      "choices": [
+        {
+          "id": "ben_2.choice.0",
+          "next": "ben_3"
+        }
+      ]
+    },
+    {
+      "id": "ben_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ben",
+      "portrait": "assets/char/BEN.png",
+      "next": "sys_ben"
+    },
+    {
+      "id": "sys_ben",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "benIntroDone": true
+        },
+        "inc": {
+          "npcIntroCount": 1
+        }
+      }
+    },
+    {
+      "id": "giorgia_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "giorgia",
+      "portrait": "assets/char/GIORGIA.png",
+      "choices": [
+        {
+          "id": "giorgia_1.choice.0",
+          "next": "giorgia_2"
+        }
+      ]
+    },
+    {
+      "id": "giorgia_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "giorgia",
+      "portrait": "assets/char/GIORGIA.png",
+      "choices": [
+        {
+          "id": "giorgia_2.choice.0",
+          "next": "giorgia_3"
+        }
+      ]
+    },
+    {
+      "id": "giorgia_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "giorgia",
+      "portrait": "assets/char/GIORGIA.png",
+      "next": "sys_giorgia"
+    },
+    {
+      "id": "sys_giorgia",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "giorgiaIntroDone": true
+        },
+        "inc": {
+          "npcIntroCount": 1
+        }
+      }
+    },
+    {
+      "id": "sigrid_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "sigrid",
+      "portrait": "assets/char/SIGRID.png",
+      "choices": [
+        {
+          "id": "sigrid_1.choice.0",
+          "next": "sigrid_2"
+        }
+      ]
+    },
+    {
+      "id": "sigrid_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "sigrid",
+      "portrait": "assets/char/SIGRID.png",
+      "choices": [
+        {
+          "id": "sigrid_2.choice.0",
+          "next": "sigrid_3"
+        }
+      ]
+    },
+    {
+      "id": "sigrid_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "sigrid",
+      "portrait": "assets/char/SIGRID.png",
+      "next": "sys_sigrid"
+    },
+    {
+      "id": "sys_sigrid",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "sigridIntroDone": true
+        },
+        "inc": {
+          "npcIntroCount": 1
+        }
+      }
+    },
+    {
+      "id": "ruben_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "choices": [
+        {
+          "id": "ruben_1.choice.0",
+          "next": "ruben_2"
+        }
+      ]
+    },
+    {
+      "id": "ruben_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "choices": [
+        {
+          "id": "ruben_2.choice.0",
+          "next": "ruben_3"
+        }
+      ]
+    },
+    {
+      "id": "ruben_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "choices": [
+        {
+          "id": "ruben_3.choice.0",
+          "next": "ruben_4"
+        }
+      ]
+    },
+    {
+      "id": "ruben_4",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "next": "sys_ruben"
+    },
+    {
+      "id": "sys_ruben",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "rubenIntroDone": true
+        },
+        "inc": {
+          "npcIntroCount": 1
+        }
+      }
+    },
+    {
+      "id": "amin_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "amin",
+      "portrait": "assets/char/AMIN.png",
+      "choices": [
+        {
+          "id": "amin_1.choice.0",
+          "next": "amin_2"
+        }
+      ]
+    },
+    {
+      "id": "amin_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "amin",
+      "portrait": "assets/char/AMIN.png",
+      "choices": [
+        {
+          "id": "amin_2.choice.0",
+          "next": "amin_3"
+        }
+      ]
+    },
+    {
+      "id": "amin_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "amin",
+      "portrait": "assets/char/AMIN.png",
+      "next": "sys_amin"
+    },
+    {
+      "id": "sys_amin",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "hub",
+      "effects": {
+        "set": {
+          "aminIntroDone": true
+        },
+        "inc": {
+          "npcIntroCount": 1
+        }
+      }
+    },
+    {
+      "id": "map_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "map_2"
+    },
+    {
+      "id": "map_2",
+      "type": "system",
+      "bg": "city_map",
+      "speaker": "system",
+      "next": "map_3",
+      "effects": {
+        "set": {
+          "mapUnlocked": true
+        }
+      }
+    },
+    {
+      "id": "map_3",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "map_3.choice.0",
+          "next": "map_4"
+        }
+      ]
+    },
+    {
+      "id": "map_4",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "map_5"
+    },
+    {
+      "id": "map_5",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "next": "map_6"
+    },
+    {
+      "id": "map_6",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "map_7"
+    },
+    {
+      "id": "map_7",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "next": "map_8"
+    },
+    {
+      "id": "map_8",
+      "type": "system",
+      "bg": "city_map",
+      "speaker": "system",
+      "choices": [
+        {
+          "id": "map_8.choice.0",
+          "next": "map_9"
+        }
+      ],
+      "effects": {
+        "set": {
+          "fragmentationIntroduced": true
+        }
+      }
+    },
+    {
+      "id": "map_9",
+      "type": "dialogue",
+      "bg": "city_map",
+      "speaker": "ben",
+      "portrait": "assets/char/BEN.png",
+      "next": "res_1"
+    },
+    {
+      "id": "res_1",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "res_2"
+    },
+    {
+      "id": "res_2",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "choices": [
+        {
+          "id": "res_2.choice.0",
+          "next": "res_3"
+        }
+      ],
+      "effects": {
+        "set": {
+          "collectiveResourcesIntroduced": true
+        }
+      }
+    },
+    {
+      "id": "res_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "sigrid",
+      "portrait": "assets/char/SIGRID.png",
+      "next": "res_4"
+    },
+    {
+      "id": "res_4",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "elena",
+      "portrait": "assets/char/ELENA.png",
+      "choices": [
+        {
+          "id": "res_4.choice.0",
+          "next": "res_5"
+        }
+      ]
+    },
+    {
+      "id": "res_5",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "elena",
+      "portrait": "assets/char/ELENA.png",
+      "next": "alex_1"
+    },
+    {
+      "id": "alex_1",
+      "type": "message",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "alex_2"
+    },
+    {
+      "id": "alex_2",
+      "type": "message",
+      "bg": "community_center_hall",
+      "speaker": "alexandria",
+      "portrait": "assets/char/ALEXANDRIA.png",
+      "next": "alex_3",
+      "effects": {
+        "set": {
+          "alexandriaMessageReceived": true
+        }
+      }
+    },
+    {
+      "id": "alex_3",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "anna",
+      "portrait": "assets/char/ANNA.png",
+      "next": "alex_4"
+    },
+    {
+      "id": "alex_4",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ben",
+      "portrait": "assets/char/BEN.png",
+      "next": "alex_5"
+    },
+    {
+      "id": "alex_5",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "elena",
+      "portrait": "assets/char/ELENA.png",
+      "next": "alex_6"
+    },
+    {
+      "id": "alex_6",
+      "type": "dialogue",
+      "bg": "community_center_hall",
+      "speaker": "ruben",
+      "portrait": "assets/char/RUBEN.jpeg",
+      "next": "alex_7"
+    },
+    {
+      "id": "alex_7",
+      "type": "system",
+      "bg": "community_center_hall",
+      "speaker": "system",
+      "next": "end_prologue"
+    },
+    {
+      "id": "end_prologue",
+      "type": "end",
+      "bg": "community_center_hall",
+      "speaker": "narrator"
+    }
+  ]
+}
