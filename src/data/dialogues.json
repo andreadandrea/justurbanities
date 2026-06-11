@@ -1,0 +1,74 @@
+{
+  "dialogues": [
+    {
+      "id": "anna_intro",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The city map is not just about streets. It is about who can actually use them.",
+          "effects": [
+            { "type": "startQuest", "questId": "P01" }
+          ],
+          "choices": [
+            {
+              "id": "listen",
+              "label": "Listen carefully.",
+              "effects": [
+                { "type": "setVariable", "key": "talkedTo_anna", "value": true },
+                { "type": "addResource", "key": "voice", "value": 1 },
+                { "type": "completeObjective", "questId": "P01", "objectiveId": "talk_to_anna" }
+              ],
+              "next": "map"
+            }
+          ]
+        },
+        "map": {
+          "text": "Look here. The same city creates different routes for different people.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "Open the map later.",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ben_intro",
+      "speakerId": "ben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Accessibility is not a special request. It is how the city becomes public.",
+          "choices": [
+            {
+              "id": "ask_barrier",
+              "label": "Ask what barrier should be fixed first.",
+              "effects": [
+                { "type": "setVariable", "key": "talkedTo_ben", "value": true },
+                { "type": "addResource", "key": "care", "value": 1 },
+                { "type": "completeObjective", "questId": "P01", "objectiveId": "talk_to_ben" }
+              ],
+              "next": "entrance"
+            }
+          ]
+        },
+        "entrance": {
+          "text": "Start with the entrance. If people cannot enter, they cannot participate.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "Promise to check the entrance.",
+              "effects": [
+                { "type": "setVariable", "key": "promised_check_entrance", "value": true }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

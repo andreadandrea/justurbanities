@@ -1,0 +1,472 @@
+{
+  "version": "0.2.0-placeholder-assets",
+  "characters": [
+    {
+      "id": "abdullah",
+      "displayName": "Abdullah",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "ABDULLAH.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/abdullah/references/abdullah_reference_sheet.jpeg",
+        "icon": "assets/characters/abdullah/icons/icon_abdullah.png",
+        "portraits": {
+          "neutral": "assets/characters/abdullah/portraits/portrait_abdullah_neutral.png",
+          "positive": "assets/characters/abdullah/portraits/portrait_abdullah_positive.png",
+          "concerned": "assets/characters/abdullah/portraits/portrait_abdullah_concerned.png",
+          "focused": "assets/characters/abdullah/portraits/portrait_abdullah_focused.png"
+        },
+        "atlasImage": "assets/characters/abdullah/atlas/abdullah_atlas.png",
+        "atlasJson": "assets/characters/abdullah/atlas/abdullah_atlas.json",
+        "spritesDir": "assets/characters/abdullah/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "alexandria",
+      "displayName": "Alexandria Shrinehill",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "ALEXANDRIA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/alexandria/references/alexandria_reference_sheet.jpeg",
+        "icon": "assets/characters/alexandria/icons/icon_alexandria.png",
+        "portraits": {
+          "neutral": "assets/characters/alexandria/portraits/portrait_alexandria_neutral.png",
+          "positive": "assets/characters/alexandria/portraits/portrait_alexandria_positive.png",
+          "concerned": "assets/characters/alexandria/portraits/portrait_alexandria_concerned.png",
+          "focused": "assets/characters/alexandria/portraits/portrait_alexandria_focused.png"
+        },
+        "atlasImage": "assets/characters/alexandria/atlas/alexandria_atlas.png",
+        "atlasJson": "assets/characters/alexandria/atlas/alexandria_atlas.json",
+        "spritesDir": "assets/characters/alexandria/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "amin",
+      "displayName": "Amin",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "AMIN.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/amin/references/amin_reference_sheet.jpeg",
+        "icon": "assets/characters/amin/icons/icon_amin.png",
+        "portraits": {
+          "neutral": "assets/characters/amin/portraits/portrait_amin_neutral.png",
+          "positive": "assets/characters/amin/portraits/portrait_amin_positive.png",
+          "concerned": "assets/characters/amin/portraits/portrait_amin_concerned.png",
+          "focused": "assets/characters/amin/portraits/portrait_amin_focused.png"
+        },
+        "atlasImage": "assets/characters/amin/atlas/amin_atlas.png",
+        "atlasJson": "assets/characters/amin/atlas/amin_atlas.json",
+        "spritesDir": "assets/characters/amin/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "anna",
+      "displayName": "Anna",
+      "type": "npc",
+      "priority": "A",
+      "sourceReference": "ANNA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/anna/references/anna_reference_sheet.jpeg",
+        "icon": "assets/characters/anna/icons/icon_anna.png",
+        "portraits": {
+          "neutral": "assets/characters/anna/portraits/portrait_anna_neutral.png",
+          "positive": "assets/characters/anna/portraits/portrait_anna_positive.png",
+          "concerned": "assets/characters/anna/portraits/portrait_anna_concerned.png",
+          "focused": "assets/characters/anna/portraits/portrait_anna_focused.png"
+        },
+        "atlasImage": "assets/characters/anna/atlas/anna_atlas.png",
+        "atlasJson": "assets/characters/anna/atlas/anna_atlas.json",
+        "spritesDir": "assets/characters/anna/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "ben",
+      "displayName": "Ben",
+      "type": "npc",
+      "priority": "A",
+      "sourceReference": "BEN.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/ben/references/ben_reference_sheet.jpeg",
+        "icon": "assets/characters/ben/icons/icon_ben.png",
+        "portraits": {
+          "neutral": "assets/characters/ben/portraits/portrait_ben_neutral.png",
+          "positive": "assets/characters/ben/portraits/portrait_ben_positive.png",
+          "concerned": "assets/characters/ben/portraits/portrait_ben_concerned.png",
+          "focused": "assets/characters/ben/portraits/portrait_ben_focused.png"
+        },
+        "atlasImage": "assets/characters/ben/atlas/ben_atlas.png",
+        "atlasJson": "assets/characters/ben/atlas/ben_atlas.json",
+        "spritesDir": "assets/characters/ben/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "donald",
+      "displayName": "Donald",
+      "type": "npc",
+      "priority": "C",
+      "sourceReference": "DONALD.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/donald/references/donald_reference_sheet.jpeg",
+        "icon": "assets/characters/donald/icons/icon_donald.png",
+        "portraits": {
+          "neutral": "assets/characters/donald/portraits/portrait_donald_neutral.png",
+          "positive": "assets/characters/donald/portraits/portrait_donald_positive.png",
+          "concerned": "assets/characters/donald/portraits/portrait_donald_concerned.png",
+          "focused": "assets/characters/donald/portraits/portrait_donald_focused.png"
+        },
+        "atlasImage": "assets/characters/donald/atlas/donald_atlas.png",
+        "atlasJson": "assets/characters/donald/atlas/donald_atlas.json",
+        "spritesDir": "assets/characters/donald/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "elena",
+      "displayName": "Elena",
+      "type": "playable",
+      "priority": "A",
+      "sourceReference": "ELENA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/elena/references/elena_reference_sheet.jpeg",
+        "icon": "assets/characters/elena/icons/icon_elena.png",
+        "portraits": {
+          "neutral": "assets/characters/elena/portraits/portrait_elena_neutral.png",
+          "positive": "assets/characters/elena/portraits/portrait_elena_positive.png",
+          "concerned": "assets/characters/elena/portraits/portrait_elena_concerned.png",
+          "focused": "assets/characters/elena/portraits/portrait_elena_focused.png"
+        },
+        "atlasImage": "assets/characters/elena/atlas/elena_atlas.png",
+        "atlasJson": "assets/characters/elena/atlas/elena_atlas.json",
+        "spritesDir": "assets/characters/elena/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "giorgia",
+      "displayName": "Giorgia",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "GIORGIA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/giorgia/references/giorgia_reference_sheet.jpeg",
+        "icon": "assets/characters/giorgia/icons/icon_giorgia.png",
+        "portraits": {
+          "neutral": "assets/characters/giorgia/portraits/portrait_giorgia_neutral.png",
+          "positive": "assets/characters/giorgia/portraits/portrait_giorgia_positive.png",
+          "concerned": "assets/characters/giorgia/portraits/portrait_giorgia_concerned.png",
+          "focused": "assets/characters/giorgia/portraits/portrait_giorgia_focused.png"
+        },
+        "atlasImage": "assets/characters/giorgia/atlas/giorgia_atlas.png",
+        "atlasJson": "assets/characters/giorgia/atlas/giorgia_atlas.json",
+        "spritesDir": "assets/characters/giorgia/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "gwen",
+      "displayName": "Gwen",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "GWEN.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/gwen/references/gwen_reference_sheet.jpeg",
+        "icon": "assets/characters/gwen/icons/icon_gwen.png",
+        "portraits": {
+          "neutral": "assets/characters/gwen/portraits/portrait_gwen_neutral.png",
+          "positive": "assets/characters/gwen/portraits/portrait_gwen_positive.png",
+          "concerned": "assets/characters/gwen/portraits/portrait_gwen_concerned.png",
+          "focused": "assets/characters/gwen/portraits/portrait_gwen_focused.png"
+        },
+        "atlasImage": "assets/characters/gwen/atlas/gwen_atlas.png",
+        "atlasJson": "assets/characters/gwen/atlas/gwen_atlas.json",
+        "spritesDir": "assets/characters/gwen/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "lia",
+      "displayName": "Lia",
+      "type": "child_npc",
+      "priority": "B",
+      "sourceReference": "LIA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/lia/references/lia_reference_sheet.jpeg",
+        "icon": "assets/characters/lia/icons/icon_lia.png",
+        "portraits": {
+          "neutral": "assets/characters/lia/portraits/portrait_lia_neutral.png",
+          "positive": "assets/characters/lia/portraits/portrait_lia_positive.png",
+          "concerned": "assets/characters/lia/portraits/portrait_lia_concerned.png",
+          "focused": "assets/characters/lia/portraits/portrait_lia_focused.png"
+        },
+        "atlasImage": "assets/characters/lia/atlas/lia_atlas.png",
+        "atlasJson": "assets/characters/lia/atlas/lia_atlas.json",
+        "spritesDir": "assets/characters/lia/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "luca",
+      "displayName": "Luca",
+      "type": "playable",
+      "priority": "A",
+      "sourceReference": "LUCA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/luca/references/luca_reference_sheet.jpeg",
+        "icon": "assets/characters/luca/icons/icon_luca.png",
+        "portraits": {
+          "neutral": "assets/characters/luca/portraits/portrait_luca_neutral.png",
+          "positive": "assets/characters/luca/portraits/portrait_luca_positive.png",
+          "concerned": "assets/characters/luca/portraits/portrait_luca_concerned.png",
+          "focused": "assets/characters/luca/portraits/portrait_luca_focused.png"
+        },
+        "atlasImage": "assets/characters/luca/atlas/luca_atlas.png",
+        "atlasJson": "assets/characters/luca/atlas/luca_atlas.json",
+        "spritesDir": "assets/characters/luca/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "marta",
+      "displayName": "Marta",
+      "type": "npc",
+      "priority": "C",
+      "sourceReference": "MARTA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/marta/references/marta_reference_sheet.jpeg",
+        "icon": "assets/characters/marta/icons/icon_marta.png",
+        "portraits": {
+          "neutral": "assets/characters/marta/portraits/portrait_marta_neutral.png",
+          "positive": "assets/characters/marta/portraits/portrait_marta_positive.png",
+          "concerned": "assets/characters/marta/portraits/portrait_marta_concerned.png",
+          "focused": "assets/characters/marta/portraits/portrait_marta_focused.png"
+        },
+        "atlasImage": "assets/characters/marta/atlas/marta_atlas.png",
+        "atlasJson": "assets/characters/marta/atlas/marta_atlas.json",
+        "spritesDir": "assets/characters/marta/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "matilda",
+      "displayName": "Matilda",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "MATILDA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/matilda/references/matilda_reference_sheet.jpeg",
+        "icon": "assets/characters/matilda/icons/icon_matilda.png",
+        "portraits": {
+          "neutral": "assets/characters/matilda/portraits/portrait_matilda_neutral.png",
+          "positive": "assets/characters/matilda/portraits/portrait_matilda_positive.png",
+          "concerned": "assets/characters/matilda/portraits/portrait_matilda_concerned.png",
+          "focused": "assets/characters/matilda/portraits/portrait_matilda_focused.png"
+        },
+        "atlasImage": "assets/characters/matilda/atlas/matilda_atlas.png",
+        "atlasJson": "assets/characters/matilda/atlas/matilda_atlas.json",
+        "spritesDir": "assets/characters/matilda/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "maya",
+      "displayName": "Maya",
+      "type": "playable",
+      "priority": "A",
+      "sourceReference": "MAYA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/maya/references/maya_reference_sheet.jpeg",
+        "icon": "assets/characters/maya/icons/icon_maya.png",
+        "portraits": {
+          "neutral": "assets/characters/maya/portraits/portrait_maya_neutral.png",
+          "positive": "assets/characters/maya/portraits/portrait_maya_positive.png",
+          "concerned": "assets/characters/maya/portraits/portrait_maya_concerned.png",
+          "focused": "assets/characters/maya/portraits/portrait_maya_focused.png"
+        },
+        "atlasImage": "assets/characters/maya/atlas/maya_atlas.png",
+        "atlasJson": "assets/characters/maya/atlas/maya_atlas.json",
+        "spritesDir": "assets/characters/maya/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "mrs_viveca",
+      "displayName": "Mrs Viveca",
+      "type": "npc",
+      "priority": "C",
+      "sourceReference": "MRS VIVECA.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/mrs_viveca/references/mrs_viveca_reference_sheet.jpeg",
+        "icon": "assets/characters/mrs_viveca/icons/icon_mrs_viveca.png",
+        "portraits": {
+          "neutral": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_neutral.png",
+          "positive": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_positive.png",
+          "concerned": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_concerned.png",
+          "focused": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_focused.png"
+        },
+        "atlasImage": "assets/characters/mrs_viveca/atlas/mrs_viveca_atlas.png",
+        "atlasJson": "assets/characters/mrs_viveca/atlas/mrs_viveca_atlas.json",
+        "spritesDir": "assets/characters/mrs_viveca/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "pablo",
+      "displayName": "Pablo",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "PABLO.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/pablo/references/pablo_reference_sheet.jpeg",
+        "icon": "assets/characters/pablo/icons/icon_pablo.png",
+        "portraits": {
+          "neutral": "assets/characters/pablo/portraits/portrait_pablo_neutral.png",
+          "positive": "assets/characters/pablo/portraits/portrait_pablo_positive.png",
+          "concerned": "assets/characters/pablo/portraits/portrait_pablo_concerned.png",
+          "focused": "assets/characters/pablo/portraits/portrait_pablo_focused.png"
+        },
+        "atlasImage": "assets/characters/pablo/atlas/pablo_atlas.png",
+        "atlasJson": "assets/characters/pablo/atlas/pablo_atlas.json",
+        "spritesDir": "assets/characters/pablo/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "ruben",
+      "displayName": "Ruben",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "RUBEN.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/ruben/references/ruben_reference_sheet.jpeg",
+        "icon": "assets/characters/ruben/icons/icon_ruben.png",
+        "portraits": {
+          "neutral": "assets/characters/ruben/portraits/portrait_ruben_neutral.png",
+          "positive": "assets/characters/ruben/portraits/portrait_ruben_positive.png",
+          "concerned": "assets/characters/ruben/portraits/portrait_ruben_concerned.png",
+          "focused": "assets/characters/ruben/portraits/portrait_ruben_focused.png"
+        },
+        "atlasImage": "assets/characters/ruben/atlas/ruben_atlas.png",
+        "atlasJson": "assets/characters/ruben/atlas/ruben_atlas.json",
+        "spritesDir": "assets/characters/ruben/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "samir",
+      "displayName": "Samir",
+      "type": "playable",
+      "priority": "A",
+      "sourceReference": "SAMIR.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/samir/references/samir_reference_sheet.jpeg",
+        "icon": "assets/characters/samir/icons/icon_samir.png",
+        "portraits": {
+          "neutral": "assets/characters/samir/portraits/portrait_samir_neutral.png",
+          "positive": "assets/characters/samir/portraits/portrait_samir_positive.png",
+          "concerned": "assets/characters/samir/portraits/portrait_samir_concerned.png",
+          "focused": "assets/characters/samir/portraits/portrait_samir_focused.png"
+        },
+        "atlasImage": "assets/characters/samir/atlas/samir_atlas.png",
+        "atlasJson": "assets/characters/samir/atlas/samir_atlas.json",
+        "spritesDir": "assets/characters/samir/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "sigrid",
+      "displayName": "Sigrid",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "SIGRID.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/sigrid/references/sigrid_reference_sheet.jpeg",
+        "icon": "assets/characters/sigrid/icons/icon_sigrid.png",
+        "portraits": {
+          "neutral": "assets/characters/sigrid/portraits/portrait_sigrid_neutral.png",
+          "positive": "assets/characters/sigrid/portraits/portrait_sigrid_positive.png",
+          "concerned": "assets/characters/sigrid/portraits/portrait_sigrid_concerned.png",
+          "focused": "assets/characters/sigrid/portraits/portrait_sigrid_focused.png"
+        },
+        "atlasImage": "assets/characters/sigrid/atlas/sigrid_atlas.png",
+        "atlasJson": "assets/characters/sigrid/atlas/sigrid_atlas.json",
+        "spritesDir": "assets/characters/sigrid/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "siobhan",
+      "displayName": "Siobhan",
+      "type": "npc",
+      "priority": "C",
+      "sourceReference": "SIOBAHN.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/siobhan/references/siobhan_reference_sheet.jpeg",
+        "icon": "assets/characters/siobhan/icons/icon_siobhan.png",
+        "portraits": {
+          "neutral": "assets/characters/siobhan/portraits/portrait_siobhan_neutral.png",
+          "positive": "assets/characters/siobhan/portraits/portrait_siobhan_positive.png",
+          "concerned": "assets/characters/siobhan/portraits/portrait_siobhan_concerned.png",
+          "focused": "assets/characters/siobhan/portraits/portrait_siobhan_focused.png"
+        },
+        "atlasImage": "assets/characters/siobhan/atlas/siobhan_atlas.png",
+        "atlasJson": "assets/characters/siobhan/atlas/siobhan_atlas.json",
+        "spritesDir": "assets/characters/siobhan/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "tom",
+      "displayName": "Tom",
+      "type": "npc",
+      "priority": "B",
+      "sourceReference": "TOM.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/tom/references/tom_reference_sheet.jpeg",
+        "icon": "assets/characters/tom/icons/icon_tom.png",
+        "portraits": {
+          "neutral": "assets/characters/tom/portraits/portrait_tom_neutral.png",
+          "positive": "assets/characters/tom/portraits/portrait_tom_positive.png",
+          "concerned": "assets/characters/tom/portraits/portrait_tom_concerned.png",
+          "focused": "assets/characters/tom/portraits/portrait_tom_focused.png"
+        },
+        "atlasImage": "assets/characters/tom/atlas/tom_atlas.png",
+        "atlasJson": "assets/characters/tom/atlas/tom_atlas.json",
+        "spritesDir": "assets/characters/tom/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    },
+    {
+      "id": "zoe",
+      "displayName": "Zoe",
+      "type": "child_npc",
+      "priority": "A",
+      "sourceReference": "ZOE.jpeg",
+      "generatedAssets": {
+        "reference": "assets/characters/zoe/references/zoe_reference_sheet.jpeg",
+        "icon": "assets/characters/zoe/icons/icon_zoe.png",
+        "portraits": {
+          "neutral": "assets/characters/zoe/portraits/portrait_zoe_neutral.png",
+          "positive": "assets/characters/zoe/portraits/portrait_zoe_positive.png",
+          "concerned": "assets/characters/zoe/portraits/portrait_zoe_concerned.png",
+          "focused": "assets/characters/zoe/portraits/portrait_zoe_focused.png"
+        },
+        "atlasImage": "assets/characters/zoe/atlas/zoe_atlas.png",
+        "atlasJson": "assets/characters/zoe/atlas/zoe_atlas.json",
+        "spritesDir": "assets/characters/zoe/sprites/"
+      },
+      "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+    }
+  ],
+  "notes": [
+    "Generated from reference sheets as runtime placeholder assets.",
+    "These are not final cleaned animation sprites.",
+    "Use for preload, caching, UI, dialogue, movement tests and engine development."
+  ]
+}

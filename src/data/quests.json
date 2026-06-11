@@ -1,0 +1,55 @@
+{
+  "quests": [
+    {
+      "id": "P01",
+      "title": "The Center Holds?",
+      "description": "Understand why the Community Center is losing its civic function.",
+      "status": "available",
+      "objectives": [
+        {
+          "id": "talk_to_anna",
+          "description": "Talk to Anna about the civic map.",
+          "completed": false,
+          "required": true
+        },
+        {
+          "id": "talk_to_ben",
+          "description": "Talk to Ben about accessibility.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        { "type": "addResource", "key": "commons", "value": 1 }
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "Same City, Different Routes",
+      "description": "Discover how the same district creates different routes for different people.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "choose_route",
+          "description": "Choose a playable character route.",
+          "completed": false,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "title": "Arriving Is Already Participation",
+      "description": "Investigate mobility barriers around the Crossroads.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "reach_bus_hub",
+          "description": "Reach the Main Bus Hub.",
+          "completed": false,
+          "required": true
+        }
+      ]
+    }
+  ]
+}
