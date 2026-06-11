@@ -1,0 +1,21 @@
+{
+  "id": "mrs_viveca",
+  "displayName": "Mrs Viveca",
+  "type": "npc",
+  "priority": "C",
+  "sourceReference": "MRS VIVECA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/mrs_viveca/references/mrs_viveca_reference_sheet.jpeg",
+    "icon": "assets/characters/mrs_viveca/icons/icon_mrs_viveca.png",
+    "portraits": {
+      "neutral": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_neutral.png",
+      "positive": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_positive.png",
+      "concerned": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_concerned.png",
+      "focused": "assets/characters/mrs_viveca/portraits/portrait_mrs_viveca_focused.png"
+    },
+    "atlasImage": "assets/characters/mrs_viveca/atlas/mrs_viveca_atlas.png",
+    "atlasJson": "assets/characters/mrs_viveca/atlas/mrs_viveca_atlas.json",
+    "spritesDir": "assets/characters/mrs_viveca/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

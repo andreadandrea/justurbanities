@@ -1,0 +1,21 @@
+{
+  "id": "zoe",
+  "displayName": "Zoe",
+  "type": "child_npc",
+  "priority": "A",
+  "sourceReference": "ZOE.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/zoe/references/zoe_reference_sheet.jpeg",
+    "icon": "assets/characters/zoe/icons/icon_zoe.png",
+    "portraits": {
+      "neutral": "assets/characters/zoe/portraits/portrait_zoe_neutral.png",
+      "positive": "assets/characters/zoe/portraits/portrait_zoe_positive.png",
+      "concerned": "assets/characters/zoe/portraits/portrait_zoe_concerned.png",
+      "focused": "assets/characters/zoe/portraits/portrait_zoe_focused.png"
+    },
+    "atlasImage": "assets/characters/zoe/atlas/zoe_atlas.png",
+    "atlasJson": "assets/characters/zoe/atlas/zoe_atlas.json",
+    "spritesDir": "assets/characters/zoe/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

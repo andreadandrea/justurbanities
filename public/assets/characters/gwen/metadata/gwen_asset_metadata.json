@@ -1,0 +1,21 @@
+{
+  "id": "gwen",
+  "displayName": "Gwen",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "GWEN.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/gwen/references/gwen_reference_sheet.jpeg",
+    "icon": "assets/characters/gwen/icons/icon_gwen.png",
+    "portraits": {
+      "neutral": "assets/characters/gwen/portraits/portrait_gwen_neutral.png",
+      "positive": "assets/characters/gwen/portraits/portrait_gwen_positive.png",
+      "concerned": "assets/characters/gwen/portraits/portrait_gwen_concerned.png",
+      "focused": "assets/characters/gwen/portraits/portrait_gwen_focused.png"
+    },
+    "atlasImage": "assets/characters/gwen/atlas/gwen_atlas.png",
+    "atlasJson": "assets/characters/gwen/atlas/gwen_atlas.json",
+    "spritesDir": "assets/characters/gwen/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

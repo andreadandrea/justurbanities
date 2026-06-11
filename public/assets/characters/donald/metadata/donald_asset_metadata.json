@@ -1,0 +1,21 @@
+{
+  "id": "donald",
+  "displayName": "Donald",
+  "type": "npc",
+  "priority": "C",
+  "sourceReference": "DONALD.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/donald/references/donald_reference_sheet.jpeg",
+    "icon": "assets/characters/donald/icons/icon_donald.png",
+    "portraits": {
+      "neutral": "assets/characters/donald/portraits/portrait_donald_neutral.png",
+      "positive": "assets/characters/donald/portraits/portrait_donald_positive.png",
+      "concerned": "assets/characters/donald/portraits/portrait_donald_concerned.png",
+      "focused": "assets/characters/donald/portraits/portrait_donald_focused.png"
+    },
+    "atlasImage": "assets/characters/donald/atlas/donald_atlas.png",
+    "atlasJson": "assets/characters/donald/atlas/donald_atlas.json",
+    "spritesDir": "assets/characters/donald/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "marta",
+  "displayName": "Marta",
+  "type": "npc",
+  "priority": "C",
+  "sourceReference": "MARTA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/marta/references/marta_reference_sheet.jpeg",
+    "icon": "assets/characters/marta/icons/icon_marta.png",
+    "portraits": {
+      "neutral": "assets/characters/marta/portraits/portrait_marta_neutral.png",
+      "positive": "assets/characters/marta/portraits/portrait_marta_positive.png",
+      "concerned": "assets/characters/marta/portraits/portrait_marta_concerned.png",
+      "focused": "assets/characters/marta/portraits/portrait_marta_focused.png"
+    },
+    "atlasImage": "assets/characters/marta/atlas/marta_atlas.png",
+    "atlasJson": "assets/characters/marta/atlas/marta_atlas.json",
+    "spritesDir": "assets/characters/marta/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

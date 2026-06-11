@@ -1,0 +1,21 @@
+{
+  "id": "lia",
+  "displayName": "Lia",
+  "type": "child_npc",
+  "priority": "B",
+  "sourceReference": "LIA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/lia/references/lia_reference_sheet.jpeg",
+    "icon": "assets/characters/lia/icons/icon_lia.png",
+    "portraits": {
+      "neutral": "assets/characters/lia/portraits/portrait_lia_neutral.png",
+      "positive": "assets/characters/lia/portraits/portrait_lia_positive.png",
+      "concerned": "assets/characters/lia/portraits/portrait_lia_concerned.png",
+      "focused": "assets/characters/lia/portraits/portrait_lia_focused.png"
+    },
+    "atlasImage": "assets/characters/lia/atlas/lia_atlas.png",
+    "atlasJson": "assets/characters/lia/atlas/lia_atlas.json",
+    "spritesDir": "assets/characters/lia/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

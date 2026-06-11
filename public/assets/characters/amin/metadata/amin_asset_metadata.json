@@ -1,0 +1,21 @@
+{
+  "id": "amin",
+  "displayName": "Amin",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "AMIN.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/amin/references/amin_reference_sheet.jpeg",
+    "icon": "assets/characters/amin/icons/icon_amin.png",
+    "portraits": {
+      "neutral": "assets/characters/amin/portraits/portrait_amin_neutral.png",
+      "positive": "assets/characters/amin/portraits/portrait_amin_positive.png",
+      "concerned": "assets/characters/amin/portraits/portrait_amin_concerned.png",
+      "focused": "assets/characters/amin/portraits/portrait_amin_focused.png"
+    },
+    "atlasImage": "assets/characters/amin/atlas/amin_atlas.png",
+    "atlasJson": "assets/characters/amin/atlas/amin_atlas.json",
+    "spritesDir": "assets/characters/amin/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

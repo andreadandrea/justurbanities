@@ -1,0 +1,21 @@
+{
+  "id": "giorgia",
+  "displayName": "Giorgia",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "GIORGIA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/giorgia/references/giorgia_reference_sheet.jpeg",
+    "icon": "assets/characters/giorgia/icons/icon_giorgia.png",
+    "portraits": {
+      "neutral": "assets/characters/giorgia/portraits/portrait_giorgia_neutral.png",
+      "positive": "assets/characters/giorgia/portraits/portrait_giorgia_positive.png",
+      "concerned": "assets/characters/giorgia/portraits/portrait_giorgia_concerned.png",
+      "focused": "assets/characters/giorgia/portraits/portrait_giorgia_focused.png"
+    },
+    "atlasImage": "assets/characters/giorgia/atlas/giorgia_atlas.png",
+    "atlasJson": "assets/characters/giorgia/atlas/giorgia_atlas.json",
+    "spritesDir": "assets/characters/giorgia/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

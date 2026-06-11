@@ -1,0 +1,21 @@
+{
+  "id": "matilda",
+  "displayName": "Matilda",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "MATILDA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/matilda/references/matilda_reference_sheet.jpeg",
+    "icon": "assets/characters/matilda/icons/icon_matilda.png",
+    "portraits": {
+      "neutral": "assets/characters/matilda/portraits/portrait_matilda_neutral.png",
+      "positive": "assets/characters/matilda/portraits/portrait_matilda_positive.png",
+      "concerned": "assets/characters/matilda/portraits/portrait_matilda_concerned.png",
+      "focused": "assets/characters/matilda/portraits/portrait_matilda_focused.png"
+    },
+    "atlasImage": "assets/characters/matilda/atlas/matilda_atlas.png",
+    "atlasJson": "assets/characters/matilda/atlas/matilda_atlas.json",
+    "spritesDir": "assets/characters/matilda/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}
