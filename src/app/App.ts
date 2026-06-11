@@ -17,8 +17,18 @@ import { EffectResolver } from "../game/effects/EffectResolver";
 import { DialogueManager } from "../game/dialogue/DialogueManager";
 import type { DialogueFile } from "../types/Dialogue";
 import type { QuestFile } from "../types/Quest";
+import {
+  animationsSchema,
+  assetManifestSchema,
+  charactersSchema,
+  dialogueFileSchema,
+  questFileSchema,
+  validateData
+} from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
 import questsData from "../data/quests.json";
+import charactersData from "../data/characters.json";
+import animationsData from "../data/animations.json";
 
 type AppElements = {
   canvas: HTMLCanvasElement;
@@ -59,11 +69,31 @@ export class App {
 
   async start(): Promise<void> {
     await this.registerServiceWorker();
-    await this.db.openDatabase();
-    await this.preload();
 
-    this.questManager.load(questsData as unknown as QuestFile);
-    this.dialogueManager.load(dialoguesData as unknown as DialogueFile);
+    // Validate every bundled JSON before anything uses it; on failure the
+    // preload never starts and the loading screen explains what is broken.
+    let manifest: AssetManifest;
+    let dialogueFile: DialogueFile;
+    let questFile: QuestFile;
+    try {
+      manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
+      validateData("characters.json", charactersSchema, charactersData);
+      validateData("animations.json", animationsSchema, animationsData);
+      dialogueFile = validateData("dialogues.json", dialogueFileSchema, dialoguesData) as DialogueFile;
+      questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
+    } catch (error) {
+      console.error(error);
+      this.elements.loadingProgress.hidden = true;
+      this.elements.loadingStatus.textContent =
+        error instanceof Error ? error.message : "Game data failed validation.";
+      return;
+    }
+
+    await this.db.openDatabase();
+    await this.preload(manifest);
+
+    this.questManager.load(questFile);
+    this.dialogueManager.load(dialogueFile);
 
     const session = await this.saveRepository.loadOrCreateSession("local-user", "vertical-slice-01");
     const save = await this.saveRepository.loadLatestSave(session.id);
@@ -107,9 +137,9 @@ export class App {
     this.syncEngine.start();
   }
 
-  private async preload(): Promise<void> {
+  private async preload(manifest: AssetManifest): Promise<void> {
     // The manifest is bundled at build time: fetching /src/... only works in dev.
-    await this.preloadManager.preloadFromData(assetManifest as AssetManifest, (progress) => {
+    await this.preloadManager.preloadFromData(manifest, (progress) => {
       this.elements.loadingProgress.value = progress.percent;
       this.elements.loadingStatus.textContent = progress.message;
     });
