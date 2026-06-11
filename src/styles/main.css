@@ -1,0 +1,110 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #2a2723;
+  background: #f3eadb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #e6d2b5;
+  touch-action: none;
+}
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f3eadb;
+  z-index: 10;
+}
+
+.loading-screen[hidden] {
+  display: none;
+}
+
+.loading-card {
+  width: min(420px, 90vw);
+  padding: 28px;
+  border: 2px solid #5d4c3c;
+  border-radius: 24px;
+  background: #fff8ea;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.loading-card progress {
+  width: 100%;
+}
+
+.hud {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(255, 248, 234, 0.88);
+  border: 1px solid rgba(93, 76, 60, 0.35);
+  z-index: 3;
+}
+
+.dialogue-root {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  width: min(860px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  background: #fff8ea;
+  border: 2px solid #5d4c3c;
+  border-radius: 24px;
+  padding: 20px;
+  z-index: 5;
+  box-shadow: 0 12px 30px rgba(0,0,0,.2);
+}
+
+.dialogue-root[hidden] {
+  display: none;
+}
+
+.dialogue-speaker {
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.dialogue-text {
+  font-size: 1.05rem;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.dialogue-choices {
+  display: grid;
+  gap: 8px;
+}
+
+.dialogue-choices button {
+  text-align: left;
+  border: 1px solid #5d4c3c;
+  border-radius: 14px;
+  background: #f7d58a;
+  padding: 12px;
+  cursor: pointer;
+  font: inherit;
+}

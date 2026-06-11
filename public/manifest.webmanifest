@@ -1,0 +1,9 @@
+{
+  "name": "Justurbanities",
+  "short_name": "Justurbanities",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3eadb",
+  "theme_color": "#d79a43",
+  "icons": []
+}

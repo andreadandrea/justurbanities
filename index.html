@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#d79a43" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Justurbanities</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game-canvas" aria-label="Justurbanities game canvas"></canvas>
+
+      <div id="loading-screen" class="loading-screen">
+        <div class="loading-card">
+          <h1>Justurbanities</h1>
+          <p id="loading-status">Loading assets…</p>
+          <progress id="loading-progress" max="100" value="0"></progress>
+        </div>
+      </div>
+
+      <div id="hud" class="hud">
+        <strong>Community Center Test Scene</strong>
+        <span id="save-status">Local save ready</span>
+      </div>
+
+      <div id="dialogue-root" class="dialogue-root" hidden></div>
+    </div>
+
+    <script type="module" src="/src/app/main.ts"></script>
+  </body>
+</html>

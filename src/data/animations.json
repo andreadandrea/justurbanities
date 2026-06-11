@@ -1,0 +1,570 @@
+{
+  "abdullah": {
+    "atlas": "abdullah_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_abdullah_idle_front_01"
+      ],
+      "talk_front": [
+        "char_abdullah_talk_front_01",
+        "char_abdullah_talk_front_02"
+      ],
+      "interaction": [
+        "char_abdullah_interaction_front_01"
+      ]
+    }
+  },
+  "alexandria": {
+    "atlas": "alexandria_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_alexandria_idle_front_01"
+      ],
+      "talk_front": [
+        "char_alexandria_talk_front_01",
+        "char_alexandria_talk_front_02"
+      ],
+      "interaction": [
+        "char_alexandria_interaction_front_01"
+      ]
+    }
+  },
+  "amin": {
+    "atlas": "amin_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_amin_idle_front_01"
+      ],
+      "talk_front": [
+        "char_amin_talk_front_01",
+        "char_amin_talk_front_02"
+      ],
+      "interaction": [
+        "char_amin_interaction_front_01"
+      ]
+    }
+  },
+  "anna": {
+    "atlas": "anna_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_anna_idle_front_01"
+      ],
+      "talk_front": [
+        "char_anna_talk_front_01",
+        "char_anna_talk_front_02"
+      ],
+      "interaction": [
+        "char_anna_interaction_front_01"
+      ]
+    }
+  },
+  "ben": {
+    "atlas": "ben_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_ben_idle_front_01"
+      ],
+      "talk_front": [
+        "char_ben_talk_front_01",
+        "char_ben_talk_front_02"
+      ],
+      "interaction": [
+        "char_ben_interaction_front_01"
+      ]
+    }
+  },
+  "donald": {
+    "atlas": "donald_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_donald_idle_front_01"
+      ],
+      "talk_front": [
+        "char_donald_talk_front_01",
+        "char_donald_talk_front_02"
+      ],
+      "interaction": [
+        "char_donald_interaction_front_01"
+      ]
+    }
+  },
+  "elena": {
+    "atlas": "elena_atlas",
+    "frameRate": 8,
+    "animations": {
+      "idle_down": [
+        "char_elena_idle_down_01"
+      ],
+      "idle_up": [
+        "char_elena_idle_up_01"
+      ],
+      "idle_left": [
+        "char_elena_idle_left_01"
+      ],
+      "idle_right": [
+        "char_elena_idle_right_01"
+      ],
+      "walk_down": [
+        "char_elena_walk_down_01",
+        "char_elena_walk_down_02",
+        "char_elena_walk_down_03",
+        "char_elena_walk_down_04"
+      ],
+      "walk_up": [
+        "char_elena_walk_up_01",
+        "char_elena_walk_up_02",
+        "char_elena_walk_up_03",
+        "char_elena_walk_up_04"
+      ],
+      "walk_left": [
+        "char_elena_walk_left_01",
+        "char_elena_walk_left_02",
+        "char_elena_walk_left_03",
+        "char_elena_walk_left_04"
+      ],
+      "walk_right": [
+        "char_elena_walk_right_01",
+        "char_elena_walk_right_02",
+        "char_elena_walk_right_03",
+        "char_elena_walk_right_04"
+      ],
+      "talk": [
+        "char_elena_talk_front_01",
+        "char_elena_talk_front_02"
+      ],
+      "interact": [
+        "char_elena_interact_front_01",
+        "char_elena_interact_front_02"
+      ],
+      "tool": [
+        "char_elena_tool_front_01"
+      ],
+      "stressed": [
+        "char_elena_stressed_front_01"
+      ]
+    }
+  },
+  "giorgia": {
+    "atlas": "giorgia_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_giorgia_idle_front_01"
+      ],
+      "talk_front": [
+        "char_giorgia_talk_front_01",
+        "char_giorgia_talk_front_02"
+      ],
+      "interaction": [
+        "char_giorgia_interaction_front_01"
+      ]
+    }
+  },
+  "gwen": {
+    "atlas": "gwen_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_gwen_idle_front_01"
+      ],
+      "talk_front": [
+        "char_gwen_talk_front_01",
+        "char_gwen_talk_front_02"
+      ],
+      "interaction": [
+        "char_gwen_interaction_front_01"
+      ]
+    }
+  },
+  "lia": {
+    "atlas": "lia_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_lia_idle_front_01"
+      ],
+      "talk_front": [
+        "char_lia_talk_front_01",
+        "char_lia_talk_front_02"
+      ],
+      "interaction": [
+        "char_lia_interaction_front_01"
+      ]
+    }
+  },
+  "luca": {
+    "atlas": "luca_atlas",
+    "frameRate": 8,
+    "animations": {
+      "idle_down": [
+        "char_luca_idle_down_01"
+      ],
+      "idle_up": [
+        "char_luca_idle_up_01"
+      ],
+      "idle_left": [
+        "char_luca_idle_left_01"
+      ],
+      "idle_right": [
+        "char_luca_idle_right_01"
+      ],
+      "walk_down": [
+        "char_luca_walk_down_01",
+        "char_luca_walk_down_02",
+        "char_luca_walk_down_03",
+        "char_luca_walk_down_04"
+      ],
+      "walk_up": [
+        "char_luca_walk_up_01",
+        "char_luca_walk_up_02",
+        "char_luca_walk_up_03",
+        "char_luca_walk_up_04"
+      ],
+      "walk_left": [
+        "char_luca_walk_left_01",
+        "char_luca_walk_left_02",
+        "char_luca_walk_left_03",
+        "char_luca_walk_left_04"
+      ],
+      "walk_right": [
+        "char_luca_walk_right_01",
+        "char_luca_walk_right_02",
+        "char_luca_walk_right_03",
+        "char_luca_walk_right_04"
+      ],
+      "talk": [
+        "char_luca_talk_front_01",
+        "char_luca_talk_front_02"
+      ],
+      "interact": [
+        "char_luca_interact_front_01",
+        "char_luca_interact_front_02"
+      ],
+      "tool": [
+        "char_luca_tool_front_01"
+      ],
+      "stressed": [
+        "char_luca_stressed_front_01"
+      ]
+    }
+  },
+  "marta": {
+    "atlas": "marta_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_marta_idle_front_01"
+      ],
+      "talk_front": [
+        "char_marta_talk_front_01",
+        "char_marta_talk_front_02"
+      ],
+      "interaction": [
+        "char_marta_interaction_front_01"
+      ]
+    }
+  },
+  "matilda": {
+    "atlas": "matilda_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_matilda_idle_front_01"
+      ],
+      "talk_front": [
+        "char_matilda_talk_front_01",
+        "char_matilda_talk_front_02"
+      ],
+      "interaction": [
+        "char_matilda_interaction_front_01"
+      ]
+    }
+  },
+  "maya": {
+    "atlas": "maya_atlas",
+    "frameRate": 8,
+    "animations": {
+      "idle_down": [
+        "char_maya_idle_down_01"
+      ],
+      "idle_up": [
+        "char_maya_idle_up_01"
+      ],
+      "idle_left": [
+        "char_maya_idle_left_01"
+      ],
+      "idle_right": [
+        "char_maya_idle_right_01"
+      ],
+      "walk_down": [
+        "char_maya_walk_down_01",
+        "char_maya_walk_down_02",
+        "char_maya_walk_down_03",
+        "char_maya_walk_down_04"
+      ],
+      "walk_up": [
+        "char_maya_walk_up_01",
+        "char_maya_walk_up_02",
+        "char_maya_walk_up_03",
+        "char_maya_walk_up_04"
+      ],
+      "walk_left": [
+        "char_maya_walk_left_01",
+        "char_maya_walk_left_02",
+        "char_maya_walk_left_03",
+        "char_maya_walk_left_04"
+      ],
+      "walk_right": [
+        "char_maya_walk_right_01",
+        "char_maya_walk_right_02",
+        "char_maya_walk_right_03",
+        "char_maya_walk_right_04"
+      ],
+      "talk": [
+        "char_maya_talk_front_01",
+        "char_maya_talk_front_02"
+      ],
+      "interact": [
+        "char_maya_interact_front_01",
+        "char_maya_interact_front_02"
+      ],
+      "tool": [
+        "char_maya_tool_front_01"
+      ],
+      "stressed": [
+        "char_maya_stressed_front_01"
+      ]
+    }
+  },
+  "mrs_viveca": {
+    "atlas": "mrs_viveca_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_mrs_viveca_idle_front_01"
+      ],
+      "talk_front": [
+        "char_mrs_viveca_talk_front_01",
+        "char_mrs_viveca_talk_front_02"
+      ],
+      "interaction": [
+        "char_mrs_viveca_interaction_front_01"
+      ]
+    }
+  },
+  "pablo": {
+    "atlas": "pablo_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_pablo_idle_front_01"
+      ],
+      "talk_front": [
+        "char_pablo_talk_front_01",
+        "char_pablo_talk_front_02"
+      ],
+      "interaction": [
+        "char_pablo_interaction_front_01"
+      ]
+    }
+  },
+  "ruben": {
+    "atlas": "ruben_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_ruben_idle_front_01"
+      ],
+      "talk_front": [
+        "char_ruben_talk_front_01",
+        "char_ruben_talk_front_02"
+      ],
+      "interaction": [
+        "char_ruben_interaction_front_01"
+      ]
+    }
+  },
+  "samir": {
+    "atlas": "samir_atlas",
+    "frameRate": 8,
+    "animations": {
+      "idle_down": [
+        "char_samir_idle_down_01"
+      ],
+      "idle_up": [
+        "char_samir_idle_up_01"
+      ],
+      "idle_left": [
+        "char_samir_idle_left_01"
+      ],
+      "idle_right": [
+        "char_samir_idle_right_01"
+      ],
+      "walk_down": [
+        "char_samir_walk_down_01",
+        "char_samir_walk_down_02",
+        "char_samir_walk_down_03",
+        "char_samir_walk_down_04"
+      ],
+      "walk_up": [
+        "char_samir_walk_up_01",
+        "char_samir_walk_up_02",
+        "char_samir_walk_up_03",
+        "char_samir_walk_up_04"
+      ],
+      "walk_left": [
+        "char_samir_walk_left_01",
+        "char_samir_walk_left_02",
+        "char_samir_walk_left_03",
+        "char_samir_walk_left_04"
+      ],
+      "walk_right": [
+        "char_samir_walk_right_01",
+        "char_samir_walk_right_02",
+        "char_samir_walk_right_03",
+        "char_samir_walk_right_04"
+      ],
+      "talk": [
+        "char_samir_talk_front_01",
+        "char_samir_talk_front_02"
+      ],
+      "interact": [
+        "char_samir_interact_front_01",
+        "char_samir_interact_front_02"
+      ],
+      "tool": [
+        "char_samir_tool_front_01"
+      ],
+      "stressed": [
+        "char_samir_stressed_front_01"
+      ]
+    }
+  },
+  "sigrid": {
+    "atlas": "sigrid_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_sigrid_idle_front_01"
+      ],
+      "talk_front": [
+        "char_sigrid_talk_front_01",
+        "char_sigrid_talk_front_02"
+      ],
+      "interaction": [
+        "char_sigrid_interaction_front_01"
+      ]
+    }
+  },
+  "siobhan": {
+    "atlas": "siobhan_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_siobhan_idle_front_01"
+      ],
+      "talk_front": [
+        "char_siobhan_talk_front_01",
+        "char_siobhan_talk_front_02"
+      ],
+      "interaction": [
+        "char_siobhan_interaction_front_01"
+      ]
+    }
+  },
+  "tom": {
+    "atlas": "tom_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_tom_idle_front_01"
+      ],
+      "talk_front": [
+        "char_tom_talk_front_01",
+        "char_tom_talk_front_02"
+      ],
+      "interaction": [
+        "char_tom_interaction_front_01"
+      ]
+    }
+  },
+  "zoe": {
+    "atlas": "zoe_atlas",
+    "frameRate": 6,
+    "animations": {
+      "idle_front": [
+        "char_zoe_idle_front_01"
+      ],
+      "talk_front": [
+        "char_zoe_talk_front_01",
+        "char_zoe_talk_front_02"
+      ],
+      "interaction": [
+        "char_zoe_interaction_front_01"
+      ]
+    }
+  },
+  "custom": {
+    "atlas": "custom_atlas",
+    "frameRate": 8,
+    "animations": {
+      "idle_down": [
+        "char_custom_idle_down_01"
+      ],
+      "idle_up": [
+        "char_custom_idle_up_01"
+      ],
+      "idle_left": [
+        "char_custom_idle_left_01"
+      ],
+      "idle_right": [
+        "char_custom_idle_right_01"
+      ],
+      "walk_down": [
+        "char_custom_walk_down_01",
+        "char_custom_walk_down_02",
+        "char_custom_walk_down_03",
+        "char_custom_walk_down_04"
+      ],
+      "walk_up": [
+        "char_custom_walk_up_01",
+        "char_custom_walk_up_02",
+        "char_custom_walk_up_03",
+        "char_custom_walk_up_04"
+      ],
+      "walk_left": [
+        "char_custom_walk_left_01",
+        "char_custom_walk_left_02",
+        "char_custom_walk_left_03",
+        "char_custom_walk_left_04"
+      ],
+      "walk_right": [
+        "char_custom_walk_right_01",
+        "char_custom_walk_right_02",
+        "char_custom_walk_right_03",
+        "char_custom_walk_right_04"
+      ],
+      "talk": [
+        "char_custom_talk_front_01",
+        "char_custom_talk_front_02"
+      ],
+      "interact": [
+        "char_custom_interact_front_01",
+        "char_custom_interact_front_02"
+      ],
+      "tool": [
+        "char_custom_tool_front_01"
+      ],
+      "stressed": [
+        "char_custom_stressed_front_01"
+      ]
+    }
+  }
+}
