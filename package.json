@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "@types/uuid": "^10.0.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.0",
-    "vitest": "^3.2.4",
-    "prettier": "^3.6.2"
+    "vitest": "^3.2.6"
   }
 }

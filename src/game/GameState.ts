@@ -1,7 +1,11 @@
+import type { Quest } from "../types/Quest";
+
 export type SerializableGameState = {
   currentScene: string;
   currentCharacter: string;
   player: { x: number; y: number };
+  // Quest snapshot is attached at save time by the scene (QuestManager owns runtime state).
+  quests?: Quest[];
   variables: Record<string, boolean | number | string>;
   resources: {
     trust: number;

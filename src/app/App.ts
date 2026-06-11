@@ -12,6 +12,13 @@ import { SyncEngine } from "../sync/SyncEngine";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { GameState } from "../game/GameState";
+import { QuestManager } from "../game/quest/QuestManager";
+import { EffectResolver } from "../game/effects/EffectResolver";
+import { DialogueManager } from "../game/dialogue/DialogueManager";
+import type { DialogueFile } from "../types/Dialogue";
+import type { QuestFile } from "../types/Quest";
+import dialoguesData from "../data/dialogues.json";
+import questsData from "../data/quests.json";
 
 type AppElements = {
   canvas: HTMLCanvasElement;
@@ -34,6 +41,9 @@ export class App {
   private readonly progressRepository: ProgressRepository;
   private readonly syncQueue: SyncQueue;
   private readonly syncEngine: SyncEngine;
+  private readonly questManager = new QuestManager();
+  private readonly effectResolver = new EffectResolver(this.state, this.questManager);
+  private readonly dialogueManager = new DialogueManager(this.effectResolver);
   private scene!: CommunityCenterScene;
   private loop!: GameLoop;
 
@@ -52,11 +62,25 @@ export class App {
     await this.db.openDatabase();
     await this.preload();
 
+    this.questManager.load(questsData as unknown as QuestFile);
+    this.dialogueManager.load(dialoguesData as unknown as DialogueFile);
+
     const session = await this.saveRepository.loadOrCreateSession("local-user", "vertical-slice-01");
     const save = await this.saveRepository.loadLatestSave(session.id);
     if (save) {
       this.state.restore(save.state);
+      if (save.state.quests?.length) {
+        this.questManager.restore(save.state.quests);
+      }
     }
+
+    // Dialogue effects can emit progress events; log + queue them like scene events.
+    this.effectResolver.setProgressEventHandler((eventType, payload) => {
+      void (async () => {
+        const event = await this.progressRepository.append(session.id, "local-user", eventType, payload ?? {});
+        await this.syncQueue.enqueue("progress_event", event.id, "create", event);
+      })();
+    });
 
     this.scene = new CommunityCenterScene({
       renderer: this.renderer,
@@ -64,6 +88,8 @@ export class App {
       assets: this.assetLoader,
       dialogueUI: this.dialogueUI,
       gameState: this.state,
+      dialogueManager: this.dialogueManager,
+      questManager: this.questManager,
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,
