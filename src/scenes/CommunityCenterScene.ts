@@ -2,11 +2,15 @@ import type { AssetLoader } from "../assets/AssetLoader";
 import type { CanvasRenderer } from "../engine/CanvasRenderer";
 import type { InputManager } from "../engine/InputManager";
 import type { RenderableEntity } from "../types/Entity";
+import type { DialogueNode } from "../types/Dialogue";
 import type { DialogueUI } from "../ui/DialogueUI";
 import type { GameState } from "../game/GameState";
+import type { DialogueManager } from "../game/dialogue/DialogueManager";
+import type { QuestManager } from "../game/quest/QuestManager";
 import type { SaveRepository } from "../storage/SaveRepository";
 import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
+import charactersData from "../data/characters.json";
 
 type SceneDeps = {
   renderer: CanvasRenderer;
@@ -14,12 +18,21 @@ type SceneDeps = {
   assets: AssetLoader;
   dialogueUI: DialogueUI;
   gameState: GameState;
+  dialogueManager: DialogueManager;
+  questManager: QuestManager;
   saveRepository: SaveRepository;
   progressRepository: ProgressRepository;
   syncQueue: SyncQueue;
   sessionId: string;
   saveStatus: HTMLElement;
 };
+
+const DISPLAY_NAMES = new Map(
+  (charactersData as Array<{ id: string; displayName: string }>).map((character) => [
+    character.id,
+    character.displayName
+  ])
+);
 
 export class CommunityCenterScene {
   private readonly userId = "local-user";
@@ -74,7 +87,7 @@ export class CommunityCenterScene {
 
     if (this.deps.input.consumeInteract()) {
       const npc = this.findNearbyNpc();
-      if (npc) void this.openDialogue(npc.id);
+      if (npc) this.openDialogue(npc.id);
     }
 
     this.saveCooldown -= dt;
@@ -108,30 +121,40 @@ export class CommunityCenterScene {
     return this.npcs.find((npc) => Math.hypot(npc.x - player.x, npc.y - player.y) < 160);
   }
 
-  private async openDialogue(npcId: string): Promise<void> {
-    const speaker = npcId === "anna" ? "Anna" : "Ben";
-    const text =
-      npcId === "anna"
-        ? "The city map is not just about streets. It is about who can actually use them."
-        : "Accessibility is not a special request. It is how the city becomes public.";
+  private openDialogue(npcId: string): void {
+    const dialogueId = `${npcId}_intro`;
+    if (!this.deps.dialogueManager.has(dialogueId)) {
+      console.warn(`No dialogue defined for ${npcId}`);
+      return;
+    }
+    const node = this.deps.dialogueManager.start(dialogueId);
+    this.showNode(npcId, node);
+  }
 
+  private showNode(npcId: string, node: DialogueNode): void {
     this.deps.dialogueUI.show({
-      speaker,
-      text,
-      choices: [
-        { id: "listen", label: "Listen carefully." },
-        { id: "ask", label: "Ask what should change first." }
-      ],
+      speaker: DISPLAY_NAMES.get(npcId) ?? npcId,
+      text: node.text,
+      choices: node.choices.map((choice) => ({ id: choice.id, label: choice.label })),
       onChoice: (choice) => {
-        void this.recordChoice(npcId, choice.id);
+        void this.handleChoice(npcId, choice.id);
       }
     });
   }
 
-  private async recordChoice(npcId: string, choiceId: string): Promise<void> {
-    this.deps.gameState.variables[`talkedTo_${npcId}`] = true;
-    this.deps.gameState.resources.voice += 1;
+  private async handleChoice(npcId: string, choiceId: string): Promise<void> {
+    // Choice and node-entry effects (variables, resources, quest state) are
+    // applied by DialogueManager through the EffectResolver.
+    const result = this.deps.dialogueManager.choose(choiceId);
 
+    await this.recordChoice(npcId, choiceId);
+
+    if (!result.ended && result.node) {
+      this.showNode(npcId, result.node);
+    }
+  }
+
+  private async recordChoice(npcId: string, choiceId: string): Promise<void> {
     const event = await this.deps.progressRepository.append(
       this.deps.sessionId,
       this.userId,
@@ -144,7 +167,10 @@ export class CommunityCenterScene {
   }
 
   private async autosave(): Promise<void> {
-    await this.deps.saveRepository.save(this.userId, this.deps.sessionId, this.deps.gameState.snapshot());
+    await this.deps.saveRepository.save(this.userId, this.deps.sessionId, {
+      ...this.deps.gameState.snapshot(),
+      quests: this.deps.questManager.snapshot()
+    });
     this.deps.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
   }
 }

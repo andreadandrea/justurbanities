@@ -2,11 +2,19 @@ import type { Effect, Condition } from "../../types/Dialogue";
 import type { GameState } from "../GameState";
 import type { QuestManager } from "../quest/QuestManager";
 
+export type ProgressEventHandler = (eventType: string, payload?: Record<string, unknown>) => void;
+
 export class EffectResolver {
+  private progressEventHandler?: ProgressEventHandler;
+
   constructor(
     private readonly gameState: GameState,
     private readonly questManager: QuestManager
   ) {}
+
+  setProgressEventHandler(handler: ProgressEventHandler): void {
+    this.progressEventHandler = handler;
+  }
 
   check(condition: Condition): boolean {
     switch (condition.type) {
@@ -49,6 +57,7 @@ export class EffectResolver {
         this.questManager.completeQuest(effect.questId);
         break;
       case "createProgressEvent":
+        this.progressEventHandler?.(effect.eventType, effect.payload);
         break;
     }
   }

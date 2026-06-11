@@ -15,16 +15,23 @@ export class DialogueManager {
     }
   }
 
+  has(dialogueId: string): boolean {
+    return this.dialogues.has(dialogueId);
+  }
+
   start(dialogueId: string): DialogueNode {
     const dialogue = this.dialogues.get(dialogueId);
     if (!dialogue) throw new Error(`Dialogue not found: ${dialogueId}`);
 
     this.activeDialogue = dialogue;
     this.activeNodeId = dialogue.startNode;
+    this.applyNodeEntryEffects();
 
     return this.getCurrentNode();
   }
 
+  // Read-only view of the current node: entry effects are applied once,
+  // when the node is entered (start/choose), never on repeated reads.
   getCurrentNode(): DialogueNode {
     if (!this.activeDialogue || !this.activeNodeId) {
       throw new Error("No active dialogue.");
@@ -33,7 +40,6 @@ export class DialogueManager {
     const node = this.activeDialogue.nodes[this.activeNodeId];
     if (!node) throw new Error(`Dialogue node not found: ${this.activeNodeId}`);
 
-    this.effectResolver.applyAll(node.effects);
     return {
       ...node,
       choices: this.getAvailableChoices(node)
@@ -55,7 +61,14 @@ export class DialogueManager {
     }
 
     this.activeNodeId = choice.next;
+    this.applyNodeEntryEffects();
     return { node: this.getCurrentNode(), ended: false, choice };
+  }
+
+  private applyNodeEntryEffects(): void {
+    if (!this.activeDialogue || !this.activeNodeId) return;
+    const node = this.activeDialogue.nodes[this.activeNodeId];
+    this.effectResolver.applyAll(node?.effects);
   }
 
   private getAvailableChoices(node: DialogueNode): DialogueChoice[] {
