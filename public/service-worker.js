@@ -1,8 +1,9 @@
 const CACHE_NAME = "justurbanities-cache-v0-1";
+// Relative to the SW scope so the app also works when served from a subpath.
 const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest"
+  "./",
+  "./index.html",
+  "./manifest.webmanifest"
 ];
 
 self.addEventListener("install", (event) => {

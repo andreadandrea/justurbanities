@@ -1,5 +1,6 @@
 import { AssetLoader } from "../assets/AssetLoader";
-import { PreloadManager } from "../assets/PreloadManager";
+import { PreloadManager, type AssetManifest } from "../assets/PreloadManager";
+import assetManifest from "../data/asset_manifest.json";
 import { GameLoop } from "../engine/GameLoop";
 import { CanvasRenderer } from "../engine/CanvasRenderer";
 import { InputManager } from "../engine/InputManager";
@@ -81,7 +82,8 @@ export class App {
   }
 
   private async preload(): Promise<void> {
-    await this.preloadManager.loadManifest("/src/data/asset_manifest.json", (progress) => {
+    // The manifest is bundled at build time: fetching /src/... only works in dev.
+    await this.preloadManager.preloadFromData(assetManifest as AssetManifest, (progress) => {
       this.elements.loadingProgress.value = progress.percent;
       this.elements.loadingStatus.textContent = progress.message;
     });
