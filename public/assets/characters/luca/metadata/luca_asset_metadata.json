@@ -1,0 +1,21 @@
+{
+  "id": "luca",
+  "displayName": "Luca",
+  "type": "playable",
+  "priority": "A",
+  "sourceReference": "LUCA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/luca/references/luca_reference_sheet.jpeg",
+    "icon": "assets/characters/luca/icons/icon_luca.png",
+    "portraits": {
+      "neutral": "assets/characters/luca/portraits/portrait_luca_neutral.png",
+      "positive": "assets/characters/luca/portraits/portrait_luca_positive.png",
+      "concerned": "assets/characters/luca/portraits/portrait_luca_concerned.png",
+      "focused": "assets/characters/luca/portraits/portrait_luca_focused.png"
+    },
+    "atlasImage": "assets/characters/luca/atlas/luca_atlas.png",
+    "atlasJson": "assets/characters/luca/atlas/luca_atlas.json",
+    "spritesDir": "assets/characters/luca/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

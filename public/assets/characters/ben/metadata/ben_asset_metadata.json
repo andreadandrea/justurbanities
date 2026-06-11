@@ -1,0 +1,21 @@
+{
+  "id": "ben",
+  "displayName": "Ben",
+  "type": "npc",
+  "priority": "A",
+  "sourceReference": "BEN.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/ben/references/ben_reference_sheet.jpeg",
+    "icon": "assets/characters/ben/icons/icon_ben.png",
+    "portraits": {
+      "neutral": "assets/characters/ben/portraits/portrait_ben_neutral.png",
+      "positive": "assets/characters/ben/portraits/portrait_ben_positive.png",
+      "concerned": "assets/characters/ben/portraits/portrait_ben_concerned.png",
+      "focused": "assets/characters/ben/portraits/portrait_ben_focused.png"
+    },
+    "atlasImage": "assets/characters/ben/atlas/ben_atlas.png",
+    "atlasJson": "assets/characters/ben/atlas/ben_atlas.json",
+    "spritesDir": "assets/characters/ben/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

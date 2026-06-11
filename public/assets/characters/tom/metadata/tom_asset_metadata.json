@@ -1,0 +1,21 @@
+{
+  "id": "tom",
+  "displayName": "Tom",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "TOM.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/tom/references/tom_reference_sheet.jpeg",
+    "icon": "assets/characters/tom/icons/icon_tom.png",
+    "portraits": {
+      "neutral": "assets/characters/tom/portraits/portrait_tom_neutral.png",
+      "positive": "assets/characters/tom/portraits/portrait_tom_positive.png",
+      "concerned": "assets/characters/tom/portraits/portrait_tom_concerned.png",
+      "focused": "assets/characters/tom/portraits/portrait_tom_focused.png"
+    },
+    "atlasImage": "assets/characters/tom/atlas/tom_atlas.png",
+    "atlasJson": "assets/characters/tom/atlas/tom_atlas.json",
+    "spritesDir": "assets/characters/tom/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

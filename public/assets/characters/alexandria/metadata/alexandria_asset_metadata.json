@@ -1,0 +1,21 @@
+{
+  "id": "alexandria",
+  "displayName": "Alexandria Shrinehill",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "ALEXANDRIA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/alexandria/references/alexandria_reference_sheet.jpeg",
+    "icon": "assets/characters/alexandria/icons/icon_alexandria.png",
+    "portraits": {
+      "neutral": "assets/characters/alexandria/portraits/portrait_alexandria_neutral.png",
+      "positive": "assets/characters/alexandria/portraits/portrait_alexandria_positive.png",
+      "concerned": "assets/characters/alexandria/portraits/portrait_alexandria_concerned.png",
+      "focused": "assets/characters/alexandria/portraits/portrait_alexandria_focused.png"
+    },
+    "atlasImage": "assets/characters/alexandria/atlas/alexandria_atlas.png",
+    "atlasJson": "assets/characters/alexandria/atlas/alexandria_atlas.json",
+    "spritesDir": "assets/characters/alexandria/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "maya",
+  "displayName": "Maya",
+  "type": "playable",
+  "priority": "A",
+  "sourceReference": "MAYA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/maya/references/maya_reference_sheet.jpeg",
+    "icon": "assets/characters/maya/icons/icon_maya.png",
+    "portraits": {
+      "neutral": "assets/characters/maya/portraits/portrait_maya_neutral.png",
+      "positive": "assets/characters/maya/portraits/portrait_maya_positive.png",
+      "concerned": "assets/characters/maya/portraits/portrait_maya_concerned.png",
+      "focused": "assets/characters/maya/portraits/portrait_maya_focused.png"
+    },
+    "atlasImage": "assets/characters/maya/atlas/maya_atlas.png",
+    "atlasJson": "assets/characters/maya/atlas/maya_atlas.json",
+    "spritesDir": "assets/characters/maya/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

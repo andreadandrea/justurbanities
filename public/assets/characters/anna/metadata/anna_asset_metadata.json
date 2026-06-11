@@ -1,0 +1,21 @@
+{
+  "id": "anna",
+  "displayName": "Anna",
+  "type": "npc",
+  "priority": "A",
+  "sourceReference": "ANNA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/anna/references/anna_reference_sheet.jpeg",
+    "icon": "assets/characters/anna/icons/icon_anna.png",
+    "portraits": {
+      "neutral": "assets/characters/anna/portraits/portrait_anna_neutral.png",
+      "positive": "assets/characters/anna/portraits/portrait_anna_positive.png",
+      "concerned": "assets/characters/anna/portraits/portrait_anna_concerned.png",
+      "focused": "assets/characters/anna/portraits/portrait_anna_focused.png"
+    },
+    "atlasImage": "assets/characters/anna/atlas/anna_atlas.png",
+    "atlasJson": "assets/characters/anna/atlas/anna_atlas.json",
+    "spritesDir": "assets/characters/anna/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

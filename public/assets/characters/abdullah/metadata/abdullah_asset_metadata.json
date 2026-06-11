@@ -1,0 +1,21 @@
+{
+  "id": "abdullah",
+  "displayName": "Abdullah",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "ABDULLAH.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/abdullah/references/abdullah_reference_sheet.jpeg",
+    "icon": "assets/characters/abdullah/icons/icon_abdullah.png",
+    "portraits": {
+      "neutral": "assets/characters/abdullah/portraits/portrait_abdullah_neutral.png",
+      "positive": "assets/characters/abdullah/portraits/portrait_abdullah_positive.png",
+      "concerned": "assets/characters/abdullah/portraits/portrait_abdullah_concerned.png",
+      "focused": "assets/characters/abdullah/portraits/portrait_abdullah_focused.png"
+    },
+    "atlasImage": "assets/characters/abdullah/atlas/abdullah_atlas.png",
+    "atlasJson": "assets/characters/abdullah/atlas/abdullah_atlas.json",
+    "spritesDir": "assets/characters/abdullah/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

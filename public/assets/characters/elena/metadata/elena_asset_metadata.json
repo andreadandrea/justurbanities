@@ -1,0 +1,21 @@
+{
+  "id": "elena",
+  "displayName": "Elena",
+  "type": "playable",
+  "priority": "A",
+  "sourceReference": "ELENA.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/elena/references/elena_reference_sheet.jpeg",
+    "icon": "assets/characters/elena/icons/icon_elena.png",
+    "portraits": {
+      "neutral": "assets/characters/elena/portraits/portrait_elena_neutral.png",
+      "positive": "assets/characters/elena/portraits/portrait_elena_positive.png",
+      "concerned": "assets/characters/elena/portraits/portrait_elena_concerned.png",
+      "focused": "assets/characters/elena/portraits/portrait_elena_focused.png"
+    },
+    "atlasImage": "assets/characters/elena/atlas/elena_atlas.png",
+    "atlasJson": "assets/characters/elena/atlas/elena_atlas.json",
+    "spritesDir": "assets/characters/elena/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "pablo",
+  "displayName": "Pablo",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "PABLO.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/pablo/references/pablo_reference_sheet.jpeg",
+    "icon": "assets/characters/pablo/icons/icon_pablo.png",
+    "portraits": {
+      "neutral": "assets/characters/pablo/portraits/portrait_pablo_neutral.png",
+      "positive": "assets/characters/pablo/portraits/portrait_pablo_positive.png",
+      "concerned": "assets/characters/pablo/portraits/portrait_pablo_concerned.png",
+      "focused": "assets/characters/pablo/portraits/portrait_pablo_focused.png"
+    },
+    "atlasImage": "assets/characters/pablo/atlas/pablo_atlas.png",
+    "atlasJson": "assets/characters/pablo/atlas/pablo_atlas.json",
+    "spritesDir": "assets/characters/pablo/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

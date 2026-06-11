@@ -1,0 +1,21 @@
+{
+  "id": "sigrid",
+  "displayName": "Sigrid",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "SIGRID.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/sigrid/references/sigrid_reference_sheet.jpeg",
+    "icon": "assets/characters/sigrid/icons/icon_sigrid.png",
+    "portraits": {
+      "neutral": "assets/characters/sigrid/portraits/portrait_sigrid_neutral.png",
+      "positive": "assets/characters/sigrid/portraits/portrait_sigrid_positive.png",
+      "concerned": "assets/characters/sigrid/portraits/portrait_sigrid_concerned.png",
+      "focused": "assets/characters/sigrid/portraits/portrait_sigrid_focused.png"
+    },
+    "atlasImage": "assets/characters/sigrid/atlas/sigrid_atlas.png",
+    "atlasJson": "assets/characters/sigrid/atlas/sigrid_atlas.json",
+    "spritesDir": "assets/characters/sigrid/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

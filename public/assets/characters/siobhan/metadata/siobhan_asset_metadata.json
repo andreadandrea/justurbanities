@@ -1,0 +1,21 @@
+{
+  "id": "siobhan",
+  "displayName": "Siobhan",
+  "type": "npc",
+  "priority": "C",
+  "sourceReference": "SIOBAHN.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/siobhan/references/siobhan_reference_sheet.jpeg",
+    "icon": "assets/characters/siobhan/icons/icon_siobhan.png",
+    "portraits": {
+      "neutral": "assets/characters/siobhan/portraits/portrait_siobhan_neutral.png",
+      "positive": "assets/characters/siobhan/portraits/portrait_siobhan_positive.png",
+      "concerned": "assets/characters/siobhan/portraits/portrait_siobhan_concerned.png",
+      "focused": "assets/characters/siobhan/portraits/portrait_siobhan_focused.png"
+    },
+    "atlasImage": "assets/characters/siobhan/atlas/siobhan_atlas.png",
+    "atlasJson": "assets/characters/siobhan/atlas/siobhan_atlas.json",
+    "spritesDir": "assets/characters/siobhan/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

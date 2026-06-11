@@ -1,0 +1,21 @@
+{
+  "id": "samir",
+  "displayName": "Samir",
+  "type": "playable",
+  "priority": "A",
+  "sourceReference": "SAMIR.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/samir/references/samir_reference_sheet.jpeg",
+    "icon": "assets/characters/samir/icons/icon_samir.png",
+    "portraits": {
+      "neutral": "assets/characters/samir/portraits/portrait_samir_neutral.png",
+      "positive": "assets/characters/samir/portraits/portrait_samir_positive.png",
+      "concerned": "assets/characters/samir/portraits/portrait_samir_concerned.png",
+      "focused": "assets/characters/samir/portraits/portrait_samir_focused.png"
+    },
+    "atlasImage": "assets/characters/samir/atlas/samir_atlas.png",
+    "atlasJson": "assets/characters/samir/atlas/samir_atlas.json",
+    "spritesDir": "assets/characters/samir/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ruben",
+  "displayName": "Ruben",
+  "type": "npc",
+  "priority": "B",
+  "sourceReference": "RUBEN.jpeg",
+  "generatedAssets": {
+    "reference": "assets/characters/ruben/references/ruben_reference_sheet.jpeg",
+    "icon": "assets/characters/ruben/icons/icon_ruben.png",
+    "portraits": {
+      "neutral": "assets/characters/ruben/portraits/portrait_ruben_neutral.png",
+      "positive": "assets/characters/ruben/portraits/portrait_ruben_positive.png",
+      "concerned": "assets/characters/ruben/portraits/portrait_ruben_concerned.png",
+      "focused": "assets/characters/ruben/portraits/portrait_ruben_focused.png"
+    },
+    "atlasImage": "assets/characters/ruben/atlas/ruben_atlas.png",
+    "atlasJson": "assets/characters/ruben/atlas/ruben_atlas.json",
+    "spritesDir": "assets/characters/ruben/sprites/"
+  },
+  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+}
