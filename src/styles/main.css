@@ -229,3 +229,17 @@ body,
   border-color: #a2412c;
   background: #f7e3df;
 }
+
+/* ---------- Educational report (Task 7) ---------- */
+.report-toggle {
+  position: fixed;
+  right: 213px;
+  bottom: 12px;
+  z-index: 40;
+  padding: 8px 14px;
+  font-size: 13px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #fff8ec;
+  cursor: pointer;
+}
