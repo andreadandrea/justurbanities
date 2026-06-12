@@ -11,6 +11,7 @@ import { SyncQueue } from "../sync/SyncQueue";
 import { SyncEngine } from "../sync/SyncEngine";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { DialogueUI } from "../ui/DialogueUI";
+import { DebugPanel } from "../ui/DebugPanel";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
@@ -31,6 +32,7 @@ import charactersData from "../data/characters.json";
 import animationsData from "../data/animations.json";
 
 type AppElements = {
+  appRoot: HTMLElement;
   canvas: HTMLCanvasElement;
   loadingScreen: HTMLElement;
   loadingStatus: HTMLElement;
@@ -125,6 +127,15 @@ export class App {
       syncQueue: this.syncQueue,
       sessionId: session.id,
       saveStatus: this.elements.saveStatus
+    });
+
+    new DebugPanel({
+      root: this.elements.appRoot,
+      gameState: this.state,
+      questManager: this.questManager,
+      syncQueue: this.syncQueue,
+      db: this.db,
+      sessionId: session.id
     });
 
     this.loop = new GameLoop({
