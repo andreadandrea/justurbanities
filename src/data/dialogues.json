@@ -8,16 +8,31 @@
         "start": {
           "text": "The city map is not just about streets. It is about who can actually use them.",
           "effects": [
-            { "type": "startQuest", "questId": "P01" }
+            {
+              "type": "startQuest",
+              "questId": "P01"
+            }
           ],
           "choices": [
             {
               "id": "listen",
               "label": "Listen carefully.",
               "effects": [
-                { "type": "setVariable", "key": "talkedTo_anna", "value": true },
-                { "type": "addResource", "key": "voice", "value": 1 },
-                { "type": "completeObjective", "questId": "P01", "objectiveId": "talk_to_anna" }
+                {
+                  "type": "setVariable",
+                  "key": "talkedTo_anna",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "P01",
+                  "objectiveId": "talk_to_anna"
+                }
               ],
               "next": "map"
             }
@@ -47,9 +62,21 @@
               "id": "ask_barrier",
               "label": "Ask what barrier should be fixed first.",
               "effects": [
-                { "type": "setVariable", "key": "talkedTo_ben", "value": true },
-                { "type": "addResource", "key": "care", "value": 1 },
-                { "type": "completeObjective", "questId": "P01", "objectiveId": "talk_to_ben" }
+                {
+                  "type": "setVariable",
+                  "key": "talkedTo_ben",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "P01",
+                  "objectiveId": "talk_to_ben"
+                }
               ],
               "next": "entrance"
             }
@@ -62,8 +89,193 @@
               "id": "close",
               "label": "Promise to check the entrance.",
               "effects": [
-                { "type": "setVariable", "key": "promised_check_entrance", "value": true }
+                {
+                  "type": "setVariable",
+                  "key": "promised_check_entrance",
+                  "value": true
+                }
               ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crossroads_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The Crossroads. Buses, stalls, shortcuts and queues: this is where the district decides who arrives, who waits and who gives up.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "C01"
+            },
+            {
+              "type": "setVariable",
+              "key": "crossroadsIntroSeen",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "Look around.",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crossroads_bus_hub",
+      "speakerId": "bus_hub",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Main Bus Hub. Three lines by day, one after dinner. The timetable assumes nobody works evenings.",
+          "effects": [
+            {
+              "type": "completeObjective",
+              "questId": "C01",
+              "objectiveId": "reach_bus_hub"
+            }
+          ],
+          "choices": [
+            {
+              "id": "note_gap",
+              "label": "Note the missing evening line.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "notedEveningBusGap",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "noted"
+            },
+            {
+              "id": "leave",
+              "label": "Leave.",
+              "end": true
+            }
+          ]
+        },
+        "noted": {
+          "text": "You write it down. Evidence is how a complaint becomes a proposal.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "Done.",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crossroads_market",
+      "speakerId": "market",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The market is the district's living room: half the stalls take cash only, and the vendors know everyone's name.",
+          "choices": [
+            {
+              "id": "chat",
+              "label": "Chat with a vendor.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "visitedMarket",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "leave",
+              "label": "Move on.",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crossroads_narrow_crossing",
+      "speakerId": "narrow_crossing",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "A narrow crossing between parked cars. Fine on foot, a puzzle with a stroller, impossible in a wheelchair. Ben would have measured it already.",
+          "choices": [
+            {
+              "id": "measure",
+              "label": "Take note for Ben.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "notedNarrowCrossing",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "leave",
+              "label": "Squeeze through.",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crossroads_info_point",
+      "speakerId": "info_point",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Civic Info Point. Opening hours: shorter than the queue. Still, the noticeboard is honest work.",
+          "choices": [
+            {
+              "id": "read",
+              "label": "Read the noticeboard.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "visitedInfoPoint",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "leave",
+              "label": "Move on.",
               "end": true
             }
           ]

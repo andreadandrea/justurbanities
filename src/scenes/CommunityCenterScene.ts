@@ -1,31 +1,6 @@
-import type { AssetLoader } from "../assets/AssetLoader";
-import type { CanvasRenderer } from "../engine/CanvasRenderer";
-import type { InputManager } from "../engine/InputManager";
 import type { RenderableEntity } from "../types/Entity";
-import type { DialogueNode } from "../types/Dialogue";
-import type { DialogueUI } from "../ui/DialogueUI";
-import type { GameState } from "../game/GameState";
-import type { DialogueManager } from "../game/dialogue/DialogueManager";
-import type { QuestManager } from "../game/quest/QuestManager";
-import type { SaveRepository } from "../storage/SaveRepository";
-import type { ProgressRepository } from "../storage/ProgressRepository";
-import type { SyncQueue } from "../sync/SyncQueue";
+import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
 import charactersData from "../data/characters.json";
-
-type SceneDeps = {
-  renderer: CanvasRenderer;
-  input: InputManager;
-  assets: AssetLoader;
-  dialogueUI: DialogueUI;
-  gameState: GameState;
-  dialogueManager: DialogueManager;
-  questManager: QuestManager;
-  saveRepository: SaveRepository;
-  progressRepository: ProgressRepository;
-  syncQueue: SyncQueue;
-  sessionId: string;
-  saveStatus: HTMLElement;
-};
 
 const DISPLAY_NAMES = new Map(
   (charactersData as Array<{ id: string; displayName: string }>).map((character) => [
@@ -34,13 +9,23 @@ const DISPLAY_NAMES = new Map(
   ])
 );
 
-export class CommunityCenterScene {
-  private readonly userId = "local-user";
-  private saveCooldown = 0;
+export class CommunityCenterScene extends BaseScene {
+  readonly sceneId = "community_center";
 
   private readonly npcs: RenderableEntity[];
+  private readonly exitDoor: RenderableEntity = {
+    id: "door_crossroads",
+    label: "→ Crossroads",
+    x: 0,
+    y: 0,
+    width: 90,
+    height: 120,
+    color: "#8a5a2c",
+    interactive: true
+  };
 
-  constructor(private readonly deps: SceneDeps) {
+  constructor(deps: SceneDeps) {
+    super(deps);
     this.npcs = [
       {
         id: "anna",
@@ -65,112 +50,26 @@ export class CommunityCenterScene {
     ];
   }
 
-  update(dt: number): void {
-    const axis = this.deps.input.axis();
-    const speed = 180;
+  protected interactables(): Interactable[] {
+    this.exitDoor.x = window.innerWidth - 140;
+    this.exitDoor.y = window.innerHeight * 0.7;
 
-    this.deps.gameState.player.x += axis.x * speed * dt;
-    this.deps.gameState.player.y += axis.y * speed * dt;
-
-    const target = this.deps.input.pointerTarget;
-    if (target) {
-      const dx = target.x - this.deps.gameState.player.x;
-      const dy = target.y - this.deps.gameState.player.y;
-      const distance = Math.hypot(dx, dy);
-      if (distance > 5) {
-        this.deps.gameState.player.x += (dx / distance) * speed * dt;
-        this.deps.gameState.player.y += (dy / distance) * speed * dt;
-      } else {
-        this.deps.input.pointerTarget = null;
+    return [
+      ...this.npcs.map((npc) => ({
+        entity: npc,
+        onInteract: () => this.dialogueRunner.run(`${npc.id}_intro`, DISPLAY_NAMES.get(npc.id) ?? npc.id)
+      })),
+      {
+        entity: this.exitDoor,
+        onInteract: () => this.deps.changeScene("crossroads", { x: 220, y: 480 })
       }
-    }
-
-    if (this.deps.input.consumeInteract()) {
-      const npc = this.findNearbyNpc();
-      if (npc) this.openDialogue(npc.id);
-    }
-
-    this.saveCooldown -= dt;
-    if (this.saveCooldown <= 0) {
-      this.saveCooldown = 2;
-      void this.autosave();
-    }
+    ];
   }
 
-  render(): void {
+  protected drawScene(): void {
     const renderer = this.deps.renderer;
     renderer.clear();
     renderer.drawBackground();
-
-    const player: RenderableEntity = {
-      id: "maya",
-      label: "Maya",
-      x: this.deps.gameState.player.x,
-      y: this.deps.gameState.player.y,
-      width: 132,
-      height: 132,
-      image: this.deps.assets.getImage("maya:icon"),
-      interactive: false
-    };
-
-    renderer.drawEntities([...this.npcs, player]);
-  }
-
-  private findNearbyNpc(): RenderableEntity | undefined {
-    const player = this.deps.gameState.player;
-    return this.npcs.find((npc) => Math.hypot(npc.x - player.x, npc.y - player.y) < 160);
-  }
-
-  private openDialogue(npcId: string): void {
-    const dialogueId = `${npcId}_intro`;
-    if (!this.deps.dialogueManager.has(dialogueId)) {
-      console.warn(`No dialogue defined for ${npcId}`);
-      return;
-    }
-    const node = this.deps.dialogueManager.start(dialogueId);
-    this.showNode(npcId, node);
-  }
-
-  private showNode(npcId: string, node: DialogueNode): void {
-    this.deps.dialogueUI.show({
-      speaker: DISPLAY_NAMES.get(npcId) ?? npcId,
-      text: node.text,
-      choices: node.choices.map((choice) => ({ id: choice.id, label: choice.label })),
-      onChoice: (choice) => {
-        void this.handleChoice(npcId, choice.id);
-      }
-    });
-  }
-
-  private async handleChoice(npcId: string, choiceId: string): Promise<void> {
-    // Choice and node-entry effects (variables, resources, quest state) are
-    // applied by DialogueManager through the EffectResolver.
-    const result = this.deps.dialogueManager.choose(choiceId);
-
-    await this.recordChoice(npcId, choiceId);
-
-    if (!result.ended && result.node) {
-      this.showNode(npcId, result.node);
-    }
-  }
-
-  private async recordChoice(npcId: string, choiceId: string): Promise<void> {
-    const event = await this.deps.progressRepository.append(
-      this.deps.sessionId,
-      this.userId,
-      "dialogue_choice",
-      { npcId, choiceId, scene: "community_center" }
-    );
-
-    await this.deps.syncQueue.enqueue("progress_event", event.id, "create", event);
-    await this.autosave();
-  }
-
-  private async autosave(): Promise<void> {
-    await this.deps.saveRepository.save(this.userId, this.deps.sessionId, {
-      ...this.deps.gameState.snapshot(),
-      quests: this.deps.questManager.snapshot()
-    });
-    this.deps.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
+    renderer.drawEntities([...this.npcs, this.exitDoor, this.playerEntity()]);
   }
 }
