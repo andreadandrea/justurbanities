@@ -165,3 +165,67 @@ body,
   color: #fff;
   cursor: pointer;
 }
+
+/* ---------- Offline asset controls (Task 5) ---------- */
+.offline-toggle {
+  position: fixed;
+  right: 110px;
+  bottom: 12px;
+  z-index: 40;
+  padding: 8px 14px;
+  font-size: 13px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #fff8ec;
+  cursor: pointer;
+}
+
+.offline-panel {
+  position: fixed;
+  right: 12px;
+  bottom: 60px;
+  z-index: 41;
+  width: min(320px, 90vw);
+  padding: 14px 16px;
+  border: 1px solid #b89a6a;
+  border-radius: 12px;
+  background: #fff8ec;
+  box-shadow: 0 10px 28px rgba(42, 39, 35, 0.18);
+  font-size: 13px;
+}
+
+.offline-panel[hidden] {
+  display: none;
+}
+
+.offline-panel h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+.offline-panel progress {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.offline-panel button {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid #b89a6a;
+  border-radius: 6px;
+  background: #f3eadb;
+  cursor: pointer;
+}
+
+.offline-panel button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.offline-panel .offline-clear {
+  border-color: #a2412c;
+  background: #f7e3df;
+}

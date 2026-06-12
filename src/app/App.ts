@@ -13,6 +13,8 @@ import { createRemoteApi } from "../sync/RemoteApiClient";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
+import { OfflineControls } from "../ui/OfflineControls";
+import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
@@ -139,6 +141,13 @@ export class App {
       db: this.db,
       sessionId: session.id
     });
+
+    new OfflineControls(
+      this.elements.appRoot,
+      new OfflineAssetCache(
+        collectAssetUrls(manifest, animationsData as AnimationsData, import.meta.env.BASE_URL)
+      )
+    );
 
     this.loop = new GameLoop({
       update: (dt) => this.scene.update(dt),
