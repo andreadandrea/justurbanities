@@ -16,6 +16,7 @@ import type { BaseScene, SceneDeps } from "../scenes/BaseScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
 import { OfflineControls } from "../ui/OfflineControls";
+import { ReportButton } from "../ui/ReportButton";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
@@ -159,6 +160,16 @@ export class App {
         collectAssetUrls(manifest, animationsData as AnimationsData, import.meta.env.BASE_URL)
       )
     );
+
+    new ReportButton({
+      root: this.elements.appRoot,
+      gameState: this.state,
+      questManager: this.questManager,
+      progressRepository: this.progressRepository,
+      syncQueue: this.syncQueue,
+      session,
+      saveStatus: this.elements.saveStatus
+    });
 
     this.loop = new GameLoop({
       update: (dt) => this.activeScene().update(dt),

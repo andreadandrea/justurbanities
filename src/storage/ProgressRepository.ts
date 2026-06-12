@@ -22,4 +22,9 @@ export class ProgressRepository {
     await this.db.progress_events.add(event);
     return event;
   }
+
+  async listBySession(sessionId: string): Promise<ProgressEvent[]> {
+    const events = await this.db.progress_events.where({ sessionId }).toArray();
+    return events.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  }
 }
