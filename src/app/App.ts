@@ -11,6 +11,8 @@ import { SyncQueue } from "../sync/SyncQueue";
 import { SyncEngine } from "../sync/SyncEngine";
 import { createRemoteApi } from "../sync/RemoteApiClient";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
+import { CrossroadsScene } from "../scenes/CrossroadsScene";
+import type { BaseScene, SceneDeps } from "../scenes/BaseScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
 import { OfflineControls } from "../ui/OfflineControls";
@@ -59,7 +61,7 @@ export class App {
   private readonly questManager = new QuestManager();
   private readonly effectResolver = new EffectResolver(this.state, this.questManager);
   private readonly dialogueManager = new DialogueManager(this.effectResolver);
-  private scene!: CommunityCenterScene;
+  private scenes!: Record<string, BaseScene>;
   private loop!: GameLoop;
 
   constructor(private readonly elements: AppElements) {
@@ -118,7 +120,7 @@ export class App {
       })();
     });
 
-    this.scene = new CommunityCenterScene({
+    const sceneDeps: SceneDeps = {
       renderer: this.renderer,
       input: this.input,
       assets: this.assetLoader,
@@ -130,8 +132,17 @@ export class App {
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,
       sessionId: session.id,
-      saveStatus: this.elements.saveStatus
-    });
+      saveStatus: this.elements.saveStatus,
+      changeScene: (sceneId, spawn) => this.changeScene(sceneId, spawn)
+    };
+
+    this.scenes = {
+      community_center: new CommunityCenterScene(sceneDeps),
+      crossroads: new CrossroadsScene(sceneDeps)
+    };
+    if (!this.scenes[this.state.currentScene]) {
+      this.state.currentScene = "community_center";
+    }
 
     new DebugPanel({
       root: this.elements.appRoot,
@@ -150,13 +161,31 @@ export class App {
     );
 
     this.loop = new GameLoop({
-      update: (dt) => this.scene.update(dt),
-      render: () => this.scene.render()
+      update: (dt) => this.activeScene().update(dt),
+      render: () => this.activeScene().render()
     });
 
     this.elements.loadingScreen.hidden = true;
+    this.activeScene().enter();
     this.loop.start();
     this.syncEngine.start();
+  }
+
+  private activeScene(): BaseScene {
+    return this.scenes[this.state.currentScene] ?? this.scenes.community_center;
+  }
+
+  private changeScene(sceneId: string, spawn: { x: number; y: number }): void {
+    const scene = this.scenes[sceneId];
+    if (!scene) {
+      console.warn(`Unknown scene: ${sceneId}`);
+      return;
+    }
+    this.state.currentScene = sceneId;
+    this.state.player = { ...spawn };
+    this.input.pointerTarget = null;
+    this.dialogueUI.hide();
+    scene.enter();
   }
 
   private async preload(manifest: AssetManifest): Promise<void> {

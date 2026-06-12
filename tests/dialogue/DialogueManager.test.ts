@@ -117,3 +117,43 @@ describe("DialogueManager + QuestManager integration (Task 1)", () => {
     expect(dialogues.start("gated").choices.map((c) => c.id)).toEqual(["secret", "leave"]);
   });
 });
+
+describe("Crossroads dialogues (Task 6)", () => {
+  it("intro starts C01 and sets the one-time gate variable", () => {
+    const { state, quests, dialogues } = setup();
+    expect(quests.getQuestStatus("C01")).toBe("locked");
+
+    dialogues.start("crossroads_intro");
+    expect(quests.getQuestStatus("C01")).toBe("active");
+    expect(state.variables.crossroadsIntroSeen).toBe(true);
+
+    expect(dialogues.choose("look").ended).toBe(true);
+  });
+
+  it("reaching the bus hub completes C01 (arriving is already participation)", () => {
+    const { state, quests, dialogues } = setup();
+    dialogues.start("crossroads_intro");
+    dialogues.choose("look");
+
+    dialogues.start("crossroads_bus_hub");
+    expect(quests.getQuestStatus("C01")).toBe("completed");
+
+    const result = dialogues.choose("note_gap");
+    expect(result.ended).toBe(false);
+    expect(state.variables.notedEveningBusGap).toBe(true);
+    expect(state.resources.voice).toBe(1);
+    expect(dialogues.choose("close").ended).toBe(true);
+  });
+
+  it("every crossroads POI dialogue exists and ends cleanly", () => {
+    const { dialogues } = setup();
+    for (const [id, choice] of [
+      ["crossroads_market", "chat"],
+      ["crossroads_narrow_crossing", "measure"],
+      ["crossroads_info_point", "read"]
+    ] as const) {
+      dialogues.start(id);
+      expect(dialogues.choose(choice).ended).toBe(true);
+    }
+  });
+});

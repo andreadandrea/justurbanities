@@ -29,7 +29,10 @@ export class CanvasRenderer {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  drawBackground(): void {
+  drawBackground(
+    title = "Community Center",
+    subtitle = "Prototype scene — Canvas 2D + local save + dialogue event log"
+  ): void {
     const ctx = this.ctx;
     ctx.fillStyle = "#e7d4b3";
     ctx.fillRect(0, 0, this.width, this.height);
@@ -46,10 +49,10 @@ export class CanvasRenderer {
 
     ctx.fillStyle = "#5d4c3c";
     ctx.font = "bold 28px system-ui";
-    ctx.fillText("Community Center", 110, 125);
+    ctx.fillText(title, 110, 125);
 
     ctx.font = "18px system-ui";
-    ctx.fillText("Prototype scene — Canvas 2D + local save + dialogue event log", 110, 154);
+    ctx.fillText(subtitle, 110, 154);
   }
 
   drawEntity(entity: RenderableEntity): void {
