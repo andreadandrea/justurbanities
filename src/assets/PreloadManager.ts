@@ -13,6 +13,7 @@ export type AssetManifest = {
       portraits?: Record<string, string>;
       atlasImage?: string;
       atlasJson?: string;
+      spritesDir?: string;
     };
     icon?: string;
     portrait?: string;

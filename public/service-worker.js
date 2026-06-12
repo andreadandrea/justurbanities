@@ -19,7 +19,15 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) =>
+        Promise.all(
+          keys
+            // Only old app-shell caches: the offline asset cache
+            // ("justurbanities-assets-*") is managed by OfflineAssetCache.
+            .filter((key) => key.startsWith("justurbanities-cache-") && key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
+      )
       .then(() => self.clients.claim())
   );
 });
