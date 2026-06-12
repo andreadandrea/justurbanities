@@ -1,9 +1,20 @@
-import { SyncQueue } from "./SyncQueue";
+import type { SyncQueueItem } from "../storage/LocalDatabase";
+import type { RemoteApiAdapter } from "./RemoteApiClient";
+
+/** Structural dependency so the engine can be tested without IndexedDB. */
+export type SyncQueueLike = {
+  pending(): Promise<SyncQueueItem[]>;
+  markSynced(id: string): Promise<void>;
+  markFailed(id: string, attempts: number): Promise<void>;
+};
 
 export class SyncEngine {
   private intervalId: number | undefined;
 
-  constructor(private readonly queue: SyncQueue) {}
+  constructor(
+    private readonly queue: SyncQueueLike,
+    private readonly api: RemoteApiAdapter
+  ) {}
 
   start(): void {
     window.addEventListener("online", () => void this.syncOnce());
@@ -20,11 +31,10 @@ export class SyncEngine {
 
     const pending = await this.queue.pending();
     for (const item of pending) {
-      try {
-        // Remote API placeholder.
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      const result = await this.api.push(item);
+      if (result.ok) {
         await this.queue.markSynced(item.id);
-      } catch {
+      } else {
         await this.queue.markFailed(item.id, item.attempts + 1);
       }
     }

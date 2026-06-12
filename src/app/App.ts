@@ -9,6 +9,7 @@ import { SaveRepository } from "../storage/SaveRepository";
 import { ProgressRepository } from "../storage/ProgressRepository";
 import { SyncQueue } from "../sync/SyncQueue";
 import { SyncEngine } from "../sync/SyncEngine";
+import { createRemoteApi } from "../sync/RemoteApiClient";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
@@ -66,7 +67,8 @@ export class App {
     this.saveRepository = new SaveRepository(this.db);
     this.progressRepository = new ProgressRepository(this.db);
     this.syncQueue = new SyncQueue(this.db);
-    this.syncEngine = new SyncEngine(this.syncQueue);
+    // Fake remote backend for now; swap with createRemoteApi("rest", url) later.
+    this.syncEngine = new SyncEngine(this.syncQueue, createRemoteApi("fake"));
   }
 
   async start(): Promise<void> {
