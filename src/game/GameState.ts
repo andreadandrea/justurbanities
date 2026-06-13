@@ -1,8 +1,14 @@
 import type { Quest } from "../types/Quest";
 
+export type Pronoun = "she" | "he" | "they";
+
 export type SerializableGameState = {
   currentScene: string;
   currentCharacter: string;
+  playerName: string;
+  playerPronoun: Pronoun;
+  /** false until the player has finished the opening flow at least once. */
+  started: boolean;
   player: { x: number; y: number };
   // Quest snapshot is attached at save time by the scene (QuestManager owns runtime state).
   quests?: Quest[];
@@ -17,24 +23,39 @@ export type SerializableGameState = {
   };
 };
 
+function freshResources() {
+  return { trust: 0, care: 0, commons: 0, voice: 0, resilience: 0, fragmentationGlobal: 5 };
+}
+
 export class GameState {
   currentScene = "community_center";
   currentCharacter = "maya";
+  playerName = "";
+  playerPronoun: Pronoun = "they";
+  started = false;
   player = { x: 280, y: 440 };
   variables: Record<string, boolean | number | string> = {};
-  resources = {
-    trust: 0,
-    care: 0,
-    commons: 0,
-    voice: 0,
-    resilience: 0,
-    fragmentationGlobal: 5
-  };
+  resources = freshResources();
+
+  /** Reset to a clean run and apply the opening-flow choices. */
+  startNewGame(character: string, name: string, pronoun: Pronoun): void {
+    this.currentScene = "community_center";
+    this.currentCharacter = character;
+    this.playerName = name;
+    this.playerPronoun = pronoun;
+    this.started = true;
+    this.player = { x: 280, y: 440 };
+    this.variables = {};
+    this.resources = freshResources();
+  }
 
   snapshot(): SerializableGameState {
     return {
       currentScene: this.currentScene,
       currentCharacter: this.currentCharacter,
+      playerName: this.playerName,
+      playerPronoun: this.playerPronoun,
+      started: this.started,
       player: { ...this.player },
       variables: { ...this.variables },
       resources: { ...this.resources }
@@ -44,6 +65,10 @@ export class GameState {
   restore(state: SerializableGameState): void {
     this.currentScene = state.currentScene;
     this.currentCharacter = state.currentCharacter;
+    // Defaults keep older saves (written before the opening flow) loadable.
+    this.playerName = state.playerName ?? "";
+    this.playerPronoun = state.playerPronoun ?? "they";
+    this.started = state.started ?? true;
     this.player = { ...state.player };
     this.variables = { ...state.variables };
     this.resources = { ...state.resources };

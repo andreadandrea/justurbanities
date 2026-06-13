@@ -162,6 +162,36 @@ export const questFileSchema = z.object({
   )
 });
 
+// ---------- playable.json ----------
+
+export const playableSchema = z.object({
+  playable: z
+    .array(
+      z.object({
+        id: z.string().min(1),
+        displayName: z.string().min(1),
+        pronoun: z.enum(["she", "he", "they"]),
+        customizable: z.boolean(),
+        tagline: z.string(),
+        portrait: z.string().min(1)
+      })
+    )
+    .min(1)
+});
+
+// ---------- prologue.json ----------
+
+export const prologueSchema = z.object({
+  panels: z
+    .array(
+      z.object({
+        title: z.string().optional(),
+        text: z.string().min(1)
+      })
+    )
+    .min(1)
+});
+
 // ---------- helper ----------
 
 export class DataValidationError extends Error {

@@ -1,0 +1,44 @@
+{
+  "playable": [
+    {
+      "id": "maya",
+      "displayName": "Maya",
+      "pronoun": "she",
+      "customizable": false,
+      "tagline": "A student heading to her first city assembly.",
+      "portrait": "assets/characters/maya/portraits/portrait_maya_neutral.png"
+    },
+    {
+      "id": "samir",
+      "displayName": "Samir",
+      "pronoun": "he",
+      "customizable": false,
+      "tagline": "A courier who knows every shortcut and every closed door.",
+      "portrait": "assets/characters/samir/portraits/portrait_samir_neutral.png"
+    },
+    {
+      "id": "elena",
+      "displayName": "Elena",
+      "pronoun": "she",
+      "customizable": false,
+      "tagline": "A civic worker who still believes institutions can listen.",
+      "portrait": "assets/characters/elena/portraits/portrait_elena_neutral.png"
+    },
+    {
+      "id": "luca",
+      "displayName": "Luca",
+      "pronoun": "he",
+      "customizable": false,
+      "tagline": "A father balancing care at home and life in the neighbourhood.",
+      "portrait": "assets/characters/luca/portraits/portrait_luca_neutral.png"
+    },
+    {
+      "id": "custom",
+      "displayName": "New citizen",
+      "pronoun": "they",
+      "customizable": true,
+      "tagline": "Someone new to Eurbania. Write your own route.",
+      "portrait": "assets/characters/custom/portraits/portrait_custom_neutral.png"
+    }
+  ]
+}

@@ -100,14 +100,15 @@ export abstract class BaseScene {
   }
 
   protected playerEntity(): RenderableEntity {
+    const character = this.deps.gameState.currentCharacter;
     return {
-      id: "maya",
-      label: "Maya",
+      id: "player",
+      label: this.deps.gameState.playerName || character,
       x: this.deps.gameState.player.x,
       y: this.deps.gameState.player.y,
       width: 132,
       height: 132,
-      image: this.deps.assets.getImage("maya:icon"),
+      image: this.deps.assets.getImage(`${character}:icon`),
       interactive: false
     };
   }
