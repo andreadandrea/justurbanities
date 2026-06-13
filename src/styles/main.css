@@ -243,3 +243,208 @@ body,
   background: #fff8ec;
   cursor: pointer;
 }
+
+/* ---------- Opening flow (title / prologue / select / customize) ---------- */
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse at 50% -10%, #f3eadb 0%, transparent 60%),
+    linear-gradient(180deg, #3c2f23, #211c16);
+  color: #f1e8d8;
+}
+
+.opening[hidden] {
+  display: none;
+}
+
+.opening-card {
+  width: min(720px, 100%);
+  padding: 32px;
+  text-align: center;
+  background: rgba(43, 36, 28, 0.7);
+  border: 1px solid #b89a6a;
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+}
+
+.opening-title {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #f3eadb;
+}
+
+.opening-title::before {
+  content: "◆ ";
+  color: #d79a43;
+}
+
+.opening-subtitle {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #d7c7ab;
+}
+
+.opening-panel-title {
+  margin: 0 0 14px;
+  font-size: 26px;
+  color: #d79a43;
+}
+
+.opening-panel-text {
+  margin: 0 auto;
+  max-width: 56ch;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.opening-steps {
+  margin: 22px 0 0;
+  font-size: 13px;
+  color: #b6a98a;
+  letter-spacing: 0.1em;
+}
+
+.opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.opening-primary,
+.opening-secondary {
+  min-height: 44px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.opening-primary {
+  background: #e0853a;
+  border: 1px solid #a2412c;
+  color: #2a2723;
+}
+
+.opening-primary:hover {
+  background: #d99a4c;
+}
+
+.opening-secondary {
+  background: transparent;
+  border: 1px solid #b89a6a;
+  color: #f1e8d8;
+}
+
+.opening-secondary:hover {
+  background: rgba(184, 154, 106, 0.18);
+}
+
+.opening :focus-visible {
+  outline: 3px solid #2e7d8c;
+  outline-offset: 2px;
+}
+
+/* Character selection grid */
+.opening-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.opening-character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+  text-align: center;
+  background: rgba(243, 234, 219, 0.06);
+  border: 1px solid #8a7057;
+  border-radius: 14px;
+  color: #f1e8d8;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.opening-character:hover {
+  background: rgba(224, 133, 58, 0.16);
+  border-color: #e0853a;
+  transform: translateY(-2px);
+}
+
+.opening-portrait {
+  width: 96px;
+  height: 128px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.opening-character-name {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.opening-character-tagline {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #d7c7ab;
+}
+
+/* Customization form */
+.opening-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 22px;
+  text-align: left;
+}
+
+.opening-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #d7c7ab;
+}
+
+.opening-field input[type="text"] {
+  padding: 10px 12px;
+  font-size: 16px;
+  color: #2a2723;
+  background: #fff8ec;
+  border: 1px solid #b89a6a;
+  border-radius: 8px;
+}
+
+.opening-field legend {
+  padding: 0;
+  font-weight: 700;
+}
+
+.opening-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+  font-weight: 400;
+  color: #f1e8d8;
+  cursor: pointer;
+}

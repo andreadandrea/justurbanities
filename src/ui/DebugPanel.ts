@@ -64,6 +64,7 @@ export class DebugPanel {
     this.panel.replaceChildren(
       this.section("Session", [sessionId]),
       this.section("Player", [
+        `name: ${gameState.playerName || "(unset)"} (${gameState.playerPronoun})`,
         `x: ${Math.round(gameState.player.x)}  y: ${Math.round(gameState.player.y)}`,
         `scene: ${gameState.currentScene}`,
         `character: ${gameState.currentCharacter}`

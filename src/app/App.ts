@@ -17,6 +17,7 @@ import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
 import { OfflineControls } from "../ui/OfflineControls";
 import { ReportButton } from "../ui/ReportButton";
+import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
@@ -30,12 +31,16 @@ import {
   charactersSchema,
   dialogueFileSchema,
   questFileSchema,
+  playableSchema,
+  prologueSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
 import questsData from "../data/quests.json";
 import charactersData from "../data/characters.json";
 import animationsData from "../data/animations.json";
+import playableData from "../data/playable.json";
+import prologueData from "../data/prologue.json";
 
 type AppElements = {
   appRoot: HTMLElement;
@@ -90,6 +95,8 @@ export class App {
       validateData("animations.json", animationsSchema, animationsData);
       dialogueFile = validateData("dialogues.json", dialogueFileSchema, dialoguesData) as DialogueFile;
       questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
+      validateData("playable.json", playableSchema, playableData);
+      validateData("prologue.json", prologueSchema, prologueData);
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -106,11 +113,30 @@ export class App {
 
     const session = await this.saveRepository.loadOrCreateSession("local-user", "vertical-slice-01");
     const save = await this.saveRepository.loadLatestSave(session.id);
-    if (save) {
+    const canContinue = !!save && save.state.started === true;
+
+    // Opening flow: title → prologue → character selection → customization.
+    this.elements.loadingScreen.hidden = true;
+    const opening = new OpeningScreens({
+      root: this.elements.appRoot,
+      playable: playableData.playable as PlayableCharacter[],
+      prologue: prologueData.panels,
+      canContinue,
+      baseUrl: import.meta.env.BASE_URL
+    });
+    const choice = await opening.run();
+
+    if (choice.mode === "continue" && save) {
       this.state.restore(save.state);
       if (save.state.quests?.length) {
         this.questManager.restore(save.state.quests);
       }
+    } else if (choice.mode === "new") {
+      this.state.startNewGame(choice.character, choice.name, choice.pronoun);
+      await this.saveRepository.save("local-user", session.id, {
+        ...this.state.snapshot(),
+        quests: this.questManager.snapshot()
+      });
     }
 
     // Dialogue effects can emit progress events; log + queue them like scene events.
@@ -176,7 +202,6 @@ export class App {
       render: () => this.activeScene().render()
     });
 
-    this.elements.loadingScreen.hidden = true;
     this.activeScene().enter();
     this.loop.start();
     this.syncEngine.start();
