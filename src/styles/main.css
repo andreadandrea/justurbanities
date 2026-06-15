@@ -448,3 +448,97 @@ body,
   color: #f1e8d8;
   cursor: pointer;
 }
+
+/* ---------- Resource HUD / living-fabric vitality ---------- */
+.hud-resources {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 30;
+  width: min(260px, 70vw);
+  padding: 12px 14px;
+  border: 1px solid #b89a6a;
+  border-radius: 12px;
+  background: rgba(255, 248, 236, 0.92);
+  box-shadow: 0 6px 18px rgba(42, 39, 35, 0.18);
+  font-size: 13px;
+  color: #2a2723;
+}
+
+.hud-vitality-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.hud-vitality-header > span:first-child {
+  margin-right: auto;
+}
+
+.hud-state {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6e655a;
+}
+
+.hud-vitality-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-vitality-track {
+  margin-top: 6px;
+  height: 8px;
+  background: #e6d8bf;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hud-vitality-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: #8b8275;
+  transition: width 320ms ease, background 900ms ease;
+}
+
+.hud-resources[data-state="fragmented"] .hud-vitality-fill { background: #586571; }
+.hud-resources[data-state="awakening"] .hud-vitality-fill { background: #d99a4c; }
+.hud-resources[data-state="connected"] .hud-vitality-fill { background: #6e9a5a; }
+.hud-resources[data-state="thriving"] .hud-vitality-fill { background: #4fb0aa; }
+
+.hud-resource-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 14px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hud-resource {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.hud-resource-name {
+  color: #6e655a;
+}
+
+.hud-resource-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#game-canvas {
+  transition: filter 900ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-vitality-fill,
+  #game-canvas {
+    transition: none;
+  }
+}
