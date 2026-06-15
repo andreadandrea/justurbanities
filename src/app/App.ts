@@ -18,6 +18,7 @@ import { DebugPanel } from "../ui/DebugPanel";
 import { OfflineControls } from "../ui/OfflineControls";
 import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
+import { ResourceHud } from "../ui/ResourceHud";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
@@ -155,6 +156,7 @@ export class App {
       gameState: this.state,
       dialogueManager: this.dialogueManager,
       questManager: this.questManager,
+      resourceHud: new ResourceHud(this.elements.appRoot),
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,

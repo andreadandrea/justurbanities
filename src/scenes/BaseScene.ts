@@ -10,6 +10,8 @@ import type { QuestManager } from "../game/quest/QuestManager";
 import type { SaveRepository } from "../storage/SaveRepository";
 import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
+import type { ResourceHud } from "../ui/ResourceHud";
+import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
 
 export type SceneDeps = {
   renderer: CanvasRenderer;
@@ -19,6 +21,7 @@ export type SceneDeps = {
   gameState: GameState;
   dialogueManager: DialogueManager;
   questManager: QuestManager;
+  resourceHud: ResourceHud;
   saveRepository: SaveRepository;
   progressRepository: ProgressRepository;
   syncQueue: SyncQueue;
@@ -97,6 +100,10 @@ export abstract class BaseScene {
 
   render(): void {
     this.drawScene();
+    // The whole city re-colours with the neighbourhood's vitality.
+    const vitality = neighbourhoodVitality(this.deps.gameState.resources);
+    this.deps.renderer.setColorFilter(cityFilter(cityState(vitality)));
+    this.deps.resourceHud.update(this.deps.gameState.resources);
   }
 
   protected playerEntity(): RenderableEntity {

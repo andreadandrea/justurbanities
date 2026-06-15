@@ -5,6 +5,7 @@ export class CanvasRenderer {
   private width = 0;
   private height = 0;
   private dpr = 1;
+  private colorFilter = "";
 
   constructor(readonly canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
@@ -12,6 +13,17 @@ export class CanvasRenderer {
     this.ctx = ctx;
     this.resize();
     window.addEventListener("resize", () => this.resize());
+  }
+
+  /**
+   * Whole-city colour state: the canvas desaturates when the neighbourhood
+   * is fragmented and regains colour as it reconnects. Reduced-motion
+   * users still get the state (the CSS transition is what's disabled).
+   */
+  setColorFilter(filter: string): void {
+    if (filter === this.colorFilter) return;
+    this.colorFilter = filter;
+    this.canvas.style.filter = filter;
   }
 
   resize(): void {
