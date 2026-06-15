@@ -40,8 +40,9 @@ describe("cityState", () => {
 });
 
 describe("cityFilter", () => {
-  it("desaturates when fragmented and is neutral when connected", () => {
-    expect(cityFilter("fragmented")).toContain("saturate(0.4)");
-    expect(cityFilter("connected")).toBe("saturate(1) brightness(1)");
+  it("desaturates when fragmented and boosts saturation as the city reconnects", () => {
+    expect(cityFilter("fragmented")).toContain("saturate(0.45)");
+    expect(cityFilter("connected")).toContain("saturate(1.15)");
+    expect(cityFilter("thriving")).toContain("saturate(1.35)");
   });
 });

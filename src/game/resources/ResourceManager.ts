@@ -35,14 +35,16 @@ export function cityState(vitality: number): CityState {
  * colour is never the only signal.
  */
 export function cityFilter(state: CityState): string {
+  // Keep our identity but lean vivid: even "connected" is slightly boosted,
+  // and "thriving" reads as a bright, saturated city.
   switch (state) {
     case "fragmented":
-      return "saturate(0.4) brightness(0.95) contrast(0.96)";
+      return "saturate(0.45) brightness(0.95) contrast(0.97)";
     case "awakening":
-      return "saturate(0.7) brightness(0.99)";
+      return "saturate(0.85) brightness(1)";
     case "connected":
-      return "saturate(1) brightness(1)";
+      return "saturate(1.15) brightness(1.03)";
     case "thriving":
-      return "saturate(1.08) brightness(1.02)";
+      return "saturate(1.35) brightness(1.06)";
   }
 }
