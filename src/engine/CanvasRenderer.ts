@@ -1,4 +1,7 @@
 import type { RenderableEntity } from "../types/Entity";
+import type { Camera2D } from "./Camera2D";
+
+export type WorldSize = { width: number; height: number };
 
 export class CanvasRenderer {
   readonly ctx: CanvasRenderingContext2D;
@@ -13,6 +16,14 @@ export class CanvasRenderer {
     this.ctx = ctx;
     this.resize();
     window.addEventListener("resize", () => this.resize());
+  }
+
+  get viewportWidth(): number {
+    return this.width;
+  }
+
+  get viewportHeight(): number {
+    return this.height;
   }
 
   /**
@@ -41,30 +52,59 @@ export class CanvasRenderer {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  drawBackground(
-    title = "Community Center",
-    subtitle = "Prototype scene — Canvas 2D + local save + dialogue event log"
-  ): void {
+  /** Run world-space drawing translated by the camera (3/4 follow view). */
+  withCamera(camera: Camera2D, draw: () => void): void {
     const ctx = this.ctx;
-    ctx.fillStyle = "#e7d4b3";
-    ctx.fillRect(0, 0, this.width, this.height);
+    ctx.save();
+    ctx.translate(-Math.round(camera.x), -Math.round(camera.y));
+    draw();
+    ctx.restore();
+  }
 
-    ctx.fillStyle = "#d0b894";
-    ctx.fillRect(0, this.height * 0.64, this.width, this.height * 0.36);
+  /**
+   * Vivid warm ground for the whole world, with a soft path grid. Drawn in
+   * world coordinates (call inside withCamera). Placeholder until final art.
+   */
+  drawGround(world: WorldSize, top = "#f6cf87", bottom = "#e79a4e"): void {
+    const ctx = this.ctx;
+    const gradient = ctx.createLinearGradient(0, 0, 0, world.height);
+    gradient.addColorStop(0, top);
+    gradient.addColorStop(1, bottom);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, world.width, world.height);
 
-    ctx.fillStyle = "#fff2d2";
-    ctx.fillRect(80, 80, this.width - 160, this.height * 0.48);
+    ctx.strokeStyle = "rgba(120, 86, 52, 0.18)";
+    ctx.lineWidth = 2;
+    const step = 160;
+    for (let x = step; x < world.width; x += step) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, world.height);
+      ctx.stroke();
+    }
+    for (let y = step; y < world.height; y += step) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(world.width, y);
+      ctx.stroke();
+    }
+  }
 
-    ctx.strokeStyle = "#8a7057";
+  /** A simple vivid building/landmark footprint in world coordinates. */
+  drawLandmark(x: number, y: number, w: number, h: number, color: string, label?: string): void {
+    const ctx = this.ctx;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "rgba(74, 47, 30, 0.55)";
     ctx.lineWidth = 4;
-    ctx.strokeRect(80, 80, this.width - 160, this.height * 0.48);
-
-    ctx.fillStyle = "#5d4c3c";
-    ctx.font = "bold 28px system-ui";
-    ctx.fillText(title, 110, 125);
-
-    ctx.font = "18px system-ui";
-    ctx.fillText(subtitle, 110, 154);
+    ctx.strokeRect(x, y, w, h);
+    if (label) {
+      ctx.font = "bold 20px system-ui";
+      ctx.fillStyle = "rgba(42, 39, 35, 0.85)";
+      ctx.textAlign = "center";
+      ctx.fillText(label, x + w / 2, y + h / 2);
+      ctx.textAlign = "start";
+    }
   }
 
   drawEntity(entity: RenderableEntity): void {

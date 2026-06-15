@@ -45,6 +45,20 @@ Conversations and quest outcomes change people, the neighbourhood and the
 final **educational report** (*who arrived / what changed / what was
 missed*). No victory screen — an honest mirror of the civic fabric built.
 
+## Presentation & point of view
+
+- **3/4 follow camera** in a world larger than the viewport (Vivarium/
+  Stardew-like). Implemented: `Camera2D` + animated directional character
+  sprites (walk/idle in four directions) driven from `animations.json`.
+- **Keep our hand-painted identity, but lean vivid** — higher saturation,
+  warmer ground; the city looks brighter as it reconnects.
+- **NPCs live on the street and move.** Their positions change by **story,
+  time of day and quest state** — people appear, relocate or leave as the
+  neighbourhood's situation evolves. (Builds on pillars 2–3; data-driven
+  placement per scene/time/quest.)
+- Dialogues show the **speaker portrait** (four expressions) + name plate
+  + organized choices. *(next presentation slice)*
+
 ## Phased plan
 
 1. **Living fabric v1** — `ResourceManager` (derive Vitality + state),

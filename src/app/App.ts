@@ -20,6 +20,7 @@ import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
+import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
@@ -148,10 +149,20 @@ export class App {
       })();
     });
 
+    // Load animated sprite frames for the player and the on-street NPCs.
+    const sprites = new SpriteRepository(
+      this.assetLoader,
+      animationsData as AnimationsData,
+      manifest,
+      import.meta.env.BASE_URL
+    );
+    await Promise.all([sprites.load(this.state.currentCharacter), sprites.load("anna"), sprites.load("ben")]);
+
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
       input: this.input,
       assets: this.assetLoader,
+      sprites,
       dialogueUI: this.dialogueUI,
       gameState: this.state,
       dialogueManager: this.dialogueManager,
