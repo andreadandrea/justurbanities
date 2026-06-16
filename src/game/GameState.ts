@@ -9,6 +9,9 @@ export type SerializableGameState = {
   playerPronoun: Pronoun;
   /** false until the player has finished the opening flow at least once. */
   started: boolean;
+  /** Day/time cycle (timePart: 0=morning, 1=afternoon, 2=evening). */
+  day: number;
+  timePart: number;
   player: { x: number; y: number };
   // Quest snapshot is attached at save time by the scene (QuestManager owns runtime state).
   quests?: Quest[];
@@ -33,6 +36,8 @@ export class GameState {
   playerName = "";
   playerPronoun: Pronoun = "they";
   started = false;
+  day = 1;
+  timePart = 0;
   player = { x: 280, y: 440 };
   variables: Record<string, boolean | number | string> = {};
   resources = freshResources();
@@ -44,6 +49,8 @@ export class GameState {
     this.playerName = name;
     this.playerPronoun = pronoun;
     this.started = true;
+    this.day = 1;
+    this.timePart = 0;
     this.player = { x: 280, y: 440 };
     this.variables = {};
     this.resources = freshResources();
@@ -56,6 +63,8 @@ export class GameState {
       playerName: this.playerName,
       playerPronoun: this.playerPronoun,
       started: this.started,
+      day: this.day,
+      timePart: this.timePart,
       player: { ...this.player },
       variables: { ...this.variables },
       resources: { ...this.resources }
@@ -69,6 +78,8 @@ export class GameState {
     this.playerName = state.playerName ?? "";
     this.playerPronoun = state.playerPronoun ?? "they";
     this.started = state.started ?? true;
+    this.day = state.day ?? 1;
+    this.timePart = state.timePart ?? 0;
     this.player = { ...state.player };
     this.variables = { ...state.variables };
     this.resources = { ...state.resources };
