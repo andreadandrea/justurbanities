@@ -400,7 +400,7 @@
         "h": 256
       }
     },
-    "char_maya_talk_front_02": {
+    "char_maya_talk_front_01": {
       "frame": {
         "x": 5120,
         "y": 0,
@@ -420,7 +420,7 @@
         "h": 256
       }
     },
-    "char_maya_interact_front_01": {
+    "char_maya_talk_front_02": {
       "frame": {
         "x": 5376,
         "y": 0,
@@ -440,7 +440,7 @@
         "h": 256
       }
     },
-    "char_maya_interact_front_02": {
+    "char_maya_interact_front_01": {
       "frame": {
         "x": 5632,
         "y": 0,
@@ -460,7 +460,7 @@
         "h": 256
       }
     },
-    "char_maya_tool_front_01": {
+    "char_maya_interact_front_02": {
       "frame": {
         "x": 5888,
         "y": 0,
@@ -480,9 +480,29 @@
         "h": 256
       }
     },
-    "char_maya_stressed_front_01": {
+    "char_maya_tool_front_01": {
       "frame": {
         "x": 6144,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "char_maya_stressed_front_01": {
+      "frame": {
+        "x": 6400,
         "y": 0,
         "w": 256,
         "h": 256
@@ -505,7 +525,7 @@
     "image": "maya_atlas.png",
     "format": "RGBA8888",
     "size": {
-      "w": 6400,
+      "w": 6656,
       "h": 256
     },
     "scale": "1"
