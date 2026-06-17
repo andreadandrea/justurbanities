@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { DialogueManager } from "../../src/game/dialogue/DialogueManager";
 import { EffectResolver } from "../../src/game/effects/EffectResolver";
 import { QuestManager } from "../../src/game/quest/QuestManager";
+import { GameClock } from "../../src/game/time/GameClock";
 import { GameState } from "../../src/game/GameState";
 import type { DialogueFile } from "../../src/types/Dialogue";
 import type { QuestFile } from "../../src/types/Quest";
@@ -12,10 +13,11 @@ function setup() {
   const state = new GameState();
   const quests = new QuestManager();
   quests.load(questsData as unknown as QuestFile);
-  const resolver = new EffectResolver(state, quests);
+  const clock = new GameClock(state);
+  const resolver = new EffectResolver(state, quests, clock);
   const dialogues = new DialogueManager(resolver);
   dialogues.load(dialoguesData as unknown as DialogueFile);
-  return { state, quests, resolver, dialogues };
+  return { state, quests, resolver, clock, dialogues };
 }
 
 describe("DialogueManager + QuestManager integration (Task 1)", () => {
@@ -34,6 +36,16 @@ describe("DialogueManager + QuestManager integration (Task 1)", () => {
 
     const closing = dialogues.choose("close");
     expect(closing.ended).toBe(true);
+  });
+
+  it("advances the game clock through the advanceTime effect", () => {
+    const { clock, resolver } = setup();
+    expect(clock.label()).toBe("Day 1 · Morning");
+    resolver.apply({ type: "advanceTime" });
+    expect(clock.partName).toBe("afternoon");
+    resolver.apply({ type: "advanceTime", steps: 2 });
+    expect(clock.day).toBe(2);
+    expect(clock.partName).toBe("morning");
   });
 
   it("completes P01 after talking to both Anna and Ben", () => {

@@ -532,6 +532,59 @@ body,
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- Day / time HUD ---------- */
+.hud-time {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 12px;
+  background: rgba(255, 248, 236, 0.92);
+  box-shadow: 0 6px 18px rgba(42, 39, 35, 0.18);
+  color: #2a2723;
+}
+
+.hud-time-readout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-time-glyph {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hud-time-label {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.hud-time-advance {
+  padding: 6px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #f2c777;
+  color: #3a2f1c;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hud-time-advance:hover {
+  background: #efb950;
+}
+
+.hud-time-advance:focus-visible {
+  outline: 3px solid #3a6ea5;
+  outline-offset: 2px;
+}
+
 #game-canvas {
   transition: filter 900ms ease;
 }

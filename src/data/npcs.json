@@ -1,0 +1,58 @@
+{
+  "npcs": [
+    {
+      "id": "anna",
+      "placements": [
+        {
+          "scene": "community_center",
+          "x": 900,
+          "y": 620,
+          "dialogueId": "anna_intro",
+          "parts": ["morning", "afternoon"]
+        }
+      ]
+    },
+    {
+      "id": "ben",
+      "placements": [
+        {
+          "scene": "community_center",
+          "x": 1240,
+          "y": 760,
+          "dialogueId": "ben_intro"
+        }
+      ]
+    },
+    {
+      "id": "samir",
+      "placements": [
+        {
+          "scene": "crossroads",
+          "x": 620,
+          "y": 600,
+          "dialogueId": "samir_intro",
+          "parts": ["morning"]
+        },
+        {
+          "scene": "community_center",
+          "x": 1000,
+          "y": 900,
+          "dialogueId": "samir_intro",
+          "parts": ["evening"]
+        }
+      ]
+    },
+    {
+      "id": "luca",
+      "placements": [
+        {
+          "scene": "crossroads",
+          "x": 1180,
+          "y": 1000,
+          "dialogueId": "luca_intro",
+          "parts": ["afternoon", "evening"]
+        }
+      ]
+    }
+  ]
+}

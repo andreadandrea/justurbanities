@@ -1,6 +1,7 @@
 import type { Effect, Condition } from "../../types/Dialogue";
 import type { GameState } from "../GameState";
 import type { QuestManager } from "../quest/QuestManager";
+import type { GameClock } from "../time/GameClock";
 
 export type ProgressEventHandler = (eventType: string, payload?: Record<string, unknown>) => void;
 
@@ -9,7 +10,8 @@ export class EffectResolver {
 
   constructor(
     private readonly gameState: GameState,
-    private readonly questManager: QuestManager
+    private readonly questManager: QuestManager,
+    private readonly clock: GameClock
   ) {}
 
   setProgressEventHandler(handler: ProgressEventHandler): void {
@@ -58,6 +60,9 @@ export class EffectResolver {
         break;
       case "createProgressEvent":
         this.progressEventHandler?.(effect.eventType, effect.payload);
+        break;
+      case "advanceTime":
+        this.clock.advance(effect.steps ?? 1);
         break;
     }
   }

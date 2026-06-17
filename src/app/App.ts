@@ -19,6 +19,9 @@ import { OfflineControls } from "../ui/OfflineControls";
 import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
+import { TimeHud } from "../ui/TimeHud";
+import { GameClock } from "../game/time/GameClock";
+import { NpcScheduler, type NpcsFile } from "../game/npc/NpcScheduler";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
@@ -35,6 +38,7 @@ import {
   questFileSchema,
   playableSchema,
   prologueSchema,
+  npcsSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -43,6 +47,7 @@ import charactersData from "../data/characters.json";
 import animationsData from "../data/animations.json";
 import playableData from "../data/playable.json";
 import prologueData from "../data/prologue.json";
+import npcsData from "../data/npcs.json";
 
 type AppElements = {
   appRoot: HTMLElement;
@@ -67,7 +72,9 @@ export class App {
   private readonly syncQueue: SyncQueue;
   private readonly syncEngine: SyncEngine;
   private readonly questManager = new QuestManager();
-  private readonly effectResolver = new EffectResolver(this.state, this.questManager);
+  private readonly gameClock = new GameClock(this.state);
+  private readonly npcScheduler = new NpcScheduler(npcsData as NpcsFile);
+  private readonly effectResolver = new EffectResolver(this.state, this.questManager, this.gameClock);
   private readonly dialogueManager = new DialogueManager(this.effectResolver);
   private scenes!: Record<string, BaseScene>;
   private loop!: GameLoop;
@@ -99,6 +106,7 @@ export class App {
       questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
+      validateData("npcs.json", npcsSchema, npcsData);
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -156,7 +164,8 @@ export class App {
       manifest,
       import.meta.env.BASE_URL
     );
-    await Promise.all([sprites.load(this.state.currentCharacter), sprites.load("anna"), sprites.load("ben")]);
+    const spriteIds = new Set<string>([this.state.currentCharacter, ...this.npcScheduler.allNpcIds()]);
+    await Promise.all([...spriteIds].map((id) => sprites.load(id)));
 
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
@@ -167,6 +176,8 @@ export class App {
       gameState: this.state,
       dialogueManager: this.dialogueManager,
       questManager: this.questManager,
+      gameClock: this.gameClock,
+      npcScheduler: this.npcScheduler,
       resourceHud: new ResourceHud(this.elements.appRoot),
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
@@ -210,6 +221,13 @@ export class App {
       saveStatus: this.elements.saveStatus
     });
 
+    // Day/time HUD: "Pass time" advances the clock, which re-places NPCs and
+    // is persisted to the save so the cycle survives a reload.
+    new TimeHud(this.elements.appRoot, this.gameClock, () => {
+      this.gameClock.advance(1);
+      void this.persist(session.id);
+    });
+
     this.loop = new GameLoop({
       update: (dt) => this.activeScene().update(dt),
       render: () => this.activeScene().render()
@@ -222,6 +240,14 @@ export class App {
 
   private activeScene(): BaseScene {
     return this.scenes[this.state.currentScene] ?? this.scenes.community_center;
+  }
+
+  private async persist(sessionId: string): Promise<void> {
+    await this.saveRepository.save("local-user", sessionId, {
+      ...this.state.snapshot(),
+      quests: this.questManager.snapshot()
+    });
+    this.elements.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
   }
 
   private changeScene(sceneId: string, spawn: { x: number; y: number }): void {

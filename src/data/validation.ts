@@ -86,7 +86,8 @@ const effectSchema = z.discriminatedUnion("type", [
     type: z.literal("createProgressEvent"),
     eventType: z.string(),
     payload: z.record(z.string(), z.unknown()).optional()
-  })
+  }),
+  z.object({ type: z.literal("advanceTime"), steps: z.number().int().positive().optional() })
 ]);
 
 const dialogueChoiceSchema = z.object({
@@ -190,6 +191,36 @@ export const prologueSchema = z.object({
       })
     )
     .min(1)
+});
+
+// ---------- npcs.json ----------
+
+const timePartEnum = z.enum(["morning", "afternoon", "evening"]);
+
+const placementSchema = z.object({
+  scene: z.string().min(1),
+  x: z.number(),
+  y: z.number(),
+  dialogueId: z.string().min(1),
+  parts: z.array(timePartEnum).min(1).optional(),
+  minDay: z.number().int().positive().optional(),
+  maxDay: z.number().int().positive().optional(),
+  variableEquals: z
+    .object({ key: z.string().min(1), value: z.union([z.string(), z.number(), z.boolean()]) })
+    .optional(),
+  questState: z
+    .object({ questId: z.string().min(1), state: z.enum(["locked", "available", "active", "completed"]) })
+    .optional()
+});
+
+export const npcsSchema = z.object({
+  npcs: z.array(
+    z.object({
+      id: z.string().min(1),
+      displayName: z.string().min(1).optional(),
+      placements: z.array(placementSchema).min(1)
+    })
+  )
 });
 
 // ---------- helper ----------
