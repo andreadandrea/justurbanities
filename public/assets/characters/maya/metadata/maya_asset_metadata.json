@@ -11,11 +11,12 @@
       "neutral": "assets/characters/maya/portraits/portrait_maya_neutral.png",
       "positive": "assets/characters/maya/portraits/portrait_maya_positive.png",
       "concerned": "assets/characters/maya/portraits/portrait_maya_concerned.png",
-      "focused": "assets/characters/maya/portraits/portrait_maya_focused.png"
+      "focused": "assets/characters/maya/portraits/portrait_maya_focused.png",
+      "full": "assets/characters/maya/portraits/portrait_maya_full.png"
     },
     "atlasImage": "assets/characters/maya/atlas/maya_atlas.png",
     "atlasJson": "assets/characters/maya/atlas/maya_atlas.json",
     "spritesDir": "assets/characters/maya/sprites/"
   },
-  "status": "placeholder_runtime_assets_generated_from_reference_sheet"
+  "status": "runtime_assets_extracted_from_reference_sheet"
 }

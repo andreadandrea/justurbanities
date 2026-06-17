@@ -3,9 +3,9 @@
 Quick context for continuing development in a fresh session.
 
 ## Repo & deploy
-- **Working branch:** `claude/charming-fermi-xoi7hf` (also merged to `main`).
+- **Working branch:** `claude/eloquent-sagan-tvs9ez` (latest day/time + dynamic NPCs slice). Previous: `claude/charming-fermi-xoi7hf` (merged to `main`).
 - **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main` via `.github/workflows/pages.yml`). Hard-refresh after deploy.
-- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (42 tests).
+- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (58 tests).
 
 ## Read first (for the next agent)
 - `AGENTS.md` — hard technical rules.
@@ -18,12 +18,14 @@ Quick context for continuing development in a fresh session.
 - **3/4 follow camera** in a world larger than the viewport + **animated directional sprites** (walk/idle ×4 dir) for playables.
 - **Living fabric:** the whole city re-colours with derived **Neighbourhood Vitality**; resource HUD. Vivid palette.
 - **Maya real art** integrated (portrait, icon, full figure) — generated externally, background-removed and wired in.
+- **Day/time cycle + dynamic NPCs** (Gameplay Loop pillars 2–3): `GameClock` (day + morning/afternoon/evening) drives a top-right **time HUD with a "Pass time" button**; an `advanceTime` dialogue/quest effect can pass time too. **Data-driven NPC placement** (`src/data/npcs.json` + `NpcScheduler`) makes NPCs appear / relocate / leave by **time, day, quest state and story variables** — e.g. Anna leaves in the evening, Samir is at the Crossroads in the morning and the Community Center after his shift, Luca holds the corner in the afternoon. Scenes rebuild their NPC set reactively (cheap per-frame signature check). All persisted in the save.
 
 ## In progress / next
-1. **Day/time + dynamic NPCs** (the user's priority): `GameState.day`/`timePart` fields exist; still to build `GameClock`, time HUD + "pass time", and **data-driven NPC placement that varies by time / quest / story** (NPCs appear/relocate/leave).
-2. **Use name/pronoun in dialogue text** (accepted, not yet done).
-3. **Directional sprite set for Maya** in the new art style (only a front pose exists, so in-world she still uses placeholder walk frames).
-4. Art for the other characters.
+1. **Quest loop v1** (Gameplay Loop phase 4): a small data-driven quest board of neighbour tasks with resource rewards feeding Vitality. NPC placements can already gate on `questState`, so quests can now move people around.
+2. **Assembly as a dated deadline** (phase 3 tail): use `GameClock.day` for a real deadline; `notedAssemblyTiming` flag already set by Samir.
+3. **Use name/pronoun in dialogue text** (accepted, not yet done).
+4. **Directional sprite set for Maya** in the new art style (only a front pose exists, so in-world she still uses placeholder walk frames). Other NPCs render from their `:icon` when no walk frames exist.
+5. Art for the other characters.
 
 ## Asset pipeline (works)
 Higgsfield is **not** available as an MCP connector in this environment, so the agent can't drive it. Proven workflow: user generates art (Higgsfield/ChatGPT, from the reference sheets in `public/assets/characters/<id>/references/`) → exports PNG → **puts it in a .zip** (inline-pasted images are NOT saved to disk; zips are) → uploads → the agent removes background (Pillow/scipy, multi-seed flood-fill avoiding hair), crops portrait/icon/full, saves to `public/assets/characters/<id>/{portraits,icons}/` with manifest-matching names, commits + deploys. No code change needed when filenames match the manifest.

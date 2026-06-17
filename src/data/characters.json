@@ -147,7 +147,7 @@
     "displayName": "Maya",
     "type": "playable",
     "priority": "A",
-    "assetStatus": "reference_and_placeholder_assets",
+    "assetStatus": "runtime_assets_extracted_from_reference_sheet",
     "reference": "assets/characters/maya/references/maya_reference_sheet.jpeg",
     "icon": "assets/characters/maya/icons/icon_maya.png",
     "portrait": "assets/characters/maya/portraits/portrait_maya_neutral.png",

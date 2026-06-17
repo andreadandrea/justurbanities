@@ -12,9 +12,19 @@ import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
 import type { ResourceHud } from "../ui/ResourceHud";
 import type { SpriteRepository } from "../assets/SpriteRepository";
+import type { GameClock } from "../game/time/GameClock";
+import type { NpcScheduler, ActivePlacement } from "../game/npc/NpcScheduler";
 import { Camera2D } from "../engine/Camera2D";
 import { AnimatedSprite, movementAnimation, type Direction } from "../engine/AnimatedSprite";
 import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
+import charactersData from "../data/characters.json";
+
+const NPC_DISPLAY_NAMES = new Map(
+  (charactersData as Array<{ id: string; displayName: string }>).map((character) => [
+    character.id,
+    character.displayName
+  ])
+);
 
 export type SceneDeps = {
   renderer: CanvasRenderer;
@@ -25,6 +35,8 @@ export type SceneDeps = {
   gameState: GameState;
   dialogueManager: DialogueManager;
   questManager: QuestManager;
+  gameClock: GameClock;
+  npcScheduler: NpcScheduler;
   resourceHud: ResourceHud;
   saveRepository: SaveRepository;
   progressRepository: ProgressRepository;
@@ -46,6 +58,9 @@ const AUTOSAVE_INTERVAL = 2;
 const PLAYER_HEIGHT = 150;
 const EDGE_MARGIN = 40;
 
+/** A scheduled NPC currently present in the scene. */
+type SceneNpc = ActivePlacement & { label: string; sprite: AnimatedSprite | null };
+
 /**
  * Shared walk-and-interact scene behaviour for the 3/4 follow-camera world:
  * player movement in world space (keys + pointer), an animated directional
@@ -60,6 +75,8 @@ export abstract class BaseScene {
   private saveCooldown = 0;
   private playerSprite: AnimatedSprite | null = null;
   private facing: Direction = "down";
+  private npcs: SceneNpc[] = [];
+  private npcSignature = "";
 
   constructor(protected readonly deps: SceneDeps) {
     this.dialogueRunner = new DialogueRunner(deps.dialogueUI, deps.dialogueManager, (dialogueId, choiceId) =>
@@ -83,9 +100,16 @@ export abstract class BaseScene {
   protected abstract drawScene(): void;
 
   /** Called when the player enters the scene (and on boot for the active scene). */
-  enter(): void {}
+  enter(): void {
+    // Force a rebuild so NPCs reflect the time/quest/story on entry.
+    this.npcSignature = "";
+    this.syncNpcs();
+  }
 
   update(dt: number): void {
+    this.syncNpcs();
+    for (const npc of this.npcs) npc.sprite?.update(dt);
+
     const player = this.deps.gameState.player;
     const startX = player.x;
     const startY = player.y;
@@ -164,6 +188,57 @@ export abstract class BaseScene {
       ...spriteSize(sprite ?? fallback),
       image: sprite ?? fallback,
       interactive: false
+    };
+  }
+
+  /**
+   * Rebuild the active NPC list when the scheduler's decision changes
+   * (time of day, day number, quest state or story variables). Cheap to run
+   * every frame: it only re-creates sprites when the placement set differs.
+   */
+  private syncNpcs(): void {
+    const state = this.deps.gameState;
+    const placements = this.deps.npcScheduler.placementsFor({
+      scene: this.sceneId,
+      day: state.day,
+      part: this.deps.gameClock.partName,
+      getVariable: (key) => state.variables[key],
+      getQuestStatus: (questId) => this.deps.questManager.getQuestStatus(questId)
+    });
+    const signature = placements.map((p) => `${p.npcId}@${p.x},${p.y}:${p.dialogueId}`).join("|");
+    if (signature === this.npcSignature) return;
+    this.npcSignature = signature;
+
+    this.npcs = placements.map((placement) => ({
+      ...placement,
+      label: placement.displayName ?? NPC_DISPLAY_NAMES.get(placement.npcId) ?? placement.npcId,
+      sprite: this.deps.sprites.createSprite(placement.npcId)
+    }));
+  }
+
+  /** Render entities for every NPC currently present. */
+  protected npcEntities(): RenderableEntity[] {
+    return this.npcs.map((npc) => this.npcEntity(npc));
+  }
+
+  /** Interactables for every NPC currently present. */
+  protected npcInteractables(): Interactable[] {
+    return this.npcs.map((npc) => ({
+      entity: this.npcEntity(npc),
+      onInteract: () => this.dialogueRunner.run(npc.dialogueId, npc.label)
+    }));
+  }
+
+  private npcEntity(npc: SceneNpc): RenderableEntity {
+    const image = npc.sprite?.image() ?? this.deps.assets.getImage(`${npc.npcId}:icon`);
+    return {
+      id: npc.npcId,
+      label: npc.label,
+      x: npc.x,
+      y: npc.y,
+      ...spriteSize(image),
+      image,
+      interactive: true
     };
   }
 

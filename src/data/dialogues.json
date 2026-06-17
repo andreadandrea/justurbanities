@@ -281,6 +281,108 @@
           ]
         }
       }
+    },
+    {
+      "id": "samir_intro",
+      "speakerId": "samir",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Caught me between shifts. Mornings I'm at the hub before the early bus; by evening I'm back here, too tired to argue but too stubborn to leave.",
+          "choices": [
+            {
+              "id": "listen",
+              "label": "Ask how the assembly could fit his hours.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "talkedTo_samir",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "shift"
+            },
+            {
+              "id": "leave",
+              "label": "Let him rest.",
+              "end": true
+            }
+          ]
+        },
+        "shift": {
+          "text": "Hold it after the evening line, not before. People who work can only show up when the day lets them. That's not absence — that's arriving.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "Note the timing.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "notedAssemblyTiming",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "luca_intro",
+      "speakerId": "luca",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Afternoons are pick-up time, so this corner is my office. If a thing in this district can't be done with a child on your arm, it isn't really open to everyone.",
+          "choices": [
+            {
+              "id": "listen",
+              "label": "Ask what would make it easier.",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "talkedTo_luca",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "next": "care"
+            },
+            {
+              "id": "leave",
+              "label": "Wave and move on.",
+              "end": true
+            }
+          ]
+        },
+        "care": {
+          "text": "A bench, a shorter queue, someone to watch the little ones for ten minutes. Small things. Care is just attention nobody's been paid to give.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "Offer those ten minutes.",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

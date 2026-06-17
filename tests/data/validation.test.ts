@@ -5,6 +5,7 @@ import {
   charactersSchema,
   dialogueFileSchema,
   questFileSchema,
+  npcsSchema,
   DataValidationError,
   validateData
 } from "../../src/data/validation";
@@ -13,6 +14,7 @@ import charactersData from "../../src/data/characters.json";
 import animationsData from "../../src/data/animations.json";
 import dialoguesData from "../../src/data/dialogues.json";
 import questsData from "../../src/data/quests.json";
+import npcsData from "../../src/data/npcs.json";
 
 describe("bundled JSON data is valid", () => {
   it("accepts every shipped data file", () => {
@@ -21,6 +23,18 @@ describe("bundled JSON data is valid", () => {
     expect(() => validateData("animations.json", animationsSchema, animationsData)).not.toThrow();
     expect(() => validateData("dialogues.json", dialogueFileSchema, dialoguesData)).not.toThrow();
     expect(() => validateData("quests.json", questFileSchema, questsData)).not.toThrow();
+    expect(() => validateData("npcs.json", npcsSchema, npcsData)).not.toThrow();
+  });
+
+  it("checks that every NPC placement points at a real dialogue and scene", () => {
+    const dialogueIds = new Set(dialoguesData.dialogues.map((d) => d.id));
+    const scenes = new Set(["community_center", "crossroads"]);
+    for (const npc of npcsData.npcs) {
+      for (const placement of npc.placements) {
+        expect(dialogueIds, `${npc.id} dialogue`).toContain(placement.dialogueId);
+        expect(scenes, `${npc.id} scene`).toContain(placement.scene);
+      }
+    }
   });
 });
 

@@ -38,4 +38,5 @@ export type Effect =
   | { type: "startQuest"; questId: string }
   | { type: "completeObjective"; questId: string; objectiveId: string }
   | { type: "completeQuest"; questId: string }
-  | { type: "createProgressEvent"; eventType: string; payload?: Record<string, unknown> };
+  | { type: "createProgressEvent"; eventType: string; payload?: Record<string, unknown> }
+  | { type: "advanceTime"; steps?: number };
