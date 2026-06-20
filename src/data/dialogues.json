@@ -6,7 +6,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The city map is not just about streets. It is about who can actually use them.",
+          "text": "Welcome, {name}. The city map is not just about streets. It is about who can actually use them.",
           "effects": [
             {
               "type": "startQuest",
@@ -83,7 +83,7 @@
           ]
         },
         "entrance": {
-          "text": "Start with the entrance. If people cannot enter, they cannot participate.",
+          "text": "Start with the entrance, {name}. If people cannot enter, the city is not really {theirs}. Trust {them}: people notice who is kept out.",
           "choices": [
             {
               "id": "close",
