@@ -7,6 +7,9 @@ import type { GameState } from "../game/GameState";
 import type { DialogueManager } from "../game/dialogue/DialogueManager";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { QuestManager } from "../game/quest/QuestManager";
+import type { EffectResolver } from "../game/effects/EffectResolver";
+import type { GameClock } from "../game/time/GameClock";
+import type { NpcDirector } from "../game/npc/NpcDirector";
 import type { SaveRepository } from "../storage/SaveRepository";
 import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
@@ -25,6 +28,9 @@ export type SceneDeps = {
   gameState: GameState;
   dialogueManager: DialogueManager;
   questManager: QuestManager;
+  effectResolver: EffectResolver;
+  gameClock: GameClock;
+  npcDirector: NpcDirector;
   resourceHud: ResourceHud;
   saveRepository: SaveRepository;
   progressRepository: ProgressRepository;
@@ -68,6 +74,10 @@ export abstract class BaseScene {
     // Subclass `world` field initializers run after super(); the camera is
     // pointed at the real world bounds every frame in update().
     this.camera = new Camera2D({ width: 0, height: 0 });
+    // The world changes when time advances: refresh whichever scene is active.
+    deps.gameClock.onChange(() => {
+      if (this.deps.gameState.currentScene === this.sceneId) this.onTimeChanged();
+    });
   }
 
   /** Scene id used in GameState.currentScene and progress events. */
@@ -84,6 +94,9 @@ export abstract class BaseScene {
 
   /** Called when the player enters the scene (and on boot for the active scene). */
   enter(): void {}
+
+  /** Called when the day/time cycle advances while this scene is active. */
+  protected onTimeChanged(): void {}
 
   update(dt: number): void {
     const player = this.deps.gameState.player;
