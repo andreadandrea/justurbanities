@@ -19,8 +19,19 @@ Quick context for continuing development in a fresh session.
 - **Living fabric:** the whole city re-colours with derived **Neighbourhood Vitality**; resource HUD. Vivid palette.
 - **Maya real art** integrated (portrait, icon, full figure) — generated externally, background-removed and wired in.
 
+## Data in the repo, not yet wired
+- **18 NPC quests `N01`–`N18`** appended to `src/data/quests.json`, with their
+  dialogues (`<speaker>_<id>`) in `src/data/dialogues.json` (engage vs shortcut;
+  shortcut raises `fragmentationGlobal`). Some engage choices are gated
+  (`N03`,`N06`,`N08`,`N18`).
+- **Crisis Week**: `src/data/crises.json` (5 crises) + `src/types/Crisis.ts` +
+  `crisisFileSchema` (validated at boot). No `CrisisManager` yet — see
+  `docs/game-design/INTEGRATION_NPC_Quests.md` for the proposed evaluation.
+- These dialogues are **not yet triggered by any scene** — they need the NPC
+  director (below) to place the NPCs and open `<speaker>_<id>` on interaction.
+
 ## In progress / next
-1. **Day/time + dynamic NPCs** (the user's priority): `GameState.day`/`timePart` fields exist; still to build `GameClock`, time HUD + "pass time", and **data-driven NPC placement that varies by time / quest / story** (NPCs appear/relocate/leave).
+1. **Day/time + dynamic NPCs** (the user's priority): `GameState.day`/`timePart` fields exist; still to build `GameClock`, time HUD + "pass time", and **data-driven NPC placement that varies by time / quest / story** (NPCs appear/relocate/leave). This is also what wires the N01–N18 dialogues into the world.
 2. **Use name/pronoun in dialogue text** (accepted, not yet done).
 3. **Directional sprite set for Maya** in the new art style (only a front pose exists, so in-world she still uses placeholder walk frames).
 4. Art for the other characters.

@@ -5,6 +5,7 @@ import {
   charactersSchema,
   dialogueFileSchema,
   questFileSchema,
+  crisisFileSchema,
   DataValidationError,
   validateData
 } from "../../src/data/validation";
@@ -13,6 +14,7 @@ import charactersData from "../../src/data/characters.json";
 import animationsData from "../../src/data/animations.json";
 import dialoguesData from "../../src/data/dialogues.json";
 import questsData from "../../src/data/quests.json";
+import crisesData from "../../src/data/crises.json";
 
 describe("bundled JSON data is valid", () => {
   it("accepts every shipped data file", () => {
@@ -21,6 +23,23 @@ describe("bundled JSON data is valid", () => {
     expect(() => validateData("animations.json", animationsSchema, animationsData)).not.toThrow();
     expect(() => validateData("dialogues.json", dialogueFileSchema, dialoguesData)).not.toThrow();
     expect(() => validateData("quests.json", questFileSchema, questsData)).not.toThrow();
+    expect(() => validateData("crises.json", crisisFileSchema, crisesData)).not.toThrow();
+  });
+
+  it("ships the NPC quests (N01..N18) and their dialogues", () => {
+    const quests = validateData("quests.json", questFileSchema, questsData);
+    const dialogues = validateData("dialogues.json", dialogueFileSchema, dialoguesData);
+    const questIds = new Set(quests.quests.map((q) => q.id));
+    for (let i = 1; i <= 18; i++) expect(questIds.has(`N${String(i).padStart(2, "0")}`)).toBe(true);
+    // every dialogue that starts a quest must reference an existing quest
+    const allQuests = questIds;
+    for (const dialogue of dialogues.dialogues) {
+      for (const node of Object.values(dialogue.nodes)) {
+        for (const effect of node.effects ?? []) {
+          if (effect.type === "startQuest") expect(allQuests.has(effect.questId)).toBe(true);
+        }
+      }
+    }
   });
 });
 

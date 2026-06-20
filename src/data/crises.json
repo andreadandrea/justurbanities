@@ -1,0 +1,286 @@
+{
+  "schema": "justurbanities.crises.v1",
+  "note": "Estensione: nessun tipo crisi nel motore attuale. tiers valutati in ordine transformative>coordinated>reactive con le Condition del motore (resourceAtLeast/questState).",
+  "crises": [
+    {
+      "id": "CRISIS_HEATWAVE",
+      "day": 1,
+      "title": "Heatwave",
+      "type": "fragmentationEnvironmental",
+      "convergingNeeds": [
+        "Siobhan",
+        "anziano solo/Pablo",
+        "Maya",
+        "Giorgia",
+        "Elena"
+      ],
+      "bufferResources": [
+        "care",
+        "commons"
+      ],
+      "resultVariable": "heatwaveResolution",
+      "tiers": {
+        "transformative": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "care",
+              "value": 6
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 6
+            },
+            {
+              "type": "questState",
+              "questId": "N11",
+              "state": "completed"
+            }
+          ]
+        },
+        "coordinated": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "care",
+              "value": 3
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 3
+            }
+          ]
+        },
+        "reactive": {
+          "conditions": []
+        }
+      }
+    },
+    {
+      "id": "CRISIS_RUMOR",
+      "day": 2,
+      "title": "The Rumor",
+      "type": "fragmentationInformation",
+      "convergingNeeds": [
+        "Ruben",
+        "Abdullah",
+        "Samir",
+        "Marta",
+        "Anna"
+      ],
+      "bufferResources": [
+        "trust",
+        "voice"
+      ],
+      "resultVariable": "rumorResolution",
+      "tiers": {
+        "transformative": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "trust",
+              "value": 6
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "voice",
+              "value": 6
+            },
+            {
+              "type": "questState",
+              "questId": "N06",
+              "state": "completed"
+            }
+          ]
+        },
+        "coordinated": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "trust",
+              "value": 3
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "voice",
+              "value": 3
+            }
+          ]
+        },
+        "reactive": {
+          "conditions": []
+        }
+      }
+    },
+    {
+      "id": "CRISIS_OFFER",
+      "day": 3,
+      "title": "The Offer",
+      "type": "fragmentationEconomic",
+      "convergingNeeds": [
+        "Mystery Corporate Man",
+        "Luca",
+        "property manager",
+        "Elena",
+        "Sigrid"
+      ],
+      "bufferResources": [
+        "commons",
+        "trust"
+      ],
+      "resultVariable": "offerResolution",
+      "tiers": {
+        "transformative": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 6
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "trust",
+              "value": 6
+            },
+            {
+              "type": "questState",
+              "questId": "N08",
+              "state": "completed"
+            }
+          ]
+        },
+        "coordinated": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 3
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "trust",
+              "value": 3
+            }
+          ]
+        },
+        "reactive": {
+          "conditions": []
+        }
+      }
+    },
+    {
+      "id": "CRISIS_CLOSURE",
+      "day": 4,
+      "title": "The Closure",
+      "type": "fragmentationInstitutional",
+      "convergingNeeds": [
+        "Elena",
+        "Gwen",
+        "Mrs Viveca",
+        "Maya",
+        "caregiver"
+      ],
+      "bufferResources": [
+        "voice",
+        "care"
+      ],
+      "resultVariable": "closureResolution",
+      "tiers": {
+        "transformative": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "voice",
+              "value": 6
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "care",
+              "value": 6
+            },
+            {
+              "type": "questState",
+              "questId": "N09",
+              "state": "completed"
+            }
+          ]
+        },
+        "coordinated": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "voice",
+              "value": 3
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "care",
+              "value": 3
+            }
+          ]
+        },
+        "reactive": {
+          "conditions": []
+        }
+      }
+    },
+    {
+      "id": "CRISIS_FLOOD",
+      "day": 5,
+      "title": "Storm / Flood",
+      "type": "fragmentationEnvironmental",
+      "convergingNeeds": [
+        "Siobhan",
+        "Samir",
+        "persona colpita da crisi climatica",
+        "Ben",
+        "Maya"
+      ],
+      "bufferResources": [
+        "resilience",
+        "commons"
+      ],
+      "resultVariable": "floodResolution",
+      "tiers": {
+        "transformative": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "resilience",
+              "value": 6
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 6
+            },
+            {
+              "type": "questState",
+              "questId": "N15",
+              "state": "completed"
+            }
+          ]
+        },
+        "coordinated": {
+          "conditions": [
+            {
+              "type": "resourceAtLeast",
+              "key": "resilience",
+              "value": 3
+            },
+            {
+              "type": "resourceAtLeast",
+              "key": "commons",
+              "value": 3
+            }
+          ]
+        },
+        "reactive": {
+          "conditions": []
+        }
+      }
+    }
+  ]
+}

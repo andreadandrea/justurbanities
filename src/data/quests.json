@@ -20,7 +20,11 @@
         }
       ],
       "rewards": [
-        { "type": "addResource", "key": "commons", "value": 1 }
+        {
+          "type": "addResource",
+          "key": "commons",
+          "value": 1
+        }
       ]
     },
     {
@@ -50,6 +54,491 @@
           "required": true
         }
       ]
+    },
+    {
+      "id": "N01",
+      "title": "Listen Before Fixing",
+      "description": "Intervista almeno tre persone in distretti diversi prima di proporre soluzioni.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "interview_three",
+          "description": "Ascolta 3 persone in distretti diversi.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Anna",
+        "abilityMatch": "Custom · Listen & Adapt",
+        "crisisLink": null
+      }
+    },
+    {
+      "id": "N02",
+      "title": "The Crossing",
+      "description": "Rendi sicuro un attraversamento che blocca bambini, anziani e disabili.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "temp_fix",
+          "description": "Intervento temporaneo sull'attraversamento.",
+          "completed": false,
+          "required": true
+        },
+        {
+          "id": "propose",
+          "description": "Proposta istituzionale.",
+          "completed": false,
+          "required": false
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "care",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Ben",
+        "abilityMatch": "Maya/Samir + Ben",
+        "crisisLink": "CRISIS_FLOOD"
+      }
+    },
+    {
+      "id": "N03",
+      "title": "Mandate, Not a Photo Op",
+      "description": "Trasforma l'attenzione politica in un impegno reale con responsabilità chiare.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "secure_mandate",
+          "description": "Ottieni un impegno con responsabilità definite.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "trust",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Alexandria",
+        "abilityMatch": "Elena · Institutional Access",
+        "crisisLink": null
+      }
+    },
+    {
+      "id": "N04",
+      "title": "Memory Is Not Nostalgia",
+      "description": "Usa la memoria del quartiere per legittimare il nuovo invece di frenarlo.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "collect_memory",
+          "description": "Raccogli memoria e collegala a una proposta nuova.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "trust",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Donald",
+        "abilityMatch": "Maya/Luca",
+        "crisisLink": null
+      }
+    },
+    {
+      "id": "N05",
+      "title": "The Repair Day",
+      "description": "Riparazione collettiva di uno spazio con risorse limitate (mini-gioco Modular Repair).",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "repair",
+          "description": "Ripara e adatta lo spazio.",
+          "completed": false,
+          "required": true
+        },
+        {
+          "id": "plan",
+          "description": "Definisci un piano di gestione.",
+          "completed": false,
+          "required": false
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "commons",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Sigrid",
+        "abilityMatch": "Luca · Resource Mobilizer",
+        "crisisLink": "CRISIS_FLOOD"
+      }
+    },
+    {
+      "id": "N06",
+      "title": "The Story Behind the Headline",
+      "description": "Scegli se Ruben alimenta o disinnesca la voce falsa.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "provide_material",
+          "description": "Fornisci materiale autentico per la storia.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Ruben",
+        "abilityMatch": "Samir · Bridge Language",
+        "crisisLink": "CRISIS_RUMOR"
+      }
+    },
+    {
+      "id": "N07",
+      "title": "From Rumor to Information",
+      "description": "Trasforma l'edicola in un punto info affidabile e multilingue.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "setup_info",
+          "description": "Allestisci il punto info multilingue.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Abdullah",
+        "abilityMatch": "Samir · Bridge Language",
+        "crisisLink": "CRISIS_RUMOR"
+      }
+    },
+    {
+      "id": "N08",
+      "title": "Rules and Open Doors",
+      "description": "Trova un modo regolare per aprire una sala comune (mini-gioco Commons Access).",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "agreement",
+          "description": "Stabilisci un accordo d'uso con responsabilità.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "commons",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Tom",
+        "abilityMatch": "Elena · Institutional Access",
+        "crisisLink": "CRISIS_OFFER"
+      }
+    },
+    {
+      "id": "N09",
+      "title": "The Last Bus",
+      "description": "Documenta un collegamento mancante e costruisci una proposta.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "document",
+          "description": "Documenta il problema di mobilità.",
+          "completed": false,
+          "required": true
+        },
+        {
+          "id": "proposal",
+          "description": "Costruisci la proposta.",
+          "completed": false,
+          "required": false
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "care",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Gwen",
+        "abilityMatch": "Maya/Elena",
+        "crisisLink": "CRISIS_CLOSURE"
+      }
+    },
+    {
+      "id": "N10",
+      "title": "Care for the Carers",
+      "description": "Introduci pratiche di riposo e distribuzione del carico nella rete.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "anti_burnout",
+          "description": "Attiva pratiche anti-burnout.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "care",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Giorgia",
+        "abilityMatch": "Maya · Care Network",
+        "crisisLink": "CRISIS_HEATWAVE"
+      }
+    },
+    {
+      "id": "N11",
+      "title": "Nobody Is Off the Map",
+      "description": "Individua residenti isolati e collegali a una rete di cura.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "find_isolated",
+          "description": "Individua gli abitanti isolati.",
+          "completed": false,
+          "required": true
+        },
+        {
+          "id": "connect",
+          "description": "Collegali a una rete di cura.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "care",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Pablo",
+        "abilityMatch": "Maya · Care Network",
+        "crisisLink": "CRISIS_HEATWAVE"
+      }
+    },
+    {
+      "id": "N12",
+      "title": "Mixed Tables",
+      "description": "Trasforma il bar in luogo d'incontro tra gruppi separati.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "mixed_tables",
+          "description": "Organizza serate tematiche e bacheca comune.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "trust",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Amin",
+        "abilityMatch": "Samir · Bridge Language",
+        "crisisLink": "CRISIS_RUMOR"
+      }
+    },
+    {
+      "id": "N13",
+      "title": "Care Made Visible",
+      "description": "Verde minimo co-curato dai residenti, che resta nelle loro mani.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "green",
+          "description": "Realizza interventi verdi co-curati.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "commons",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Matilda",
+        "abilityMatch": "Luca/Maya",
+        "crisisLink": null
+      }
+    },
+    {
+      "id": "N14",
+      "title": "Through a Child's Eyes",
+      "description": "Mappa la città dal punto di vista dei bambini.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "child_map",
+          "description": "Crea la mappa dei bambini.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "care",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Lia",
+        "abilityMatch": "Maya · Care Network",
+        "crisisLink": null
+      }
+    },
+    {
+      "id": "N15",
+      "title": "Before the Water Rises",
+      "description": "Prepara reti e percorsi prima della crisi climatica (mini-gioco Crisis Response Map).",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "prepare",
+          "description": "Prepara la risposta climatica del quartiere.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "resilience",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Siobhan",
+        "abilityMatch": "Samir/Elena/Maya",
+        "crisisLink": "CRISIS_FLOOD"
+      }
+    },
+    {
+      "id": "N16",
+      "title": "Words to Belong",
+      "description": "Corso di lingua e memoria intergenerazionale per partecipare davvero.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "course",
+          "description": "Avvia il corso lingua + memoria.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Mrs Viveca",
+        "abilityMatch": "Samir · Bridge Language",
+        "crisisLink": "CRISIS_CLOSURE"
+      }
+    },
+    {
+      "id": "N17",
+      "title": "Don't Tell Our Story Without Us",
+      "description": "Contro-narrazione co-creata con residenti e giovani (mini-gioco Story Routes).",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "co_create",
+          "description": "Co-crea la contro-narrazione del quartiere.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Marta",
+        "abilityMatch": "Samir/Custom",
+        "crisisLink": "CRISIS_RUMOR"
+      }
+    },
+    {
+      "id": "N18",
+      "title": "The Offer",
+      "description": "Anti-quest: accetta, negozia o rifiuta l'offerta speculativa.",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "decide_offer",
+          "description": "Decidi come rispondere all'offerta.",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Mystery Corporate Man",
+        "abilityMatch": "tentazione (Luca)",
+        "crisisLink": "CRISIS_OFFER"
+      }
     }
   ]
 }

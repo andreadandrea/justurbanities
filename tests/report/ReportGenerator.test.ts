@@ -60,7 +60,9 @@ describe("buildReport (Task 7)", () => {
 
     expect(report.quests.completed.map((q) => q.id)).toEqual(["P01"]);
     expect(report.quests.active.map((q) => q.id)).toEqual(["C01"]);
-    expect(report.quests.notStarted).toEqual(["P02"]);
+    expect(report.quests.notStarted).toContain("P02");
+    expect(report.quests.notStarted).not.toContain("P01");
+    expect(report.quests.notStarted).not.toContain("C01");
     expect(report.quests.completed[0].objectives.every((o) => o.completed)).toBe(true);
 
     expect(report.participation.totalEvents).toBe(4);

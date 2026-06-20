@@ -162,6 +162,31 @@ export const questFileSchema = z.object({
   )
 });
 
+// ---------- crises.json (Crisis Week extension) ----------
+
+const crisisTierSchema = z.object({ conditions: z.array(conditionSchema) });
+
+export const crisisFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  crises: z.array(
+    z.object({
+      id: z.string().min(1),
+      day: z.number().int().positive(),
+      title: z.string().min(1),
+      type: z.string(),
+      convergingNeeds: z.array(z.string()),
+      bufferResources: z.array(z.string()),
+      resultVariable: z.string().min(1),
+      tiers: z.object({
+        transformative: crisisTierSchema,
+        coordinated: crisisTierSchema,
+        reactive: crisisTierSchema
+      })
+    })
+  )
+});
+
 // ---------- playable.json ----------
 
 export const playableSchema = z.object({
