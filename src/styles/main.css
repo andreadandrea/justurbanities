@@ -575,6 +575,54 @@ body,
   outline-offset: 2px;
 }
 
+.crisis-banner {
+  position: fixed;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  min-width: 240px;
+  max-width: 80vw;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border-left: 6px solid #b89a6a;
+  background: rgba(255, 248, 236, 0.96);
+  box-shadow: 0 8px 22px rgba(42, 39, 35, 0.24);
+  color: #2a2723;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.crisis-banner--leaving {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.crisis-banner-title {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.crisis-banner-outcome {
+  margin-top: 2px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* Tier accents: deepening green as the collective response grows stronger. */
+.crisis-banner--transformative {
+  border-left-color: #2f7d4f;
+}
+
+.crisis-banner--coordinated {
+  border-left-color: #6e9a5a;
+}
+
+.crisis-banner--reactive {
+  border-left-color: #c08a3e;
+}
+
 #game-canvas {
   transition: filter 900ms ease;
 }

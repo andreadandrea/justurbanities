@@ -8,6 +8,9 @@ export const TIME_PART_LABELS = ["Morning", "Afternoon", "Evening"] as const;
 
 export type TimeChangeListener = (state: GameState) => void;
 
+/** Notified when a day finishes (the clock rolls over to the next morning). */
+export type DayEndListener = (completedDay: number) => void;
+
 /**
  * Owns advancing the day/time cycle. It does not duplicate state — it mutates
  * `GameState.day` / `GameState.timePart` in place. `advance()` moves to the
@@ -17,6 +20,7 @@ export type TimeChangeListener = (state: GameState) => void;
  */
 export class GameClock {
   private readonly listeners = new Set<TimeChangeListener>();
+  private readonly dayEndListeners = new Set<DayEndListener>();
 
   constructor(private readonly state: GameState) {}
 
@@ -46,13 +50,20 @@ export class GameClock {
    * the morning of the next day. Notifies subscribers afterwards.
    */
   advance(): void {
+    let completedDay: number | null = null;
     if (this.state.timePart + 1 >= PARTS_PER_DAY) {
+      completedDay = this.state.day;
       this.state.timePart = 0;
       this.state.day += 1;
     } else {
       this.state.timePart += 1;
     }
     this.emit();
+    // Day-end fires after the time-change so HUD/world have already refreshed
+    // for the new morning before end-of-day logic (e.g. crisis resolution) runs.
+    if (completedDay !== null) {
+      for (const listener of this.dayEndListeners) listener(completedDay);
+    }
   }
 
   /** Subscribe to time changes. Returns an unsubscribe function. */
@@ -60,6 +71,14 @@ export class GameClock {
     this.listeners.add(listener);
     return () => {
       this.listeners.delete(listener);
+    };
+  }
+
+  /** Subscribe to day-end (rollover to the next morning). Returns an unsubscribe function. */
+  onDayEnd(listener: DayEndListener): () => void {
+    this.dayEndListeners.add(listener);
+    return () => {
+      this.dayEndListeners.delete(listener);
     };
   }
 

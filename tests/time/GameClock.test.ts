@@ -57,4 +57,31 @@ describe("GameClock", () => {
     expect(GameClock.labelFor(3)).toBe("Morning");
     expect(GameClock.labelFor(-1)).toBe("Evening");
   });
+
+  it("fires onDayEnd only on rollover, with the day that just ended", () => {
+    const clock = new GameClock(new GameState());
+    const dayEnd = vi.fn();
+    clock.onDayEnd(dayEnd);
+
+    clock.advance(); // morning -> afternoon
+    clock.advance(); // afternoon -> evening
+    expect(dayEnd).not.toHaveBeenCalled();
+
+    clock.advance(); // evening -> next morning (day 1 ends)
+    expect(dayEnd).toHaveBeenCalledTimes(1);
+    expect(dayEnd).toHaveBeenCalledWith(1);
+    expect(clock.day).toBe(2);
+  });
+
+  it("supports unsubscribing from onDayEnd", () => {
+    const state = new GameState();
+    state.timePart = PARTS_PER_DAY - 1; // evening
+    const clock = new GameClock(state);
+    const dayEnd = vi.fn();
+    const unsubscribe = clock.onDayEnd(dayEnd);
+
+    unsubscribe();
+    clock.advance();
+    expect(dayEnd).not.toHaveBeenCalled();
+  });
 });

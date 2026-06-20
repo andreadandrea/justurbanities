@@ -27,6 +27,9 @@ import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
 import { DialogueManager } from "../game/dialogue/DialogueManager";
 import { GameClock } from "../game/time/GameClock";
+import { CrisisManager } from "../game/crisis/CrisisManager";
+import { CrisisBanner } from "../ui/CrisisBanner";
+import type { CrisisFile } from "../types/Crisis";
 import { NpcDirector, type NpcPlacementFile } from "../game/npc/NpcDirector";
 import type { DialogueFile } from "../types/Dialogue";
 import type { QuestFile } from "../types/Quest";
@@ -99,6 +102,7 @@ export class App {
     let manifest: AssetManifest;
     let dialogueFile: DialogueFile;
     let questFile: QuestFile;
+    let crisisFile: CrisisFile;
     let placementFile: NpcPlacementFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
@@ -108,7 +112,7 @@ export class App {
       questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
-      validateData("crises.json", crisisFileSchema, crisesData);
+      crisisFile = validateData("crises.json", crisisFileSchema, crisesData) as CrisisFile;
       placementFile = validateData(
         "npc_placement.json",
         npcPlacementFileSchema,
@@ -213,6 +217,31 @@ export class App {
           quests: this.questManager.snapshot()
         });
         this.elements.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
+      })();
+    });
+
+    // Crisis Week: at the end of each day, resolve the day's crisis (best tier
+    // whose conditions pass), announce it, log a progress event and persist the
+    // outcome (it lives in GameState.variables → saves + educational report).
+    const crisisManager = new CrisisManager(this.effectResolver, this.state);
+    crisisManager.load(crisisFile);
+    const crisisBanner = new CrisisBanner(this.elements.appRoot);
+    this.gameClock.onDayEnd((completedDay) => {
+      const resolutions = crisisManager.resolveForDay(completedDay);
+      if (resolutions.length === 0) return;
+      for (const resolution of resolutions) {
+        crisisBanner.announce(resolution);
+        this.effectResolver.apply({
+          type: "createProgressEvent",
+          eventType: "crisis_resolved",
+          payload: { crisisId: resolution.crisis.id, tier: resolution.tier, day: completedDay }
+        });
+      }
+      void (async () => {
+        await this.saveRepository.save("local-user", session.id, {
+          ...this.state.snapshot(),
+          quests: this.questManager.snapshot()
+        });
       })();
     });
 

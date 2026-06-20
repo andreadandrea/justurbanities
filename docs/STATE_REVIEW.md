@@ -2,11 +2,12 @@
 
 **As of:** 20 June 2026 · baseline commit `b7203fc` (Merge NPC quests + dialogues + Crisis Week data).
 
-> **Note:** Two roadmap items below — **(A) the dynamic NPC director** and **(B) GameClock + time
-> advancement**, plus **name/pronoun substitution in dialogue** — are implemented in the PR that adds
-> this document. Treat their "not started" notes as the pre-PR baseline; the remaining open work is
-> **(C) CrisisManager**, **(D) Maya directional sprites**, **(E) character art**, **(F) dialogue
-> portraits**, and **(G) save versioning**.
+> **Note:** Several roadmap items below are now implemented in the PR that adds this document:
+> **(A) the dynamic NPC director**, **(B) GameClock + time advancement** (incl. an `onDayEnd` hook),
+> **(C) CrisisManager** (resolves each day's crisis at day-end, announces it, and records the tier in
+> `GameState.variables` → saves + report), plus **name/pronoun substitution in dialogue**. Treat their
+> "not started" notes as the pre-PR baseline. The remaining open work is **(D) Maya directional sprites**,
+> **(E) character art**, **(F) dialogue portraits**, and **(G) save versioning**.
 
 ---
 
@@ -108,7 +109,7 @@ runs yet.
 
 | Item | Size | Files (primary) |
 |---|---|---|
-| **C. CrisisManager** — load `crises.json`, resolve tiers at day-end, store result, feed report | M | `src/game/crisis/CrisisManager.ts` (new), `App.ts`, the GameClock day-end hook, `ReportGenerator`, tests |
+| ~~**C. CrisisManager**~~ ✅ done — loads `crises.json`, resolves tiers at day-end (`GameClock.onDayEnd`), stores the result in `variables` (→ report observations), announces via `CrisisBanner` | M | `src/game/crisis/CrisisManager.ts`, `src/ui/CrisisBanner.ts`, `GameClock.ts`, `App.ts`, tests |
 | **D. Maya directional sprites** — complete the 4-dir `animations.json` entry + ensure the renderer uses directional names | S | `src/data/animations.json`, `src/engine/AnimatedSprite.ts`, tests |
 | **E. Character art (priority NPCs)** — generate + integrate real art (Anna, Ben, Samir, Elena, Luca) via the proven pipeline | L (art-bound) | `public/assets/characters/*/`, `animations.json`, `asset_manifest.json` |
 | **F. Dialogue portraits** — speaker portrait + expression in `DialogueUI`, optional `portraitExpression` on nodes | M | `src/ui/DialogueUI.ts`, `DialogueRunner.ts`, `types/Dialogue.ts`, `validation.ts`, `dialogues.json` |
