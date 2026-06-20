@@ -35,6 +35,7 @@ import {
   questFileSchema,
   playableSchema,
   prologueSchema,
+  crisisFileSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -43,6 +44,7 @@ import charactersData from "../data/characters.json";
 import animationsData from "../data/animations.json";
 import playableData from "../data/playable.json";
 import prologueData from "../data/prologue.json";
+import crisesData from "../data/crises.json";
 
 type AppElements = {
   appRoot: HTMLElement;
@@ -99,6 +101,7 @@ export class App {
       questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
+      validateData("crises.json", crisisFileSchema, crisesData);
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;

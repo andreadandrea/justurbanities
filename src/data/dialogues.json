@@ -281,6 +281,1372 @@
           ]
         }
       }
+    },
+    {
+      "id": "anna_n01",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Listen Before Fixing: Intervista almeno tre persone in distretti diversi prima di proporre soluzioni.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N01"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N01",
+                  "objectiveId": "interview_three"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "listenBeforeFixingDone",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N01"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N01",
+                  "objectiveId": "interview_three"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N01"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ben_n02",
+      "speakerId": "ben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The Crossing: Rendi sicuro un attraversamento che blocca bambini, anziani e disabili.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N02"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N02",
+                  "objectiveId": "temp_fix"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "N02",
+                  "objectiveId": "propose"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "resilience",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseSaferCrossing",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N02"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N02",
+                  "objectiveId": "temp_fix"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N02"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "alexandria_n03",
+      "speakerId": "alexandria",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Mandate, Not a Photo Op: Trasforma l'attenzione politica in un impegno reale con responsabilità chiare.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N03"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "conditions": [
+                {
+                  "type": "resourceAtLeast",
+                  "key": "trust",
+                  "value": 5
+                }
+              ],
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N03",
+                  "objectiveId": "secure_mandate"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "assemblyMandateReal",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N03"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N03",
+                  "objectiveId": "secure_mandate"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 2
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N03"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "donald_n04",
+      "speakerId": "donald",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Memory Is Not Nostalgia: Usa la memoria del quartiere per legittimare il nuovo invece di frenarlo.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N04"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N04",
+                  "objectiveId": "collect_memory"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N04"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N04",
+                  "objectiveId": "collect_memory"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N04"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sigrid_n05",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The Repair Day: Riparazione collettiva di uno spazio con risorse limitate (mini-gioco Modular Repair).",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N05"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N05",
+                  "objectiveId": "repair"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "N05",
+                  "objectiveId": "plan"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "resilience",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseRepairDay",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N05"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N05",
+                  "objectiveId": "repair"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N05"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ruben_n06",
+      "speakerId": "ruben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The Story Behind the Headline: Scegli se Ruben alimenta o disinnesca la voce falsa.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N06"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "talkedTo_ruben",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N06",
+                  "objectiveId": "provide_material"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N06"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N06",
+                  "objectiveId": "provide_material"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 2
+                },
+                {
+                  "type": "setVariable",
+                  "key": "rumorFed",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N06"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "abdullah_n07",
+      "speakerId": "abdullah",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "From Rumor to Information: Trasforma l'edicola in un punto info affidabile e multilingue.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N07"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N07",
+                  "objectiveId": "setup_info"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseOpenInfoPoint",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N07"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N07",
+                  "objectiveId": "setup_info"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N07"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tom_n08",
+      "speakerId": "tom",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Rules and Open Doors: Trova un modo regolare per aprire una sala comune (mini-gioco Commons Access).",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N08"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "conditions": [
+                {
+                  "type": "resourceAtLeast",
+                  "key": "trust",
+                  "value": 4
+                }
+              ],
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N08",
+                  "objectiveId": "agreement"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseOpenCommonRoom",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N08"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N08",
+                  "objectiveId": "agreement"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "commonRoomPrivateSponsor",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N08"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gwen_n09",
+      "speakerId": "gwen",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "The Last Bus: Documenta un collegamento mancante e costruisci una proposta.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N09"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N09",
+                  "objectiveId": "document"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "N09",
+                  "objectiveId": "proposal"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseAccessibleBusInfo",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N09"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N09",
+                  "objectiveId": "document"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N09"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "giorgia_n10",
+      "speakerId": "giorgia",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Care for the Carers: Introduci pratiche di riposo e distribuzione del carico nella rete.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N10"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N10",
+                  "objectiveId": "anti_burnout"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "resilience",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "careForCarersDone",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N10"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N10",
+                  "objectiveId": "anti_burnout"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N10"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "amin_n12",
+      "speakerId": "amin",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Mixed Tables: Trasforma il bar in luogo d'incontro tra gruppi separati.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N12"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N12",
+                  "objectiveId": "mixed_tables"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N12"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N12",
+                  "objectiveId": "mixed_tables"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N12"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "matilda_n13",
+      "speakerId": "matilda",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Care Made Visible: Verde minimo co-curato dai residenti, che resta nelle loro mani.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N13"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N13",
+                  "objectiveId": "green"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N13"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N13",
+                  "objectiveId": "green"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N13"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "lia_n14",
+      "speakerId": "lia",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Through a Child's Eyes: Mappa la città dal punto di vista dei bambini.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N14"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N14",
+                  "objectiveId": "child_map"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "childFriendlyIssueUnlocked",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseChildFriendlyMeeting",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N14"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N14",
+                  "objectiveId": "child_map"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N14"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "siobhan_n15",
+      "speakerId": "siobhan",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Before the Water Rises: Prepara reti e percorsi prima della crisi climatica (mini-gioco Crisis Response Map).",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N15"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N15",
+                  "objectiveId": "prepare"
+                },
+                {
+                  "type": "addResource",
+                  "key": "resilience",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseClimatePrep",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N15"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N15",
+                  "objectiveId": "prepare"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 2
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N15"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mrs_viveca_n16",
+      "speakerId": "mrs_viveca",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Words to Belong: Corso di lingua e memoria intergenerazionale per partecipare davvero.",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N16"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N16",
+                  "objectiveId": "course"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "samirRecognized",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N16"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N16",
+                  "objectiveId": "course"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N16"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "marta_n17",
+      "speakerId": "marta",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Don't Tell Our Story Without Us: Contro-narrazione co-creata con residenti e giovani (mini-gioco Story Routes).",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N17"
+            }
+          ],
+          "choices": [
+            {
+              "id": "engage",
+              "label": "Affronta la quest insieme alla comunità.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N17",
+                  "objectiveId": "co_create"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N17"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "shortcut",
+              "label": "Scegli la scorciatoia rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N17",
+                  "objectiveId": "co_create"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N17"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pablo_n11",
+      "speakerId": "pablo",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Conosco porte a cui nessuno bussa più. Vuoi che ti mostri chi è rimasto fuori dalla mappa?",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N11"
+            }
+          ],
+          "choices": [
+            {
+              "id": "show",
+              "label": "Mostrami chi è isolato.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N11",
+                  "objectiveId": "find_isolated"
+                }
+              ],
+              "next": "choose"
+            },
+            {
+              "id": "later",
+              "label": "Più tardi.",
+              "end": true
+            }
+          ]
+        },
+        "choose": {
+          "text": "Eccoli: anziani soli, nuovi arrivati. Cosa facciamo?",
+          "choices": [
+            {
+              "id": "connect",
+              "label": "Colleghiamoli a una rete di cura.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N11",
+                  "objectiveId": "connect"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "promiseSupportLonelyElders",
+                  "value": "active"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N11"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "survey",
+              "label": "Solo un censimento, per ora.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N11",
+                  "objectiveId": "connect"
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N11"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "corporate_n18",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "Un intermediario propone fondi e un rinnovo rapido per Grey Yards. A quali condizioni?",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "N18"
+            }
+          ],
+          "choices": [
+            {
+              "id": "accept",
+              "label": "Accetta la soluzione rapida.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N18",
+                  "objectiveId": "decide_offer"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 3
+                },
+                {
+                  "type": "setVariable",
+                  "key": "acceptedCorporateOffer",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N18"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "negotiate",
+              "label": "Negozia a tutela di residenti e commons.",
+              "conditions": [
+                {
+                  "type": "resourceAtLeast",
+                  "key": "trust",
+                  "value": 5
+                }
+              ],
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N18",
+                  "objectiveId": "decide_offer"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N18"
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "refuse",
+              "label": "Rifiuta e cerca alleanze locali.",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N18",
+                  "objectiveId": "decide_offer"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N18"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }
