@@ -6,6 +6,7 @@ import {
   dialogueFileSchema,
   questFileSchema,
   crisisFileSchema,
+  npcPlacementFileSchema,
   DataValidationError,
   validateData
 } from "../../src/data/validation";
@@ -15,6 +16,7 @@ import animationsData from "../../src/data/animations.json";
 import dialoguesData from "../../src/data/dialogues.json";
 import questsData from "../../src/data/quests.json";
 import crisesData from "../../src/data/crises.json";
+import npcPlacementData from "../../src/data/npc_placement.json";
 
 describe("bundled JSON data is valid", () => {
   it("accepts every shipped data file", () => {
@@ -24,6 +26,21 @@ describe("bundled JSON data is valid", () => {
     expect(() => validateData("dialogues.json", dialogueFileSchema, dialoguesData)).not.toThrow();
     expect(() => validateData("quests.json", questFileSchema, questsData)).not.toThrow();
     expect(() => validateData("crises.json", crisisFileSchema, crisesData)).not.toThrow();
+    expect(() => validateData("npc_placement.json", npcPlacementFileSchema, npcPlacementData)).not.toThrow();
+  });
+
+  it("placement dialogue/quest references point at shipped data", () => {
+    const placements = validateData("npc_placement.json", npcPlacementFileSchema, npcPlacementData);
+    const dialogues = validateData("dialogues.json", dialogueFileSchema, dialoguesData);
+    const quests = validateData("quests.json", questFileSchema, questsData);
+    const dialogueIds = new Set(dialogues.dialogues.map((d) => d.id));
+    const questIds = new Set(quests.quests.map((q) => q.id));
+    for (const placement of placements.placements) {
+      expect(dialogueIds.has(placement.dialogueId)).toBe(true);
+      for (const condition of placement.when?.conditions ?? []) {
+        if (condition.type === "questState") expect(questIds.has(condition.questId)).toBe(true);
+      }
+    }
   });
 
   it("ships the NPC quests (N01..N18) and their dialogues", () => {

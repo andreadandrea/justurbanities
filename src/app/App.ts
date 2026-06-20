@@ -19,12 +19,15 @@ import { OfflineControls } from "../ui/OfflineControls";
 import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
+import { TimeHud } from "../ui/TimeHud";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
 import { DialogueManager } from "../game/dialogue/DialogueManager";
+import { GameClock } from "../game/time/GameClock";
+import { NpcDirector, type NpcPlacementFile } from "../game/npc/NpcDirector";
 import type { DialogueFile } from "../types/Dialogue";
 import type { QuestFile } from "../types/Quest";
 import {
@@ -36,6 +39,7 @@ import {
   playableSchema,
   prologueSchema,
   crisisFileSchema,
+  npcPlacementFileSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -45,6 +49,7 @@ import animationsData from "../data/animations.json";
 import playableData from "../data/playable.json";
 import prologueData from "../data/prologue.json";
 import crisesData from "../data/crises.json";
+import npcPlacementData from "../data/npc_placement.json";
 
 type AppElements = {
   appRoot: HTMLElement;
@@ -71,6 +76,7 @@ export class App {
   private readonly questManager = new QuestManager();
   private readonly effectResolver = new EffectResolver(this.state, this.questManager);
   private readonly dialogueManager = new DialogueManager(this.effectResolver);
+  private readonly gameClock = new GameClock(this.state);
   private scenes!: Record<string, BaseScene>;
   private loop!: GameLoop;
 
@@ -93,6 +99,7 @@ export class App {
     let manifest: AssetManifest;
     let dialogueFile: DialogueFile;
     let questFile: QuestFile;
+    let placementFile: NpcPlacementFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -102,6 +109,11 @@ export class App {
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
       validateData("crises.json", crisisFileSchema, crisesData);
+      placementFile = validateData(
+        "npc_placement.json",
+        npcPlacementFileSchema,
+        npcPlacementData
+      ) as NpcPlacementFile;
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -161,6 +173,8 @@ export class App {
     );
     await Promise.all([sprites.load(this.state.currentCharacter), sprites.load("anna"), sprites.load("ben")]);
 
+    const npcDirector = new NpcDirector(placementFile.placements);
+
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
       input: this.input,
@@ -170,6 +184,9 @@ export class App {
       gameState: this.state,
       dialogueManager: this.dialogueManager,
       questManager: this.questManager,
+      effectResolver: this.effectResolver,
+      gameClock: this.gameClock,
+      npcDirector,
       resourceHud: new ResourceHud(this.elements.appRoot),
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
@@ -186,6 +203,18 @@ export class App {
     if (!this.scenes[this.state.currentScene]) {
       this.state.currentScene = "community_center";
     }
+
+    // Day/time HUD: "Pass time" advances the clock (scenes refresh their NPCs
+    // via the clock subscription) and autosaves the new day/time.
+    new TimeHud(this.elements.appRoot, this.gameClock, () => {
+      void (async () => {
+        await this.saveRepository.save("local-user", session.id, {
+          ...this.state.snapshot(),
+          quests: this.questManager.snapshot()
+        });
+        this.elements.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
+      })();
+    });
 
     new DebugPanel({
       root: this.elements.appRoot,

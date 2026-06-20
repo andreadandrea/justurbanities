@@ -1,0 +1,113 @@
+{
+  "schema": "npc_placement.v1",
+  "note": "Data-driven NPC placement that varies by scene + time part + day + story/quest state. timePart: 0=morning, 1=afternoon, 2=evening. dialogueId opens on interaction; speakerLabel defaults to characters.json displayName.",
+  "placements": [
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "x": 900,
+      "y": 620,
+      "dialogueId": "anna_intro",
+      "when": { "timeParts": [0, 1] }
+    },
+    {
+      "npcId": "ben",
+      "scene": "community_center",
+      "x": 1240,
+      "y": 760,
+      "dialogueId": "ben_intro",
+      "when": { "timeParts": [0, 1] }
+    },
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "x": 760,
+      "y": 980,
+      "dialogueId": "anna_n01",
+      "when": {
+        "timeParts": [2],
+        "conditions": [{ "type": "questState", "questId": "P01", "state": "completed" }]
+      }
+    },
+    {
+      "npcId": "alexandria",
+      "scene": "community_center",
+      "x": 620,
+      "y": 940,
+      "dialogueId": "alexandria_n03",
+      "when": { "timeParts": [1] }
+    },
+    {
+      "npcId": "donald",
+      "scene": "community_center",
+      "x": 1480,
+      "y": 540,
+      "dialogueId": "donald_n04",
+      "when": { "timeParts": [2] }
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "community_center",
+      "x": 1020,
+      "y": 1080,
+      "dialogueId": "sigrid_n05",
+      "when": { "timeParts": [1, 2], "dayMin": 2 }
+    },
+    {
+      "npcId": "matilda",
+      "scene": "community_center",
+      "x": 1640,
+      "y": 980,
+      "dialogueId": "matilda_n13",
+      "when": { "timeParts": [0], "dayMin": 2 }
+    },
+    {
+      "npcId": "pablo",
+      "scene": "crossroads",
+      "x": 760,
+      "y": 640,
+      "dialogueId": "pablo_n11",
+      "when": { "timeParts": [0] }
+    },
+    {
+      "npcId": "giorgia",
+      "scene": "crossroads",
+      "x": 1320,
+      "y": 760,
+      "dialogueId": "giorgia_n10",
+      "when": { "timeParts": [1] }
+    },
+    {
+      "npcId": "gwen",
+      "scene": "crossroads",
+      "x": 980,
+      "y": 1180,
+      "dialogueId": "gwen_n09",
+      "when": { "timeParts": [2] }
+    },
+    {
+      "npcId": "tom",
+      "scene": "crossroads",
+      "x": 1700,
+      "y": 980,
+      "dialogueId": "tom_n08",
+      "when": { "timeParts": [1, 2] }
+    },
+    {
+      "npcId": "amin",
+      "scene": "crossroads",
+      "x": 520,
+      "y": 1080,
+      "dialogueId": "amin_n12",
+      "when": { "timeParts": [0, 1], "dayMin": 2 }
+    },
+    {
+      "npcId": "ruben",
+      "scene": "crossroads",
+      "x": 1480,
+      "y": 460,
+      "dialogueId": "ruben_n06",
+      "when": { "timeParts": [1], "conditions": [{ "type": "questState", "questId": "N03", "state": "completed" }] }
+    }
+  ]
+}

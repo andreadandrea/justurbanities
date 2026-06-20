@@ -187,6 +187,31 @@ export const crisisFileSchema = z.object({
   )
 });
 
+// ---------- npc_placement.json ----------
+
+const placementWhenSchema = z.object({
+  timeParts: z.array(z.number().int().min(0)).optional(),
+  dayMin: z.number().int().positive().optional(),
+  dayMax: z.number().int().positive().optional(),
+  conditions: z.array(conditionSchema).optional()
+});
+
+export const npcPlacementFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  placements: z.array(
+    z.object({
+      npcId: z.string().min(1),
+      scene: z.string().min(1),
+      x: z.number(),
+      y: z.number(),
+      dialogueId: z.string().min(1),
+      speakerLabel: z.string().min(1).optional(),
+      when: placementWhenSchema.optional()
+    })
+  )
+});
+
 // ---------- playable.json ----------
 
 export const playableSchema = z.object({
