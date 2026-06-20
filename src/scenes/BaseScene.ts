@@ -68,8 +68,11 @@ export abstract class BaseScene {
   private facing: Direction = "down";
 
   constructor(protected readonly deps: SceneDeps) {
-    this.dialogueRunner = new DialogueRunner(deps.dialogueUI, deps.dialogueManager, (dialogueId, choiceId) =>
-      this.recordChoice(dialogueId, choiceId)
+    this.dialogueRunner = new DialogueRunner(
+      deps.dialogueUI,
+      deps.dialogueManager,
+      (dialogueId, choiceId) => this.recordChoice(dialogueId, choiceId),
+      () => ({ name: deps.gameState.playerName, pronoun: deps.gameState.playerPronoun })
     );
     // Subclass `world` field initializers run after super(); the camera is
     // pointed at the real world bounds every frame in update().
