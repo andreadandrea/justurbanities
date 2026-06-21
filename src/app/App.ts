@@ -20,6 +20,7 @@ import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
 import { TimeHud } from "../ui/TimeHud";
+import { InteractionPrompt } from "../ui/InteractionPrompt";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
@@ -192,6 +193,7 @@ export class App {
       gameClock: this.gameClock,
       npcDirector,
       resourceHud: new ResourceHud(this.elements.appRoot),
+      interactionPrompt: new InteractionPrompt(this.elements.appRoot),
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,
