@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eurbania — Città Isometrica 3D</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#1c2333;--p2:#242d42;--txt:#f0ece4;--txt2:#a8a49c;--txt3:#606870;--b:rgba(255,255,255,0.08);--acc:#e8734a}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2a}
+#c{display:block;width:100%;height:100%}
+#bar{position:absolute;top:0;left:0;right:0;height:50px;background:rgba(28,35,51,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 14px;gap:10px;z-index:100}
+.logo{font-size:12px;font-weight:700;color:var(--txt);letter-spacing:.06em}
+.logo em{color:#e8734a;font-style:normal}
+.lang{display:flex;gap:2px;background:rgba(255,255,255,0.06);border:1px solid var(--b);border-radius:6px;padding:2px}
+.lb{font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;color:var(--txt2);cursor:pointer;border:none;background:none;transition:all .15s}
+.lb.on{background:var(--acc);color:white}
+.res{display:flex;gap:8px;margin-left:auto;align-items:center}
+.ri{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--txt2)}
+.rd{width:7px;height:7px;border-radius:50%}
+.fp{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--txt2);padding:3px 9px;background:rgba(232,69,86,0.12);border:1px solid rgba(232,69,86,0.25);border-radius:20px}
+.fv{color:#ff7088;font-weight:600}
+#ctrl{position:absolute;bottom:80px;right:14px;display:flex;flex-direction:column;gap:2px;z-index:100}
+.cb{width:34px;height:34px;background:rgba(28,35,51,0.95);border:1px solid var(--b);border-radius:8px;color:var(--txt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.cb:hover{background:rgba(40,52,75,0.98)}
+#zlbl{font-size:10px;color:var(--txt2);text-align:center;padding:2px 0}
+#leg{position:absolute;bottom:14px;left:14px;background:rgba(28,35,51,0.92);border:1px solid var(--b);border-radius:10px;padding:9px 12px;z-index:100;backdrop-filter:blur(8px)}
+.lt{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px}
+.li{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.ls{font-size:9px;color:var(--txt2)}
+.lsep{height:1px;background:var(--b);margin:4px 0}
+#cmp{position:absolute;bottom:14px;right:14px;width:40px;height:40px;z-index:100;background:rgba(28,35,51,0.9);border:1px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--txt);font-weight:700;font-size:11px;backdrop-filter:blur(8px)}
+#sw{position:absolute;top:58px;left:14px;z-index:100}
+#si{width:190px;height:30px;background:rgba(28,35,51,0.95);border:1px solid var(--b);border-radius:8px;color:var(--txt);font-size:11px;padding:0 10px;outline:none}
+#si::placeholder{color:var(--txt3)}
+#sr{position:absolute;top:34px;left:0;width:190px;background:rgba(28,35,51,0.98);border:1px solid var(--b);border-radius:8px;overflow:hidden;display:none;z-index:101}
+.sri{padding:7px 12px;font-size:11px;color:var(--txt2);cursor:pointer;border-bottom:1px solid var(--b)}
+.sri:last-child{border:none}.sri:hover{background:rgba(255,255,255,0.06);color:var(--txt)}
+#pop{position:absolute;width:280px;background:rgba(25,32,48,0.98);border:1px solid var(--b);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);z-index:200;display:none;backdrop-filter:blur(14px);overflow:hidden;max-height:calc(100vh - 80px)}
+.pb{height:3px}.ph{padding:12px 14px 10px;border-bottom:1px solid var(--b);display:flex;align-items:flex-start;gap:10px;position:relative}
+.pe{font-size:22px;flex-shrink:0}.pt{font-size:13px;font-weight:700;color:var(--txt);line-height:1.3}
+.ps{font-size:10px;color:var(--txt2);margin-top:2px}
+.pbd{padding:11px 14px;overflow-y:auto;max-height:50vh;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent}
+.pl{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3);margin-bottom:4px;margin-top:10px}
+.pl:first-child{margin-top:0}.px{font-size:11px;color:var(--txt2);line-height:1.5}
+.ptag{font-size:9px;padding:2px 7px;border-radius:20px;border:1px solid;font-weight:500;display:inline-block}
+.qi{background:rgba(255,255,255,0.04);border:1px solid var(--b);border-radius:6px;padding:7px 9px;margin-bottom:4px}
+.qt{font-size:10px;font-weight:600;color:var(--txt);margin-bottom:2px}.qm{font-size:9px;color:var(--txt3)}
+.cx{position:absolute;top:8px;right:10px;background:rgba(255,255,255,0.08);border:none;color:var(--txt2);font-size:15px;width:22px;height:22px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cx:hover{background:rgba(255,255,255,0.15)}
+#mapRoot{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden}
+#dlabels{position:absolute;inset:0;pointer-events:none;z-index:5}
+.dlabel{position:absolute;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.dln{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-shadow:0 2px 6px rgba(0,0,0,0.9),0 0 20px rgba(0,0,0,0.6);white-space:nowrap}
+.dls{font-size:7px;color:rgba(255,255,255,0.45);text-shadow:0 1px 4px rgba(0,0,0,0.9);margin-top:1px;white-space:nowrap}
+#npcL{position:absolute;inset:0;pointer-events:none;z-index:6}
+.nm{position:absolute;transform:translate(-50%,-100%);cursor:pointer;pointer-events:all;transition:transform .15s}
+.nm:hover{transform:translate(-50%,-100%) scale(1.2)}
+.nb{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid rgba(255,255,255,0.7);box-shadow:0 2px 8px rgba(0,0,0,0.5)}
+.nn{font-size:7px;font-weight:600;text-align:center;margin-top:1px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,0.9)}
+.npin{width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:6px solid;margin:0 auto}
+#hint{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--txt3);z-index:99;pointer-events:none;white-space:nowrap;padding:4px 10px;background:rgba(28,35,51,0.7);border-radius:20px;transition:opacity 1s}
+#toast{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--txt);z-index:300;pointer-events:none;white-space:nowrap;padding:8px 16px;background:rgba(28,35,51,0.97);border:1px solid var(--b);border-radius:20px;display:none;backdrop-filter:blur(10px)}
+</style>
+</head>
+<body>
+<div id="bar">
+  <div class="logo">JUST<em>URBAN</em>iTiES <span style="color:var(--txt3);font-weight:400;font-size:10px">— Città Isometrica 3D</span></div>
+  <div class="lang"><button class="lb on" id="bIT" onclick="setL('it')">IT</button><button class="lb" id="bEN" onclick="setL('en')">EN</button></div>
+  <div class="res">
+    <div class="ri"><div class="rd" style="background:#7F77DD"></div><span id="lt">Fiducia</span> 58%</div>
+    <div class="ri"><div class="rd" style="background:#1D9E75"></div><span id="lc">Cura</span> 44%</div>
+    <div class="ri"><div class="rd" style="background:#EF9F27"></div>Commons 31%</div>
+    <div class="ri"><div class="rd" style="background:#639922"></div><span id="lv">Voce</span> 52%</div>
+    <div class="ri"><div class="rd" style="background:#378ADD"></div><span id="lr">Res.</span> 39%</div>
+  </div>
+  <div class="fp"><span id="lf">Framm.</span> <span class="fv">62%</span></div>
+</div>
+<div id="sw"><input id="si" type="text" placeholder="Cerca luogo o NPC…" oninput="doS(this.value)" onkeydown="if(event.key==='Escape')clrS()"><div id="sr"></div></div>
+<div id="mapRoot"><canvas id="c"></canvas>
+<div id="dlabels"></div>
+<div id="npcL"></div>
+</div>
+<div id="ctrl">
+  <button class="cb" onclick="zB(1.2)" title="Zoom in">+</button>
+  <div id="zlbl">100%</div>
+  <button class="cb" onclick="zB(0.83)" title="Zoom out">−</button>
+  <button class="cb" onclick="resetCam()" style="font-size:12px" title="Reset">⌂</button>
+  <button class="cb" onclick="rotCam()" style="font-size:12px" title="Ruota camera">↻</button>
+  <button class="cb" onclick="downloadOffline()" style="font-size:14px" id="dlBtn" title="Scarica per uso offline">⬇</button>
+</div>
+<div id="cmp">N</div>
+<div id="leg">
+  <div class="lt" id="lleg">Legenda</div>
+  <div class="li"><div class="ld" style="background:#9FCC60"></div><span class="ls">Crossroads</span></div>
+  <div class="li"><div class="ld" style="background:#E8A84A"></div><span class="ls">Old Blocks</span></div>
+  <div class="li"><div class="ld" style="background:#A8A49C"></div><span class="ls">Grey Yards</span></div>
+  <div class="li"><div class="ld" style="background:#9080D8"></div><span class="ls">Youth Court</span></div>
+  <div class="li"><div class="ld" style="background:#60A8E8"></div><span class="ls">Coastline Q.</span></div>
+  <div class="li"><div class="ld" style="background:#50B888"></div><span class="ls">Hill Gardens</span></div>
+  <div class="li"><div class="ld" style="background:#4880C8"></div><span class="ls">Lake Edge</span></div>
+  <div class="lsep"></div>
+  <div class="li"><div class="ld" style="background:#a090f0;border-radius:50%"></div><span class="ls" id="lhub">Central Hub</span></div>
+  <div class="li"><div class="ld" style="background:#5a9a30"></div><span class="ls" id="lpark">Parco</span></div>
+  <div class="li"><div class="ld" style="background:#4880b8"></div><span class="ls" id="lwater">Acqua</span></div>
+  <div class="lsep"></div>
+  <div class="ls" style="font-size:8px;color:var(--txt3)" id="lhints">Clicca edifici · NPC · Scrolla zoom</div>
+</div>
+<div id="pop"><button class="cx" onclick="closePop()">×</button><div class="pb" id="ppb"></div><div class="ph"><div class="pe" id="ppe"></div><div><div class="pt" id="ppt"></div><div class="ps" id="pps"></div></div></div><div class="pbd" id="ppbd"></div></div>
+<div id="hint">🖱 Trascina · Scrolla zoom · Clicca edifici e NPC · ↻ ruota camera</div>
+<div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+// ═══ LANGUAGE ═══════════════════════════════════════════
+let L='it';
+function setL(l){L=l;document.getElementById('bIT').classList.toggle('on',l==='it');document.getElementById('bEN').classList.toggle('on',l==='en');const T=l==='it'?{t:'Fiducia',c:'Cura',v:'Voce',r:'Res.',f:'Framm.',leg:'Legenda',hub:'Central Hub',park:'Parco',water:'Acqua',hints:'Clicca edifici · NPC · Scrolla zoom'}:{t:'Trust',c:'Care',v:'Voice',r:'Res.',f:'Fragm.',leg:'Legend',hub:'Central Hub',park:'Park',water:'Water',hints:'Click buildings · NPC · Scroll zoom'};document.getElementById('lt').textContent=T.t;document.getElementById('lc').textContent=T.c;document.getElementById('lv').textContent=T.v;document.getElementById('lr').textContent=T.r;document.getElementById('lf').textContent=T.f;document.getElementById('lleg').textContent=T.leg;document.getElementById('lhub').textContent=T.hub;document.getElementById('lpark').textContent=T.park;document.getElementById('lwater').textContent=T.water;document.getElementById('lhints').textContent=T.hints;document.getElementById('si').placeholder=l==='it'?'Cerca luogo o NPC…':'Search place or NPC…';renderLabels();renderNPCs();}
+
+// ═══ DATA ════════════════════════════════════════════════
+const DISTRICTS=[
+  {id:'crossroads',ni:'Crossroads',ne:'Crossroads',si:'Mobilità · Accessibilità · Comunicazione',se:'Mobility · Accessibility · Communication',cx:3,cz:-6},
+  {id:'old',ni:'Old Blocks',ne:'Old Blocks',si:'Alloggi temporanei · Memoria collettiva',se:'Temporary Housing · Collective Memory',cx:-8,cz:1},
+  {id:'grey',ni:'Grey Yards',ne:'Grey Yards',si:'Commons chiusi · Cemento · Gentrificazione',se:'Locked Commons · Concrete · Gentrification',cx:-8,cz:9},
+  {id:'youth',ni:'Youth Court',ne:'Youth Court',si:'Giovani · Voce · Partecipazione reale',se:'Youth · Voice · Real Participation',cx:11,cz:-5},
+  {id:'coast',ni:'Coastline Quarter',ne:'Coastline Quarter',si:'Turismo · Anziani · Pressione stagionale',se:'Tourism · Elderly · Seasonal Pressure',cx:20,cz:-9},
+  {id:'hill',ni:'Hill Gardens',ne:'Hill Gardens',si:'Periferia · Cultura · Stigma',se:'Periphery · Culture · Stigma',cx:2,cz:15},
+  {id:'lake',ni:'Lake Edge',ne:'Lake Edge',si:'Clima · Vulnerabilità · Marginalità',se:'Climate · Vulnerability · Marginality',cx:15,cz:11},
+];
+
+const BDATA=[
+  {id:'cc',ni:'Community Center',ne:'Community Center',ti:'Hub Operativo',te:'Operational Hub',di:'Cuore simbolico. Non perfetto ma vivo. Bacheche, logbook, mappa civica, sala assemblee.',de:'The symbolic heart. Imperfect but alive. Notice boards, logbook, civic map, assembly room.',x:0,z:0,w:3.5,d:3.5,h:4.5,c:0xb0a0e8,r:0x8870c0,em:0x181028,icon:'🏛',qi:[{t:'"Listen Before Fixing" (Anna)',r:'Voice, Trust',c:'2'},{t:'"Care for the Carers" (Giorgia)',r:'Care, Resilience',c:'3-4'}]},
+  {id:'th',ni:'Town Hall',ne:'Town Hall',ti:'Istituzione',te:'Institution',di:'Dove lavora Elena. Mandato politico, pressione istituzionale, decisioni difficili.',de:'Where Elena works. Political mandate, institutional pressure, difficult decisions.',x:-4,z:1,w:4.5,d:3.5,h:6,c:0x7888b8,r:0x587090,em:0x101828,icon:'🏢',qi:[{t:'"Mandate, Not a Photo Op" (Alexandria)',r:'Trust, Voice',c:'5'},{t:'"Rules and Open Doors" (Tom)',r:'Trust, Commons',c:'3'}]},
+  {id:'amins',ni:"Bar di Amin",ne:"Amin's Bar",ti:'Terzo Luogo',te:'Third Place',di:'Le persone dicono qui ciò che non direbbero in assemblea.',de:'People say here what they would not say in an assembly.',x:3,z:2.5,w:2.2,d:2.2,h:2.5,c:0xc86848,r:0x983828,em:0x301008,icon:'☕',qi:[{t:'"Mixed Tables" (Amin)',r:'Trust, Commons',c:'3'}]},
+  {id:'bens',ni:"Officina di Ben",ne:"Ben's Bike Shop",ti:'Accessibilità',te:'Accessibility',di:'Base per audit di barriere fisiche e invisibili.',de:'Base for physical and invisible barrier audits.',x:1.5,z:4,w:2,d:2,h:2,c:0x68b878,r:0x489858,em:0x0a1810,icon:'🚲',qi:[{t:'"The Crossing" (Ben)',r:'Care, Resilience',c:'2-3'}]},
+  {id:'flowers',ni:"Fioreria Matilda",ne:"Matilda's Flower Shop",ti:'Cura urbana',te:'Urban Care',di:'Base di Matilda per interventi verdi e cura degli spazi.',de:"Matilda's base for green interventions and space care.",x:1,z:2.5,w:1.8,d:1.8,h:2,c:0xc890a0,r:0x987080,em:0x201018,icon:'🌸',qi:[{t:'"Care Made Visible" (Matilda)',r:'Commons, Care',c:'3'}]},
+  // CROSSROADS
+  {id:'bushub',ni:'Main Bus Hub',ne:'Main Bus Hub',ti:'Mobilità',te:'Mobility',di:'Nodo di trasporto centrale. Fondamentale ma caotico. Orari confusi, accessibilità difficile.',de:'Central transport node. Essential but chaotic. Confusing schedules, difficult accessibility.',x:3,z:-8,w:5,d:3.5,h:3.5,c:0xc8a048,r:0x987828,em:0x282008,icon:'🚌',qi:[{t:'"Arriving Is Already Participating"',r:'Voice, Care',c:'1'},{t:'"The Crossing" (Ben)',r:'Care, Resilience',c:'2-3'}]},
+  {id:'market',ni:'Mercato Multilingue',ne:'Multilingual Market',ti:'Reti informali',te:'Informal Networks',di:'Comunità diverse si incrociano. Ricco di informazioni informali.',de:'Different communities cross. Rich in informal information.',x:7,z:-6,w:3.5,d:3.5,h:2.8,c:0xd8a858,r:0xa87838,em:0x282008,icon:'🏪',qi:[{t:'"From Rumor to Information" (Abdullah)',r:'Voice, Trust',c:'2-3'},{t:'"Lost in Translation"',r:'Trust, Voice',c:'2'}]},
+  {id:'infopoint',ni:'Civic Info Point',ne:'Civic Info Point',ti:'Info pubblica',te:'Public Info',di:'Sportello che usa un linguaggio incomprensibile per tutti.',de:'Information desk using language incomprehensible to everyone.',x:1,z:-7,w:2,d:2,h:2.5,c:0x7898c8,r:0x587898,em:0x101828,icon:'ℹ️',qi:[{t:'"Lost in Translation"',r:'Trust, Voice',c:'2'}]},
+  {id:'cr1',x:5,z:-4,w:2.5,d:2.5,h:4,c:0xb8a868,r:0x887848,em:0x181808},
+  {id:'cr2',x:8,z:-9,w:2.5,d:2,h:3,c:0xc0a858,r:0x907838,em:0x181808},
+  {id:'cr3',x:-1,z:-5,w:2.5,d:2.5,h:3.5,c:0xb8b068,r:0x888040,em:0x181808},
+  // OLD BLOCKS
+  {id:'courtyard',ni:'Cortile 17',ne:'Courtyard 17',ti:'Spazio potenziale',te:'Potential Space',di:'Vuoto, usato come parcheggio informale. Potenziale: giardino, laboratorio, assemblea.',de:'Empty, used as informal parking. Potential: garden, workshop, assembly space.',x:-9,z:-2,w:3.5,d:4.5,h:2.5,c:0xd8a860,r:0xa87840,em:0x281808,icon:'🏗',qi:[{t:'"Courtyard 17"',r:'Commons, Care',c:'2'}]},
+  {id:'shelter',ni:'Il Vecchio Rifugio',ne:'Old Shelter',ti:'Edificio chiuso',te:'Closed Building',di:'Edificio comunitario chiuso. Può diventare laboratorio, aula o deposito condiviso.',de:'Closed community building. Could become a workshop, classroom, or shared storage.',x:-13,z:0,w:3.5,d:3.5,h:3.5,c:0xb89060,r:0x886040,em:0x201008,icon:'🏚',qi:[{t:'"Not Another Promise"',r:'Trust, Voice',c:'2'}]},
+  {id:'ob1',x:-7,z:2,w:2.5,d:2.5,h:3.5,c:0xc8a870,r:0x987050,em:0x201008},
+  {id:'ob2',x:-10,z:3,w:2.5,d:2.5,h:4,c:0xb89858,r:0x886040,em:0x201008},
+  {id:'ob3',x:-12,z:-2,w:2,d:2,h:3,c:0xd0a060,r:0xa07040,em:0x201008},
+  // GREY YARDS
+  {id:'common_room',ni:'Sala Comune Chiusa',ne:'Locked Common Room',ti:'Commons bloccato',te:'Locked Commons',di:'"Si potrebbe usare" — ma nessuno sa chi ha la chiave.',de:'"Could be used" — nobody knows who holds the key.',x:-9,z:8,w:4.5,d:3.5,h:3.5,c:0x909090,r:0x686868,em:0x181818,icon:'🔒',qi:[{t:'"Who Has the Key?"',r:'Trust, Commons',c:'2-3'}]},
+  {id:'prop_office',ni:"Ufficio della Proprietà",ne:'Property Office',ti:'Potere nascosto',te:'Hidden Power',di:'Luogo di negoziazione, vincoli, conflitti. Tom lavora qui.',de:'Negotiation, constraints, conflicts. Tom works here.',x:-13,z:9,w:3.5,d:3.5,h:4.5,c:0x787878,r:0x585858,em:0x141414,icon:'📋',qi:[{t:'"Rules and Open Doors" (Tom)',r:'Trust, Commons',c:'3'},{t:'"The Offer" (MCM)',r:'Commons(±), Trust(±)',c:'4'}]},
+  {id:'gy1',x:-6,z:9,w:3,d:3,h:5.5,c:0x808888,r:0x606868,em:0x101414},
+  {id:'gy2',x:-11,z:12,w:4,d:3.5,h:4,c:0x787080,r:0x585060,em:0x101014},
+  {id:'gy3',x:-7,z:12,w:2.5,d:2.5,h:3,c:0x888080,r:0x686060,em:0x141010},
+  // YOUTH COURT
+  {id:'the_court',ni:'Il Cortile',ne:'The Court',ti:'Spazio giovani',te:'Youth Space',di:'Spazio sportivo e di ritrovo. Inizialmente vuoto o diviso in gruppi chiusi.',de:'Sports and gathering space. Initially empty or split into closed groups.',x:10,z:-8,w:5,d:5,h:1.8,c:0x8070b0,r:0x605088,em:0x101020,icon:'🏀',qi:[{t:'"Real Seats at the Table"',r:'Voice, Trust',c:'2'},{t:'"Through a Child\'s Eyes" (Lia)',r:'Care, Voice',c:'2'}]},
+  {id:'wall_plans',ni:'Wall of Plans',ne:'Wall of Plans',ti:'Narrazione visiva',te:'Visual Narrative',di:'Muro dove i giovani pianificano. Base di Marta per la contro-narrativa.',de:"Wall where young people plan. Also Marta's counter-narrative base.",x:14,z:-5,w:3,d:2.5,h:3.5,c:0xa080d8,r:0x7858a8,em:0x180838,icon:'🎨',qi:[{t:'"The Wall Speaks"',r:'Voice, Commons',c:'3'}]},
+  {id:'school',ni:'Scuola',ne:'School',x:11,z:-4,w:4.5,d:4.5,h:4.5,c:0xb0a0d0,r:0x8878a8,em:0x181028},
+  {id:'yc1',x:13,z:-10,w:2.5,d:2.5,h:3,c:0x9888c8,r:0x6860a0,em:0x101020},
+  // COASTLINE
+  {id:'promenade_bld',ni:'La Promenade',ne:'The Promenade',ti:'Spazio conteso',te:'Contested Space',di:'Bella ma contesa tra residenti, turisti, eventi commerciali.',de:'Beautiful but contested between residents, tourists, commercial events.',x:18,z:-12,w:7,d:2.5,h:2.5,c:0x80c0e0,r:0x5898b8,em:0x102030,icon:'🌊',qi:[{t:'"Beautiful for Whom?"',r:'Voice, Trust',c:'3'},{t:'"Seasonal Pressure"',r:'Business, Care, Voice',c:'3'}]},
+  {id:'library',ni:'Old Library',ne:'Old Library',ti:'Terzo luogo potenziale',te:'Potential Third Place',di:'Biblioteca con potenziale di terzo luogo non commerciale. Base di Mrs Viveca.',de:"Library with potential as non-commercial third place. Mrs Viveca's base.",x:22,z:-7,w:3.5,d:3.5,h:4,c:0x5880b8,r:0x386098,em:0x080f1a,icon:'📚',qi:[{t:'"The Third Place"',r:'Commons, Care',c:'3'},{t:'"Words to Belong" (Mrs Viveca)',r:'Voice, Trust',c:'2-3'}]},
+  {id:'cb1',x:17,z:-8,w:3.5,d:3.5,h:6,c:0x90c0d8,r:0x6898b0,em:0x101520},
+  {id:'cb2',x:21,z:-11,w:4,d:3.5,h:7,c:0x80b0d0,r:0x6090b0,em:0x0c1218},
+  {id:'cb3',x:25,z:-9,w:3,d:4,h:5,c:0x88b8d0,r:0x6090a8,em:0x0c1218},
+  {id:'cb4',x:19,z:-6,w:3,d:3,h:4,c:0x78a8c8,r:0x5888a8,em:0x0c1218},
+  // HILL GARDENS
+  {id:'studio',ni:'The Studio',ne:'The Studio',ti:'Spazio creativo',te:'Creative Space',di:'Musica, video, arte, podcast. Base di Marta e cuore culturale di Hill Gardens.',de:'Music, video, art, podcasts. Cultural heart of Hill Gardens.',x:2,z:14,w:3.5,d:3.5,h:3.5,c:0x58b888,r:0x389868,em:0x0a1810,icon:'🎵',qi:[{t:'"Don\'t Tell Our Story Without Us" (Marta)',r:'Voice, Trust',c:'4'}]},
+  {id:'hill_st',ni:'Hill Station',ne:'Hill Station',ti:'Connessione fragile',te:'Fragile Connection',di:'La fermata che può sparire — e con essa l\'accesso alla città.',de:'The stop that could disappear — and with it, access to the city.',x:7,z:13,w:2.5,d:2.5,h:2.5,c:0xc09040,r:0xa07030,em:0x201008,icon:'🚏',qi:[{t:'"The Last Bus" (Gwen)',r:'Care, Voice',c:'3-4'}]},
+  {id:'hb1',x:0,z:17,w:4.5,d:3.5,h:7,c:0x68b888,r:0x489068,em:0x0c1810},
+  {id:'hb2',x:5,z:16,w:3.5,d:3.5,h:5.5,c:0x78c090,r:0x589870,em:0x0c1810},
+  {id:'hb3',x:-2,z:15,w:3,d:3,h:4,c:0x60a878,r:0x408858,em:0x0c1810},
+  // LAKE EDGE
+  {id:'afterschool',ni:'After-School Room',ne:'After-School Room',ti:'Spazio educativo fragile',te:'Fragile Educational Space',di:'Fondamentale per le famiglie. Fragile, rischioso di chiusura.',de:'Fundamental for families. Fragile, at risk of closure.',x:16,z:9,w:3,d:2.5,h:2.8,c:0x6098c8,r:0x4878a8,em:0x0c1420,icon:'📖',qi:[{t:'"Words to Belong" (Mrs Viveca)',r:'Voice, Trust',c:'2-3'},{t:'"Close, Yet Excluded"',r:'Trust, Voice',c:'2-3'}]},
+  {id:'flood',ni:'Flood Zone',ne:'Flood Zone',ti:'Rischio climatico',te:'Climate Risk',di:'Area soggetta ad allagamenti. La crisi che arriva se la Resilienza non è stata costruita prima.',de:'Area subject to flooding. The crisis that arrives if Resilience was not built.',x:19,z:15,w:5,d:4,h:0.4,c:0x3060a8,r:0x2040a0,em:0x081020,icon:'⚠️',qi:[{t:'"Before the Water Rises" (Siobhan)',r:'Resilience, Commons',c:'3-4'}]},
+  {id:'lb1',x:19,z:11,w:3.5,d:3.5,h:4.5,c:0x5080a0,r:0x386080,em:0x0a1018},
+  {id:'lb2',x:13,z:12,w:3,d:3.5,h:3.5,c:0x588090,r:0x406070,em:0x0a1018},
+  {id:'lb3',x:22,z:9,w:3,d:3,h:5,c:0x4878a0,r:0x386080,em:0x081018},
+];
+
+const NPCS=[
+  {id:'anna',x:-0.5,z:0.5,c:'#378ADD',icon:'💻',name:'Anna',ri:'Civic Tech · Mentore',re:'Civic Tech · Mentor',vi:'Lanciare rete civica e mappatura partecipata.',ve:'Launch civic network and participatory mapping.',hi:'Teme che gli strumenti siano diventati rituali vuoti.',he:'Fears tools have become empty rituals.',qi:'"Listen Before Fixing" — intervistare 3 persone in distretti diversi.',qe:'"Listen Before Fixing" — interview 3 people across different districts.',type:'mentor'},
+  {id:'ben',x:1.5,z:4.5,c:'#1D9E75',icon:'♿',name:'Ben',ri:'Accessibilità · Mentore',re:'Accessibility · Mentor',vi:'Rendere le riunioni genuinamente raggiungibili.',ve:'Make public meetings genuinely reachable.',hi:'Stanco di essere simbolo senza cambiamenti reali.',he:'Tired of being used as a symbol without real change.',qi:'"The Crossing" — rendere sicuro l\'attraversamento.',qe:'"The Crossing" — make the dangerous crossing safe.',type:'mentor'},
+  {id:'amin',x:3,z:3,c:'#D85A30',icon:'☕',name:'Amin',ri:'Bar owner · Mentore',re:'Bar owner · Mentor',vi:'Tenere il bar accogliente e vivo.',ve:'Keep the bar welcoming and alive.',hi:'Stanco di dover sempre essere positivo.',he:'Tired of always having to be positive.',qi:'"Mixed Tables" — trasformare il bar in luogo di incontro tra gruppi.',qe:'"Mixed Tables" — turn the bar into a meeting place.',type:'mentor'},
+  {id:'sigrid',x:-8.5,z:0,c:'#639922',icon:'🔧',name:'Sigrid',ri:'Carpentiera · Alleata',re:'Carpenter · Ally',vi:'Riparare spazi con materiali di recupero.',ve:'Repair spaces with recycled materials.',hi:'Vuole che il lavoro manuale sia competenza civica.',he:'Wants manual work recognised as civic expertise.',qi:'"The Repair Day" — giornata collettiva di riparazione.',qe:'"The Repair Day" — collective repair day.',type:'ally'},
+  {id:'pablo',x:-11.5,z:1,c:'#378ADD',icon:'✉️',name:'Pablo',ri:'Postino · Bridge',re:'Postman · Bridge',vi:'Consegnare e conoscere strade, portoni e persone.',ve:'Deliver and know streets, doorways, people.',hi:'Solitudine e bisogno di contare di più.',he:'Loneliness and a need to matter more.',qi:'"Nobody Is Off the Map" — identificare i residenti isolati.',qe:'"Nobody Is Off the Map" — identify isolated residents.',type:'bridge'},
+  {id:'tom',x:-3,z:1.5,c:'#888780',icon:'📋',name:'Tom',ri:'Impiegato comunale · Frizione',re:'Municipal Clerk · Friction',vi:'Far rispettare procedure e regolamenti.',ve:'Enforce procedures and regulations.',hi:'In fondo vorrebbe che le regole servissero le persone.',he:'Deep down wishes the rules served people.',qi:'"Rules and Open Doors" — trovare modo legale per aprire spazio comune.',qe:'"Rules and Open Doors" — find lawful way to open common space.',type:'friction'},
+  {id:'alex',x:-3,z:-0.5,c:'#7F77DD',icon:'🏛',name:'Alexandria',ri:'Sindaca · Frizione/gate',re:'Mayor · Friction/gate',vi:'Ottenere risultati concreti dalla consultazione.',ve:'Get concrete results from the consultation.',hi:'Bilanciare pressione politica, budget e offerte speculative.',he:'Balance political pressure, budget, speculative offers.',qi:'"Mandate, Not a Photo Op" — impegno reale, non evento simbolico.',qe:'"Mandate, Not a Photo Op" — real commitment, not a symbolic event.',type:'friction'},
+  {id:'giorgia',x:0.5,z:1,c:'#1D9E75',icon:'🌿',name:'Giorgia',ri:'Benessere · Mentore',re:'Wellbeing · Mentor',vi:'Sostenere il benessere dei volontari.',ve:'Support the wellbeing of volunteers.',hi:'Porta il peso emotivo di tutti.',he:'Carries everyone\'s emotional weight.',qi:'"Care for the Carers" — pratiche anti-burnout prima della Crisis Week.',qe:'"Care for the Carers" — anti-burnout practices before Crisis Week.',type:'mentor'},
+  {id:'abd',x:6,z:-6,c:'#EF9F27',icon:'📮',name:'Abdullah',ri:'Edicola · Bridge',re:'Newsstand · Bridge',vi:'Tenere l\'edicola viva come punto di riferimento.',ve:'Keep the newsstand alive as a landmark.',hi:'Teme la chiusura e si sente fuori dai canali ufficiali.',he:'Fears closure and feels outside official channels.',qi:'"From Rumor to Information" — trasformare edicola in info point affidabile.',qe:'"From Rumor to Information" — turn newsstand into reliable info point.',type:'bridge'},
+  {id:'gwen',x:6,z:13,c:'#7F77DD',icon:'🚌',name:'Gwen',ri:'Autista bus · Alleata',re:'Bus Driver · Ally',vi:'Tenere in piedi la linea e i turni.',ve:'Keep the line and shifts running.',hi:'Vede l\'esclusione dal finestrino ma si sente inascoltata.',he:'Sees exclusion from behind the wheel but feels unheard.',qi:'"The Last Bus" — documentare la connessione mancante.',qe:'"The Last Bus" — document the missing connection.',type:'ally'},
+  {id:'marta',x:3,z:15,c:'#D4537E',icon:'🖊️',name:'Marta',ri:'Fumettista · Alleata',re:'Comic Writer · Ally',vi:'Creare campagne civiche e fumetti riconosciuti.',ve:'Create recognised civic campaigns and comics.',hi:'Insicura; cerca riconoscimento e rischia di mettere l\'ego davanti alla comunità.',he:'Insecure; seeks recognition and risks putting ego before community.',qi:'"Don\'t Tell Our Story Without Us" — contro-narrativa di Hill Gardens.',qe:'"Don\'t Tell Our Story Without Us" — Hill Gardens counter-narrative.',type:'ally'},
+  {id:'ruben',x:4,z:14,c:'#D85A30',icon:'📰',name:'Ruben',ri:'Giornalista · Frizione',re:'Journalist · Friction',vi:'Un reportage forte sulla crisi della partecipazione.',ve:'A strong story on the crisis of participation.',hi:'Cerca scoop; può amplificare stigma o disinformazione.',he:'Seeks scoops; can amplify stigma or disinformation.',qi:'"The Story Behind the Headline" — alimenta o smorza la falsa voce?',qe:'"The Story Behind the Headline" — feed or defuse the rumour?',type:'friction'},
+  {id:'siobhan',x:15,z:9,c:'#639922',icon:'🌱',name:'Siobhan',ri:'Giardiniera · Alleata',re:'Gardener · Ally',vi:'Orti, giardini, biodiversità, gestione dell\'acqua.',ve:'Allotments, gardens, biodiversity, water management.',hi:'Ansia climatica; teme interventi tardivi e simbolici.',he:'Climate anxiety; fears late, symbolic interventions.',qi:'"Before the Water Rises" — preparare il quartiere alla crisi climatica.',qe:'"Before the Water Rises" — prepare neighbourhood for climate crisis.',type:'ally'},
+  {id:'viveca',x:21,z:-7,c:'#7F77DD',icon:'📖',name:'Mrs Viveca',ri:'Ex insegnante · Mentore',re:'Former Teacher · Mentor',vi:'Corsi di lingua e alfabetizzazione civica.',ve:'Language courses and civic literacy.',hi:'Teme che la sua severità allontani le persone.',he:'Fears her sternness pushes people away.',qi:'"Words to Belong" — corso di lingua e memoria intergenerazionale.',qe:'"Words to Belong" — language and intergenerational-memory course.',type:'mentor'},
+  {id:'lia',x:12,z:-7,c:'#EF9F27',icon:'🚗',name:'Lia',ri:'Bambina 8 anni · Bridge',re:'Child 8 y.o. · Bridge',vi:'Giocare e muoversi liberamente per la città.',ve:'Play and move around the city freely.',hi:'Percepisce insicurezza ma non ha voce nelle decisioni.',he:'Senses insecurity but has no voice in decisions.',qi:'"Through a Child\'s Eyes" — mappare la città dal punto di vista di Lia.',qe:'"Through a Child\'s Eyes" — map the city from a child\'s point of view.',type:'bridge'},
+  {id:'donald',x:22,z:-10,c:'#BA7517',icon:'📚',name:'Donald',ri:'Ex sindaco · Alleato',re:'Former Mayor · Ally',vi:'Che la memoria e la storia della città vengano onorate.',ve:'That the city\'s memory and history be honoured.',hi:'Teme di essere irrilevante; la nostalgia può bloccarlo.',he:'Fears he has become irrelevant; nostalgia can make him resist.',qi:'"Memory Is Not Nostalgia" — usare la memoria per legittimare il nuovo.',qe:'"Memory Is Not Nostalgia" — use memory to legitimise the new.',type:'ally'},
+  {id:'mcm',x:-11,z:8,c:'#5F5E5A',icon:'🕴',name:'Mystery Corp. Man',ri:'Tentazione · Speculazione',re:'Temptation · Speculation',vi:'Offrire soluzioni rapide, fondi e ristrutturazione degli spazi.',ve:'Offer quick fixes, funds, and renovation of spaces.',hi:'Privatizzazione, estrazione di valore, dislocamento.',he:'Privatisation, value extraction, displacement.',qi:'"The Offer" — anti-quest: accettare, negoziare o rifiutare.',qe:'"The Offer" — anti-quest: accept, negotiate, or refuse.',type:'temptation'},
+  {id:'matilda',x:1.5,z:2.5,c:'#1D9E75',icon:'🌸',name:'Matilda',ri:'Fioraia · Alleata',re:'Florist · Ally',vi:'Curare piante e piccoli spazi urbani.',ve:'Tend plants and small urban spaces.',hi:'Teme che la cura sia vista come decorazione.',he:'Fears everyday care is seen as decoration.',qi:'"Care Made Visible" — interventi verdi co-curati dai residenti.',qe:'"Care Made Visible" — green interventions co-tended by residents.',type:'ally'},
+];
+
+// ═══ THREE.JS ════════════════════════════════════════════
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x9ac4e0);
+scene.fog=new THREE.FogExp2(0xb8d4ec,0.018);
+const CAM_SIZE=22;
+const cam=new THREE.OrthographicCamera(-CAM_SIZE,CAM_SIZE,CAM_SIZE,-CAM_SIZE,0.1,250);
+let camAng=Math.PI/4; // rotation around Y
+let camTilt=Math.PI/5; // tilt (isometric)
+let camTarget=new THREE.Vector3(4,0,2);
+let camZoom=1.5;
+const CAM_DIST=35;
+
+function updateCam(){
+  const s=CAM_SIZE/camZoom;
+  const aspect=window.innerWidth/window.innerHeight;
+  cam.left=-s*aspect;cam.right=s*aspect;cam.top=s;cam.bottom=-s;
+  const cx=camTarget.x+Math.sin(camAng)*Math.cos(camTilt)*CAM_DIST;
+  const cy=Math.sin(camTilt)*CAM_DIST;
+  const cz=camTarget.z+Math.cos(camAng)*Math.cos(camTilt)*CAM_DIST;
+  cam.position.set(cx,cy,cz);cam.lookAt(camTarget);cam.updateProjectionMatrix();cam.updateMatrixWorld(true);
+  document.getElementById('zlbl').textContent=Math.round(camZoom*100)+'%';
+  // Update compass
+  const deg=Math.round(camAng*180/Math.PI);
+  const dirs=['N','NE','E','SE','S','SO','O','NO'];
+  const d=dirs[Math.round(((deg%360)+360)%360/45)%8];
+  document.getElementById('cmp').textContent=d||'N';
+  renderLabels();renderNPCs();
+}
+
+// ── LIGHTS ───────────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0xfff4e0,0.75));
+const sun=new THREE.DirectionalLight(0xfff0cc,1.5);
+sun.position.set(25,45,15);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.near=1;sun.shadow.camera.far=200;
+sun.shadow.camera.left=-70;sun.shadow.camera.right=70;sun.shadow.camera.top=70;sun.shadow.camera.bottom=-70;
+sun.shadow.bias=-0.0008;scene.add(sun);
+const fillLight=new THREE.DirectionalLight(0xd0e8ff,0.45);fillLight.position.set(-20,25,-15);scene.add(fillLight);
+
+// ── GROUND ZONES ─────────────────────────────────────────
+const ZONES=[
+  {cx:3,cz:-6,w:16,d:14,c:0xd4ecb0},{cx:-8,cz:1,w:14,d:16,c:0xecdf94},{cx:-8,cz:10,w:14,d:14,c:0xd4d0c0},
+  {cx:11,cz:-5,w:14,d:12,c:0xd0c4e8},{cx:20,cz:-9,w:18,d:14,c:0xc0d8f0},{cx:2,cz:15,w:16,d:12,c:0xb0e0c4},
+  {cx:15,cz:11,w:18,d:14,c:0xa8c8e0},{cx:0,cz:1,w:9,d:9,c:0xe0d8f4},
+];
+ZONES.forEach(z=>{
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(z.w,z.d),new THREE.MeshLambertMaterial({color:z.c}));
+  m.rotation.x=-Math.PI/2;m.position.set(z.cx,0.02,z.cz);m.receiveShadow=true;scene.add(m);
+});
+// Main ground
+const gm=new THREE.Mesh(new THREE.PlaneGeometry(180,180),new THREE.MeshLambertMaterial({color:0xd8d0b8}));
+gm.rotation.x=-Math.PI/2;gm.position.y=-0.01;gm.receiveShadow=true;scene.add(gm);
+
+// ── ROADS ────────────────────────────────────────────────
+function road(x1,z1,x2,z2,w,c=0xc8bfaa){
+  const dx=x2-x1,dz=z2-z1,len=Math.sqrt(dx*dx+dz*dz);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(len,w),new THREE.MeshLambertMaterial({color:c}));
+  m.rotation.x=-Math.PI/2;m.position.set((x1+x2)/2,0.04,(z1+z2)/2);m.rotation.z=-Math.atan2(dz,dx);
+  m.receiveShadow=true;scene.add(m);
+  if(w>1.5){
+    const l=new THREE.Mesh(new THREE.PlaneGeometry(len*0.8,0.1),new THREE.MeshBasicMaterial({color:0xe8e0cc,transparent:true,opacity:0.45}));
+    l.rotation.x=-Math.PI/2;l.position.set((x1+x2)/2,0.06,(z1+z2)/2);l.rotation.z=-Math.atan2(dz,dx);scene.add(l);
+  }
+}
+road(-35,0,35,0,2.5);road(0,-30,0,30,2.5);road(-35,6,35,6,1.8);road(-35,-6,35,-6,1.8);
+road(8,-30,8,30,1.8);road(-8,-30,-8,30,1.2);road(16,-25,16,25,1.2);road(-16,-25,-16,25,1.2);
+road(-35,3,35,3,1.0);road(-35,-3,35,-3,1.0);road(-35,12,20,12,1.0);road(-35,-12,20,-12,1.0);
+road(8,0,-8,0,0.9);road(0,6,0,12,0.9);road(0,-6,0,-12,0.9);
+road(-5,-6,-8,-10,0.8);road(4,-6,8,-10,0.8);road(8,0,16,3,0.8);road(8,3,16,6,0.8);
+
+// Pavements
+function pave(x1,z1,x2,z2){
+  const dx=x2-x1,dz=z2-z1,len=Math.sqrt(dx*dx+dz*dz);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(len,0.6),new THREE.MeshLambertMaterial({color:0xe0d8c8}));
+  m.rotation.x=-Math.PI/2;m.position.set((x1+x2)/2,0.05,(z1+z2)/2);m.rotation.z=-Math.atan2(dz,dx);scene.add(m);
+}
+pave(-35,1.4,35,1.4);pave(-35,-1.4,35,-1.4);pave(1.4,-30,1.4,30);pave(-1.4,-30,-1.4,30);
+
+// ── WATER ─────────────────────────────────────────────────
+const lakeMat=new THREE.MeshLambertMaterial({color:0x4898d0,transparent:true,opacity:0.82});
+const lake=new THREE.Mesh(new THREE.CylinderGeometry(5.5,5.5,0.2,40),lakeMat);
+lake.position.set(20,0.1,16);scene.add(lake);
+const lakeShimmer=new THREE.Mesh(new THREE.CylinderGeometry(5.5,5.5,0.05,40),new THREE.MeshLambertMaterial({color:0x78c0f0,transparent:true,opacity:0.4}));
+lakeShimmer.position.set(20,0.22,16);scene.add(lakeShimmer);
+function riverSeg(x1,z1,x2,z2){
+  const dx=x2-x1,dz=z2-z1,len=Math.sqrt(dx*dx+dz*dz);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(len,1.8),new THREE.MeshLambertMaterial({color:0x6098c8,transparent:true,opacity:0.72}));
+  m.rotation.x=-Math.PI/2;m.position.set((x1+x2)/2,0.06,(z1+z2)/2);m.rotation.z=-Math.atan2(dz,dx);scene.add(m);
+}
+[[27,-14,25,-8],[25,-8,23,0],[23,0,22,8],[22,8,21,14],[21,14,20,16]].forEach(([x1,z1,x2,z2])=>riverSeg(x1,z1,x2,z2));
+// Sea
+const sea=new THREE.Mesh(new THREE.PlaneGeometry(35,16),new THREE.MeshLambertMaterial({color:0x4080c0,transparent:true,opacity:0.7}));
+sea.rotation.x=-Math.PI/2;sea.position.set(24,-0.1,-20);scene.add(sea);
+
+// ── PARKS ────────────────────────────────────────────────
+function greenPatch(x,z,w,d,c=0x78c050){
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),new THREE.MeshLambertMaterial({color:c}));
+  m.rotation.x=-Math.PI/2;m.position.set(x,0.06,z);m.receiveShadow=true;scene.add(m);
+}
+greenPatch(3,3,5.5,5.5,0x72c050);
+greenPatch(-2,14.5,5,4,0x6ab848);
+greenPatch(-1,-20,9,4.5,0x80c860);
+greenPatch(16,16,6,5,0x78c060);
+
+// ── TREES ────────────────────────────────────────────────
+function tree(x,z,h=2,tc=0x508038,cc=0x409030){
+  const trunk=new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.13,h*0.4,6),new THREE.MeshLambertMaterial({color:tc}));
+  trunk.position.set(x,h*0.2,z);trunk.castShadow=true;scene.add(trunk);
+  const crown=new THREE.Mesh(new THREE.SphereGeometry(h*0.3,7,5),new THREE.MeshLambertMaterial({color:cc}));
+  crown.position.set(x,h*0.68,z);crown.castShadow=true;scene.add(crown);
+}
+// Park trees
+for(let i=0;i<10;i++){const a=i/10*Math.PI*2;tree(3+Math.cos(a)*1.8,3+Math.sin(a)*1.8,1.6+Math.random()*0.8,0x7a5030,0x508038+Math.floor(Math.random()*0x101010));}
+// Hill garden
+[[-2,13.5],[-1,15.5],[0.5,14],[1.5,13],[-3,15]].forEach(([x,z])=>tree(x,z,1.4+Math.random()*0.7,0x7a5030,0x409050));
+// Scattered
+[[-8,-7],[-5,-9],[9,-14],[13,-15],[17,-15],[7,12],[9,14],[11,12],[-15,7],[16,17],[18,15]].forEach(([x,z])=>tree(x,z,1.3+Math.random()*1.0,0x7a5030,0x508040+Math.floor(Math.random()*0x80808)));
+
+// ── BUILDINGS ────────────────────────────────────────────
+const interactiveObjects=[];
+function makeWindow(w,h,lit){
+  return new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:lit?0xfff8c8:0x8898a8,transparent:true,opacity:lit?0.9:0.55}));
+}
+BDATA.forEach(b=>{
+  const bw=b.w,bd=b.d,bh=b.h;
+  const grp=new THREE.Group();
+  // Shadow (subtle)
+  if(bh>1){
+    const sh=new THREE.Mesh(new THREE.BoxGeometry(bw+0.2,0.12,bd+0.2),new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:0.12}));
+    sh.position.set(b.x+0.15,0.06,b.z+0.15);scene.add(sh);
+  }
+  // Body
+  const bodyMat=new THREE.MeshLambertMaterial({color:b.c,emissive:b.em||0,emissiveIntensity:0.1});
+  const body=new THREE.Mesh(new THREE.BoxGeometry(bw,bh,bd),bodyMat);
+  body.position.y=bh/2;body.castShadow=true;body.receiveShadow=true;grp.add(body);
+  // Windows grid
+  if(bh>=2){
+    const wrows=Math.max(1,Math.floor(bh/1.0));
+    const wcols=Math.max(1,Math.floor(bw/0.85));
+    for(let wr=0;wr<wrows;wr++){
+      for(let wc=0;wc<wcols;wc++){
+        const wy=0.7+wr*(bh-0.7)/(wrows);
+        const wx=-bw/2+0.45+wc*(bw/(wcols));
+        const lit=Math.random()>0.3;
+        const ww=makeWindow(0.32,0.4,lit);ww.position.set(wx,wy,bd/2+0.01);grp.add(ww);
+        const wb=makeWindow(0.32,0.4,lit&&Math.random()>0.3);wb.position.set(wx,wy,-bd/2-0.01);wb.rotation.y=Math.PI;grp.add(wb);
+      }
+    }
+    const dcols=Math.max(1,Math.floor(bd/0.85));
+    for(let wr=0;wr<Math.max(1,Math.floor(bh/1.0));wr++){
+      for(let wc=0;wc<dcols;wc++){
+        const wy=0.7+wr*(bh-0.7)/(Math.max(1,Math.floor(bh/1.0)));
+        const wz=-bd/2+0.45+wc*(bd/(dcols));
+        const lit=Math.random()>0.35;
+        const wl=makeWindow(0.32,0.4,lit);wl.position.set(bw/2+0.01,wy,wz);wl.rotation.y=Math.PI/2;grp.add(wl);
+        const wr2=makeWindow(0.32,0.4,lit&&Math.random()>0.4);wr2.position.set(-bw/2-0.01,wy,wz);wr2.rotation.y=-Math.PI/2;grp.add(wr2);
+      }
+    }
+  }
+  // Roof
+  const rh=bh>1?0.55:0.15;
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(bw+0.12,rh,bd+0.12),new THREE.MeshLambertMaterial({color:b.r||0x806040}));
+  roof.position.y=bh+rh/2;roof.castShadow=true;grp.add(roof);
+  // Gabled roof on taller buildings
+  if(bh>3&&bw>2){
+    const geo=new THREE.CylinderGeometry(0,Math.min(bw,bd)*0.55,rh*2,4);
+    const gable=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:(b.r||0x806040)}));
+    gable.position.y=bh+rh*1.5;gable.rotation.y=Math.PI/4;gable.castShadow=true;grp.add(gable);
+  }
+  // Door
+  if(bh>=1.5){
+    const door=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.75),new THREE.MeshBasicMaterial({color:0x604030}));
+    door.position.set(0,0.4,bd/2+0.02);grp.add(door);
+  }
+  // Details: balconies on tall buildings
+  if(bh>4&&bw>2.5){
+    for(let fl=1;fl<Math.floor(bh/1.5);fl++){
+      const balc=new THREE.Mesh(new THREE.BoxGeometry(bw*0.5,0.06,0.4),new THREE.MeshLambertMaterial({color:0xe8e0d0}));
+      balc.position.set(0,fl*1.5,bd/2+0.2);grp.add(balc);
+    }
+  }
+  grp.position.set(b.x,0,b.z);
+  grp.userData={poi:b};
+  scene.add(grp);
+  // Click target
+  const click=new THREE.Mesh(new THREE.BoxGeometry(bw+0.4,bh+1,bd+0.4),new THREE.MeshBasicMaterial({visible:false}));
+  click.position.set(b.x,bh/2,b.z);click.userData={poi:b};scene.add(click);interactiveObjects.push(click);
+});
+
+// ── STREET FURNITURE ─────────────────────────────────────
+function lamp(x,z){
+  const post=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.06,2.2,6),new THREE.MeshLambertMaterial({color:0x8098a0}));
+  post.position.set(x,1.1,z);scene.add(post);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.13,6,5),new THREE.MeshBasicMaterial({color:0xfff8d0}));
+  head.position.set(x,2.3,z);scene.add(head);
+  const pl=new THREE.PointLight(0xfff4c0,0.7,5);pl.position.set(x,2.3,z);scene.add(pl);
+}
+[[-1.5,1.5],[1.5,-1.5],[8.5,0],[8.5,-7],[-8,0],[-8,-7],[16,0],[16,-7],[0,-7.5],[0,7.5],[8.5,7],[16,7]].forEach(([x,z])=>lamp(x,z));
+
+function busStop(x,z,rot=0){
+  const g=new THREE.Group();
+  const rf=new THREE.Mesh(new THREE.BoxGeometry(1.6,0.1,0.9),new THREE.MeshLambertMaterial({color:0x90a8c0,transparent:true,opacity:0.7}));
+  rf.position.y=1.7;g.add(rf);
+  [-0.75,0.75].forEach(dx=>{const p=new THREE.Mesh(new THREE.BoxGeometry(0.07,1.7,0.9),new THREE.MeshLambertMaterial({color:0x7898b0,transparent:true,opacity:0.55}));p.position.set(dx,0.85,0);g.add(p);});
+  const seat=new THREE.Mesh(new THREE.BoxGeometry(1.4,0.06,0.08),new THREE.MeshLambertMaterial({color:0x708090}));
+  seat.position.set(0,0.55,0.38);g.add(seat);
+  g.position.set(x,0,z);g.rotation.y=rot;scene.add(g);
+}
+[[0,-7,Math.PI/2],[8,-4,0],[-5,0,Math.PI/2],[0,7,Math.PI/2],[16,3,0]].forEach(([x,z,r])=>busStop(x,z,r));
+
+// ── BUS (animated) ───────────────────────────────────────
+const busGrp=new THREE.Group();
+const busBody2=new THREE.Mesh(new THREE.BoxGeometry(2,1.3,1),new THREE.MeshLambertMaterial({color:0xd08020}));
+busBody2.position.y=0.8;busGrp.add(busBody2);
+const busTop2=new THREE.Mesh(new THREE.BoxGeometry(2,0.3,1),new THREE.MeshLambertMaterial({color:0xe09030}));
+busTop2.position.y=1.55;busGrp.add(busTop2);
+[[0.9,0.22,0.42],[0.9,0.22,-0.42],[-0.9,0.22,0.42],[-0.9,0.22,-0.42]].forEach(([wz,wy,wx])=>{
+  const w=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.2,0.18,10),new THREE.MeshLambertMaterial({color:0x303030}));
+  w.rotation.z=Math.PI/2;w.position.set(wz,wy,wx);busGrp.add(w);
+});
+scene.add(busGrp);
+const BUS_PATH=[[-8,6],[0,6],[8,6],[8,0],[8,-6],[0,-6],[-8,-6],[-8,0],[-8,6]];
+let busT2=0;
+
+// ── FRAG LINES ────────────────────────────────────────────
+function fragLine(x1,z1,x2,z2){
+  const pts=[new THREE.Vector3(x1,0.18,z1),new THREE.Vector3(x2,0.18,z2)];
+  const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineDashedMaterial({color:0xe84060,transparent:true,opacity:0.4,dashSize:0.6,gapSize:0.4}));
+  l.computeLineDistances();scene.add(l);
+}
+[[-8,0,0,0],[0,0,8,0],[0,-6,0,0],[0,0,0,6],[-8,6,0,6],[8,0,8,-6],[0,-6,8,-6]].forEach(([x1,z1,x2,z2])=>fragLine(x1,z1,x2,z2));
+
+// ── RAYCASTER ────────────────────────────────────────────
+const ray=new THREE.Raycaster();
+const m2d=new THREE.Vector2();
+let downX=0,downY=0,movedDist=0;
+canvas.addEventListener('mousedown',e=>{downX=e.clientX;downY=e.clientY;movedDist=0;});
+canvas.addEventListener('click',e=>{
+  // Ignore clicks that were actually drags
+  if(movedDist>5)return;
+  const r=canvas.getBoundingClientRect();
+  m2d.x=((e.clientX-r.left)/r.width)*2-1;
+  m2d.y=-((e.clientY-r.top)/r.height)*2+1;
+  ray.setFromCamera(m2d,cam);
+  const hits=ray.intersectObjects(interactiveObjects);
+  if(hits.length){const poi=hits[0].object.userData.poi;if(poi&&poi.ni)openPOI(poi,e.clientX,e.clientY);}
+  else closePop();
+});
+
+// ── CAMERA CONTROL ───────────────────────────────────────
+let drag=false,lmx=0,lmy=0,rDrag=false;
+canvas.addEventListener('mousedown',e=>{if(e.button===0){drag=true;lmx=e.clientX;lmy=e.clientY;}if(e.button===2){rDrag=true;lmx=e.clientX;lmy=e.clientY;}});
+window.addEventListener('mouseup',()=>{drag=false;rDrag=false;});
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+window.addEventListener('mousemove',e=>{
+  if(drag||rDrag){movedDist+=Math.abs(e.clientX-lmx)+Math.abs(e.clientY-lmy);}
+  if(drag){
+    const spd=0.04/camZoom;
+    const dx=(e.clientX-lmx)*spd,dy=(e.clientY-lmy)*spd;
+    camTarget.x-=Math.cos(camAng)*dx-Math.sin(camAng)*dy;
+    camTarget.z+=Math.sin(camAng)*dx+Math.cos(camAng)*dy;
+    lmx=e.clientX;lmy=e.clientY;updateCam();
+  }
+  if(rDrag){
+    camAng-=(e.clientX-lmx)*0.008;
+    lmx=e.clientX;lmy=e.clientY;updateCam();
+  }
+});
+canvas.addEventListener('wheel',e=>{e.preventDefault();camZoom=Math.max(0.3,Math.min(6,camZoom*(e.deltaY<0?1.12:0.89)));updateCam();},{passive:false});
+// Touch
+let tD=0,tDrag=false,tlmx=0,tlmy=0,tStartX=0,tStartY=0,tMoved=0;
+canvas.addEventListener('touchstart',e=>{e.preventDefault();if(e.touches.length===1){tDrag=true;tlmx=e.touches[0].clientX;tlmy=e.touches[0].clientY;tStartX=e.touches[0].clientX;tStartY=e.touches[0].clientY;tMoved=0;}else if(e.touches.length===2){tDrag=false;tD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(e.touches.length===1&&tDrag){tMoved+=Math.abs(e.touches[0].clientX-tlmx)+Math.abs(e.touches[0].clientY-tlmy);const spd=0.05/camZoom;const dx=(e.touches[0].clientX-tlmx)*spd,dy=(e.touches[0].clientY-tlmy)*spd;camTarget.x-=Math.cos(camAng)*dx-Math.sin(camAng)*dy;camTarget.z+=Math.sin(camAng)*dx+Math.cos(camAng)*dy;tlmx=e.touches[0].clientX;tlmy=e.touches[0].clientY;updateCam();}else if(e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);if(tD)camZoom=Math.max(0.3,Math.min(6,camZoom*(d/tD)));tD=d;updateCam();}},{passive:false});
+canvas.addEventListener('touchend',e=>{
+  // Tap to select (only if barely moved)
+  if(tDrag&&tMoved<10){
+    const r=canvas.getBoundingClientRect();
+    m2d.x=((tStartX-r.left)/r.width)*2-1;m2d.y=-((tStartY-r.top)/r.height)*2+1;
+    ray.setFromCamera(m2d,cam);
+    const hits=ray.intersectObjects(interactiveObjects);
+    if(hits.length){const poi=hits[0].object.userData.poi;if(poi&&poi.ni)openPOI(poi,tStartX,tStartY);}
+    else closePop();
+  }
+  if(e.touches.length===0)tDrag=false;
+});
+function zB(f){camZoom=Math.max(0.3,Math.min(6,camZoom*f));updateCam();}
+function rotCam(){camAng+=Math.PI/4;updateCam();}
+function resetCam(){camTarget.set(4,0,2);camZoom=1.5;camAng=Math.PI/4;updateCam();}
+
+// ── WORLD→SCREEN ─────────────────────────────────────────
+function w2s(wx,wy,wz){
+  const v=new THREE.Vector3(wx,wy,wz).project(cam);
+  const r=canvas.getBoundingClientRect();
+  return{x:(v.x+1)/2*r.width+r.left, y:(-v.y+1)/2*r.height+r.top};
+}
+
+// ── OVERLAYS ─────────────────────────────────────────────
+function renderLabels(){
+  const dl=document.getElementById('dlabels');dl.innerHTML='';
+  DISTRICTS.forEach(d=>{
+    const s=w2s(d.cx,0.8,d.cz);
+    const div=document.createElement('div');div.className='dlabel';div.style.left=s.x+'px';div.style.top=s.y+'px';
+    div.innerHTML=`<div class="dln">${L==='it'?d.ni:d.ne}</div><div class="dls">${L==='it'?d.si:d.se}</div>`;
+    dl.appendChild(div);
+  });
+  const hs=w2s(0,5,0);const hd=document.createElement('div');hd.className='dlabel';hd.style.left=hs.x+'px';hd.style.top=hs.y+'px';
+  hd.innerHTML='<div class="dln" style="color:rgba(210,190,255,0.9)">CENTRAL HUB</div><div class="dls" style="color:rgba(200,180,255,0.5)">Community Center · Town Hall</div>';
+  document.getElementById('dlabels').appendChild(hd);
+}
+function renderNPCs(){
+  const nl=document.getElementById('npcL');nl.innerHTML='';
+  NPCS.forEach(n=>{
+    const s=w2s(n.x,0.9,n.z);
+    const div=document.createElement('div');div.className='nm';div.style.left=s.x+'px';div.style.top=s.y+'px';
+    div.innerHTML=`<div class="nn" style="color:${n.c};margin-bottom:2px">${n.name}</div><div class="nb" style="background:${n.c}33;border-color:${n.c}">${n.icon}</div><div class="npin" style="border-top-color:${n.c}"></div>`;
+    div.onclick=e=>{e.stopPropagation();openNPC(n,e.clientX,e.clientY)};nl.appendChild(div);
+  });
+}
+
+// ── POPUP ────────────────────────────────────────────────
+function popAt(cx,cy){
+  const p=document.getElementById('pop'),pw=280,ph=420,ww=window.innerWidth,wh=window.innerHeight;
+  let l=cx+18,t=cy-50;if(l+pw>ww-10)l=cx-pw-18;if(t+ph>wh-10)t=wh-ph-10;if(t<55)t=55;
+  p.style.left=Math.max(8,l)+'px';p.style.top=t+'px';p.style.display='block';
+}
+function openPOI(b,cx,cy){
+  document.getElementById('ppb').style.background='#'+b.c.toString(16).padStart(6,'0');
+  document.getElementById('ppe').textContent=b.icon||'📍';
+  document.getElementById('ppt').textContent=L==='it'?b.ni:b.ne;
+  document.getElementById('pps').textContent=L==='it'?(b.ti||''):(b.te||'');
+  const desc=L==='it'?b.di:b.de;
+  let h='';if(desc){h+=`<div class="pl">${L==='it'?'Descrizione':'Description'}</div><div class="px">${desc}</div>`;}
+  if(b.qi&&b.qi.length){h+=`<div class="pl">Quest</div>`;b.qi.forEach(q=>{h+=`<div class="qi"><div class="qt">${q.t}</div><div class="qm">📍 ${L==='it'?'Risorse':'Resources'}: ${q.r} | ${L==='it'?'Cap.':'Ch.'} ${q.c}</div></div>`;});}
+  if(!h)h=`<div class="px">${L==='it'?'Edificio':'Building'}</div>`;
+  document.getElementById('ppbd').innerHTML=h;popAt(cx,cy);
+}
+function openNPC(n,cx,cy){
+  const TC={mentor:'#378ADD',ally:'#639922',friction:'#D85A30',bridge:'#7F77DD',temptation:'#5F5E5A'};
+  const TLi={mentor:'Mentore',ally:'Alleato',friction:'Frizione',bridge:'Bridge',temptation:'Tentazione'};
+  const TLe={mentor:'Mentor',ally:'Ally',friction:'Friction',bridge:'Bridge',temptation:'Temptation'};
+  document.getElementById('ppb').style.background=n.c;document.getElementById('ppe').textContent=n.icon;
+  document.getElementById('ppt').textContent=n.name;document.getElementById('pps').textContent=L==='it'?n.ri:n.re;
+  const tc=TC[n.type]||'#888',tl=L==='it'?TLi[n.type]:TLe[n.type];
+  const vi=L==='it'?n.vi:n.ve,hi=L==='it'?n.hi:n.he,qi=L==='it'?n.qi:n.qe;
+  document.getElementById('ppbd').innerHTML=`<div><span class="ptag" style="background:${tc}22;border-color:${tc};color:${tc}">${tl}</span></div><div class="pl">${L==='it'?'Bisogno visibile':'Visible need'}</div><div class="px">${vi}</div><div class="pl">${L==='it'?'Bisogno nascosto':'Hidden need'}</div><div class="px">${hi}</div><div class="pl">Quest</div><div class="qi"><div class="qt">${qi}</div></div>`;
+  popAt(cx,cy);
+}
+function closePop(){document.getElementById('pop').style.display='none';}
+
+// ── SEARCH ───────────────────────────────────────────────
+function doS(q){
+  const r=document.getElementById('sr');if(!q.trim()){r.style.display='none';return;}
+  const all=[...BDATA.filter(b=>b.ni).map(b=>({t:'b',item:b,n:L==='it'?b.ni:b.ne})),...NPCS.map(n=>({t:'n',item:n,n:n.name})),...DISTRICTS.map(d=>({t:'d',item:d,n:L==='it'?d.ni:d.ne}))].filter(a=>a.n.toLowerCase().includes(q.toLowerCase())).slice(0,6);
+  if(!all.length){r.style.display='none';return;}
+  r.innerHTML=all.map(m=>`<div class="sri" onclick="selR('${m.t}','${m.item.id}')">${m.item.icon||'📍'} ${m.n}</div>`).join('');r.style.display='block';
+}
+function selR(t,id){
+  clrS();
+  if(t==='n'){const n=NPCS.find(x=>x.id===id);if(n){panTo3(n.x,n.z);setTimeout(()=>{const s=w2s(n.x,0.9,n.z);openNPC(n,s.x,s.y)},500);}}
+  else if(t==='b'){const b=BDATA.find(x=>x.id===id);if(b){panTo3(b.x,b.z);setTimeout(()=>{const s=w2s(b.x,b.h,b.z);openPOI(b,s.x,s.y)},500);}}
+  else if(t==='d'){const d=DISTRICTS.find(x=>x.id===id);if(d)panTo3(d.cx,d.cz);}
+}
+function panTo3(tx,tz){
+  const s={x:camTarget.x,z:camTarget.z},e={x:tx,z:tz},t0=performance.now(),dur=500;
+  function a(t){const p=Math.min(1,(t-t0)/dur),ease=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;camTarget.x=s.x+(e.x-s.x)*ease;camTarget.z=s.z+(e.z-s.z)*ease;updateCam();if(p<1)requestAnimationFrame(a);}
+  requestAnimationFrame(a);
+}
+function clrS(){document.getElementById('si').value='';document.getElementById('sr').style.display='none';}
+
+// ── RENDER LOOP ──────────────────────────────────────────
+let frame2=0;
+function animate(){
+  requestAnimationFrame(animate);frame2++;
+  // Bus
+  busT2=(busT2+0.0015)%1;
+  const seg=Math.floor(busT2*BUS_PATH.length);const t2=busT2*BUS_PATH.length-seg;
+  const p0=BUS_PATH[seg%BUS_PATH.length],p1=BUS_PATH[(seg+1)%BUS_PATH.length];
+  busGrp.position.set(p0[0]+(p1[0]-p0[0])*t2,0,p0[1]+(p1[1]-p0[1])*t2);
+  busGrp.rotation.y=Math.atan2(p1[0]-p0[0],p1[1]-p0[1])+Math.PI/2;
+  // Subtle ambient pulse
+  if(frame2%4===0){scene.children.filter(c=>c.isAmbientLight).forEach(l=>l.intensity=0.75+Math.sin(frame2*0.008)*0.05);}
+  renderer.render(scene,cam);
+  if(frame2%3===0){renderLabels();renderNPCs();}
+}
+
+
+// ── TOAST ─────────────────────────────────────────────────
+function showToast(msg,dur=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';t.style.opacity='1';
+  clearTimeout(t._to);
+  t._to=setTimeout(()=>{t.style.transition='opacity .6s';t.style.opacity='0';setTimeout(()=>{t.style.display='none';t.style.transition='';},650);},dur);
+}
+
+// ── OFFLINE DOWNLOAD ──────────────────────────────────────
+async function downloadOffline(){
+  const btn=document.getElementById('dlBtn');
+  btn.textContent='⏳';btn.style.pointerEvents='none';
+  showToast(L==='it'?'⬇ Scaricando Three.js per uso offline…':'⬇ Fetching Three.js for offline use…',8000);
+  try{
+    // Fetch Three.js r128 minified (~600KB)
+    const r=await fetch('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+    if(!r.ok)throw new Error('fetch failed '+r.status);
+    const threeJS=await r.text();
+
+    // Get current page HTML and replace CDN script with inlined version
+    let html=document.documentElement.outerHTML;
+
+    // Replace the CDN script tag with an inline script containing Three.js
+    html=html.replace(
+      /<script src="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/three\.js\/r128\/three\.min\.js"><\/script>/,
+      `<script>\n${threeJS}\n<\/script>`
+    );
+
+    // Inject offline banner into body
+    html=html.replace(
+      '<div id="bar">',
+      '<div id="offline-banner" style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e8734a,#7F77DD,#1D9E75);z-index:999"></div><div id="bar">'
+    );
+
+    // Remove toast state (reset)
+    html=html.replace(/id="toast"[^>]*>[^<]*<\/div>/,'id="toast" style="display:none"></div>');
+
+    // Create blob and trigger download
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download='eurbania_mappa_offline.html';
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},2000);
+
+    showToast(L==='it'?'✅ File offline scaricato! Aprilo senza connessione.':'✅ Offline file downloaded! Open it without connection.',5000);
+    btn.textContent='✅';
+    setTimeout(()=>{btn.textContent='⬇';btn.style.pointerEvents='';},3000);
+  }catch(err){
+    console.error('Download failed:',err);
+    showToast(L==='it'?'❌ Errore: '+err.message:'❌ Error: '+err.message,5000);
+    btn.textContent='⬇';btn.style.pointerEvents='';
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────
+function resize(){
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  updateCam();
+}
+window.addEventListener('resize',resize);
+resize();animate();
+setTimeout(()=>{const h=document.getElementById('hint');h.style.opacity='0';setTimeout(()=>h.remove(),1000);},4500);
+</script>
+</body>
+</html>
