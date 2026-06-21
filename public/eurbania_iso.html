@@ -48,7 +48,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 .ptag{font-size:9px;padding:2px 7px;border-radius:20px;border:1px solid;font-weight:500;display:inline-block}
 .qi{background:rgba(255,255,255,0.04);border:1px solid var(--b);border-radius:6px;padding:7px 9px;margin-bottom:4px}
 .qt{font-size:10px;font-weight:600;color:var(--txt);margin-bottom:2px}.qm{font-size:9px;color:var(--txt3)}
-.cx{position:absolute;top:8px;right:10px;background:rgba(255,255,255,0.08);border:none;color:var(--txt2);font-size:15px;width:22px;height:22px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cx{position:absolute;top:8px;right:10px;z-index:10;background:rgba(255,255,255,0.18);border:none;color:var(--txt);font-size:16px;width:24px;height:24px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cx:hover{background:rgba(255,255,255,0.15)}
 #mapRoot{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden}
 #dlabels{position:absolute;inset:0;pointer-events:none;z-index:5}
@@ -56,11 +56,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 .dln{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-shadow:0 2px 6px rgba(0,0,0,0.9),0 0 20px rgba(0,0,0,0.6);white-space:nowrap}
 .dls{font-size:7px;color:rgba(255,255,255,0.45);text-shadow:0 1px 4px rgba(0,0,0,0.9);margin-top:1px;white-space:nowrap}
 #npcL{position:absolute;inset:0;pointer-events:none;z-index:6}
+#playerL{position:absolute;inset:0;pointer-events:none;z-index:7}
 .nm{position:absolute;transform:translate(-50%,-100%);cursor:pointer;pointer-events:all;transition:transform .15s}
-.nm:hover{transform:translate(-50%,-100%) scale(1.2)}
-.nb{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid rgba(255,255,255,0.7);box-shadow:0 2px 8px rgba(0,0,0,0.5)}
-.nn{font-size:7px;font-weight:600;text-align:center;margin-top:1px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,0.9)}
-.npin{width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:6px solid;margin:0 auto}
+.nm:hover{transform:translate(-50%,-100%) scale(1.16)}
+.nb{position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(255,255,255,0.85);box-shadow:0 3px 10px rgba(0,0,0,0.55);overflow:hidden;background:rgba(28,35,51,0.6)}
+.nb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.nn{font-size:9px;font-weight:600;text-align:center;margin-top:2px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,0.95)}
+.npin{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:8px solid;margin:0 auto}
+.pm .nb{width:48px;height:48px;border-width:3px;border-color:#ffd34d;box-shadow:0 3px 12px rgba(0,0,0,0.6),0 0 0 2px rgba(255,211,77,0.35)}
+.pm .nn{color:#ffe08a}
+.pbadge{position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;border-radius:50%;background:#ffd34d;color:#1c2333;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #1c2333}
+.pportrait{width:46px;height:46px;border-radius:10px;object-fit:cover;object-position:center top;flex-shrink:0;border:1px solid var(--b);background:rgba(28,35,51,0.6)}
 #hint{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--txt3);z-index:99;pointer-events:none;white-space:nowrap;padding:4px 10px;background:rgba(28,35,51,0.7);border-radius:20px;transition:opacity 1s}
 #toast{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--txt);z-index:300;pointer-events:none;white-space:nowrap;padding:8px 16px;background:rgba(28,35,51,0.97);border:1px solid var(--b);border-radius:20px;display:none;backdrop-filter:blur(10px)}
 </style>
@@ -82,6 +88,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 <div id="mapRoot"><canvas id="c"></canvas>
 <div id="dlabels"></div>
 <div id="npcL"></div>
+<div id="playerL"></div>
 </div>
 <div id="ctrl">
   <button class="cb" onclick="zB(1.2)" title="Zoom in">+</button>
@@ -105,6 +112,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
   <div class="li"><div class="ld" style="background:#a090f0;border-radius:50%"></div><span class="ls" id="lhub">Central Hub</span></div>
   <div class="li"><div class="ld" style="background:#5a9a30"></div><span class="ls" id="lpark">Parco</span></div>
   <div class="li"><div class="ld" style="background:#4880b8"></div><span class="ls" id="lwater">Acqua</span></div>
+  <div class="li"><div class="ld" style="background:#ffd34d;border-radius:50%"></div><span class="ls" id="lplay">Personaggio giocabile</span></div>
   <div class="lsep"></div>
   <div class="ls" style="font-size:8px;color:var(--txt3)" id="lhints">Clicca edifici · NPC · Scrolla zoom</div>
 </div>
@@ -116,7 +124,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 
 // ═══ LANGUAGE ═══════════════════════════════════════════
 let L='it';
-function setL(l){L=l;document.getElementById('bIT').classList.toggle('on',l==='it');document.getElementById('bEN').classList.toggle('on',l==='en');const T=l==='it'?{t:'Fiducia',c:'Cura',v:'Voce',r:'Res.',f:'Framm.',leg:'Legenda',hub:'Central Hub',park:'Parco',water:'Acqua',hints:'Clicca edifici · NPC · Scrolla zoom'}:{t:'Trust',c:'Care',v:'Voice',r:'Res.',f:'Fragm.',leg:'Legend',hub:'Central Hub',park:'Park',water:'Water',hints:'Click buildings · NPC · Scroll zoom'};document.getElementById('lt').textContent=T.t;document.getElementById('lc').textContent=T.c;document.getElementById('lv').textContent=T.v;document.getElementById('lr').textContent=T.r;document.getElementById('lf').textContent=T.f;document.getElementById('lleg').textContent=T.leg;document.getElementById('lhub').textContent=T.hub;document.getElementById('lpark').textContent=T.park;document.getElementById('lwater').textContent=T.water;document.getElementById('lhints').textContent=T.hints;document.getElementById('si').placeholder=l==='it'?'Cerca luogo o NPC…':'Search place or NPC…';renderLabels();renderNPCs();}
+function setL(l){L=l;document.getElementById('bIT').classList.toggle('on',l==='it');document.getElementById('bEN').classList.toggle('on',l==='en');const T=l==='it'?{t:'Fiducia',c:'Cura',v:'Voce',r:'Res.',f:'Framm.',leg:'Legenda',hub:'Central Hub',park:'Parco',water:'Acqua',play:'Personaggio giocabile',hints:'Clicca edifici · personaggi · zoom'}:{t:'Trust',c:'Care',v:'Voice',r:'Res.',f:'Fragm.',leg:'Legend',hub:'Central Hub',park:'Park',water:'Water',play:'Playable character',hints:'Click buildings · characters · zoom'};document.getElementById('lt').textContent=T.t;document.getElementById('lc').textContent=T.c;document.getElementById('lv').textContent=T.v;document.getElementById('lr').textContent=T.r;document.getElementById('lf').textContent=T.f;document.getElementById('lleg').textContent=T.leg;document.getElementById('lhub').textContent=T.hub;document.getElementById('lpark').textContent=T.park;document.getElementById('lwater').textContent=T.water;document.getElementById('lplay').textContent=T.play;document.getElementById('lhints').textContent=T.hints;document.getElementById('si').placeholder=l==='it'?'Cerca luogo o NPC…':'Search place or NPC…';renderLabels();renderNPCs();renderPlayers();}
 
 // ═══ DATA ════════════════════════════════════════════════
 const DISTRICTS=[
@@ -201,6 +209,25 @@ const NPCS=[
   {id:'matilda',x:1.5,z:2.5,c:'#1D9E75',icon:'🌸',name:'Matilda',ri:'Fioraia · Alleata',re:'Florist · Ally',vi:'Curare piante e piccoli spazi urbani.',ve:'Tend plants and small urban spaces.',hi:'Teme che la cura sia vista come decorazione.',he:'Fears everyday care is seen as decoration.',qi:'"Care Made Visible" — interventi verdi co-curati dai residenti.',qe:'"Care Made Visible" — green interventions co-tended by residents.',type:'ally'},
 ];
 
+// Playable characters (protagonists) — data from src/data/playable.json
+const PLAYERS=[
+  {id:'maya',asset:'maya',name:'Maya',icon:'🎮',x:-1.5,z:-2,c:'#ffd34d',ri:'Personaggio giocabile',re:'Playable character',ti:'Studentessa diretta alla sua prima assemblea cittadina.',te:'A student heading to her first city assembly.'},
+  {id:'samir',asset:'samir',name:'Samir',icon:'🎮',x:4,z:-9.5,c:'#ffd34d',ri:'Personaggio giocabile',re:'Playable character',ti:'Corriere che conosce ogni scorciatoia e ogni porta chiusa.',te:'A courier who knows every shortcut and every closed door.'},
+  {id:'elena',asset:'elena',name:'Elena',icon:'🎮',x:-5.5,z:-0.5,c:'#ffd34d',ri:'Personaggio giocabile',re:'Playable character',ti:'Funzionaria civica che crede ancora che le istituzioni possano ascoltare.',te:'A civic worker who still believes institutions can listen.'},
+  {id:'luca',asset:'luca',name:'Luca',icon:'🎮',x:-11,z:-2,c:'#ffd34d',ri:'Personaggio giocabile',re:'Playable character',ti:'Padre che bilancia la cura a casa e la vita nel quartiere.',te:'A father balancing care at home and life in the neighbourhood.'},
+  {id:'custom',asset:'custom',name:'Nuovo cittadino',name_e:'New citizen',icon:'🎮',x:1,z:-9.5,c:'#ffd34d',ri:'Personaggio giocabile',re:'Playable character',ti:'Qualcuno di nuovo a Eurbania. Scrivi il tuo percorso.',te:'Someone new to Eurbania. Write your own route.'},
+];
+// Map NPC ids to their character-asset folder (where names differ)
+const NPC_ASSET={alex:'alexandria',abd:'abdullah',viveca:'mrs_viveca'};
+function npcAsset(n){return n.asset||NPC_ASSET[n.id]||n.id;}
+// Build a pin's inner HTML with a character image (emoji fallback) + optional playable badge
+function pinHTML(name,color,icon,asset,kind){
+  const img=asset?`assets/characters/${asset}/icons/icon_${asset}.png`:'';
+  const imgTag=img?`<img src="${img}" alt="" onerror="this.remove()">`:'';
+  const badge=kind==='player'?'<div class="pbadge">★</div>':'';
+  return `<div class="nn" style="color:${color}">${name}</div><div class="nb" style="border-color:${color}"><span class="nbf">${icon||'📍'}</span>${imgTag}${badge}</div><div class="npin" style="border-top-color:${color}"></div>`;
+}
+
 // ═══ THREE.JS ════════════════════════════════════════════
 const canvas=document.getElementById('c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -232,7 +259,7 @@ function updateCam(){
   const dirs=['N','NE','E','SE','S','SO','O','NO'];
   const d=dirs[Math.round(((deg%360)+360)%360/45)%8];
   document.getElementById('cmp').textContent=d||'N';
-  renderLabels();renderNPCs();
+  renderLabels();renderNPCs();renderPlayers();
 }
 
 // ── LIGHTS ───────────────────────────────────────────────
@@ -464,8 +491,8 @@ window.addEventListener('mousemove',e=>{
   if(drag){
     const spd=0.04/camZoom;
     const dx=(e.clientX-lmx)*spd,dy=(e.clientY-lmy)*spd;
-    camTarget.x+=Math.cos(camAng)*dx-Math.sin(camAng)*dy;
-    camTarget.z-=Math.sin(camAng)*dx+Math.cos(camAng)*dy;
+    camTarget.x-=Math.cos(camAng)*dx+Math.sin(camAng)*dy;
+    camTarget.z+=Math.sin(camAng)*dx-Math.cos(camAng)*dy;
     lmx=e.clientX;lmy=e.clientY;updateCam();
   }
   if(rDrag){
@@ -477,7 +504,7 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();camZoom=Math.max(0.3,Math
 // Touch
 let tD=0,tDrag=false,tlmx=0,tlmy=0,tStartX=0,tStartY=0,tMoved=0;
 canvas.addEventListener('touchstart',e=>{e.preventDefault();if(e.touches.length===1){tDrag=true;tlmx=e.touches[0].clientX;tlmy=e.touches[0].clientY;tStartX=e.touches[0].clientX;tStartY=e.touches[0].clientY;tMoved=0;}else if(e.touches.length===2){tDrag=false;tD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}},{passive:false});
-canvas.addEventListener('touchmove',e=>{e.preventDefault();if(e.touches.length===1&&tDrag){tMoved+=Math.abs(e.touches[0].clientX-tlmx)+Math.abs(e.touches[0].clientY-tlmy);const spd=0.05/camZoom;const dx=(e.touches[0].clientX-tlmx)*spd,dy=(e.touches[0].clientY-tlmy)*spd;camTarget.x+=Math.cos(camAng)*dx-Math.sin(camAng)*dy;camTarget.z-=Math.sin(camAng)*dx+Math.cos(camAng)*dy;tlmx=e.touches[0].clientX;tlmy=e.touches[0].clientY;updateCam();}else if(e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);if(tD)camZoom=Math.max(0.3,Math.min(6,camZoom*(d/tD)));tD=d;updateCam();}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(e.touches.length===1&&tDrag){tMoved+=Math.abs(e.touches[0].clientX-tlmx)+Math.abs(e.touches[0].clientY-tlmy);const spd=0.05/camZoom;const dx=(e.touches[0].clientX-tlmx)*spd,dy=(e.touches[0].clientY-tlmy)*spd;camTarget.x-=Math.cos(camAng)*dx+Math.sin(camAng)*dy;camTarget.z+=Math.sin(camAng)*dx-Math.cos(camAng)*dy;tlmx=e.touches[0].clientX;tlmy=e.touches[0].clientY;updateCam();}else if(e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);if(tD)camZoom=Math.max(0.3,Math.min(6,camZoom*(d/tD)));tD=d;updateCam();}},{passive:false});
 canvas.addEventListener('touchend',e=>{
   // Tap to select (only if barely moved)
   if(tDrag&&tMoved<10){
@@ -519,8 +546,17 @@ function renderNPCs(){
   NPCS.forEach(n=>{
     const s=w2s(n.x,0.9,n.z);
     const div=document.createElement('div');div.className='nm';div.style.left=s.x+'px';div.style.top=s.y+'px';
-    div.innerHTML=`<div class="nn" style="color:${n.c};margin-bottom:2px">${n.name}</div><div class="nb" style="background:${n.c}33;border-color:${n.c}">${n.icon}</div><div class="npin" style="border-top-color:${n.c}"></div>`;
+    div.innerHTML=pinHTML(n.name,n.c,n.icon,npcAsset(n),'npc');
     div.onclick=e=>{e.stopPropagation();openNPC(n,e.clientX,e.clientY)};nl.appendChild(div);
+  });
+}
+function renderPlayers(){
+  const pl=document.getElementById('playerL');pl.innerHTML='';
+  PLAYERS.forEach(p=>{
+    const s=w2s(p.x,0.9,p.z);const nm=(L==='en'&&p.name_e)?p.name_e:p.name;
+    const div=document.createElement('div');div.className='nm pm';div.style.left=s.x+'px';div.style.top=s.y+'px';
+    div.innerHTML=pinHTML(nm,p.c,p.icon,p.asset,'player');
+    div.onclick=e=>{e.stopPropagation();openPlayer(p,e.clientX,e.clientY)};pl.appendChild(div);
   });
 }
 
@@ -545,11 +581,21 @@ function openNPC(n,cx,cy){
   const TC={mentor:'#378ADD',ally:'#639922',friction:'#D85A30',bridge:'#7F77DD',temptation:'#5F5E5A'};
   const TLi={mentor:'Mentore',ally:'Alleato',friction:'Frizione',bridge:'Bridge',temptation:'Tentazione'};
   const TLe={mentor:'Mentor',ally:'Ally',friction:'Friction',bridge:'Bridge',temptation:'Temptation'};
-  document.getElementById('ppb').style.background=n.c;document.getElementById('ppe').textContent=n.icon;
+  document.getElementById('ppb').style.background=n.c;
+  {const ast=npcAsset(n);document.getElementById('ppe').innerHTML='<img class="pportrait" src="assets/characters/'+ast+'/portraits/portrait_'+ast+'_neutral.png" alt="" onerror="this.replaceWith(document.createTextNode(\''+(n.icon||'📍')+'\'))">';}
   document.getElementById('ppt').textContent=n.name;document.getElementById('pps').textContent=L==='it'?n.ri:n.re;
   const tc=TC[n.type]||'#888',tl=L==='it'?TLi[n.type]:TLe[n.type];
   const vi=L==='it'?n.vi:n.ve,hi=L==='it'?n.hi:n.he,qi=L==='it'?n.qi:n.qe;
   document.getElementById('ppbd').innerHTML=`<div><span class="ptag" style="background:${tc}22;border-color:${tc};color:${tc}">${tl}</span></div><div class="pl">${L==='it'?'Bisogno visibile':'Visible need'}</div><div class="px">${vi}</div><div class="pl">${L==='it'?'Bisogno nascosto':'Hidden need'}</div><div class="px">${hi}</div><div class="pl">Quest</div><div class="qi"><div class="qt">${qi}</div></div>`;
+  popAt(cx,cy);
+}
+function openPlayer(p,cx,cy){
+  const nm=(L==='en'&&p.name_e)?p.name_e:p.name;
+  document.getElementById('ppb').style.background=p.c;
+  document.getElementById('ppe').innerHTML='<img class="pportrait" src="assets/characters/'+p.asset+'/portraits/portrait_'+p.asset+'_neutral.png" alt="" onerror="this.replaceWith(document.createTextNode(\'🎮\'))">';
+  document.getElementById('ppt').textContent=nm;
+  document.getElementById('pps').textContent=L==='it'?p.ri:p.re;
+  document.getElementById('ppbd').innerHTML=`<div><span class="ptag" style="background:#ffd34d22;border-color:#ffd34d;color:#ffe08a">${L==='it'?'Giocabile':'Playable'}</span></div><div class="pl">${L==='it'?'Chi è':'Who they are'}</div><div class="px">${L==='it'?p.ti:p.te}</div>`;
   popAt(cx,cy);
 }
 function closePop(){document.getElementById('pop').style.display='none';}
@@ -557,13 +603,14 @@ function closePop(){document.getElementById('pop').style.display='none';}
 // ── SEARCH ───────────────────────────────────────────────
 function doS(q){
   const r=document.getElementById('sr');if(!q.trim()){r.style.display='none';return;}
-  const all=[...BDATA.filter(b=>b.ni).map(b=>({t:'b',item:b,n:L==='it'?b.ni:b.ne})),...NPCS.map(n=>({t:'n',item:n,n:n.name})),...DISTRICTS.map(d=>({t:'d',item:d,n:L==='it'?d.ni:d.ne}))].filter(a=>a.n.toLowerCase().includes(q.toLowerCase())).slice(0,6);
+  const all=[...PLAYERS.map(p=>({t:'p',item:p,n:(L==='en'&&p.name_e)?p.name_e:p.name})),...BDATA.filter(b=>b.ni).map(b=>({t:'b',item:b,n:L==='it'?b.ni:b.ne})),...NPCS.map(n=>({t:'n',item:n,n:n.name})),...DISTRICTS.map(d=>({t:'d',item:d,n:L==='it'?d.ni:d.ne}))].filter(a=>a.n.toLowerCase().includes(q.toLowerCase())).slice(0,8);
   if(!all.length){r.style.display='none';return;}
   r.innerHTML=all.map(m=>`<div class="sri" onclick="selR('${m.t}','${m.item.id}')">${m.item.icon||'📍'} ${m.n}</div>`).join('');r.style.display='block';
 }
 function selR(t,id){
   clrS();
-  if(t==='n'){const n=NPCS.find(x=>x.id===id);if(n){panTo3(n.x,n.z);setTimeout(()=>{const s=w2s(n.x,0.9,n.z);openNPC(n,s.x,s.y)},500);}}
+  if(t==='p'){const p=PLAYERS.find(x=>x.id===id);if(p){panTo3(p.x,p.z);setTimeout(()=>{const s=w2s(p.x,0.9,p.z);openPlayer(p,s.x,s.y)},500);}}
+  else if(t==='n'){const n=NPCS.find(x=>x.id===id);if(n){panTo3(n.x,n.z);setTimeout(()=>{const s=w2s(n.x,0.9,n.z);openNPC(n,s.x,s.y)},500);}}
   else if(t==='b'){const b=BDATA.find(x=>x.id===id);if(b){panTo3(b.x,b.z);setTimeout(()=>{const s=w2s(b.x,b.h,b.z);openPOI(b,s.x,s.y)},500);}}
   else if(t==='d'){const d=DISTRICTS.find(x=>x.id===id);if(d)panTo3(d.cx,d.cz);}
 }
