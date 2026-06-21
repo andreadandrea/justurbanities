@@ -14,9 +14,12 @@ import type { SaveRepository } from "../storage/SaveRepository";
 import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
 import type { ResourceHud } from "../ui/ResourceHud";
+import type { InteractionPrompt } from "../ui/InteractionPrompt";
 import type { SpriteRepository } from "../assets/SpriteRepository";
 import { Camera2D } from "../engine/Camera2D";
 import { AnimatedSprite, movementAnimation, type Direction } from "../engine/AnimatedSprite";
+import { stepMovement } from "../game/movement/MovementSystem";
+import { findActiveInteractable, type Proximable } from "../game/interaction/ProximitySystem";
 import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
 
 export type SceneDeps = {
@@ -32,6 +35,7 @@ export type SceneDeps = {
   gameClock: GameClock;
   npcDirector: NpcDirector;
   resourceHud: ResourceHud;
+  interactionPrompt: InteractionPrompt;
   saveRepository: SaveRepository;
   progressRepository: ProgressRepository;
   syncQueue: SyncQueue;
@@ -46,11 +50,11 @@ export type Interactable = {
   onInteract: () => void;
 };
 
-const INTERACT_RANGE = 160;
 const PLAYER_SPEED = 220;
 const AUTOSAVE_INTERVAL = 2;
 const PLAYER_HEIGHT = 150;
 const EDGE_MARGIN = 40;
+const PROMPT_OFFSET_Y = 24;
 
 /**
  * Shared walk-and-interact scene behaviour for the 3/4 follow-camera world:
@@ -106,36 +110,45 @@ export abstract class BaseScene {
     const startX = player.x;
     const startY = player.y;
 
-    const axis = this.deps.input.axis();
-    player.x += axis.x * PLAYER_SPEED * dt;
-    player.y += axis.y * PLAYER_SPEED * dt;
-
-    const target = this.deps.input.pointerTarget;
-    if (target) {
+    // §6.4: while a dialogue is open the player can't walk away mid-line.
+    // Freeze movement, drop any queued pointer target, and don't start a new
+    // interaction. The prompt is hidden too (only shows when none is open).
+    const dialogueOpen = this.deps.dialogueUI.isOpen();
+    if (dialogueOpen) {
+      this.deps.input.pointerTarget = null;
+      this.deps.input.consumeInteract();
+    } else {
       // Pointer is in screen space; the world target adds the camera offset.
-      const worldX = target.x + this.camera.x;
-      const worldY = target.y + this.camera.y;
-      const dx = worldX - player.x;
-      const dy = worldY - player.y;
-      const distance = Math.hypot(dx, dy);
-      if (distance > 5) {
-        player.x += (dx / distance) * PLAYER_SPEED * dt;
-        player.y += (dy / distance) * PLAYER_SPEED * dt;
-      } else {
-        this.deps.input.pointerTarget = null;
-      }
-    }
+      const screenTarget = this.deps.input.pointerTarget;
+      const worldTarget = screenTarget
+        ? { x: screenTarget.x + this.camera.x, y: screenTarget.y + this.camera.y }
+        : null;
 
-    player.x = clamp(player.x, EDGE_MARGIN, this.world.width - EDGE_MARGIN);
-    player.y = clamp(player.y, PLAYER_HEIGHT, this.world.height - EDGE_MARGIN);
+      const result = stepMovement({
+        position: { x: player.x, y: player.y },
+        axis: this.deps.input.axis(),
+        pointerTarget: worldTarget,
+        dt,
+        speed: PLAYER_SPEED,
+        bounds: this.world,
+        margins: { edge: EDGE_MARGIN, top: PLAYER_HEIGHT },
+        facing: this.facing
+      });
+
+      player.x = result.position.x;
+      player.y = result.position.y;
+      if (result.pointerArrived) this.deps.input.pointerTarget = null;
+    }
 
     this.updatePlayerSprite(player.x - startX, player.y - startY, dt);
     this.camera.setWorld(this.world);
     this.camera.follow(player.x, player.y, this.deps.renderer.viewportWidth, this.deps.renderer.viewportHeight);
 
-    if (this.deps.input.consumeInteract()) {
-      const nearby = this.findNearbyInteractable();
-      if (nearby) nearby.onInteract();
+    const active = dialogueOpen ? undefined : this.findNearbyInteractable();
+    this.updatePrompt(active, dialogueOpen);
+
+    if (!dialogueOpen && this.deps.input.consumeInteract()) {
+      if (active) active.onInteract();
     }
 
     this.saveCooldown -= dt;
@@ -143,6 +156,21 @@ export abstract class BaseScene {
       this.saveCooldown = AUTOSAVE_INTERVAL;
       void this.autosave();
     }
+  }
+
+  /**
+   * §6.2 prompt overlay. Show "Press E / Tap to talk" near the active
+   * interactable (world → screen via the camera) only when one exists and no
+   * dialogue is open; tapping it fires the same handler as the interact key.
+   */
+  private updatePrompt(active: Interactable | undefined, dialogueOpen: boolean): void {
+    if (!active || dialogueOpen) {
+      this.deps.interactionPrompt.hide();
+      return;
+    }
+    const screenX = active.entity.x - this.camera.x;
+    const screenY = active.entity.y - this.camera.y - PROMPT_OFFSET_Y;
+    this.deps.interactionPrompt.show(screenX, screenY, () => active.onInteract());
   }
 
   render(): void {
@@ -183,18 +211,19 @@ export abstract class BaseScene {
     };
   }
 
+  /**
+   * Nearest interactable within its own radius (§6.1). Each Interactable is
+   * adapted to a Proximable using its entity position and optional per-entity
+   * `interactionRadius`; ProximitySystem falls back to the shared default.
+   */
   private findNearbyInteractable(): Interactable | undefined {
-    const player = this.deps.gameState.player;
-    let best: Interactable | undefined;
-    let bestDistance = INTERACT_RANGE;
-    for (const candidate of this.interactables()) {
-      const distance = Math.hypot(candidate.entity.x - player.x, candidate.entity.y - player.y);
-      if (distance < bestDistance) {
-        best = candidate;
-        bestDistance = distance;
-      }
-    }
-    return best;
+    const candidates = this.interactables().map((interactable) => ({
+      interactable,
+      x: interactable.entity.x,
+      y: interactable.entity.y,
+      interactionRadius: interactable.entity.interactionRadius
+    } satisfies Proximable & { interactable: Interactable }));
+    return findActiveInteractable(this.deps.gameState.player, candidates)?.interactable;
   }
 
   protected async recordChoice(dialogueId: string, choiceId: string): Promise<void> {
@@ -216,10 +245,6 @@ export abstract class BaseScene {
     });
     this.deps.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
   }
-}
-
-function clamp(value: number, min: number, max: number): number {
-  return Math.max(min, Math.min(max, value));
 }
 
 /** Render at a fixed height, preserving the frame's aspect ratio when known. */

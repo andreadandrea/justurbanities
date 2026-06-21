@@ -623,6 +623,37 @@ body,
   border-left-color: #c08a3e;
 }
 
+/* Proximity interaction prompt (§6.2): floats over the canvas near the active
+   interactable. Positioned in screen space by the scene; its anchor point is
+   the interactable's screen position, so we centre it horizontally and lift it
+   above that point. Tapping/clicking it triggers the same interaction as E. */
+.interaction-prompt {
+  position: fixed;
+  z-index: 35;
+  transform: translate(-50%, -100%);
+  padding: 6px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: rgba(255, 248, 236, 0.96);
+  box-shadow: 0 6px 16px rgba(42, 39, 35, 0.22);
+  color: #2a2723;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.interaction-prompt:hover {
+  background: #f1d6a0;
+}
+
+.interaction-prompt:focus-visible {
+  outline: 2px solid #6e9a5a;
+  outline-offset: 2px;
+}
+
 #game-canvas {
   transition: filter 900ms ease;
 }
