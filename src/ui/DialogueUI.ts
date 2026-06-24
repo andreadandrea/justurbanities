@@ -6,6 +6,11 @@ export type DialogueChoice = {
 export class DialogueUI {
   constructor(private readonly root: HTMLElement) {}
 
+  /** True while a dialogue is on-screen (the overlay is not hidden). */
+  isOpen(): boolean {
+    return !this.root.hidden;
+  }
+
   show(config: {
     speaker: string;
     text: string;

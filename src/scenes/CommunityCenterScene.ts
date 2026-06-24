@@ -1,6 +1,7 @@
 import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
 import type { AnimatedSprite } from "../engine/AnimatedSprite";
+import type { NpcPlacement } from "../game/npc/NpcDirector";
 import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
 import charactersData from "../data/characters.json";
 
@@ -11,16 +12,16 @@ const DISPLAY_NAMES = new Map(
   ])
 );
 
-type Npc = { id: string; x: number; y: number; sprite: AnimatedSprite | null };
+type Npc = {
+  placement: NpcPlacement;
+  sprite: AnimatedSprite | null;
+};
 
 export class CommunityCenterScene extends BaseScene {
   readonly sceneId = "community_center";
   readonly world: WorldSize = { width: 2000, height: 1300 };
 
-  private readonly npcs: Npc[] = [
-    { id: "anna", x: 900, y: 620, sprite: null },
-    { id: "ben", x: 1240, y: 760, sprite: null }
-  ];
+  private npcs: Npc[] = [];
 
   private readonly exitDoor: RenderableEntity = {
     id: "door_crossroads",
@@ -33,16 +34,35 @@ export class CommunityCenterScene extends BaseScene {
     interactive: true
   };
 
-  constructor(deps: SceneDeps) {
-    super(deps);
-    for (const npc of this.npcs) npc.sprite = this.deps.sprites.createSprite(npc.id);
+  override enter(): void {
+    this.refreshNpcs();
+  }
+
+  protected override onTimeChanged(): void {
+    this.refreshNpcs();
+  }
+
+  /** Ask the director which NPCs belong here now, then (lazily) build sprites. */
+  private refreshNpcs(): void {
+    const placements = this.deps.npcDirector.npcsForScene(
+      this.sceneId,
+      this.deps.gameState,
+      this.deps.effectResolver
+    );
+    this.npcs = placements.map((placement) => ({ placement, sprite: null }));
+    for (const npc of this.npcs) {
+      // Animated frames are optional: load in the background, fall back to icon.
+      void this.deps.sprites.load(npc.placement.npcId).then(() => {
+        npc.sprite = this.deps.sprites.createSprite(npc.placement.npcId);
+      });
+    }
   }
 
   protected interactables(): Interactable[] {
     return [
       ...this.npcs.map((npc) => ({
         entity: this.npcEntity(npc),
-        onInteract: () => this.dialogueRunner.run(`${npc.id}_intro`, DISPLAY_NAMES.get(npc.id) ?? npc.id)
+        onInteract: () => this.dialogueRunner.run(npc.placement.dialogueId, this.speakerLabel(npc.placement))
       })),
       {
         entity: this.exitDoor,
@@ -65,13 +85,18 @@ export class CommunityCenterScene extends BaseScene {
     renderer.drawEntities(entities);
   }
 
+  private speakerLabel(placement: NpcPlacement): string {
+    return placement.speakerLabel ?? DISPLAY_NAMES.get(placement.npcId) ?? placement.npcId;
+  }
+
   private npcEntity(npc: Npc): RenderableEntity {
-    const image = npc.sprite?.image() ?? this.deps.assets.getImage(`${npc.id}:icon`);
+    const id = npc.placement.npcId;
+    const image = npc.sprite?.image() ?? this.deps.assets.getImage(`${id}:icon`);
     return {
-      id: npc.id,
-      label: DISPLAY_NAMES.get(npc.id) ?? npc.id,
-      x: npc.x,
-      y: npc.y,
+      id,
+      label: this.speakerLabel(npc.placement),
+      x: npc.placement.x,
+      y: npc.placement.y,
       width: 132,
       height: 150,
       image,

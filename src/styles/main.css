@@ -532,6 +532,128 @@ body,
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- Time HUD / day-time cycle ---------- */
+.hud-time {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 12px;
+  background: rgba(255, 248, 236, 0.92);
+  box-shadow: 0 6px 18px rgba(42, 39, 35, 0.18);
+  font-size: 13px;
+  color: #2a2723;
+}
+
+.hud-time-label {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-time-button {
+  padding: 6px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #f1d6a0;
+  color: #2a2723;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hud-time-button:hover {
+  background: #e8c585;
+}
+
+.hud-time-button:focus-visible {
+  outline: 2px solid #6e9a5a;
+  outline-offset: 2px;
+}
+
+.crisis-banner {
+  position: fixed;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  min-width: 240px;
+  max-width: 80vw;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border-left: 6px solid #b89a6a;
+  background: rgba(255, 248, 236, 0.96);
+  box-shadow: 0 8px 22px rgba(42, 39, 35, 0.24);
+  color: #2a2723;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.crisis-banner--leaving {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.crisis-banner-title {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.crisis-banner-outcome {
+  margin-top: 2px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* Tier accents: deepening green as the collective response grows stronger. */
+.crisis-banner--transformative {
+  border-left-color: #2f7d4f;
+}
+
+.crisis-banner--coordinated {
+  border-left-color: #6e9a5a;
+}
+
+.crisis-banner--reactive {
+  border-left-color: #c08a3e;
+}
+
+/* Proximity interaction prompt (§6.2): floats over the canvas near the active
+   interactable. Positioned in screen space by the scene; its anchor point is
+   the interactable's screen position, so we centre it horizontally and lift it
+   above that point. Tapping/clicking it triggers the same interaction as E. */
+.interaction-prompt {
+  position: fixed;
+  z-index: 35;
+  transform: translate(-50%, -100%);
+  padding: 6px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: rgba(255, 248, 236, 0.96);
+  box-shadow: 0 6px 16px rgba(42, 39, 35, 0.22);
+  color: #2a2723;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.interaction-prompt:hover {
+  background: #f1d6a0;
+}
+
+.interaction-prompt:focus-visible {
+  outline: 2px solid #6e9a5a;
+  outline-offset: 2px;
+}
+
 #game-canvas {
   transition: filter 900ms ease;
 }

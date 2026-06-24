@@ -8,4 +8,6 @@ export type RenderableEntity = {
   image?: HTMLImageElement;
   color?: string;
   interactive?: boolean;
+  /** Per-entity proximity reach (world units). Omit to use the default. */
+  interactionRadius?: number;
 };
