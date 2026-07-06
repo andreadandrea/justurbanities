@@ -73,6 +73,18 @@
     },
     "options": {
       "hint": "Options"
+    },
+    "logbook": {
+      "title": "Logbook — Promises",
+      "toggle": "📖 Logbook",
+      "hint": "Promises made, kept and broken",
+      "empty": "No promises yet. They are made in conversation.",
+      "by": "with",
+      "status": {
+        "active": "active",
+        "kept": "kept",
+        "broken": "broken"
+      }
     }
   },
   "content": {
@@ -674,6 +686,16 @@
         "faceDay": "Face the day.",
         "close": "…"
       }
+    },
+    "promises": {
+      "promiseSaferCrossing": "Make the crossing safe: temporary fix and the real proposal.",
+      "promiseRepairDay": "Run the Repair Day on courtyard 17 with crews and materials.",
+      "promiseOpenInfoPoint": "Set up the verified, multilingual info point at the newsstand.",
+      "promiseOpenCommonRoom": "Open the common room legally, clause by clause.",
+      "promiseAccessibleBusInfo": "Count a week of bus runs with Gwen and build the proposal.",
+      "promiseChildFriendlyMeeting": "Bring the children's map into a real meeting.",
+      "promiseClimatePrep": "Clear the channels, list the low houses, set the assembly point.",
+      "promiseSupportLonelyElders": "Build the door-to-door list with a face for every name."
     }
   }
 }

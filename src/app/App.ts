@@ -22,6 +22,10 @@ import { ResourceHud } from "../ui/ResourceHud";
 import { TimeHud } from "../ui/TimeHud";
 import { GameClock } from "../game/time/GameClock";
 import { CrisisManager } from "../game/crisis/CrisisManager";
+import { PromiseManager } from "../game/promise/PromiseManager";
+import type { PromiseFile } from "../game/promise/PromiseManager";
+import { LogbookPanel } from "../ui/LogbookPanel";
+import promisesData from "../data/promises.json";
 import { CrisisWeek } from "../game/crisis/CrisisWeek";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
@@ -53,6 +57,7 @@ import {
   prologueSchema,
   crisisFileSchema,
   scheduleFileSchema,
+  promiseFileSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -123,6 +128,7 @@ export class App {
     let questFile: QuestFile;
     let scheduleFile: ScheduleFile;
     let crisisFile: CrisisFile;
+    let promiseFile: PromiseFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -133,6 +139,7 @@ export class App {
       validateData("prologue.json", prologueSchema, prologueData);
       crisisFile = validateData("crises.json", crisisFileSchema, crisesData) as CrisisFile;
       scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
+      promiseFile = validateData("promises.json", promiseFileSchema, promisesData) as PromiseFile;
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -262,6 +269,13 @@ export class App {
       (dialogueId, speakerLabel) => crisisRunner.run(dialogueId, speakerLabel),
       () => this.dialogueUI.isOpen
     );
+
+    // Promises (ratified): dialogue effects make them, deadlines break them.
+    const promiseManager = new PromiseManager(this.state, logProgress);
+    promiseManager.load(promiseFile);
+    clock.on(() => promiseManager.evaluate());
+    promiseManager.evaluate();
+    new LogbookPanel(this.elements.appRoot, promiseManager, i18n);
 
     // The time HUD lives at app level so every scene shows it; passing time
     // autosaves so the clock survives reloads.
