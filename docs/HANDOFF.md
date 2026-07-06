@@ -14,7 +14,12 @@ Quick context for continuing development in a fresh session.
 - `docs/game-design/CORE_THEME.md`, `docs/game-design/GAMEPLAY_LOOP.md` — design pillars.
 - `docs/specs/SPEC_Dual_Art_Style.md`, `docs/specs/SPEC_Multiplayer.md` — core requirements for Phases 5 and 8.
 
-## Done (this session, 2026-07-06 — Phases 0–4 of DEV_PLAN complete)
+## Done (this session, 2026-07-06 — Phases 0–5 + 6.1–6.2 of DEV_PLAN complete)
+- **Phase 5:** dual art style — variant-aware loader (flat layout = realistic, `animal/` subfolder; hard fallback chain; `npm run assets:report`), art-style toggle (⚙ + save snapshot + Dexie), dialogue speaker portraits, per-variant offline packs, 110 generated animal placeholders (sepia + ears + paw badge).
+- **Phase 6.1:** Prologue v2 (§2) — Anna's opening, voices round, map glitch, invitation; seed flags incl. `ruben_curious`; all 18 chapter placements gated on `prologue_complete`.
+- **Phase 6.2:** Chapter 1 five routes (§3) + first assembly — StoryDirector (auto-runs route post-prologue, assembly post-route), Samir's PHYSICAL fence (BaseScene blockers) in the Crossroads, `elena_saw_it`/`commission_started` seeds, assembly_v1 branches on outcomes, completes P02.
+
+## Done (earlier in the session — Phases 0–4)
 - **Phase 0:** ratified data fixes (N05→CRISIS_OFFER, RUMOR buffer→N07, voice speakers, corporate_man), canon taglines, cleanup (dynamic scene title, restore() defaults), `{playerName}`/pronoun interpolation.
 - **Phase 1:** `GameClock` (day/part cycle, dayEnded/dayStarted/timeAdvanced hooks) + TimeHud with "Pass time".
 - **Phase 2:** `schedule.json` + `NpcDirector` (first-matching-placement-wins fallbacks; refresh on enter/clock/choice). **All 18 NPC quests live in-world** with canon EN texts (§8). Simulation test completes every N01–N18.
@@ -22,7 +27,7 @@ Quick context for continuing development in a fresh session.
 - **Phase 4:** `CrisisManager` (tier resolution + per-tier data effects), `CrisisWeek` orchestrator (armed by `crisis_week_ready` flag → starts next morning; announcement + tier outcome scenes, EN+IT canon §6 texts; saves resume mid-week; DebugPanel has an "Arm Crisis Week" button until ch.3 content sets the flag), `PromiseManager` + LogbookPanel 📖 (8 canon promises, kept +3 Trust / broken −2 Trust +1 frag).
 
 ## Next task
-**Phase 5 — Dual art style** (see `docs/specs/SPEC_Dual_Art_Style.md`): 5.1 variant-aware asset manifest & loader (`realistic`/`animal` path segment, fallback chain, zod). The Dexie `settings` table and OptionsPanel are already in place for 5.2.
+**6.3 District scenes** for the remaining districts (simple layouts, entry texts from §4.5); move the 18 NPC schedules to their canonical districts. Then 6.4 (M1–M7 missions + quest E01), 6.5 (district-level vitality).
 
 ## Architecture notes for the next agent
 - **Content is 100% data-driven:** quests/dialogues/crises/schedule/promises in `src/data/*.json` (zod at boot, loud failures); every text is an i18n key resolved by `DialogueUI`/`OpeningScreens`/etc. Changing dialogue = edit `src/locales/{en,it}.json` + structure in `dialogues.json`. Guard tests fail on hardcoded strings.
