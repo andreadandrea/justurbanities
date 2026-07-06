@@ -39,7 +39,7 @@ import huLocale from "../locales/hu.json";
 import plLocale from "../locales/pl.json";
 import svLocale from "../locales/sv.json";
 import roLocale from "../locales/ro.json";
-import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
+import { OfflineAssetCache, collectAssetUrls, packCacheName, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { CharacterArt } from "../assets/CharacterArt";
 import type { ArtVariant } from "../assets/ArtStyle";
@@ -343,11 +343,17 @@ export class App {
       armCrisisWeek: () => crisisWeek.arm()
     });
 
+    // One offline pack per art variant (the animal pack includes the
+    // realistic fallbacks so a single-variant install works fully offline).
     new OfflineControls(
       this.elements.appRoot,
-      new OfflineAssetCache(
-        collectAssetUrls(manifest, animationsData as AnimationsData, import.meta.env.BASE_URL)
-      ),
+      (["realistic", "animal"] as const).map((variant) => ({
+        variant,
+        cache: new OfflineAssetCache(
+          collectAssetUrls(manifest, animationsData as AnimationsData, import.meta.env.BASE_URL, variant),
+          packCacheName(variant)
+        )
+      })),
       i18n
     );
 
