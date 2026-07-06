@@ -5,7 +5,7 @@
     {
       "id": "CRISIS_HEATWAVE",
       "day": 1,
-      "title": "Heatwave",
+      "title": "content.crises.CRISIS_HEATWAVE.title",
       "type": "fragmentationEnvironmental",
       "convergingNeeds": [
         "Siobhan",
@@ -61,7 +61,7 @@
     {
       "id": "CRISIS_RUMOR",
       "day": 2,
-      "title": "The Rumor",
+      "title": "content.crises.CRISIS_RUMOR.title",
       "type": "fragmentationInformation",
       "convergingNeeds": [
         "Ruben",
@@ -117,7 +117,7 @@
     {
       "id": "CRISIS_OFFER",
       "day": 3,
-      "title": "The Offer",
+      "title": "content.crises.CRISIS_OFFER.title",
       "type": "fragmentationEconomic",
       "convergingNeeds": [
         "Mystery Corporate Man",
@@ -173,7 +173,7 @@
     {
       "id": "CRISIS_CLOSURE",
       "day": 4,
-      "title": "The Closure",
+      "title": "content.crises.CRISIS_CLOSURE.title",
       "type": "fragmentationInstitutional",
       "convergingNeeds": [
         "Elena",
@@ -229,7 +229,7 @@
     {
       "id": "CRISIS_FLOOD",
       "day": 5,
-      "title": "Storm / Flood",
+      "title": "content.crises.CRISIS_FLOOD.title",
       "type": "fragmentationEnvironmental",
       "convergingNeeds": [
         "Siobhan",

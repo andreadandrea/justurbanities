@@ -1,19 +1,19 @@
 {
   "panels": [
     {
-      "title": "Eurbania",
-      "text": "A mid-sized European city, like many others. Trams that are almost on time, squares that fill and empty, neighbours who nod without quite knowing each other's names."
+      "title": "content.prologue.p1.title",
+      "text": "content.prologue.p1.text"
     },
     {
-      "title": "The Fragmentation",
-      "text": "Lately something has been pulling the city apart. Not a storm, not a crisis on the news — just distance. People retreating indoors, shared spaces going quiet, decisions made about everyone by fewer and fewer."
+      "title": "content.prologue.p2.title",
+      "text": "content.prologue.p2.text"
     },
     {
-      "title": "The Community Center",
-      "text": "One place still tries to hold the threads together. Its doors are open, its noticeboard is full, and tonight it is busier than usual: the city has called an assembly, and someone has to show up."
+      "title": "content.prologue.p3.title",
+      "text": "content.prologue.p3.text"
     },
     {
-      "text": "Five people could walk through that door. Tonight, one of them is you. Who will you be?"
+      "text": "content.prologue.p4.text"
     }
   ]
 }

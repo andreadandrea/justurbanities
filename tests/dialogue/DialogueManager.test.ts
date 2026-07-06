@@ -23,12 +23,12 @@ describe("DialogueManager + QuestManager integration (Task 1)", () => {
     const { state, quests, dialogues } = setup();
 
     const start = dialogues.start("anna_intro");
-    expect(start.text).toContain("city map");
+    expect(start.text).toBe("content.dialogues.anna_intro.start.text");
     expect(quests.getQuestStatus("P01")).toBe("active");
 
     const result = dialogues.choose("listen");
     expect(result.ended).toBe(false);
-    expect(result.node?.text).toContain("different routes");
+    expect(result.node?.text).toBe("content.dialogues.anna_intro.map.text");
     expect(state.variables.talkedTo_anna).toBe(true);
     expect(state.resources.voice).toBe(1);
 

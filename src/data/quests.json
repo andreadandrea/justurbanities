@@ -2,19 +2,19 @@
   "quests": [
     {
       "id": "P01",
-      "title": "The Center Holds?",
-      "description": "Understand why the Community Center is losing its civic function.",
+      "title": "content.quests.P01.title",
+      "description": "content.quests.P01.description",
       "status": "available",
       "objectives": [
         {
           "id": "talk_to_anna",
-          "description": "Talk to Anna about the civic map.",
+          "description": "content.quests.P01.objectives.talk_to_anna",
           "completed": false,
           "required": true
         },
         {
           "id": "talk_to_ben",
-          "description": "Talk to Ben about accessibility.",
+          "description": "content.quests.P01.objectives.talk_to_ben",
           "completed": false,
           "required": true
         }
@@ -29,13 +29,13 @@
     },
     {
       "id": "P02",
-      "title": "Same City, Different Routes",
-      "description": "Discover how the same district creates different routes for different people.",
+      "title": "content.quests.P02.title",
+      "description": "content.quests.P02.description",
       "status": "locked",
       "objectives": [
         {
           "id": "choose_route",
-          "description": "Choose a playable character route.",
+          "description": "content.quests.P02.objectives.choose_route",
           "completed": false,
           "required": true
         }
@@ -43,13 +43,13 @@
     },
     {
       "id": "C01",
-      "title": "Arriving Is Already Participation",
-      "description": "Investigate mobility barriers around the Crossroads.",
+      "title": "content.quests.C01.title",
+      "description": "content.quests.C01.description",
       "status": "locked",
       "objectives": [
         {
           "id": "reach_bus_hub",
-          "description": "Reach the Main Bus Hub.",
+          "description": "content.quests.C01.objectives.reach_bus_hub",
           "completed": false,
           "required": true
         }
@@ -57,13 +57,13 @@
     },
     {
       "id": "N01",
-      "title": "Listen Before Fixing",
-      "description": "Intervista almeno tre persone in distretti diversi prima di proporre soluzioni.",
+      "title": "content.quests.N01.title",
+      "description": "content.quests.N01.description",
       "status": "locked",
       "objectives": [
         {
           "id": "interview_three",
-          "description": "Ascolta 3 persone in distretti diversi.",
+          "description": "content.quests.N01.objectives.interview_three",
           "completed": false,
           "required": true
         }
@@ -83,19 +83,19 @@
     },
     {
       "id": "N02",
-      "title": "The Crossing",
-      "description": "Rendi sicuro un attraversamento che blocca bambini, anziani e disabili.",
+      "title": "content.quests.N02.title",
+      "description": "content.quests.N02.description",
       "status": "locked",
       "objectives": [
         {
           "id": "temp_fix",
-          "description": "Intervento temporaneo sull'attraversamento.",
+          "description": "content.quests.N02.objectives.temp_fix",
           "completed": false,
           "required": true
         },
         {
           "id": "propose",
-          "description": "Proposta istituzionale.",
+          "description": "content.quests.N02.objectives.propose",
           "completed": false,
           "required": false
         }
@@ -115,13 +115,13 @@
     },
     {
       "id": "N03",
-      "title": "Mandate, Not a Photo Op",
-      "description": "Trasforma l'attenzione politica in un impegno reale con responsabilità chiare.",
+      "title": "content.quests.N03.title",
+      "description": "content.quests.N03.description",
       "status": "locked",
       "objectives": [
         {
           "id": "secure_mandate",
-          "description": "Ottieni un impegno con responsabilità definite.",
+          "description": "content.quests.N03.objectives.secure_mandate",
           "completed": false,
           "required": true
         }
@@ -141,13 +141,13 @@
     },
     {
       "id": "N04",
-      "title": "Memory Is Not Nostalgia",
-      "description": "Usa la memoria del quartiere per legittimare il nuovo invece di frenarlo.",
+      "title": "content.quests.N04.title",
+      "description": "content.quests.N04.description",
       "status": "locked",
       "objectives": [
         {
           "id": "collect_memory",
-          "description": "Raccogli memoria e collegala a una proposta nuova.",
+          "description": "content.quests.N04.objectives.collect_memory",
           "completed": false,
           "required": true
         }
@@ -167,19 +167,19 @@
     },
     {
       "id": "N05",
-      "title": "The Repair Day",
-      "description": "Riparazione collettiva di uno spazio con risorse limitate (mini-gioco Modular Repair).",
+      "title": "content.quests.N05.title",
+      "description": "content.quests.N05.description",
       "status": "locked",
       "objectives": [
         {
           "id": "repair",
-          "description": "Ripara e adatta lo spazio.",
+          "description": "content.quests.N05.objectives.repair",
           "completed": false,
           "required": true
         },
         {
           "id": "plan",
-          "description": "Definisci un piano di gestione.",
+          "description": "content.quests.N05.objectives.plan",
           "completed": false,
           "required": false
         }
@@ -199,13 +199,13 @@
     },
     {
       "id": "N06",
-      "title": "The Story Behind the Headline",
-      "description": "Scegli se Ruben alimenta o disinnesca la voce falsa.",
+      "title": "content.quests.N06.title",
+      "description": "content.quests.N06.description",
       "status": "locked",
       "objectives": [
         {
           "id": "provide_material",
-          "description": "Fornisci materiale autentico per la storia.",
+          "description": "content.quests.N06.objectives.provide_material",
           "completed": false,
           "required": true
         }
@@ -225,13 +225,13 @@
     },
     {
       "id": "N07",
-      "title": "From Rumor to Information",
-      "description": "Trasforma l'edicola in un punto info affidabile e multilingue.",
+      "title": "content.quests.N07.title",
+      "description": "content.quests.N07.description",
       "status": "locked",
       "objectives": [
         {
           "id": "setup_info",
-          "description": "Allestisci il punto info multilingue.",
+          "description": "content.quests.N07.objectives.setup_info",
           "completed": false,
           "required": true
         }
@@ -251,13 +251,13 @@
     },
     {
       "id": "N08",
-      "title": "Rules and Open Doors",
-      "description": "Trova un modo regolare per aprire una sala comune (mini-gioco Commons Access).",
+      "title": "content.quests.N08.title",
+      "description": "content.quests.N08.description",
       "status": "locked",
       "objectives": [
         {
           "id": "agreement",
-          "description": "Stabilisci un accordo d'uso con responsabilità.",
+          "description": "content.quests.N08.objectives.agreement",
           "completed": false,
           "required": true
         }
@@ -277,19 +277,19 @@
     },
     {
       "id": "N09",
-      "title": "The Last Bus",
-      "description": "Documenta un collegamento mancante e costruisci una proposta.",
+      "title": "content.quests.N09.title",
+      "description": "content.quests.N09.description",
       "status": "locked",
       "objectives": [
         {
           "id": "document",
-          "description": "Documenta il problema di mobilità.",
+          "description": "content.quests.N09.objectives.document",
           "completed": false,
           "required": true
         },
         {
           "id": "proposal",
-          "description": "Costruisci la proposta.",
+          "description": "content.quests.N09.objectives.proposal",
           "completed": false,
           "required": false
         }
@@ -309,13 +309,13 @@
     },
     {
       "id": "N10",
-      "title": "Care for the Carers",
-      "description": "Introduci pratiche di riposo e distribuzione del carico nella rete.",
+      "title": "content.quests.N10.title",
+      "description": "content.quests.N10.description",
       "status": "locked",
       "objectives": [
         {
           "id": "anti_burnout",
-          "description": "Attiva pratiche anti-burnout.",
+          "description": "content.quests.N10.objectives.anti_burnout",
           "completed": false,
           "required": true
         }
@@ -335,19 +335,19 @@
     },
     {
       "id": "N11",
-      "title": "Nobody Is Off the Map",
-      "description": "Individua residenti isolati e collegali a una rete di cura.",
+      "title": "content.quests.N11.title",
+      "description": "content.quests.N11.description",
       "status": "locked",
       "objectives": [
         {
           "id": "find_isolated",
-          "description": "Individua gli abitanti isolati.",
+          "description": "content.quests.N11.objectives.find_isolated",
           "completed": false,
           "required": true
         },
         {
           "id": "connect",
-          "description": "Collegali a una rete di cura.",
+          "description": "content.quests.N11.objectives.connect",
           "completed": false,
           "required": true
         }
@@ -367,13 +367,13 @@
     },
     {
       "id": "N12",
-      "title": "Mixed Tables",
-      "description": "Trasforma il bar in luogo d'incontro tra gruppi separati.",
+      "title": "content.quests.N12.title",
+      "description": "content.quests.N12.description",
       "status": "locked",
       "objectives": [
         {
           "id": "mixed_tables",
-          "description": "Organizza serate tematiche e bacheca comune.",
+          "description": "content.quests.N12.objectives.mixed_tables",
           "completed": false,
           "required": true
         }
@@ -393,13 +393,13 @@
     },
     {
       "id": "N13",
-      "title": "Care Made Visible",
-      "description": "Verde minimo co-curato dai residenti, che resta nelle loro mani.",
+      "title": "content.quests.N13.title",
+      "description": "content.quests.N13.description",
       "status": "locked",
       "objectives": [
         {
           "id": "green",
-          "description": "Realizza interventi verdi co-curati.",
+          "description": "content.quests.N13.objectives.green",
           "completed": false,
           "required": true
         }
@@ -419,13 +419,13 @@
     },
     {
       "id": "N14",
-      "title": "Through a Child's Eyes",
-      "description": "Mappa la città dal punto di vista dei bambini.",
+      "title": "content.quests.N14.title",
+      "description": "content.quests.N14.description",
       "status": "locked",
       "objectives": [
         {
           "id": "child_map",
-          "description": "Crea la mappa dei bambini.",
+          "description": "content.quests.N14.objectives.child_map",
           "completed": false,
           "required": true
         }
@@ -445,13 +445,13 @@
     },
     {
       "id": "N15",
-      "title": "Before the Water Rises",
-      "description": "Prepara reti e percorsi prima della crisi climatica (mini-gioco Crisis Response Map).",
+      "title": "content.quests.N15.title",
+      "description": "content.quests.N15.description",
       "status": "locked",
       "objectives": [
         {
           "id": "prepare",
-          "description": "Prepara la risposta climatica del quartiere.",
+          "description": "content.quests.N15.objectives.prepare",
           "completed": false,
           "required": true
         }
@@ -471,13 +471,13 @@
     },
     {
       "id": "N16",
-      "title": "Words to Belong",
-      "description": "Corso di lingua e memoria intergenerazionale per partecipare davvero.",
+      "title": "content.quests.N16.title",
+      "description": "content.quests.N16.description",
       "status": "locked",
       "objectives": [
         {
           "id": "course",
-          "description": "Avvia il corso lingua + memoria.",
+          "description": "content.quests.N16.objectives.course",
           "completed": false,
           "required": true
         }
@@ -497,13 +497,13 @@
     },
     {
       "id": "N17",
-      "title": "Don't Tell Our Story Without Us",
-      "description": "Contro-narrazione co-creata con residenti e giovani (mini-gioco Story Routes).",
+      "title": "content.quests.N17.title",
+      "description": "content.quests.N17.description",
       "status": "locked",
       "objectives": [
         {
           "id": "co_create",
-          "description": "Co-crea la contro-narrazione del quartiere.",
+          "description": "content.quests.N17.objectives.co_create",
           "completed": false,
           "required": true
         }
@@ -523,13 +523,13 @@
     },
     {
       "id": "N18",
-      "title": "The Offer",
-      "description": "Anti-quest: accetta, negozia o rifiuta l'offerta speculativa.",
+      "title": "content.quests.N18.title",
+      "description": "content.quests.N18.description",
       "status": "locked",
       "objectives": [
         {
           "id": "decide_offer",
-          "description": "Decidi come rispondere all'offerta.",
+          "description": "content.quests.N18.objectives.decide_offer",
           "completed": false,
           "required": true
         }

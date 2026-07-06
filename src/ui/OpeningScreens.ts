@@ -1,3 +1,5 @@
+import type { I18n } from "../i18n/I18n";
+
 export type Pronoun = "she" | "he" | "they";
 
 export type PlayableCharacter = {
@@ -21,12 +23,13 @@ type OpeningDeps = {
   prologue: ProloguePanel[];
   canContinue: boolean;
   baseUrl: string;
+  i18n: I18n;
 };
 
-const PRONOUN_LABEL: Record<Pronoun, string> = {
-  she: "she / her",
-  he: "he / him",
-  they: "they / them"
+const PRONOUN_KEY: Record<Pronoun, string> = {
+  she: "ui.opening.pronounShe",
+  he: "ui.opening.pronounHe",
+  they: "ui.opening.pronounThey"
 };
 
 /**
@@ -63,6 +66,10 @@ export class OpeningScreens {
     this.resolve(result);
   }
 
+  private t(key: string): string {
+    return this.deps.i18n.t(key);
+  }
+
   private card(): HTMLElement {
     const card = document.createElement("div");
     card.className = "opening-card";
@@ -79,16 +86,16 @@ export class OpeningScreens {
 
     const subtitle = document.createElement("p");
     subtitle.className = "opening-subtitle";
-    subtitle.textContent = "Eurbanities and Fragmentation";
+    subtitle.textContent = this.t("ui.opening.subtitle");
 
     const actions = document.createElement("div");
     actions.className = "opening-actions";
 
-    const newGame = button("New game", "opening-primary", () => this.showPrologue(0));
+    const newGame = button(this.t("ui.opening.newGame"), "opening-primary", () => this.showPrologue(0));
     actions.appendChild(newGame);
 
     if (this.deps.canContinue) {
-      actions.appendChild(button("Continue", "opening-secondary", () => this.finish({ mode: "continue" })));
+      actions.appendChild(button(this.t("ui.opening.continue"), "opening-secondary", () => this.finish({ mode: "continue" })));
     }
 
     card.append(title, subtitle, actions);
@@ -108,13 +115,13 @@ export class OpeningScreens {
     if (panel.title) {
       const heading = document.createElement("h2");
       heading.className = "opening-panel-title";
-      heading.textContent = panel.title;
+      heading.textContent = this.t(panel.title);
       card.appendChild(heading);
     }
 
     const text = document.createElement("p");
     text.className = "opening-panel-text";
-    text.textContent = panel.text;
+    text.textContent = this.t(panel.text);
     card.appendChild(text);
 
     const steps = document.createElement("p");
@@ -123,8 +130,8 @@ export class OpeningScreens {
 
     const actions = document.createElement("div");
     actions.className = "opening-actions";
-    actions.appendChild(button("Skip intro", "opening-secondary", () => this.showSelect()));
-    const next = button(isLast ? "Choose your character" : "Continue", "opening-primary", () =>
+    actions.appendChild(button(this.t("ui.opening.skipIntro"), "opening-secondary", () => this.showSelect()));
+    const next = button(isLast ? this.t("ui.opening.chooseCharacter") : this.t("ui.opening.next"), "opening-primary", () =>
       this.showPrologue(index + 1)
     );
     actions.appendChild(next);
@@ -138,11 +145,11 @@ export class OpeningScreens {
 
     const heading = document.createElement("h2");
     heading.className = "opening-panel-title";
-    heading.textContent = "Same city, different routes";
+    heading.textContent = this.t("ui.opening.selectTitle");
 
     const hint = document.createElement("p");
     hint.className = "opening-subtitle";
-    hint.textContent = "Who walks into the assembly tonight?";
+    hint.textContent = this.t("ui.opening.selectHint");
 
     const grid = document.createElement("div");
     grid.className = "opening-grid";
@@ -175,7 +182,7 @@ export class OpeningScreens {
 
     const tagline = document.createElement("span");
     tagline.className = "opening-character-tagline";
-    tagline.textContent = character.tagline;
+    tagline.textContent = this.t(character.tagline);
 
     cell.append(img, name, tagline);
     cell.addEventListener("click", () => {
@@ -199,29 +206,29 @@ export class OpeningScreens {
 
     const heading = document.createElement("h2");
     heading.className = "opening-panel-title";
-    heading.textContent = "Create your citizen";
+    heading.textContent = this.t("ui.opening.createTitle");
 
     const form = document.createElement("form");
     form.className = "opening-form";
 
     const nameLabel = document.createElement("label");
     nameLabel.className = "opening-field";
-    nameLabel.textContent = "Name";
+    nameLabel.textContent = this.t("ui.opening.name");
     const nameInput = document.createElement("input");
     nameInput.type = "text";
     nameInput.maxLength = 24;
     nameInput.autocomplete = "off";
-    nameInput.placeholder = "e.g. Alex";
+    nameInput.placeholder = this.t("ui.opening.namePlaceholder");
     nameLabel.appendChild(nameInput);
 
     const pronounFieldset = document.createElement("fieldset");
     pronounFieldset.className = "opening-field";
     const legend = document.createElement("legend");
-    legend.textContent = "Pronoun";
+    legend.textContent = this.t("ui.opening.pronoun");
     pronounFieldset.appendChild(legend);
 
     let pronoun: Pronoun = character.pronoun;
-    (Object.keys(PRONOUN_LABEL) as Pronoun[]).forEach((value) => {
+    (Object.keys(PRONOUN_KEY) as Pronoun[]).forEach((value) => {
       const option = document.createElement("label");
       option.className = "opening-radio";
       const radio = document.createElement("input");
@@ -233,15 +240,15 @@ export class OpeningScreens {
         pronoun = value;
       });
       const span = document.createElement("span");
-      span.textContent = PRONOUN_LABEL[value];
+      span.textContent = this.t(PRONOUN_KEY[value]);
       option.append(radio, span);
       pronounFieldset.appendChild(option);
     });
 
     const actions = document.createElement("div");
     actions.className = "opening-actions";
-    actions.appendChild(button("Back", "opening-secondary", () => this.showSelect()));
-    const confirm = button("Enter Eurbania", "opening-primary", () => {
+    actions.appendChild(button(this.t("ui.opening.back"), "opening-secondary", () => this.showSelect()));
+    const confirm = button(this.t("ui.opening.enter"), "opening-primary", () => {
       const name = nameInput.value.trim();
       if (!name) {
         nameInput.focus();

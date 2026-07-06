@@ -5,7 +5,7 @@
       "displayName": "Maya",
       "pronoun": "she",
       "customizable": false,
-      "tagline": "A shift worker and Zoe's mother. For her the city is a puzzle of schedules that barely fit.",
+      "tagline": "content.playable.maya.tagline",
       "portrait": "assets/characters/maya/portraits/portrait_maya_neutral.png"
     },
     {
@@ -13,7 +13,7 @@
       "displayName": "Samir",
       "pronoun": "he",
       "customizable": false,
-      "tagline": "A courier who knows every shortcut and every closed door.",
+      "tagline": "content.playable.samir.tagline",
       "portrait": "assets/characters/samir/portraits/portrait_samir_neutral.png"
     },
     {
@@ -21,7 +21,7 @@
       "displayName": "Elena",
       "pronoun": "she",
       "customizable": false,
-      "tagline": "A Town Hall official who must turn listening into real decisions, without overpromising.",
+      "tagline": "content.playable.elena.tagline",
       "portrait": "assets/characters/elena/portraits/portrait_elena_neutral.png"
     },
     {
@@ -29,7 +29,7 @@
       "displayName": "Luca",
       "pronoun": "he",
       "customizable": false,
-      "tagline": "A small business owner trying to serve the neighbourhood without going under.",
+      "tagline": "content.playable.luca.tagline",
       "portrait": "assets/characters/luca/portraits/portrait_luca_neutral.png"
     },
     {
@@ -37,7 +37,7 @@
       "displayName": "New citizen",
       "pronoun": "they",
       "customizable": true,
-      "tagline": "Your own route through Eurbania: choose who to help, knowing you can't help everyone.",
+      "tagline": "content.playable.custom.tagline",
       "portrait": "assets/characters/custom/portraits/portrait_custom_neutral.png"
     }
   ]

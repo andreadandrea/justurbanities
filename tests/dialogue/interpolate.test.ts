@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { interpolateDialogueText } from "../../src/game/dialogue/interpolate";
-import dialoguesData from "../../src/data/dialogues.json";
+import en from "../../src/locales/en.json";
+import itLocale from "../../src/locales/it.json";
 
 describe("dialogue interpolation", () => {
   it("replaces {playerName}", () => {
@@ -26,10 +27,11 @@ describe("dialogue interpolation", () => {
     );
   });
 
-  it("the prologue-chapter opener greets the player by name", () => {
-    const anna = dialoguesData.dialogues.find((d) => d.id === "anna_intro");
-    const startText = (anna?.nodes as Record<string, { text: string }>).start.text;
-    expect(startText).toContain("{playerName}");
-    expect(interpolateDialogueText(startText, { playerName: "Nour", pronoun: "they" })).toContain("Nour");
+  it("the prologue-chapter opener greets the player by name (in every complete locale)", () => {
+    for (const locale of [en, itLocale]) {
+      const startText = locale.content.dialogues.anna_intro.start.text;
+      expect(startText).toContain("{playerName}");
+      expect(interpolateDialogueText(startText, { playerName: "Nour", pronoun: "they" })).toContain("Nour");
+    }
   });
 });

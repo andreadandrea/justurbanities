@@ -45,7 +45,7 @@ export class OptionsPanel {
     toggle.type = "button";
     toggle.className = "options-toggle";
     toggle.textContent = "⚙";
-    toggle.title = "Options";
+    toggle.title = i18n.t("ui.options.hint");
     toggle.addEventListener("click", () => {
       this.panel.hidden = !this.panel.hidden;
     });

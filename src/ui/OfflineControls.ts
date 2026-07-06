@@ -1,4 +1,5 @@
 import type { OfflineAssetCache } from "../assets/OfflineAssetCache";
+import type { I18n } from "../i18n/I18n";
 
 /**
  * Offline play controls (Task 5): download all runtime assets into the
@@ -12,18 +13,18 @@ export class OfflineControls {
   private readonly clearButton: HTMLButtonElement;
   private busy = false;
 
-  constructor(root: HTMLElement, private readonly cache: OfflineAssetCache) {
+  constructor(root: HTMLElement, private readonly cache: OfflineAssetCache, private readonly i18n: I18n) {
     this.panel = document.createElement("aside");
     this.panel.className = "offline-panel";
     this.panel.hidden = true;
     this.panel.setAttribute("aria-label", "Offline assets");
 
     const title = document.createElement("h3");
-    title.textContent = "Offline play";
+    title.textContent = i18n.t("ui.offline.title");
 
     this.statusLine = document.createElement("p");
     this.statusLine.className = "offline-status";
-    this.statusLine.textContent = "Checking…";
+    this.statusLine.textContent = i18n.t("ui.offline.checking");
 
     this.progress = document.createElement("progress");
     this.progress.max = 100;
@@ -32,13 +33,13 @@ export class OfflineControls {
 
     this.downloadButton = document.createElement("button");
     this.downloadButton.type = "button";
-    this.downloadButton.textContent = "Download assets for offline play";
+    this.downloadButton.textContent = i18n.t("ui.offline.download");
     this.downloadButton.addEventListener("click", () => void this.download());
 
     this.clearButton = document.createElement("button");
     this.clearButton.type = "button";
     this.clearButton.className = "offline-clear";
-    this.clearButton.textContent = "Clear local asset cache";
+    this.clearButton.textContent = i18n.t("ui.offline.clear");
     this.clearButton.addEventListener("click", () => void this.clear());
 
     this.panel.append(title, this.statusLine, this.progress, this.downloadButton, this.clearButton);
@@ -47,8 +48,8 @@ export class OfflineControls {
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "offline-toggle";
-    toggle.textContent = "📦 Offline";
-    toggle.title = "Offline asset cache";
+    toggle.textContent = i18n.t("ui.offline.toggle");
+    toggle.title = i18n.t("ui.offline.toggleHint");
     toggle.addEventListener("click", () => {
       this.panel.hidden = !this.panel.hidden;
       if (!this.panel.hidden) void this.refreshStatus();
@@ -58,17 +59,17 @@ export class OfflineControls {
 
   private async refreshStatus(): Promise<void> {
     if (!this.cache.supported) {
-      this.statusLine.textContent = "Cache API not available in this browser.";
+      this.statusLine.textContent = this.i18n.t("ui.offline.unsupported");
       this.downloadButton.disabled = true;
       this.clearButton.disabled = true;
       return;
     }
     const status = await this.cache.status();
     this.statusLine.textContent = status.ready
-      ? `✅ Offline-ready (${status.cached}/${status.total} assets cached)`
+      ? `✅ ${this.i18n.t("ui.offline.ready")} (${status.cached}/${status.total})`
       : status.cached > 0
-        ? `⚠️ Partial: ${status.cached}/${status.total} assets cached`
-        : `Not downloaded (${status.total} assets)`;
+        ? `⚠️ ${this.i18n.t("ui.offline.partial")}: ${status.cached}/${status.total}`
+        : `${this.i18n.t("ui.offline.notDownloaded")} (${status.total})`;
     this.downloadButton.disabled = this.busy || status.ready;
     this.clearButton.disabled = this.busy || status.cached === 0;
   }
@@ -83,13 +84,13 @@ export class OfflineControls {
     try {
       const status = await this.cache.download(({ done, total, failed }) => {
         this.progress.value = Math.round((done / total) * 100);
-        this.statusLine.textContent = `Downloading ${done}/${total}${failed ? ` (${failed} failed)` : ""}…`;
+        this.statusLine.textContent = `${this.i18n.t("ui.offline.downloading")} ${done}/${total}${failed ? ` (${failed} ✗)` : ""}…`;
       });
       this.statusLine.textContent = status.ready
-        ? `✅ Offline-ready (${status.cached}/${status.total} assets cached)`
-        : `⚠️ Done with issues: ${status.cached}/${status.total} cached`;
+        ? `✅ ${this.i18n.t("ui.offline.ready")} (${status.cached}/${status.total})`
+        : `⚠️ ${this.i18n.t("ui.offline.doneWithIssues")}: ${status.cached}/${status.total}`;
     } catch (error) {
-      this.statusLine.textContent = error instanceof Error ? error.message : "Download failed.";
+      this.statusLine.textContent = error instanceof Error ? error.message : this.i18n.t("ui.offline.failed");
     } finally {
       this.progress.hidden = true;
       this.busy = false;
