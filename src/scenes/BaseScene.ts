@@ -15,6 +15,7 @@ import type { SpriteRepository } from "../assets/SpriteRepository";
 import { Camera2D } from "../engine/Camera2D";
 import { AnimatedSprite, movementAnimation, type Direction } from "../engine/AnimatedSprite";
 import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
+import type { NpcPlacement } from "../types/Schedule";
 
 export type SceneDeps = {
   renderer: CanvasRenderer;
@@ -32,6 +33,8 @@ export type SceneDeps = {
   sessionId: string;
   saveStatus: HTMLElement;
   changeScene: (sceneId: string, spawn: { x: number; y: number }) => void;
+  /** Active NPC placements for a scene, given current time and conditions. */
+  npcPlacements: (sceneId: string) => NpcPlacement[];
 };
 
 /** An entity the player can walk up to and activate with space/enter/tap. */

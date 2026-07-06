@@ -38,6 +38,7 @@ import {
   playableSchema,
   prologueSchema,
   crisisFileSchema,
+  scheduleFileSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -47,6 +48,9 @@ import animationsData from "../data/animations.json";
 import playableData from "../data/playable.json";
 import prologueData from "../data/prologue.json";
 import crisesData from "../data/crises.json";
+import scheduleData from "../data/schedule.json";
+import { activePlacements } from "../game/npc/NpcSchedule";
+import type { ScheduleFile } from "../types/Schedule";
 
 type AppElements = {
   appRoot: HTMLElement;
@@ -99,6 +103,7 @@ export class App {
     let manifest: AssetManifest;
     let dialogueFile: DialogueFile;
     let questFile: QuestFile;
+    let scheduleFile: ScheduleFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -108,6 +113,7 @@ export class App {
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
       validateData("crises.json", crisisFileSchema, crisesData);
+      scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -165,7 +171,17 @@ export class App {
       manifest,
       import.meta.env.BASE_URL
     );
-    await Promise.all([sprites.load(this.state.currentCharacter), sprites.load("anna"), sprites.load("ben")]);
+    // Player sprite plus every NPC that can appear via the schedule.
+    const spriteIds = new Set<string>([
+      this.state.currentCharacter,
+      ...scheduleFile.placements.map((placement) => placement.npcId)
+    ]);
+    await Promise.all([...spriteIds].map((id) => sprites.load(id)));
+
+    // Day/time cycle: time only moves through explicit actions ("Pass time"
+    // now; story beats later). Created before the scenes so placements can
+    // depend on the current part of day.
+    const clock = new GameClock(this.state);
 
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
@@ -182,7 +198,11 @@ export class App {
       syncQueue: this.syncQueue,
       sessionId: session.id,
       saveStatus: this.elements.saveStatus,
-      changeScene: (sceneId, spawn) => this.changeScene(sceneId, spawn)
+      changeScene: (sceneId, spawn) => this.changeScene(sceneId, spawn),
+      npcPlacements: (sceneId) =>
+        activePlacements(scheduleFile, sceneId, clock.timePart, (conditions) =>
+          this.effectResolver.checkAll(conditions)
+        )
     };
 
     this.scenes = {
@@ -193,10 +213,8 @@ export class App {
       this.state.currentScene = "community_center";
     }
 
-    // Day/time cycle: time only moves through explicit actions ("Pass time"
-    // now; story beats later). The HUD lives at app level so every scene
-    // shows it; passing time autosaves so the clock survives reloads.
-    const clock = new GameClock(this.state);
+    // The time HUD lives at app level so every scene shows it; passing time
+    // autosaves so the clock survives reloads.
     new TimeHud(this.elements.appRoot, clock, () => {
       clock.advance();
       void this.activeScene().saveNow();
