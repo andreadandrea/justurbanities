@@ -55,6 +55,13 @@ export class NpcDirector<TSprite = unknown> {
     this.npcs = next;
   }
 
+  /** Recreate every sprite from the factory (e.g. after an art-style switch). */
+  rebuildSprites(): void {
+    for (const npc of this.npcs) {
+      npc.sprite = this.deps.createSprite(npc.id);
+    }
+  }
+
   list(): readonly DirectedNpc<TSprite>[] {
     return this.npcs;
   }
