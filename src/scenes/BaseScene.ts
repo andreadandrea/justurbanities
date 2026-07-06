@@ -16,6 +16,16 @@ import { Camera2D } from "../engine/Camera2D";
 import { AnimatedSprite, movementAnimation, type Direction } from "../engine/AnimatedSprite";
 import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
 import type { NpcPlacement } from "../types/Schedule";
+import { NpcDirector } from "../game/npc/NpcDirector";
+import type { GameClock } from "../game/time/GameClock";
+import charactersData from "../data/characters.json";
+
+const DISPLAY_NAMES = new Map(
+  (charactersData as Array<{ id: string; displayName: string }>).map((character) => [
+    character.id,
+    character.displayName
+  ])
+);
 
 export type SceneDeps = {
   renderer: CanvasRenderer;
@@ -35,6 +45,7 @@ export type SceneDeps = {
   changeScene: (sceneId: string, spawn: { x: number; y: number }) => void;
   /** Active NPC placements for a scene, given current time and conditions. */
   npcPlacements: (sceneId: string) => NpcPlacement[];
+  clock: GameClock;
 };
 
 /** An entity the player can walk up to and activate with space/enter/tap. */
@@ -59,6 +70,7 @@ export abstract class BaseScene {
   protected readonly userId = "local-user";
   protected readonly dialogueRunner: DialogueRunner;
   protected readonly camera: Camera2D;
+  protected readonly npcDirector: NpcDirector<AnimatedSprite>;
 
   private saveCooldown = 0;
   private playerSprite: AnimatedSprite | null = null;
@@ -71,6 +83,14 @@ export abstract class BaseScene {
     // Subclass `world` field initializers run after super(); the camera is
     // pointed at the real world bounds every frame in update().
     this.camera = new Camera2D({ width: 0, height: 0 });
+
+    // Data-driven NPCs: the director re-materializes the roster whenever
+    // time passes; story-state changes are picked up after every choice.
+    this.npcDirector = new NpcDirector<AnimatedSprite>({
+      placements: deps.npcPlacements,
+      createSprite: (npcId) => deps.sprites.createSprite(npcId)
+    });
+    deps.clock.on(() => this.npcDirector.refresh());
   }
 
   /** Scene id used in GameState.currentScene and progress events. */
@@ -89,7 +109,36 @@ export abstract class BaseScene {
   protected abstract drawScene(): void;
 
   /** Called when the player enters the scene (and on boot for the active scene). */
-  enter(): void {}
+  enter(): void {
+    this.npcDirector.setScene(this.sceneId);
+  }
+
+  /** Scheduled NPCs as renderable entities (world space). */
+  protected npcEntities(): RenderableEntity[] {
+    return this.npcDirector.list().map((npc) => this.npcEntity(npc));
+  }
+
+  /** Scheduled NPCs as interactables opening their scheduled dialogue. */
+  protected npcInteractables(): Interactable[] {
+    return this.npcDirector.list().map((npc) => ({
+      entity: this.npcEntity(npc),
+      onInteract: () => this.dialogueRunner.run(npc.dialogueId, DISPLAY_NAMES.get(npc.id) ?? npc.id)
+    }));
+  }
+
+  private npcEntity(npc: { id: string; x: number; y: number; sprite: AnimatedSprite | null }): RenderableEntity {
+    const image = npc.sprite?.image() ?? this.deps.assets.getImage(`${npc.id}:icon`);
+    return {
+      id: npc.id,
+      label: DISPLAY_NAMES.get(npc.id) ?? npc.id,
+      x: npc.x,
+      y: npc.y,
+      width: 132,
+      height: 150,
+      image,
+      interactive: true
+    };
+  }
 
   update(dt: number): void {
     const player = this.deps.gameState.player;
@@ -188,6 +237,9 @@ export abstract class BaseScene {
   }
 
   protected async recordChoice(dialogueId: string, choiceId: string): Promise<void> {
+    // Choices change quests/variables, so the NPC roster may change too.
+    this.npcDirector.refresh();
+
     const event = await this.deps.progressRepository.append(
       this.deps.sessionId,
       this.userId,

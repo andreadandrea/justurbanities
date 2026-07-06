@@ -47,6 +47,7 @@ export class CrossroadsScene extends BaseScene {
   }
 
   override enter(): void {
+    super.enter();
     if (this.deps.gameState.variables.crossroadsIntroSeen !== true) {
       this.dialogueRunner.run("crossroads_intro", "Crossroads");
     }
@@ -54,6 +55,7 @@ export class CrossroadsScene extends BaseScene {
 
   protected interactables(): Interactable[] {
     return [
+      ...this.npcInteractables(),
       ...this.pois.map((poi) => ({
         entity: poi.entity,
         onInteract: () => this.dialogueRunner.run(poi.dialogueId, poi.speakerLabel)
@@ -70,6 +72,7 @@ export class CrossroadsScene extends BaseScene {
     renderer.drawGround(this.world, "#eccf95", "#cf9f63");
     const entities: RenderableEntity[] = [
       ...this.pois.map((poi) => poi.entity),
+      ...this.npcEntities(),
       this.returnDoor,
       this.playerEntity()
     ];

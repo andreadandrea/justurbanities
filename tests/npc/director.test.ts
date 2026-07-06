@@ -1,0 +1,141 @@
+import { describe, expect, it } from "vitest";
+import { NpcDirector } from "../../src/game/npc/NpcDirector";
+import { activePlacements } from "../../src/game/npc/NpcSchedule";
+import { GameState } from "../../src/game/GameState";
+import { GameClock } from "../../src/game/time/GameClock";
+import { QuestManager } from "../../src/game/quest/QuestManager";
+import { EffectResolver } from "../../src/game/effects/EffectResolver";
+import { DialogueManager } from "../../src/game/dialogue/DialogueManager";
+import { dialogueFileSchema, questFileSchema, scheduleFileSchema, validateData } from "../../src/data/validation";
+import type { ScheduleFile } from "../../src/types/Schedule";
+import type { DialogueFile } from "../../src/types/Dialogue";
+import type { QuestFile } from "../../src/types/Quest";
+import scheduleData from "../../src/data/schedule.json";
+import dialoguesData from "../../src/data/dialogues.json";
+import questsData from "../../src/data/quests.json";
+
+/** Full engine wiring on the real data files — no scenes, no DOM. */
+function world() {
+  const state = new GameState();
+  const clock = new GameClock(state);
+  const quests = new QuestManager();
+  quests.load(validateData("quests.json", questFileSchema, questsData) as QuestFile);
+  const resolver = new EffectResolver(state, quests);
+  const dialogues = new DialogueManager(resolver);
+  dialogues.load(validateData("dialogues.json", dialogueFileSchema, dialoguesData) as DialogueFile);
+  const schedule = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
+
+  const director = new NpcDirector<{ id: string }>({
+    placements: (sceneId) => activePlacements(schedule, sceneId, clock.timePart, (c) => resolver.checkAll(c)),
+    createSprite: (npcId) => ({ id: npcId })
+  });
+  director.setScene("community_center");
+
+  return { state, clock, quests, resolver, dialogues, director };
+}
+
+function npc(director: ReturnType<typeof world>["director"], id: string) {
+  const found = director.list().find((entry) => entry.id === id);
+  if (!found) throw new Error(`NPC ${id} not on stage`);
+  return found;
+}
+
+describe("NpcDirector — N01 (Anna) end-to-end in-world", () => {
+  it("intro -> quest offer -> completion -> fallback, with persistent quest state", () => {
+    const { quests, dialogues, director } = world();
+
+    // Fresh game: Anna offers her intro, not the quest.
+    expect(npc(director, "anna").dialogueId).toBe("anna_intro");
+
+    // Play the intro: listen, then close the map explanation.
+    dialogues.start("anna_intro");
+    dialogues.choose("listen");
+    dialogues.choose("close");
+    director.refresh();
+
+    // talkedTo_anna is set and N01 is still locked -> the quest placement wins.
+    expect(npc(director, "anna").dialogueId).toBe("anna_n01");
+
+    // Play N01 and engage (the relational route).
+    dialogues.start("anna_n01");
+    expect(quests.getQuestStatus("N01")).toBe("active");
+    dialogues.choose("engage");
+    expect(quests.getQuestStatus("N01")).toBe("completed");
+    director.refresh();
+
+    // Quest done -> Anna falls back to her intro placement.
+    expect(npc(director, "anna").dialogueId).toBe("anna_intro");
+
+    // Quest state persists through snapshot/restore (what autosave stores).
+    const restored = new QuestManager();
+    restored.restore(quests.snapshot());
+    expect(restored.getQuestStatus("N01")).toBe("completed");
+  });
+
+  it("N01 shortcut route raises fragmentation instead of weaving resources", () => {
+    const { state, dialogues, quests } = world();
+    const before = state.resources.fragmentationGlobal;
+    dialogues.start("anna_n01");
+    dialogues.choose("shortcut");
+    expect(quests.getQuestStatus("N01")).toBe("completed");
+    expect(state.resources.fragmentationGlobal).toBe(before + 1);
+  });
+});
+
+describe("NpcDirector — N02 (Ben) end-to-end in-world", () => {
+  it("intro -> quest offer -> completion -> fallback", () => {
+    const { state, quests, dialogues, director } = world();
+
+    expect(npc(director, "ben").dialogueId).toBe("ben_intro");
+
+    dialogues.start("ben_intro");
+    dialogues.choose("ask_barrier");
+    dialogues.choose("close");
+    director.refresh();
+    expect(npc(director, "ben").dialogueId).toBe("ben_n02");
+
+    dialogues.start("ben_n02");
+    dialogues.choose("engage");
+    expect(quests.getQuestStatus("N02")).toBe("completed");
+    expect(state.resources.care).toBeGreaterThan(0);
+    director.refresh();
+    expect(npc(director, "ben").dialogueId).toBe("ben_intro");
+  });
+});
+
+describe("NpcDirector mechanics", () => {
+  it("reuses sprite instances across refreshes for NPCs that stay", () => {
+    const { director } = world();
+    const first = npc(director, "anna").sprite;
+    director.refresh();
+    expect(npc(director, "anna").sprite).toBe(first);
+  });
+
+  it("NPCs appear and leave when time passes (timeParts)", () => {
+    const state = new GameState();
+    const clock = new GameClock(state);
+    const schedule: ScheduleFile = {
+      placements: [
+        {
+          npcId: "gwen",
+          scene: "crossroads",
+          position: { x: 1, y: 1 },
+          dialogueId: "gwen_n09",
+          timeParts: [0]
+        }
+      ]
+    };
+    const director = new NpcDirector({
+      placements: (sceneId) => activePlacements(schedule, sceneId, clock.timePart, () => true),
+      createSprite: () => null
+    });
+    clock.on(() => director.refresh());
+    director.setScene("crossroads");
+
+    expect(director.list().map((n) => n.id)).toEqual(["gwen"]);
+    clock.advance(); // morning -> afternoon: Gwen's shift is over
+    expect(director.list()).toHaveLength(0);
+    clock.advance(2); // -> next morning: she is back
+    expect(director.list().map((n) => n.id)).toEqual(["gwen"]);
+  });
+});

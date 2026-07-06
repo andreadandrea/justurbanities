@@ -1,12 +1,32 @@
 {
   "schema": "npc-schedule@1",
-  "note": "NPC placements per scene / part of day / conditions. timeParts omitted = always present; conditions omitted = unconditional. Dialogue ids follow <speaker>_<id>.",
+  "note": "NPC placements per scene / part of day / conditions. timeParts omitted = always present; conditions omitted = unconditional. When several placements match one NPC, the FIRST wins - list quest offers before intro fallbacks. Dialogue ids follow <speaker>_<id>.",
   "placements": [
     {
       "npcId": "anna",
       "scene": "community_center",
       "position": { "x": 900, "y": 620 },
+      "dialogueId": "anna_n01",
+      "conditions": [
+        { "type": "variableEquals", "key": "talkedTo_anna", "value": true },
+        { "type": "questState", "questId": "N01", "state": "locked" }
+      ]
+    },
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "position": { "x": 900, "y": 620 },
       "dialogueId": "anna_intro"
+    },
+    {
+      "npcId": "ben",
+      "scene": "community_center",
+      "position": { "x": 1240, "y": 760 },
+      "dialogueId": "ben_n02",
+      "conditions": [
+        { "type": "variableEquals", "key": "talkedTo_ben", "value": true },
+        { "type": "questState", "questId": "N02", "state": "locked" }
+      ]
     },
     {
       "npcId": "ben",
