@@ -8,7 +8,8 @@ const app = new App({
   loadingStatus: document.querySelector<HTMLElement>("#loading-status")!,
   loadingProgress: document.querySelector<HTMLProgressElement>("#loading-progress")!,
   dialogueRoot: document.querySelector<HTMLElement>("#dialogue-root")!,
-  saveStatus: document.querySelector<HTMLElement>("#save-status")!
+  saveStatus: document.querySelector<HTMLElement>("#save-status")!,
+  sceneTitle: document.querySelector<HTMLElement>("#scene-title")!
 });
 
 void app.start();

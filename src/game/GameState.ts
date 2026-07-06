@@ -82,6 +82,8 @@ export class GameState {
     this.timePart = state.timePart ?? 0;
     this.player = { ...state.player };
     this.variables = { ...state.variables };
-    this.resources = { ...state.resources };
+    // Merge over fresh defaults: a save written before a resource existed
+    // must not leave that resource undefined (NaN after the first add).
+    this.resources = { ...freshResources(), ...(state.resources ?? {}) };
   }
 }
