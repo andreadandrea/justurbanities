@@ -6,7 +6,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The city map is not just about streets. It is about who can actually use them.",
+          "text": "Good, you made it, {playerName}. The city map is not just about streets. It is about who can actually use them.",
           "effects": [
             {
               "type": "startQuest",
