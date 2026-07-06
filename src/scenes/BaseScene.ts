@@ -18,6 +18,7 @@ import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/
 import type { NpcPlacement } from "../types/Schedule";
 import { NpcDirector } from "../game/npc/NpcDirector";
 import type { GameClock } from "../game/time/GameClock";
+import type { I18n } from "../i18n/I18n";
 import charactersData from "../data/characters.json";
 
 const DISPLAY_NAMES = new Map(
@@ -46,6 +47,7 @@ export type SceneDeps = {
   /** Active NPC placements for a scene, given current time and conditions. */
   npcPlacements: (sceneId: string) => NpcPlacement[];
   clock: GameClock;
+  i18n: I18n;
 };
 
 /** An entity the player can walk up to and activate with space/enter/tap. */
@@ -261,7 +263,7 @@ export abstract class BaseScene {
       ...this.deps.gameState.snapshot(),
       quests: this.deps.questManager.snapshot()
     });
-    this.deps.saveStatus.textContent = `Saved locally ${new Date().toLocaleTimeString()}`;
+    this.deps.saveStatus.textContent = `${this.deps.i18n.t("ui.save.saved")} ${new Date().toLocaleTimeString()}`;
   }
 }
 

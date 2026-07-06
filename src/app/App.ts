@@ -78,6 +78,7 @@ export class App {
   private readonly input: InputManager;
   private readonly db = new LocalDatabase();
   private readonly state = new GameState();
+  private readonly i18n = new I18n();
   private readonly assetLoader = new AssetLoader();
   private readonly preloadManager = new PreloadManager(this.assetLoader);
   private readonly dialogueUI: DialogueUI;
@@ -94,7 +95,10 @@ export class App {
   constructor(private readonly elements: AppElements) {
     this.renderer = new CanvasRenderer(elements.canvas);
     this.input = new InputManager(elements.canvas);
-    this.dialogueUI = new DialogueUI(elements.dialogueRoot, () => ({
+    const localeData = { en: enLocale, it: itLocale, de: deLocale, hu: huLocale, pl: plLocale, sv: svLocale, ro: roLocale };
+    for (const locale of LOCALES) this.i18n.register(locale, localeData[locale]);
+
+    this.dialogueUI = new DialogueUI(elements.dialogueRoot, this.i18n, () => ({
       playerName: this.state.playerName || this.state.currentCharacter,
       pronoun: this.state.playerPronoun
     }));
@@ -135,10 +139,8 @@ export class App {
     await this.db.openDatabase();
     await this.preload(manifest);
 
-    // i18n: register all locales, restore the saved language before any UI.
-    const i18n = new I18n();
-    const localeData = { en: enLocale, it: itLocale, de: deLocale, hu: huLocale, pl: plLocale, sv: svLocale, ro: roLocale };
-    for (const locale of LOCALES) i18n.register(locale, localeData[locale]);
+    // i18n: restore the saved language before any UI shows.
+    const i18n = this.i18n;
     const settings = new SettingsRepository(this.db);
     const savedLocale = await settings.get<LocaleCode>("locale");
     if (savedLocale && LOCALES.includes(savedLocale)) i18n.setLocale(savedLocale);
@@ -157,7 +159,8 @@ export class App {
       playable: playableData.playable as PlayableCharacter[],
       prologue: prologueData.panels,
       canContinue,
-      baseUrl: import.meta.env.BASE_URL
+      baseUrl: import.meta.env.BASE_URL,
+      i18n
     });
     const choice = await opening.run();
 
@@ -221,7 +224,8 @@ export class App {
         activePlacements(scheduleFile, sceneId, clock.timePart, (conditions) =>
           this.effectResolver.checkAll(conditions)
         ),
-      clock
+      clock,
+      i18n
     };
 
     this.scenes = {
@@ -258,7 +262,8 @@ export class App {
       this.elements.appRoot,
       new OfflineAssetCache(
         collectAssetUrls(manifest, animationsData as AnimationsData, import.meta.env.BASE_URL)
-      )
+      ),
+      i18n
     );
 
     new ReportButton({
@@ -268,13 +273,16 @@ export class App {
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,
       session,
-      saveStatus: this.elements.saveStatus
+      saveStatus: this.elements.saveStatus,
+      i18n
     });
 
     this.loop = new GameLoop({
       update: (dt) => this.activeScene().update(dt),
       render: () => this.activeScene().render()
     });
+
+    this.elements.saveStatus.textContent = i18n.t("ui.save.ready");
 
     const bootScene = this.activeScene();
     bootScene.enter();

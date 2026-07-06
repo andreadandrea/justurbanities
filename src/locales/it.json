@@ -24,6 +24,620 @@
     },
     "language": {
       "label": "Lingua"
+    },
+    "opening": {
+      "subtitle": "Eurbanities and Fragmentation",
+      "newGame": "Nuova partita",
+      "continue": "Continua",
+      "skipIntro": "Salta l'introduzione",
+      "chooseCharacter": "Scegli il tuo personaggio",
+      "next": "Avanti",
+      "selectTitle": "Stessa città, percorsi diversi",
+      "selectHint": "Chi entra in assemblea stasera?",
+      "createTitle": "Crea il tuo cittadino",
+      "name": "Nome",
+      "pronoun": "Pronome",
+      "back": "Indietro",
+      "enter": "Entra a Eurbania",
+      "namePlaceholder": "es. Alex",
+      "pronounShe": "lei / she",
+      "pronounHe": "lui / he",
+      "pronounThey": "loro / they"
+    },
+    "report": {
+      "button": "📄 Report",
+      "hint": "Scarica il report educativo (JSON)",
+      "downloaded": "Report scaricato:"
+    },
+    "save": {
+      "ready": "Salvataggio locale pronto",
+      "saved": "Salvato in locale"
+    },
+    "loading": {
+      "assets": "Caricamento asset…"
+    },
+    "offline": {
+      "title": "Gioco offline",
+      "checking": "Verifica…",
+      "download": "Scarica gli asset per giocare offline",
+      "clear": "Svuota la cache locale degli asset",
+      "toggleHint": "Cache asset offline",
+      "unsupported": "Cache API non disponibile in questo browser.",
+      "ready": "Pronto per l'offline",
+      "partial": "Parziale",
+      "notDownloaded": "Non scaricato",
+      "downloading": "Download",
+      "doneWithIssues": "Completato con problemi",
+      "failed": "Download non riuscito.",
+      "toggle": "📦 Offline"
+    },
+    "options": {
+      "hint": "Opzioni"
+    }
+  },
+  "content": {
+    "dialogues": {
+      "anna_intro": {
+        "start": {
+          "text": "Bene, ce l'hai fatta, {playerName}. La mappa della città non parla solo di strade. Parla di chi può davvero usarle.",
+          "choices": {
+            "listen": "Ascolta con attenzione."
+          }
+        },
+        "map": {
+          "text": "Guarda qui. La stessa città crea percorsi diversi per persone diverse.",
+          "choices": {
+            "close": "Apri la mappa più tardi."
+          }
+        }
+      },
+      "ben_intro": {
+        "start": {
+          "text": "L'accessibilità non è una richiesta speciale. È il modo in cui la città diventa pubblica.",
+          "choices": {
+            "ask_barrier": "Chiedi quale barriera sistemare per prima."
+          }
+        },
+        "entrance": {
+          "text": "Comincia dall'ingresso. Se le persone non possono entrare, non possono partecipare.",
+          "choices": {
+            "close": "Prometti di controllare l'ingresso."
+          }
+        }
+      },
+      "crossroads_intro": {
+        "start": {
+          "text": "Il Crossroads. Autobus, bancarelle, scorciatoie e code: è qui che il distretto decide chi arriva, chi aspetta e chi rinuncia.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "crossroads_bus_hub": {
+        "start": {
+          "text": "Main Bus Hub. Tre linee di giorno, una dopo cena. L'orario dà per scontato che nessuno lavori la sera.",
+          "choices": {
+            "note_gap": "Annota la corsa serale mancante.",
+            "leave": "Vai via."
+          }
+        },
+        "noted": {
+          "text": "Lo scrivi. Le prove sono il modo in cui un reclamo diventa una proposta.",
+          "choices": {
+            "close": "Fatto."
+          }
+        }
+      },
+      "crossroads_market": {
+        "start": {
+          "text": "Il mercato è il salotto del distretto: metà delle bancarelle accetta solo contanti, e i venditori conoscono il nome di tutti.",
+          "choices": {
+            "chat": "Chiacchiera con un venditore.",
+            "leave": "Prosegui."
+          }
+        }
+      },
+      "crossroads_narrow_crossing": {
+        "start": {
+          "text": "Un attraversamento stretto tra le auto in sosta. Comodo a piedi, un rompicapo col passeggino, impossibile in carrozzina. Ben l'avrebbe già misurato.",
+          "choices": {
+            "measure": "Prendi nota per Ben.",
+            "leave": "Passa di lato."
+          }
+        }
+      },
+      "crossroads_info_point": {
+        "start": {
+          "text": "Punto Informazioni Civico. Orari di apertura: più corti della coda. Eppure la bacheca è lavoro onesto.",
+          "choices": {
+            "read": "Leggi la bacheca.",
+            "leave": "Prosegui."
+          }
+        }
+      },
+      "anna_n01": {
+        "start": {
+          "text": "Tre interviste, tre distretti, nessuna soluzione in tasca. Se torni con una proposta invece che con tre storie, hai sbagliato missione.",
+          "choices": {
+            "engage": "Vado ad ascoltare. Anche i silenzi.",
+            "shortcut": "Ho già parlato con gente, so cosa serve."
+          }
+        },
+        "resolution": {
+          "text": "(sfogliando le empathy map) Guarda: tre quartieri, tre parole diverse per dire “nessuno torna mai”. Ecco da dove si comincia.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "ben_n02": {
+        "start": {
+          "text": "Quell'attraversamento blocca bambini, anziani e chiunque abbia le ruote — di carrozzina o di passeggino. Il Comune “valuterà”. Io ho smesso di aspettare i verbi al futuro.",
+          "choices": {
+            "engage": "Facciamo l'intervento temporaneo E la proposta vera.",
+            "shortcut": "Segnalo il problema all'ufficio tecnico e via."
+          }
+        },
+        "resolution": {
+          "text": "(provando la pedana) Regge. Sai qual è la differenza tra oggi e un ticket? Che stasera Lia attraversa da sola.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "alexandria_n03": {
+        "start": {
+          "text": "Posso darvi una foto con la fascia tricolore, o un mandato con delega e budget. La prima è gratis. Il secondo me lo dovete rendere difendibile in consiglio.",
+          "choices": {
+            "engage": "Ecco nomi, date e verifiche.",
+            "shortcut": "Facciamo l'evento, al resto si penserà."
+          }
+        },
+        "resolution": {
+          "text": "(firmando) Sappiate che se saltate una verifica, il consiglio me lo rinfaccerà per anni. (sorride) Non saltatela.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "donald_n04": {
+        "start": {
+          "text": "Trent'anni fa quel molo era una festa continua. Ora volete “riqualificarlo”. Riqualificare, participio del verbo dimenticare. (pausa teatrale) Convincimi del contrario.",
+          "choices": {
+            "engage": "Raccontamelo. Lo mettiamo dentro il progetto, non al posto del progetto.",
+            "shortcut": "Il passato è passato, Donald."
+          }
+        },
+        "resolution": {
+          "text": "(alla cena, commosso) Va bene, va bene. Se la memoria serve ad aprire il futuro invece che a sbarrarlo… allora invecchiare è stato utile.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "sigrid_n05": {
+        "start": {
+          "text": "Un sabato, venti mani, zero soldi. Il cortile 17 può diventare una sala comune — o restare il posto dove il Corporate mette il suo rendering. Scegli il sabato.",
+          "choices": {
+            "engage": "Organizzo io squadre e materiali.",
+            "shortcut": "Chiamiamo una ditta, prima o poi."
+          }
+        },
+        "resolution": {
+          "text": "(pulendosi le mani) Non è finito. Le cose comuni non finiscono mai — si mantengono. È il loro bello.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "ruben_n06": {
+        "start": {
+          "text": "Ho due bozze. “IL CENTRO DEI SOLITI NOTI” — dodicimila click garantiti. Oppure la storia vera, che è più lenta e meno sexy. Il direttore vuole la prima entro stasera. Dammi la seconda.",
+          "choices": {
+            "engage": "Eccoti i conti, le foto e tre persone da intervistare. Verifica tutto.",
+            "shortcut": "Scrivi quello che vuoi, non ho tempo."
+          }
+        },
+        "resolution": {
+          "text": "(mostrando il pezzo) “La partecipazione non è morta: ha cambiato indirizzo.” Meno click. Più vero. (sospira) Odio quando mi migliorate.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "abdullah_n07": {
+        "start": {
+          "text": "Qui passano cento voci al giorno: ottanta vere, venti velenose. Io le smisto a orecchio. Aiutami a farne un punto informazioni vero — senza spegnere il chiacchiericcio, che è metà del quartiere.",
+          "choices": {
+            "engage": "Bacheca verificata, cinque lingue, e il tuo orecchio resta il direttore.",
+            "shortcut": "Basta un cartello con gli orari del Comune."
+          }
+        },
+        "resolution": {
+          "text": "(sistemando la bacheca) Guarda: annunci in urdu, polacco e italiano, e sotto i biglietti della gente come sempre. Ordine e calore. Come il tè.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "tom_n08": {
+        "start": {
+          "text": "Tutti mi chiedono di “chiudere un occhio”. Io ne ho due, e un regolamento. Però… c'è l'articolo 9: patti di collaborazione. Nessuno lo usa mai perché richiede lavoro. Ti va di lavorare?",
+          "choices": {
+            "engage": "Scriviamo il patto come si deve, comma per comma.",
+            "shortcut": "Apriamo e basta, poi si vedrà."
+          }
+        },
+        "resolution": {
+          "text": "(timbrando) Patto di collaborazione n. 1. (quasi sorride) Sa che le regole, usate bene, sono commoventi?",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "gwen_n09": {
+        "start": {
+          "text": "L'ultima corsa utile da Hill Gardens è alle 19:40. Chi fa il turno di sera torna a piedi, quaranta minuti, al buio. Ho i numeri in testa da anni: nessuno me li ha mai chiesti.",
+          "choices": {
+            "engage": "Te li chiedo io. Contiamo insieme una settimana di corse.",
+            "shortcut": "Manda un reclamo all'azienda."
+          }
+        },
+        "resolution": {
+          "text": "(col dossier sul cruscotto) Ventitré persone a piedi ogni sera. Ora è scritto. Vediamo se al tavolo pesa più il mio contachilometri o il loro foglio Excel.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "giorgia_n10": {
+        "start": {
+          "text": "Ho fatto il conto: dodici volontari attivi, quattro sull'orlo del burnout. Se crolla uno, crollano i turni di tutti. La cura di chi cura non è un lusso: è manutenzione della rete.",
+          "choices": {
+            "engage": "Turni con riposo obbligatorio, coppie, e il diritto di dire no.",
+            "shortcut": "Sono adulti, si regolano da soli."
+          }
+        },
+        "resolution": {
+          "text": "(appendendo il turnario) “Riposare è partecipare.” L'ha proposta Piotr, la frase. È tornato.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "amin_n12": {
+        "start": {
+          "text": "Guarda il mio bar: tavolo dei pensionati, tavolo dei ragazzi, tavolo di quelli nuovi. Tre isole. Stessi muri, zero parole tra loro. Ho lo spazio, mi manca la scusa.",
+          "choices": {
+            "engage": "Serate a tema e bacheca comune. La scusa la costruiamo insieme.",
+            "shortcut": "Metti un cartello “parlate tra voi”."
+          }
+        },
+        "resolution": {
+          "text": "(indicando la sala) Giovedì: torneo di backgammon, Donald contro i ragazzi di Youth Court. Ha perso e vuole la rivincita. (sottovoce) Quando girano le voci false, ora qui si smontano da sole: si conoscono.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "matilda_n13": {
+        "start": {
+          "text": "Vasi alle finestre, una panchina dipinta, l'aiuola adottata. Piccolo? Sì. Ma un posto curato dice “qui qualcuno resta”. L'importante è che resti nelle mani dei residenti — non diventi vetrina per turisti.",
+          "choices": {
+            "engage": "Verde minimo, co-curato, con i nomi di chi se ne occupa.",
+            "shortcut": "Chiamiamo un vivaista e via."
+          }
+        },
+        "resolution": {
+          "text": "(annaffiando con una bambina) Le regole sono tre: chi pianta, cura; chi cura, firma; chi firma, racconta. La bellezza senza custodi è solo scenografia.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "lia_n14": {
+        "start": {
+          "text": "Voi adulti misurate le strade coi metri. Io le misuro con “dove posso andare da sola”. Vuoi vedere la mia mappa? È piena di buchi.",
+          "choices": {
+            "engage": "Guidami tu. Segno tutto quello che dici.",
+            "shortcut": "I bambini non decidono queste cose."
+          }
+        },
+        "resolution": {
+          "text": "(alla bacheca, mostrando la mappa appesa) Quella X rossa l'ho messa io. E l'hanno copiata nel documento vero. (a Zoe) Vedi? A volte ci ascoltano.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "siobhan_n15": {
+        "start": {
+          "text": "Tutti parlano del clima al futuro. Io ho i tombini di Lake Edge pieni di foglie adesso, e una lista di case basse che con due ore di pioggia vanno sotto. La prevenzione è noiosa: per questo non la fa nessuno.",
+          "choices": {
+            "engage": "Giornata canali puliti + lista evacuazione + punto di raccolta. Roba noiosa, facciamola.",
+            "shortcut": "Se succede, chiamiamo la protezione civile."
+          }
+        },
+        "resolution": {
+          "text": "(guardando il cielo) Ora possiamo anche sperare che non serva. Sperare DOPO aver pulito i canali è tutta un'altra speranza.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "mrs_viveca_n16": {
+        "start": {
+          "text": "Ho insegnato per quarant'anni. Ora vedo adulti intelligenti tacere alle riunioni perché temono l'errore di grammatica. La lingua è la prima porta della città. Io ho ancora la chiave, se a qualcuno interessa.",
+          "choices": {
+            "engage": "Corso di lingua e cittadinanza. E i suoi ex alunni come tutor.",
+            "shortcut": "Ci sono le app per imparare le lingue."
+          }
+        },
+        "resolution": {
+          "text": "(dopo la prima lezione) La signora Anh oggi ha fatto una domanda in pubblico. Congiuntivo sbagliato, coraggio perfetto. (si sistema gli occhiali) Correggeremo il congiuntivo.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "marta_n17": {
+        "start": {
+          "text": "I giornali raccontano Hill Gardens solo in cronaca nera. Io so disegnare — e i ragazzi del muro sanno cosa va disegnato. Contro-narrazione, si chiama. Ma se la firmo solo io, è un altro furto.",
+          "choices": {
+            "engage": "Co-creazione: i residenti scelgono le storie, tu le disegni, firmate insieme.",
+            "shortcut": "Fai tu, sei l'artista."
+          }
+        },
+        "resolution": {
+          "text": "(davanti al murale firmato da 14 mani) Il mio nome è il più piccolo. Mai stata così contenta di un cattivo piazzamento.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "pablo_n11": {
+        "start": {
+          "text": "Io consegno anche dove i citofoni non hanno più il nome. Il signor Ferro, terzo piano: sono l'unica voce che sente in settimana. E come lui ne conosco altri venti. Nessuna lista li contiene.",
+          "choices": {
+            "show": "Mostrami chi è isolato.",
+            "later": "Più tardi."
+          }
+        },
+        "resolution": {
+          "text": "(quasi piangendo) Il signor Ferro ha offerto il caffè a due vicini. Ventitré anni che non apriva a nessuno. Ventitré! (si soffia il naso) Scusate, è la polvere.",
+          "choices": {
+            "close": "…"
+          }
+        },
+        "choose": {
+          "text": "Eccoli: anziani soli, nuovi arrivati. Cosa facciamo?",
+          "choices": {
+            "connect": "Facciamola noi, la lista. Con discrezione, e con un volto per ogni nome.",
+            "survey": "Solo un censimento, per ora."
+          }
+        }
+      },
+      "corporate_n18": {
+        "start": {
+          "text": "(voce piatta, contratto già stampato) Ristrutturazione completa, novanta giorni, gestione ventennale a noi. Il quartiere avrà uno spazio bellissimo. L'uso, be'… si regola. Firmi qui.",
+          "choices": {
+            "accept": "Firma il contratto. Novanta giorni, uno spazio bellissimo.",
+            "negotiate": "Controfirma il patto civico: orari pubblici garantiti, tariffe sociali, verifica annuale.",
+            "refuse": "Abbiamo già novanta vicini. Non ci servono novanta giorni."
+          }
+        },
+        "resolution": {
+          "text": "(richiudendo la valigetta, senza rancore) Interessante. Di solito le città stanche firmano. (alla porta) Torneremo quando sarete stanchi.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      }
+    },
+    "quests": {
+      "P01": {
+        "title": "The Center Holds?",
+        "description": "Capisci perché il Community Center sta perdendo la sua funzione civica.",
+        "objectives": {
+          "talk_to_anna": "Parla con Anna della mappa civica.",
+          "talk_to_ben": "Parla con Ben dell'accessibilità."
+        }
+      },
+      "P02": {
+        "title": "Same City, Different Routes",
+        "description": "Scopri come lo stesso distretto crea percorsi diversi per persone diverse.",
+        "objectives": {
+          "choose_route": "Scegli la route di un personaggio giocabile."
+        }
+      },
+      "C01": {
+        "title": "Arriving Is Already Participation",
+        "description": "Indaga le barriere di mobilità intorno al Crossroads.",
+        "objectives": {
+          "reach_bus_hub": "Raggiungi il Main Bus Hub."
+        }
+      },
+      "N01": {
+        "title": "Listen Before Fixing",
+        "description": "Intervista almeno tre persone in distretti diversi prima di proporre soluzioni.",
+        "objectives": {
+          "interview_three": "Ascolta 3 persone in distretti diversi."
+        }
+      },
+      "N02": {
+        "title": "The Crossing",
+        "description": "Rendi sicuro un attraversamento che blocca bambini, anziani e disabili.",
+        "objectives": {
+          "temp_fix": "Intervento temporaneo sull'attraversamento.",
+          "propose": "Proposta istituzionale."
+        }
+      },
+      "N03": {
+        "title": "Mandate, Not a Photo Op",
+        "description": "Trasforma l'attenzione politica in un impegno reale con responsabilità chiare.",
+        "objectives": {
+          "secure_mandate": "Ottieni un impegno con responsabilità definite."
+        }
+      },
+      "N04": {
+        "title": "Memory Is Not Nostalgia",
+        "description": "Usa la memoria del quartiere per legittimare il nuovo invece di frenarlo.",
+        "objectives": {
+          "collect_memory": "Raccogli memoria e collegala a una proposta nuova."
+        }
+      },
+      "N05": {
+        "title": "The Repair Day",
+        "description": "Riparazione collettiva di uno spazio con risorse limitate (mini-gioco Modular Repair).",
+        "objectives": {
+          "repair": "Ripara e adatta lo spazio.",
+          "plan": "Definisci un piano di gestione."
+        }
+      },
+      "N06": {
+        "title": "The Story Behind the Headline",
+        "description": "Scegli se Ruben alimenta o disinnesca la voce falsa.",
+        "objectives": {
+          "provide_material": "Fornisci materiale autentico per la storia."
+        }
+      },
+      "N07": {
+        "title": "From Rumor to Information",
+        "description": "Trasforma l'edicola in un punto info affidabile e multilingue.",
+        "objectives": {
+          "setup_info": "Allestisci il punto info multilingue."
+        }
+      },
+      "N08": {
+        "title": "Rules and Open Doors",
+        "description": "Trova un modo regolare per aprire una sala comune (mini-gioco Commons Access).",
+        "objectives": {
+          "agreement": "Stabilisci un accordo d'uso con responsabilità."
+        }
+      },
+      "N09": {
+        "title": "The Last Bus",
+        "description": "Documenta un collegamento mancante e costruisci una proposta.",
+        "objectives": {
+          "document": "Documenta il problema di mobilità.",
+          "proposal": "Costruisci la proposta."
+        }
+      },
+      "N10": {
+        "title": "Care for the Carers",
+        "description": "Introduci pratiche di riposo e distribuzione del carico nella rete.",
+        "objectives": {
+          "anti_burnout": "Attiva pratiche anti-burnout."
+        }
+      },
+      "N11": {
+        "title": "Nobody Is Off the Map",
+        "description": "Individua residenti isolati e collegali a una rete di cura.",
+        "objectives": {
+          "find_isolated": "Individua gli abitanti isolati.",
+          "connect": "Collegali a una rete di cura."
+        }
+      },
+      "N12": {
+        "title": "Mixed Tables",
+        "description": "Trasforma il bar in luogo d'incontro tra gruppi separati.",
+        "objectives": {
+          "mixed_tables": "Organizza serate tematiche e bacheca comune."
+        }
+      },
+      "N13": {
+        "title": "Care Made Visible",
+        "description": "Verde minimo co-curato dai residenti, che resta nelle loro mani.",
+        "objectives": {
+          "green": "Realizza interventi verdi co-curati."
+        }
+      },
+      "N14": {
+        "title": "Through a Child's Eyes",
+        "description": "Mappa la città dal punto di vista dei bambini.",
+        "objectives": {
+          "child_map": "Crea la mappa dei bambini."
+        }
+      },
+      "N15": {
+        "title": "Before the Water Rises",
+        "description": "Prepara reti e percorsi prima della crisi climatica (mini-gioco Crisis Response Map).",
+        "objectives": {
+          "prepare": "Prepara la risposta climatica del quartiere."
+        }
+      },
+      "N16": {
+        "title": "Words to Belong",
+        "description": "Corso di lingua e memoria intergenerazionale per partecipare davvero.",
+        "objectives": {
+          "course": "Avvia il corso lingua + memoria."
+        }
+      },
+      "N17": {
+        "title": "Don't Tell Our Story Without Us",
+        "description": "Contro-narrazione co-creata con residenti e giovani (mini-gioco Story Routes).",
+        "objectives": {
+          "co_create": "Co-crea la contro-narrazione del quartiere."
+        }
+      },
+      "N18": {
+        "title": "The Offer",
+        "description": "Anti-quest: accetta, negozia o rifiuta l'offerta speculativa.",
+        "objectives": {
+          "decide_offer": "Decidi come rispondere all'offerta."
+        }
+      }
+    },
+    "crises": {
+      "CRISIS_HEATWAVE": {
+        "title": "Heatwave"
+      },
+      "CRISIS_RUMOR": {
+        "title": "The Rumor"
+      },
+      "CRISIS_OFFER": {
+        "title": "The Offer"
+      },
+      "CRISIS_CLOSURE": {
+        "title": "The Closure"
+      },
+      "CRISIS_FLOOD": {
+        "title": "Storm / Flood"
+      }
+    },
+    "prologue": {
+      "p1": {
+        "title": "Eurbania",
+        "text": "Una città europea di medie dimensioni, come tante. Tram quasi puntuali, piazze che si riempiono e si svuotano, vicini che si salutano senza sapersi davvero il nome."
+      },
+      "p2": {
+        "title": "The Fragmentation",
+        "text": "Da qualche tempo qualcosa tira la città da parti diverse. Non una tempesta, non una crisi da telegiornale — solo distanza. Persone che si ritirano in casa, spazi condivisi che si spengono, decisioni prese su tutti da sempre meno persone."
+      },
+      "p3": {
+        "title": "Il Community Center",
+        "text": "Un posto prova ancora a tenere insieme i fili. Le porte sono aperte, la bacheca è piena, e stasera c'è più gente del solito: la città ha convocato un'assemblea, e qualcuno deve presentarsi."
+      },
+      "p4": {
+        "text": "Cinque persone potrebbero varcare quella porta. Stasera, una di loro sei tu. Chi sarai?"
+      }
+    },
+    "playable": {
+      "maya": {
+        "tagline": "Lavoratrice turnista e madre di Zoe. Per lei la città è un incastro di orari che tengono a malapena."
+      },
+      "samir": {
+        "tagline": "Un corriere che conosce ogni scorciatoia e ogni porta chiusa."
+      },
+      "elena": {
+        "tagline": "Una funzionaria del Town Hall che deve trasformare l'ascolto in decisioni reali, senza promettere troppo."
+      },
+      "luca": {
+        "tagline": "Un piccolo commerciante che prova a servire il quartiere senza andare a fondo."
+      },
+      "custom": {
+        "tagline": "La tua route attraverso Eurbania: scegli chi aiutare, sapendo che non puoi aiutare tutti."
+      }
     }
   }
 }

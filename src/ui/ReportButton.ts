@@ -4,6 +4,7 @@ import type { QuestManager } from "../game/quest/QuestManager";
 import type { ProgressRepository } from "../storage/ProgressRepository";
 import type { SyncQueue } from "../sync/SyncQueue";
 import type { LocalSession } from "../storage/LocalDatabase";
+import type { I18n } from "../i18n/I18n";
 
 type ReportButtonDeps = {
   root: HTMLElement;
@@ -13,6 +14,7 @@ type ReportButtonDeps = {
   syncQueue: SyncQueue;
   session: LocalSession;
   saveStatus: HTMLElement;
+  i18n: I18n;
 };
 
 /**
@@ -25,8 +27,8 @@ export class ReportButton {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "report-toggle";
-    button.textContent = "📄 Report";
-    button.title = "Download the educational report (JSON)";
+    button.textContent = deps.i18n.t("ui.report.button");
+    button.title = deps.i18n.t("ui.report.hint");
     button.addEventListener("click", () => void this.generate());
     deps.root.appendChild(button);
   }
@@ -58,6 +60,6 @@ export class ReportButton {
     });
     await syncQueue.enqueue("progress_event", event.id, "create", event);
 
-    saveStatus.textContent = `Report downloaded: ${fileName}`;
+    saveStatus.textContent = `${this.deps.i18n.t("ui.report.downloaded")} ${fileName}`;
   }
 }

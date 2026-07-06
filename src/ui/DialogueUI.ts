@@ -1,4 +1,5 @@
 import { interpolateDialogueText, type InterpolationContext } from "../game/dialogue/interpolate";
+import type { I18n } from "../i18n/I18n";
 
 export type DialogueChoice = {
   id: string;
@@ -8,12 +9,15 @@ export type DialogueChoice = {
 export class DialogueUI {
   constructor(
     private readonly root: HTMLElement,
+    /** Resolves content.* keys coming from the data files. */
+    private readonly i18n?: I18n,
     /** Supplies the current player identity for {playerName}/{they} tokens. */
     private readonly interpolation?: () => InterpolationContext
   ) {}
 
   private resolve(text: string): string {
-    return this.interpolation ? interpolateDialogueText(text, this.interpolation()) : text;
+    const localized = this.i18n ? this.i18n.t(text) : text;
+    return this.interpolation ? interpolateDialogueText(localized, this.interpolation()) : localized;
   }
 
   show(config: {

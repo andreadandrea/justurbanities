@@ -3,6 +3,7 @@ import { playableSchema, prologueSchema, validateData } from "../../src/data/val
 import { GameState } from "../../src/game/GameState";
 import playableData from "../../src/data/playable.json";
 import prologueData from "../../src/data/prologue.json";
+import en from "../../src/locales/en.json";
 
 describe("opening data", () => {
   it("playable.json is valid and exposes exactly one customizable character", () => {
@@ -18,16 +19,18 @@ describe("opening data", () => {
   });
 
   it("taglines follow Character Bible canon", () => {
-    const parsed = validateData("playable.json", playableSchema, playableData);
-    const byId = new Map(parsed.playable.map((c) => [c.id, c]));
+    const taglines = en.content.playable;
     // Maya is a shift worker and Zoe's mother — never "a student"
-    expect(byId.get("maya")?.tagline.toLowerCase()).not.toContain("student");
-    expect(byId.get("maya")?.tagline).toContain("Zoe");
+    expect(taglines.maya.tagline.toLowerCase()).not.toContain("student");
+    expect(taglines.maya.tagline).toContain("Zoe");
     // Luca is a small business owner (economic route), not a care-at-home father
-    expect(byId.get("luca")?.tagline.toLowerCase()).toMatch(/business|shop/);
-    expect(byId.get("luca")?.tagline.toLowerCase()).not.toContain("father");
+    expect(taglines.luca.tagline.toLowerCase()).toMatch(/business|shop/);
+    expect(taglines.luca.tagline.toLowerCase()).not.toContain("father");
     // Elena represents the Town Hall (institutional route)
-    expect(byId.get("elena")?.tagline).toContain("Town Hall");
+    expect(taglines.elena.tagline).toContain("Town Hall");
+    // and every tagline field in the data file is an i18n key
+    const parsed = validateData("playable.json", playableSchema, playableData);
+    for (const c of parsed.playable) expect(c.tagline).toBe(`content.playable.${c.id}.tagline`);
   });
 
   it("prologue.json is valid and non-empty", () => {

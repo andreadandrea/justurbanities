@@ -84,7 +84,7 @@ export class DebugPanel {
       this.section(
         "Active quests",
         questManager.getActiveQuests().flatMap((quest) => [
-          `${quest.id} — ${quest.title}`,
+          `${quest.id} — ${this.deps.i18n.t(quest.title)}`,
           ...quest.objectives.map((o) => `  ${o.completed ? "✓" : "·"} ${o.id}`)
         ]),
         ["(none)"]
