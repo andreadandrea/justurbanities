@@ -34,6 +34,10 @@ function world() {
   return { state, clock, quests, resolver, dialogues, director };
 }
 
+function npcId(director: ReturnType<typeof world>["director"], dialogueId: string) {
+  return director.list().find((entry) => entry.dialogueId === dialogueId);
+}
+
 function npc(director: ReturnType<typeof world>["director"], id: string) {
   const found = director.list().find((entry) => entry.id === id);
   if (!found) throw new Error(`NPC ${id} not on stage`);
@@ -66,10 +70,29 @@ describe("NpcDirector — N01 (Anna) end-to-end in-world", () => {
     // talkedTo_anna is set, prologue complete, N01 still locked -> quest offer wins.
     expect(npc(director, "anna").dialogueId).toBe("anna_n01");
 
-    // Play N01 and engage (the relational route).
+    // Play N01: engage starts Mission 1 — a week of questions, not answers.
     dialogues.start("anna_n01");
     expect(quests.getQuestStatus("N01")).toBe("active");
     dialogues.choose("engage");
+    expect(quests.getQuestStatus("N01")).toBe("active"); // interviews pending
+
+    // Three interviews in three districts build the empathy maps.
+    for (const [scene, dialogueId] of [
+      ["lake_edge", "interview_viveca"],
+      ["old_blocks", "interview_pablo"],
+      ["hill_gardens", "interview_gwen"]
+    ] as const) {
+      director.setScene(scene);
+      expect(npcId(director, dialogueId), `${dialogueId} not offered in ${scene}`).toBeDefined();
+      dialogues.start(dialogueId);
+      dialogues.choose("ask");
+    }
+
+    // Anna's resolution closes the mission.
+    director.setScene("community_center");
+    expect(npc(director, "anna").dialogueId).toBe("anna_n01_resolution");
+    dialogues.start("anna_n01_resolution");
+    dialogues.choose("close");
     expect(quests.getQuestStatus("N01")).toBe("completed");
     director.refresh();
 

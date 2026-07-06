@@ -758,6 +758,65 @@
             "look": "Look around."
           }
         }
+      },
+      "interview_viveca": {
+        "start": {
+          "text": "You want to know what's missing? Ten people will have told you already, I imagine. (studying you) I'll tell you what used to be here: an after-school room, on Thursdays. They closed it “temporarily” three years ago.",
+          "choices": {
+            "ask": "“What would change if it reopened tomorrow?”",
+            "rephrase": "“Why did they close it?”",
+            "silence": "(Wait in silence.) “…And in any case, not one of the ten ever came back to tell me what they did with my answers.”"
+          }
+        }
+      },
+      "interview_pablo": {
+        "start": {
+          "text": "What's missing? Names on the doorbells. I deliver to twenty doors a week where I'm the only voice they hear. Write that down — if you're really writing.",
+          "choices": {
+            "ask": "“Who are they? Tell me one story.”",
+            "rephrase": "“What would help you help them?”",
+            "silence": "(Wait in silence.) “…Nobody ever waits for the second half of my answers. It's longer than the first.”"
+          }
+        }
+      },
+      "interview_gwen": {
+        "start": {
+          "text": "Ask me who stopped boarding the bus. Mrs Anh, evening shift, since they cut the 19:40. The two kids from the towers. The man with the crutch. My list is a timetable of absences.",
+          "choices": {
+            "ask": "“What would put them back on the bus?”",
+            "rephrase": "“When exactly did each one stop?”",
+            "silence": "(Wait in silence.) “…You're the first one who didn't interrupt me. That's already something.”"
+          }
+        }
+      },
+      "anna_n01_resolution": {
+        "start": {
+          "text": "(leafing through the empathy maps) Look: three neighbourhoods, three different ways of saying “nobody ever comes back”. That's where we start.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "elena_e01": {
+        "start": {
+          "text": "Elena convenes the first knowledge table. TOM: “They are not qualified.” ELENA: “They know what time the underpass turns frightening and which step breaks the shopping trolleys — none of our consultants knows that. THAT is qualification.”",
+          "choices": {
+            "bring_maps": "Bring the three empathy maps to the table.",
+            "too_few": "(You have fewer than three interviews: the table would be technicians talking to technicians.)"
+          }
+        },
+        "table": {
+          "text": "Viveca's Thursdays, Pablo's unnamed doorbells, Gwen's timetable of absences — read aloud, next to the budget sheets. TOM (after a silence): “…The step measurement. Where did you get it?” Each map becomes an amendment to one of this chapter's interventions.",
+          "choices": {
+            "close": "…"
+          }
+        },
+        "too_few": {
+          "text": "ELENA: “Come back when you've really listened. A table with empty chairs on the experts' side is exactly the old way, with better wording.” (Mapping too little has a cost: the mission waits.)",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -911,6 +970,13 @@
         "description": "Anti-quest: accept, negotiate or refuse the speculative offer.",
         "objectives": {
           "decide_offer": "Decide how to answer the offer."
+        }
+      },
+      "E01": {
+        "title": "Experts of Everyday Life",
+        "description": "Bring three residents' empathy maps to the Town Hall knowledge table, alongside the technicians.",
+        "objectives": {
+          "knowledge_table": "Hold the first knowledge table with 3 empathy maps."
         }
       }
     },

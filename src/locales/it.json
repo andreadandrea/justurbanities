@@ -758,6 +758,65 @@
             "look": "Guardati intorno."
           }
         }
+      },
+      "interview_viveca": {
+        "start": {
+          "text": "Vuole sapere cosa manca? Gliel'avranno già detto in dieci, immagino. (studiandoti) Le dico cosa c'era: una sala doposcuola, il giovedì. L'hanno chiusa “temporaneamente” tre anni fa.",
+          "choices": {
+            "ask": "«Cosa cambierebbe se riaprisse domani?»",
+            "rephrase": "«Perché l'hanno chiusa?»",
+            "silence": "(Aspetta in silenzio.) «…E comunque, dei dieci, nessuno è mai tornato a dirmi cosa se n'è fatto delle mie risposte.»"
+          }
+        }
+      },
+      "interview_pablo": {
+        "start": {
+          "text": "Cosa manca? I nomi sui citofoni. Consegno a venti porte a settimana dove sono l'unica voce che sentono. Lo scriva — se scrive davvero.",
+          "choices": {
+            "ask": "«Chi sono? Mi racconti una storia.»",
+            "rephrase": "«Cosa la aiuterebbe ad aiutarli?»",
+            "silence": "(Aspetta in silenzio.) «…Nessuno aspetta mai la seconda metà delle mie risposte. È più lunga della prima.»"
+          }
+        }
+      },
+      "interview_gwen": {
+        "start": {
+          "text": "Mi chieda chi ha smesso di salire sul bus. La signora Anh, turno serale, da quando hanno tagliato le 19:40. I due ragazzi delle torri. L'uomo con la stampella. La mia lista è un orario di assenze.",
+          "choices": {
+            "ask": "«Cosa li rimetterebbe sul bus?»",
+            "rephrase": "«Quando esattamente ha smesso ciascuno?»",
+            "silence": "(Aspetta in silenzio.) «…Lei è il primo che non mi interrompe. È già qualcosa.»"
+          }
+        }
+      },
+      "anna_n01_resolution": {
+        "start": {
+          "text": "(sfogliando le mappe d'empatia) Guarda: tre quartieri, tre parole diverse per dire “nessuno torna mai”. Ecco da dove si comincia.",
+          "choices": {
+            "close": "…"
+          }
+        }
+      },
+      "elena_e01": {
+        "start": {
+          "text": "Elena convoca il primo tavolo dei saperi. TOM: «Non sono qualificati.» ELENA: «Sanno a che ora il sottopasso fa paura e quale gradino rompe i carrelli della spesa — nessuno dei nostri consulenti lo sa. QUESTA è la qualifica.»",
+          "choices": {
+            "bring_maps": "Porta le tre mappe d'empatia al tavolo.",
+            "too_few": "(Hai meno di tre interviste: il tavolo sarebbe tecnici che parlano a tecnici.)"
+          }
+        },
+        "table": {
+          "text": "I giovedì di Viveca, i citofoni senza nome di Pablo, l'orario di assenze di Gwen — letti ad alta voce, accanto ai fogli di budget. TOM (dopo un silenzio): «…La misura del gradino. Dove l'avete presa?» Ogni mappa diventa un emendamento a uno degli interventi del capitolo.",
+          "choices": {
+            "close": "…"
+          }
+        },
+        "too_few": {
+          "text": "ELENA: «Torna quando hai ascoltato davvero. Un tavolo con le sedie vuote dal lato degli esperti è esattamente il vecchio metodo, scritto meglio.» (Mappare troppo poco ha un costo: la missione aspetta.)",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -911,6 +970,13 @@
         "description": "Anti-quest: accetta, negozia o rifiuta l'offerta speculativa.",
         "objectives": {
           "decide_offer": "Decidi come rispondere all'offerta."
+        }
+      },
+      "E01": {
+        "title": "Experts of Everyday Life",
+        "description": "Porta le mappe d'empatia di tre residenti al tavolo dei saperi del Town Hall, accanto ai tecnici.",
+        "objectives": {
+          "knowledge_table": "Tieni il primo tavolo dei saperi con 3 mappe d'empatia."
         }
       }
     },
