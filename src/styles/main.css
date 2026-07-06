@@ -329,6 +329,17 @@ body,
   display: none;
 }
 
+.offline-pack {
+  border-top: 1px solid #e2d3b3;
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.offline-pack h4 {
+  margin: 0 0 4px;
+  font-size: 12px;
+}
+
 .offline-panel h3 {
   margin: 0 0 6px;
   font-size: 13px;

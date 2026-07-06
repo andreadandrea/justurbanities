@@ -1,6 +1,12 @@
 import type { AssetManifest } from "./PreloadManager";
+import { variantPath, type ArtVariant } from "./ArtStyle";
 
-export const ASSET_CACHE_NAME = "justurbanities-assets-v1";
+export const ASSET_CACHE_PREFIX = "justurbanities-assets";
+
+/** One Cache bucket per variant pack, cleared independently. */
+export function packCacheName(variant: ArtVariant): string {
+  return `${ASSET_CACHE_PREFIX}-${variant}-v1`;
+}
 
 export type AnimationsData = Record<
   string,
@@ -11,6 +17,8 @@ export type OfflineStatus = {
   total: number;
   cached: number;
   ready: boolean;
+  /** Bytes actually stored in this pack's cache bucket. */
+  sizeBytes: number;
 };
 
 export type DownloadProgress = {
@@ -24,9 +32,23 @@ export type DownloadProgress = {
  * expressions, atlases and the individual sprite frames referenced by
  * animations.json (frame id + .png inside the character's spritesDir).
  * Reference sheets are excluded on purpose (heavy, not used at runtime).
+ *
+ * The `variant` selects the offline pack. Because the runtime fallback
+ * chain is variant → realistic, the animal pack INCLUDES the realistic
+ * paths: an animal-only install must work fully offline even while animal
+ * art is incomplete. Missing variant files just count as failed downloads.
  */
-export function collectAssetUrls(manifest: AssetManifest, animations: AnimationsData, base: string): string[] {
+export function collectAssetUrls(
+  manifest: AssetManifest,
+  animations: AnimationsData,
+  base: string,
+  variant: ArtVariant = "realistic"
+): string[] {
   const urls = new Set<string>();
+  const add = (path: string) => {
+    urls.add(variantPath(path, variant));
+    if (variant !== "realistic") urls.add(path); // fallback safety net
+  };
 
   for (const character of manifest.characters ?? []) {
     const assets = character.generatedAssets;
@@ -34,11 +56,11 @@ export function collectAssetUrls(manifest: AssetManifest, animations: Animations
     const atlasImage = assets?.atlasImage ?? character.atlasImage;
     const atlasJson = assets?.atlasJson ?? character.atlasJson;
 
-    if (icon) urls.add(icon);
-    if (atlasImage) urls.add(atlasImage);
-    if (atlasJson) urls.add(atlasJson);
+    if (icon) add(icon);
+    if (atlasImage) add(atlasImage);
+    if (atlasJson) add(atlasJson);
     for (const portrait of Object.values(assets?.portraits ?? {})) {
-      urls.add(portrait);
+      add(portrait);
     }
 
     const spritesDir = assets?.spritesDir;
@@ -46,7 +68,7 @@ export function collectAssetUrls(manifest: AssetManifest, animations: Animations
     if (spritesDir && characterAnimations) {
       for (const frames of Object.values(characterAnimations.animations)) {
         for (const frame of frames) {
-          urls.add(`${spritesDir}${frame}.png`);
+          add(`${spritesDir}${frame}.png`);
         }
       }
     }
@@ -58,7 +80,10 @@ export function collectAssetUrls(manifest: AssetManifest, animations: Animations
 const DOWNLOAD_CONCURRENCY = 6;
 
 export class OfflineAssetCache {
-  constructor(private readonly urls: string[]) {}
+  constructor(
+    private readonly urls: string[],
+    private readonly cacheName: string = packCacheName("realistic")
+  ) {}
 
   get supported(): boolean {
     return typeof caches !== "undefined";
@@ -66,22 +91,31 @@ export class OfflineAssetCache {
 
   async status(): Promise<OfflineStatus> {
     const total = this.urls.length;
-    if (!this.supported) return { total, cached: 0, ready: false };
+    if (!this.supported) return { total, cached: 0, ready: false, sizeBytes: 0 };
 
-    const cache = await caches.open(ASSET_CACHE_NAME);
+    const cache = await caches.open(this.cacheName);
     let cached = 0;
+    let sizeBytes = 0;
     await Promise.all(
       this.urls.map(async (url) => {
-        if (await cache.match(url)) cached += 1;
+        const match = await cache.match(url);
+        if (match) {
+          cached += 1;
+          try {
+            sizeBytes += (await match.clone().blob()).size;
+          } catch {
+            // size stays best-effort
+          }
+        }
       })
     );
-    return { total, cached, ready: total > 0 && cached === total };
+    return { total, cached, ready: total > 0 && cached === total, sizeBytes };
   }
 
   async download(onProgress: (progress: DownloadProgress) => void): Promise<OfflineStatus> {
     if (!this.supported) throw new Error("Cache API not available in this browser.");
 
-    const cache = await caches.open(ASSET_CACHE_NAME);
+    const cache = await caches.open(this.cacheName);
     const total = this.urls.length;
     let done = 0;
     let failed = 0;
@@ -109,6 +143,6 @@ export class OfflineAssetCache {
 
   async clear(): Promise<void> {
     if (!this.supported) return;
-    await caches.delete(ASSET_CACHE_NAME);
+    await caches.delete(this.cacheName);
   }
 }
