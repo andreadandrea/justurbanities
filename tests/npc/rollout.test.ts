@@ -105,6 +105,24 @@ describe("schedule rollout — all 18 NPC quests", () => {
     }
   });
 
+  it("no placeholder texts remain in the N-quest dialogues (task 2.4)", () => {
+    const dialogueFile = validateData("dialogues.json", dialogueFileSchema, dialoguesData) as DialogueFile;
+    const nDialogues = dialogueFile.dialogues.filter((d) => /_n\d\d$/.test(d.id));
+    expect(nDialogues).toHaveLength(18);
+    for (const dialogue of nDialogues) {
+      // every quest dialogue got its canon resolution beat
+      expect(dialogue.nodes.resolution, `${dialogue.id} has no resolution node`).toBeDefined();
+      for (const node of Object.values(dialogue.nodes)) {
+        expect(node.text).not.toMatch(/Affronta la quest|Scegli la scorciatoia/);
+        for (const choice of node.choices) {
+          expect(choice.label, `${dialogue.id} still has a generic choice label`).not.toMatch(
+            /Affronta la quest|Scegli la scorciatoia/
+          );
+        }
+      }
+    }
+  });
+
   it("every NPC keeps at most one active placement at any scene/time", () => {
     const w = world();
     for (const sceneId of SCENES) {
