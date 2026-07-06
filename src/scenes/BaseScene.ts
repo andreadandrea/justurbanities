@@ -14,7 +14,7 @@ import type { ResourceHud } from "../ui/ResourceHud";
 import type { SpriteRepository } from "../assets/SpriteRepository";
 import { Camera2D } from "../engine/Camera2D";
 import { AnimatedSprite, movementAnimation, type Direction } from "../engine/AnimatedSprite";
-import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/ResourceManager";
+import { cityFilter, cityState } from "../game/resources/ResourceManager";
 import type { NpcPlacement } from "../types/Schedule";
 import { NpcDirector } from "../game/npc/NpcDirector";
 import type { GameClock } from "../game/time/GameClock";
@@ -45,6 +45,8 @@ export type SceneDeps = {
   sessionId: string;
   saveStatus: HTMLElement;
   changeScene: (sceneId: string, spawn: { x: number; y: number }) => void;
+  /** District-level vitality for a scene (global fabric + local repairs). */
+  sceneVitality: (sceneId: string) => number;
   /** Active NPC placements for a scene, given current time and conditions. */
   npcPlacements: (sceneId: string) => NpcPlacement[];
   clock: GameClock;
@@ -233,8 +235,9 @@ export abstract class BaseScene {
     renderer.clear();
     renderer.withCamera(this.camera, () => this.drawScene());
 
-    // The whole city re-colours with the neighbourhood's vitality.
-    const vitality = neighbourhoodVitality(this.deps.gameState.resources);
+    // The city re-colours with vitality — per district: local repairs
+    // bring the colour back HERE first (§5.8, GAMEPLAY_LOOP pillar 1).
+    const vitality = this.deps.sceneVitality(this.sceneId);
     renderer.setColorFilter(cityFilter(cityState(vitality)));
     this.deps.resourceHud.update(this.deps.gameState.resources);
   }

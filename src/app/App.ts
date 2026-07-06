@@ -75,6 +75,7 @@ import prologueData from "../data/prologue.json";
 import crisesData from "../data/crises.json";
 import scheduleData from "../data/schedule.json";
 import { activePlacements } from "../game/npc/NpcSchedule";
+import { districtVitality, questAnchors } from "../game/resources/DistrictVitality";
 import type { ScheduleFile } from "../types/Schedule";
 
 type AppElements = {
@@ -245,6 +246,7 @@ export class App {
     // depend on the current part of day.
     const clock = new GameClock(this.state);
 
+    const anchors = questAnchors(scheduleFile);
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
       input: this.input,
@@ -268,7 +270,11 @@ export class App {
       clock,
       i18n,
       art,
-      onDialogueEnded: () => storyDirector.check()
+      onDialogueEnded: () => storyDirector.check(),
+      sceneVitality: (sceneId) =>
+        districtVitality(sceneId, this.state.resources, anchors, (questId) =>
+          this.questManager.getQuestStatus(questId)
+        )
     };
 
     this.scenes = {
