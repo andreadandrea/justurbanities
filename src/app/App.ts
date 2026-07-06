@@ -19,6 +19,8 @@ import { OfflineControls } from "../ui/OfflineControls";
 import { ReportButton } from "../ui/ReportButton";
 import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
+import { TimeHud } from "../ui/TimeHud";
+import { GameClock } from "../game/time/GameClock";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
@@ -190,6 +192,15 @@ export class App {
     if (!this.scenes[this.state.currentScene]) {
       this.state.currentScene = "community_center";
     }
+
+    // Day/time cycle: time only moves through explicit actions ("Pass time"
+    // now; story beats later). The HUD lives at app level so every scene
+    // shows it; passing time autosaves so the clock survives reloads.
+    const clock = new GameClock(this.state);
+    new TimeHud(this.elements.appRoot, clock, () => {
+      clock.advance();
+      void this.activeScene().saveNow();
+    });
 
     new DebugPanel({
       root: this.elements.appRoot,
