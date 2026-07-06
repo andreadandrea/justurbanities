@@ -72,7 +72,12 @@
       "toggle": "📦 Offline"
     },
     "options": {
-      "hint": "Opzioni"
+      "hint": "Opzioni",
+      "artStyle": "Stile grafico",
+      "art": {
+        "realistic": "Realistico",
+        "animal": "Animale"
+      }
     },
     "logbook": {
       "title": "Logbook — Promesse",

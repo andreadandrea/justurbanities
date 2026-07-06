@@ -170,13 +170,18 @@ export class App {
 
     // Opening flow: title → prologue → character selection → customization.
     this.elements.loadingScreen.hidden = true;
+    const preferredArt = (await settings.get<ArtVariant>("artStyle")) ?? "realistic";
     const opening = new OpeningScreens({
       root: this.elements.appRoot,
       playable: playableData.playable as PlayableCharacter[],
       prologue: prologueData.panels,
       canContinue,
       baseUrl: import.meta.env.BASE_URL,
-      i18n
+      i18n,
+      artStyle: {
+        initial: preferredArt,
+        onChange: (variant) => void settings.set("artStyle", variant)
+      }
     });
     const choice = await opening.run();
 
@@ -222,6 +227,13 @@ export class App {
       await art.setVariant(variant);
     };
     this.applyArtStyle = applyArtStyle;
+
+    // Continue: the save's art style wins. New game: device preference.
+    if (choice.mode === "new") {
+      const preferred = await settings.get<ArtVariant>("artStyle");
+      if (preferred === "animal") this.state.artStyle = preferred;
+    }
+    if (this.state.artStyle !== "realistic") await applyArtStyle(this.state.artStyle);
 
     // Day/time cycle: time only moves through explicit actions ("Pass time"
     // now; story beats later). Created before the scenes so placements can
@@ -271,10 +283,15 @@ export class App {
     };
     const crisisManager = new CrisisManager(this.state, this.effectResolver, logProgress);
     crisisManager.load(crisisFile);
-    const crisisRunner = new DialogueRunner(this.dialogueUI, this.dialogueManager, async (dialogueId, choiceId) => {
-      logProgress("dialogue_choice", { dialogueId, choiceId, scene: this.state.currentScene });
-      await this.activeScene().saveNow();
-    });
+    const crisisRunner = new DialogueRunner(
+      this.dialogueUI,
+      this.dialogueManager,
+      async (dialogueId, choiceId) => {
+        logProgress("dialogue_choice", { dialogueId, choiceId, scene: this.state.currentScene });
+        await this.activeScene().saveNow();
+      },
+      (speakerId) => art.portrait(speakerId)
+    );
     const crisisWeek = new CrisisWeek(
       this.state,
       clock,
@@ -297,10 +314,23 @@ export class App {
       void this.activeScene().saveNow();
     });
 
-    // Options (⚙): runtime language switch, persisted per device.
-    new OptionsPanel(this.elements.appRoot, i18n, (locale) => {
-      void settings.set("locale", locale);
-    });
+    // Options (⚙): language + art style, both persisted per device; the
+    // art style also lives in the save snapshot (a save remembers its skin).
+    new OptionsPanel(
+      this.elements.appRoot,
+      i18n,
+      (locale) => {
+        void settings.set("locale", locale);
+      },
+      {
+        current: this.state.artStyle,
+        onChange: (variant) => {
+          this.state.artStyle = variant;
+          void settings.set("artStyle", variant);
+          void this.applyArtStyle?.(variant).then(() => this.activeScene().saveNow());
+        }
+      }
+    );
 
     new DebugPanel({
       root: this.elements.appRoot,

@@ -11,7 +11,9 @@ export class DialogueRunner {
   constructor(
     private readonly ui: DialogueUI,
     private readonly manager: DialogueManager,
-    private readonly onChoice: (dialogueId: string, choiceId: string) => Promise<void>
+    private readonly onChoice: (dialogueId: string, choiceId: string) => Promise<void>,
+    /** Variant-aware portrait lookup; voices (narrator, places) have none. */
+    private readonly portraitFor?: (speakerId: string) => HTMLImageElement | undefined
   ) {}
 
   run(dialogueId: string, speakerLabel: string): void {
@@ -23,8 +25,10 @@ export class DialogueRunner {
   }
 
   private show(dialogueId: string, speakerLabel: string, node: DialogueNode): void {
+    const speakerId = this.manager.speakerOf(dialogueId);
     this.ui.show({
       speaker: speakerLabel,
+      portrait: speakerId ? this.portraitFor?.(speakerId) : undefined,
       text: node.text,
       choices: node.choices.map((choice) => ({ id: choice.id, label: choice.label })),
       onChoice: (choice) => {

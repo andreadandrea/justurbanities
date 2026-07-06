@@ -86,6 +86,52 @@ describe("variant completeness report", () => {
   });
 });
 
+describe("art style in the save (task 5.2)", () => {
+  it("round-trips through snapshot/restore", async () => {
+    const { GameState } = await import("../../src/game/GameState");
+    const state = new GameState();
+    state.artStyle = "animal";
+    const restored = new GameState();
+    restored.restore(state.snapshot());
+    expect(restored.artStyle).toBe("animal");
+  });
+
+  it("legacy saves without artStyle default to realistic", async () => {
+    const { GameState } = await import("../../src/game/GameState");
+    const state = new GameState();
+    const legacy = state.snapshot() as Record<string, unknown>;
+    delete legacy.artStyle;
+    const restored = new GameState();
+    restored.restore(legacy as ReturnType<GameState["snapshot"]>);
+    expect(restored.artStyle).toBe("realistic");
+  });
+
+  it("mid-game toggle: state, art and sprites stay consistent (e2e at engine level)", async () => {
+    const { GameState } = await import("../../src/game/GameState");
+    const state = new GameState();
+    const loader = fakeLoader(
+      new Set([
+        "/assets/characters/maya/icons/icon_maya.png",
+        "/assets/characters/maya/animal/icons/icon_maya.png"
+      ])
+    );
+    const art = new CharacterArt(loader, { characters: [MANIFEST.characters![0]] }, "/");
+    await art.ensureLoaded("realistic");
+
+    // the App's toggle path: state -> settings (out of scope here) -> applyArtStyle
+    state.artStyle = "animal";
+    await art.setVariant(state.artStyle);
+    expect(art.icon("maya")?.src).toContain("/animal/");
+
+    // reload from the save: the snapshot remembers the skin
+    const restored = new GameState();
+    restored.restore(state.snapshot());
+    expect(restored.artStyle).toBe("animal");
+    await art.setVariant(restored.artStyle);
+    expect(art.variant).toBe("animal");
+  });
+});
+
 /** Fake loader: a set of "existing" URLs; images are opaque tokens. */
 function fakeLoader(existing: Set<string>): ImageSource & { loaded: Map<string, string> } {
   const loaded = new Map<string, string>();

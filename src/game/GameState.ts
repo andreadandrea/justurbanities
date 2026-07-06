@@ -1,4 +1,5 @@
 import type { Quest } from "../types/Quest";
+import type { ArtVariant } from "../assets/ArtStyle";
 
 export type Pronoun = "she" | "he" | "they";
 
@@ -12,6 +13,8 @@ export type SerializableGameState = {
   /** Day/time cycle (timePart: 0=morning, 1=afternoon, 2=evening). */
   day: number;
   timePart: number;
+  /** Art style the save was played with (dual art style spec). */
+  artStyle: ArtVariant;
   player: { x: number; y: number };
   // Quest snapshot is attached at save time by the scene (QuestManager owns runtime state).
   quests?: Quest[];
@@ -38,6 +41,7 @@ export class GameState {
   started = false;
   day = 1;
   timePart = 0;
+  artStyle: ArtVariant = "realistic";
   player = { x: 280, y: 440 };
   variables: Record<string, boolean | number | string> = {};
   resources = freshResources();
@@ -65,6 +69,7 @@ export class GameState {
       started: this.started,
       day: this.day,
       timePart: this.timePart,
+      artStyle: this.artStyle,
       player: { ...this.player },
       variables: { ...this.variables },
       resources: { ...this.resources }
@@ -80,6 +85,7 @@ export class GameState {
     this.started = state.started ?? true;
     this.day = state.day ?? 1;
     this.timePart = state.timePart ?? 0;
+    this.artStyle = state.artStyle ?? "realistic";
     this.player = { ...state.player };
     this.variables = { ...state.variables };
     // Merge over fresh defaults: a save written before a resource existed

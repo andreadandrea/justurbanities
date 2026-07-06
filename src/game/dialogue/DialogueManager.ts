@@ -19,6 +19,10 @@ export class DialogueManager {
     return this.dialogues.has(dialogueId);
   }
 
+  speakerOf(dialogueId: string): string | undefined {
+    return this.dialogues.get(dialogueId)?.speakerId;
+  }
+
   start(dialogueId: string): DialogueNode {
     const dialogue = this.dialogues.get(dialogueId);
     if (!dialogue) throw new Error(`Dialogue not found: ${dialogueId}`);
