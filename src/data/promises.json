@@ -1,0 +1,14 @@
+{
+  "schema": "promises@1",
+  "note": "Promise registry (task 4.3, ratified). The promise variable (same id) is set to 'active' by dialogue effects; content marks it 'kept'. deadlineDays counts from the day the promise was made; past the deadline it breaks (Trust -2, frag +1). Kept: Trust +3.",
+  "promises": [
+    { "id": "promiseSaferCrossing", "owner": "ben", "deadlineDays": 4 },
+    { "id": "promiseRepairDay", "owner": "sigrid", "deadlineDays": 4 },
+    { "id": "promiseOpenInfoPoint", "owner": "abdullah", "deadlineDays": 4 },
+    { "id": "promiseOpenCommonRoom", "owner": "tom", "deadlineDays": 5 },
+    { "id": "promiseAccessibleBusInfo", "owner": "gwen", "deadlineDays": 4 },
+    { "id": "promiseChildFriendlyMeeting", "owner": "lia", "deadlineDays": 5 },
+    { "id": "promiseClimatePrep", "owner": "siobhan", "deadlineDays": 5 },
+    { "id": "promiseSupportLonelyElders", "owner": "pablo", "deadlineDays": 4 }
+  ]
+}

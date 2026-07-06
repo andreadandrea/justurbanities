@@ -157,6 +157,20 @@ export const scheduleFileSchema = z.object({
   )
 });
 
+// ---------- promises.json (task 4.3) ----------
+
+export const promiseFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  promises: z.array(
+    z.object({
+      id: z.string().min(1),
+      owner: z.string().min(1),
+      deadlineDays: z.number().int().positive()
+    })
+  )
+});
+
 // ---------- quests.json ----------
 
 export const questFileSchema = z.object({

@@ -73,6 +73,18 @@
     },
     "options": {
       "hint": "Opzioni"
+    },
+    "logbook": {
+      "title": "Logbook — Promesse",
+      "toggle": "📖 Logbook",
+      "hint": "Promesse fatte, mantenute e rotte",
+      "empty": "Nessuna promessa ancora. Si fanno nelle conversazioni.",
+      "by": "con",
+      "status": {
+        "active": "attiva",
+        "kept": "mantenuta",
+        "broken": "rotta"
+      }
     }
   },
   "content": {
@@ -674,6 +686,16 @@
         "faceDay": "Affronta la giornata.",
         "close": "…"
       }
+    },
+    "promises": {
+      "promiseSaferCrossing": "Rendere sicuro l'attraversamento: intervento temporaneo e proposta vera.",
+      "promiseRepairDay": "Fare il Repair Day nel cortile 17 con squadre e materiali.",
+      "promiseOpenInfoPoint": "Allestire il punto informazioni verificato e multilingue all'edicola.",
+      "promiseOpenCommonRoom": "Aprire la sala comune legalmente, comma per comma.",
+      "promiseAccessibleBusInfo": "Contare una settimana di corse con Gwen e costruire la proposta.",
+      "promiseChildFriendlyMeeting": "Portare la mappa dei bambini in una riunione vera.",
+      "promiseClimatePrep": "Pulire i canali, fare la lista delle case basse, fissare il punto di raccolta.",
+      "promiseSupportLonelyElders": "Costruire la lista porta-a-porta con un volto per ogni nome."
     }
   }
 }
