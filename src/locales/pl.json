@@ -514,6 +514,202 @@
             "accept": "“Thursday. I'll be there — and I'll notice who isn't.”"
           }
         }
+      },
+      "route_maya": {
+        "shift": {
+          "text": "17:00. The shift is over — almost. The boss leans in: “Twenty minutes of overtime? Just today.” The assembly is at six; Zoe comes out of after-school at half past.",
+          "choices": {
+            "refuse": "“Tonight I really can't.”",
+            "accept": "Accept. Twenty minutes won't kill anyone."
+          }
+        },
+        "bus": {
+          "text": "At the stop, GWEN from the window: “The 14's skipping this run — breakdown, they say. Next one's in twenty minutes, or you cut through the underpass.”",
+          "choices": {
+            "wait": "Wait for the bus.",
+            "underpass": "The underpass. (Dark, stepped — a neighbour with a pram turns back. Maya notes it down.)",
+            "call_farah": "Call Farah: “Could you pick Zoe up from school?” (She hates asking.)"
+          }
+        },
+        "zoe": {
+          "text": "The phone rings. ZOE: “I forgot my recorder at school and Miss checks tomorrow. If I don't fetch it she'll tell me off. Can you, please please—”",
+          "choices": {
+            "go_back": "Go back to the school. Fifteen minutes more.",
+            "tomorrow": "“We'll explain to your teacher tomorrow.” (Zoe sulks.)",
+            "farah_again": "Ask Farah for this too. (The first care network switches on.)"
+          }
+        },
+        "dilemma": {
+          "text": "18:05. The Center's lights are on down the street. Zoe's hand is warm and the day weighs a ton.",
+          "choices": {
+            "walk_in": "Walk in late, Zoe by the hand.",
+            "online": "Follow online from the playground — present by half.",
+            "give_up": "Give up, but text Anna: “Hold the meetings when people who work can come.”"
+          }
+        }
+      },
+      "route_samir": {
+        "invitation": {
+          "text": "“The S.V. is hereby invited to attend the consultative session pursuant to Art. 12…” SAMIR (to himself): “S.V.”? Is that me, or someone else? (to a workmate) You going? WORKMATE: Me? That stuff's not for us — they talk, they put it in the minutes, the end.",
+          "choices": {
+            "ask_abdullah": "Ask Abdullah what it actually means. (“Come. If you feel out of place, you sit next to me.”)",
+            "write_anna": "Write to Anna for clarification. (She apologises for the language.)",
+            "ignore": "Ignore the invitation. The city will take you there anyway."
+          }
+        },
+        "to_crossing": {
+          "text": "Delivery run first, then the Hub. The fastest way cuts through the Narrow Crossing — it always has.",
+          "choices": {
+            "ride": "Get on the bike. (Head to the Crossroads: the crossing awaits.)"
+          }
+        }
+      },
+      "route_samir_barrier": {
+        "fence": {
+          "text": "You SLAM to a stop. A construction fence has sealed the Narrow Crossing overnight — no sign, no alternative route. On the other side, an older man turns his trolley around.",
+          "choices": {
+            "kids_gap": "Look for the gap the kids use. (You get through — and see exactly who can't.)",
+            "photo": "Photograph it and mark it on the map. (The first lived-map entry.)",
+            "detour": "Take the long detour on the busy road."
+          }
+        },
+        "checkpoint": {
+          "text": "Outside the Town Hall, an attendant raises a hand — at you, not at the man in a suit who walked in first. “ID and reason for your visit?”",
+          "choices": {
+            "show_invitation": "Show the invitation. (Abdullah appears behind you: “He's with me.”)",
+            "show_invitation_alone": "Show the invitation. (He studies it a beat too long. You get in; it costs.)",
+            "ask_everyone": "“Do you ask everyone, or just me?”",
+            "leave": "Turn around."
+          }
+        },
+        "dilemma": {
+          "text": "The assembly hall hums behind the door. Three barriers between home and this room — you counted them.",
+          "choices": {
+            "sit_back": "Go in and sit at the back, in silence.",
+            "name_barriers": "Go in and name the barriers: fence, underpass, checkpoint.",
+            "name_barriers_bridge": "Go in and name the barriers — Abdullah nods you forward.",
+            "hand_photo": "Don't go in. Hand Anna the photo of the fence at the door."
+          }
+        }
+      },
+      "route_elena": {
+        "meeting": {
+          "text": "The pre-assembly meeting never ends. TOM: “If you promise to open the spaces without the safety commission, the liability is yours. Signed: yours.”",
+          "choices": {
+            "commission": "“Then we convene the commission tomorrow.”",
+            "cautious": "“I'll find a cautious wording.”"
+          }
+        },
+        "site_visit": {
+          "text": "Two hours before the assembly. Grey Yards is ten minutes off the route — the courtyard she will be talking about is there, behind a padlock. SIGRID is measuring the entrance in hand-spans: “Three days' work and this place is a common room. Three years, if we wait for a funding call.”",
+          "choices": {
+            "show_me": "“Show me what's needed — exactly.”",
+            "no_promises": "“I can't promise anything.” — and listen anyway. (“Better than the ones who promise and vanish.”)",
+            "skip": "No time. Straight to the assembly, slides ready."
+          }
+        },
+        "ruben": {
+          "text": "RUBEN, recorder out: “One statement: does the Council believe in this process, or is it the usual shop window?”",
+          "choices": {
+            "verifiable_dates": "“I believe in it. Judge the Council by its actions — I'll give you verifiable dates.”",
+            "no_statement": "“No statement.” (He writes: “the Council won't commit”.)"
+          }
+        },
+        "dilemma": {
+          "text": "Her turn to speak. The folder holds the real numbers — smaller than anyone hopes.",
+          "choices": {
+            "state_limits": "State the budget limits at once, figures in hand.",
+            "simplify": "Simplify and postpone the details.",
+            "technical": "Full technical presentation. (Precise and cold — someone whispers “she talks like a PDF”.)",
+            "technical_saved": "Full presentation — but she opens with the padlock, not the slides."
+          }
+        }
+      },
+      "route_luca": {
+        "closing_time": {
+          "text": "17:30. The rush hour is the till's best friend, and the assembly starts at six. The delivery is late, again.",
+          "choices": {
+            "close_early": "Close early. The till will forgive — maybe.",
+            "ask_neighbour": "Ask the shopkeeper next door to cover the last hour.",
+            "stay_open": "Stay open and send a message: “With you in spirit.”"
+          }
+        },
+        "email": {
+          "text": "New email. URBAN RENEWAL PARTNERS: “Dear proprietor, your premises fall within an area of interest to us. We propose an introductory meeting, with no obligation.”",
+          "choices": {
+            "bin_it": "Bin it.",
+            "info_only": "Reply “for information only”.",
+            "forward_amin": "Forward it to Amin: “Know anything about this?” (“Third shop this month. They buy where the neighbourhood is tired.”)"
+          }
+        },
+        "amin": {
+          "text": "AMIN, drying a cup: “Come to the assembly — if you're there, shopkeepers stop being ‘the ones who never come’. And bring something: people think better on a full stomach.”",
+          "choices": {
+            "bring_goods": "Load crates of water and fruit.",
+            "just_words": "“Assemblies are just words.” (“So are quotes, until you sign.”)"
+          }
+        },
+        "dilemma": {
+          "text": "17:55. The shutter is half-way down. In one pocket the shop keys, in the other the invitation — and that email.",
+          "choices": {
+            "go_with_goods": "Go, goods under his arm.",
+            "investor_meeting": "Go to the investor meeting instead of the assembly.",
+            "keep_shop": "Don't go. Keep the shop open."
+          }
+        }
+      },
+      "route_custom": {
+        "vignettes": {
+          "text": "On the way to the Center the city shows you four scenes at once: Maya checking the timetable with Zoe's school folder underarm; Samir stopped at a fence that wasn't there yesterday; Elena juggling a case file and a paper coffee cup; Luca half-lowering his shutter with crates at his feet. You can't be everywhere.",
+          "choices": {
+            "with_maya": "Wait for the bus with Maya and keep an eye on Zoe.",
+            "with_samir": "Help Samir document the fence.",
+            "with_elena": "Offer Elena a coffee and one honest question.",
+            "with_luca": "Give Luca a hand loading the crates.",
+            "observe": "Go straight to the assembly and observe everything."
+          }
+        }
+      },
+      "assembly_v1": {
+        "who": {
+          "text": "The Community Center, 18:20. Whoever arrived sits in the circle; whoever follows online is a thumbnail on a screen; whoever is missing is an empty chair with a name. ANNA: “Before we talk about projects, let's look at ourselves: who's here? And who's missing — and why?”",
+          "choices": {
+            "look": "(Look around the circle: the first “Who is in the room”.)"
+          }
+        },
+        "ben": {
+          "text": "BEN: “Some chairs being empty is not a detail. It's THE data point.”",
+          "choices": {
+            "elena_concrete": "(Elena asks to speak — she saw the courtyard today.)",
+            "elena_pdf": "(Elena opens her slides.)"
+          }
+        },
+        "elena_saw": {
+          "text": "ELENA: “I saw the Grey Yards courtyard today — three days' work, Sigrid says. I'm checking what it takes to give her the keys.” (The circle leans in: this isn't slide language.)",
+          "choices": {
+            "next": "(Continue.)"
+          }
+        },
+        "elena_slides": {
+          "text": "ELENA: “The regulatory framework provides for…” (Someone checks their phone. The words are correct and land nowhere.)",
+          "choices": {
+            "next": "(Continue.)"
+          }
+        },
+        "voices": {
+          "text": "Anna opens the floor. The room holds its breath for a moment.",
+          "choices": {
+            "maya_line": "MAYA, Zoe on her lap: “If there's room for her, there's room for every mother who isn't here tonight.”",
+            "samir_line": "SAMIR: “Three barriers between my home and this room — I counted them. Want the list?”",
+            "silence": "(Nobody from the routes speaks: the empty chairs speak instead.)"
+          }
+        },
+        "closing": {
+          "text": "ANNA, closing: “A proposal — before we repair anything, we map the cracks. All of them.” (The Crossroads unlocks for exploration: chapter 2 begins.)",
+          "choices": {
+            "map_cracks": "“Then let's map them.”"
+          }
+        }
       }
     },
     "quests": {

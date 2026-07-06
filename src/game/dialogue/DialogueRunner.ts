@@ -13,7 +13,9 @@ export class DialogueRunner {
     private readonly manager: DialogueManager,
     private readonly onChoice: (dialogueId: string, choiceId: string) => Promise<void>,
     /** Variant-aware portrait lookup; voices (narrator, places) have none. */
-    private readonly portraitFor?: (speakerId: string) => HTMLImageElement | undefined
+    private readonly portraitFor?: (speakerId: string) => HTMLImageElement | undefined,
+    /** Fired when a dialogue truly ends (not between nodes). */
+    private readonly onEnded?: (dialogueId: string) => void
   ) {}
 
   run(dialogueId: string, speakerLabel: string): void {
@@ -42,6 +44,8 @@ export class DialogueRunner {
     await this.onChoice(dialogueId, choiceId);
     if (!result.ended && result.node) {
       this.show(dialogueId, speakerLabel, result.node);
+    } else if (result.ended) {
+      this.onEnded?.(dialogueId);
     }
   }
 }

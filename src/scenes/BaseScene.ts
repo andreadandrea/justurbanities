@@ -50,7 +50,12 @@ export type SceneDeps = {
   clock: GameClock;
   i18n: I18n;
   art: CharacterArt;
+  /** App-level story director check, fired when any dialogue ends. */
+  onDialogueEnded?: (dialogueId: string) => void;
 };
+
+/** Axis-aligned rectangle blocking player movement (fences, closures). */
+export type Blocker = { x: number; y: number; width: number; height: number };
 
 /** An entity the player can walk up to and activate with space/enter/tap. */
 export type Interactable = {
@@ -85,7 +90,8 @@ export abstract class BaseScene {
       deps.dialogueUI,
       deps.dialogueManager,
       (dialogueId, choiceId) => this.recordChoice(dialogueId, choiceId),
-      (speakerId) => deps.art.portrait(speakerId)
+      (speakerId) => deps.art.portrait(speakerId),
+      (dialogueId) => deps.onDialogueEnded?.(dialogueId)
     );
     // Subclass `world` field initializers run after super(); the camera is
     // pointed at the real world bounds every frame in update().
@@ -120,6 +126,14 @@ export abstract class BaseScene {
 
   /** Draw world-space content (ground, landmarks, entities). Called inside the camera transform. */
   protected abstract drawScene(): void;
+
+  /** Rectangles the player cannot enter (the barrier is experienced, not narrated). */
+  protected blockers(): Blocker[] {
+    return [];
+  }
+
+  /** Called when movement into a blocker was denied this frame. */
+  protected onBlocked(_blocker: Blocker): void {}
 
   /** Called when the player enters the scene (and on boot for the active scene). */
   enter(): void {
@@ -180,6 +194,23 @@ export abstract class BaseScene {
 
     player.x = clamp(player.x, EDGE_MARGIN, this.world.width - EDGE_MARGIN);
     player.y = clamp(player.y, PLAYER_HEIGHT, this.world.height - EDGE_MARGIN);
+
+    // Physical barriers: deny the step, then let the scene react (Samir's
+    // fence beat: you SLAM into it — the block is felt through the input).
+    for (const blocker of this.blockers()) {
+      if (
+        player.x > blocker.x &&
+        player.x < blocker.x + blocker.width &&
+        player.y > blocker.y &&
+        player.y < blocker.y + blocker.height
+      ) {
+        player.x = startX;
+        player.y = startY;
+        this.deps.input.pointerTarget = null;
+        this.onBlocked(blocker);
+        break;
+      }
+    }
 
     this.updatePlayerSprite(player.x - startX, player.y - startY, dt);
     this.camera.setWorld(this.world);

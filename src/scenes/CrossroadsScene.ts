@@ -1,6 +1,6 @@
 import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
-import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
+import { BaseScene, type Blocker, type Interactable, type SceneDeps } from "./BaseScene";
 
 type Poi = {
   entity: RenderableEntity;
@@ -67,9 +67,34 @@ export class CrossroadsScene extends BaseScene {
     ];
   }
 
+  /** ✳ Samir's route: an overnight construction fence seals Narrow Crossing. */
+  private samirFenceActive(): boolean {
+    return (
+      this.deps.gameState.currentCharacter === "samir" &&
+      this.deps.gameState.variables.samir_route_stage === "barrier"
+    );
+  }
+
+  protected override blockers(): Blocker[] {
+    if (!this.samirFenceActive()) return [];
+    // A band sealing the Narrow Crossing area (POI at 1640,520).
+    return [{ x: 1440, y: 380, width: 400, height: 280 }];
+  }
+
+  protected override onBlocked(): void {
+    // The player has just SLAMMED into the fence: the beat continues here.
+    if (this.deps.gameState.variables.samir_fence_hit !== true) {
+      this.deps.gameState.variables.samir_fence_hit = true;
+      this.dialogueRunner.run("route_samir_barrier", "Samir");
+    }
+  }
+
   protected drawScene(): void {
     const renderer = this.deps.renderer;
     renderer.drawGround(this.world, "#eccf95", "#cf9f63");
+    if (this.samirFenceActive()) {
+      renderer.drawLandmark(1440, 380, 400, 60, "#8a4a2c", "⚠ Construction fence");
+    }
     const entities: RenderableEntity[] = [
       ...this.pois.map((poi) => poi.entity),
       ...this.npcEntities(),
