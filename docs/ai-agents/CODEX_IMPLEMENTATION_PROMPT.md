@@ -4,7 +4,7 @@ Read first:
 
 ```text
 AGENTS.md
-docs/README_START_HERE.md
+docs/HANDOFF.md
 docs/NEXT_DEVELOPMENT_TASKS.md
 docs/dialogue/DIALOGUE_MANAGER_SPEC.md
 docs/quest/QUEST_MANAGER_SPEC.md

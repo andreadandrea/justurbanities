@@ -15,6 +15,7 @@ type Npc = { id: string; x: number; y: number; sprite: AnimatedSprite | null };
 
 export class CommunityCenterScene extends BaseScene {
   readonly sceneId = "community_center";
+  readonly displayName = "Community Center";
   readonly world: WorldSize = { width: 2000, height: 1300 };
 
   private readonly npcs: Npc[] = [

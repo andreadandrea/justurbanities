@@ -61,7 +61,7 @@ Read:
 
 ```text
 docs/CLAUDE_ONLINE_WORKFLOW.md
-docs/README_START_HERE.md
+docs/HANDOFF.md
 docs/NEXT_DEVELOPMENT_TASKS.md
 docs/ai-agents/CODEX_IMPLEMENTATION_PROMPT.md
 ```

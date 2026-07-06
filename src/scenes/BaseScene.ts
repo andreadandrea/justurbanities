@@ -73,6 +73,9 @@ export abstract class BaseScene {
   /** Scene id used in GameState.currentScene and progress events. */
   abstract readonly sceneId: string;
 
+  /** Human-readable scene name shown in the HUD. */
+  abstract readonly displayName: string;
+
   /** World size in pixels — larger than the viewport; the camera follows. */
   abstract readonly world: WorldSize;
 

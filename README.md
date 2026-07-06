@@ -21,6 +21,10 @@ This repository is prepared to be uploaded directly to GitHub and used with **Cl
 
 This project intentionally does **not** use Phaser.
 
+> **Note:** `public/eurbania_iso.html` is a standalone, online-only artefact
+> (isometric city map preview). It is not part of the game build, is not
+> offline-cached, and shares no code with `src/`.
+
 ## Quick start
 
 ```bash

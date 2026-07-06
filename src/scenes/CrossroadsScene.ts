@@ -15,6 +15,7 @@ type Poi = {
  */
 export class CrossroadsScene extends BaseScene {
   readonly sceneId = "crossroads";
+  readonly displayName = "The Crossroads";
   readonly world: WorldSize = { width: 2200, height: 1500 };
 
   private readonly pois: Poi[];

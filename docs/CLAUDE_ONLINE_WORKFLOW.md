@@ -22,7 +22,7 @@ Ask Claude Code:
 
 ```text
 Read AGENTS.md first.
-Then read docs/README_START_HERE.md and docs/NEXT_DEVELOPMENT_TASKS.md.
+Then read docs/HANDOFF.md and docs/NEXT_DEVELOPMENT_TASKS.md.
 Do not use Phaser.
 Before editing, summarize the files you plan to modify.
 ```

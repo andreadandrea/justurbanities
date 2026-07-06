@@ -54,6 +54,7 @@ type AppElements = {
   loadingProgress: HTMLProgressElement;
   dialogueRoot: HTMLElement;
   saveStatus: HTMLElement;
+  sceneTitle: HTMLElement;
 };
 
 export class App {
@@ -218,7 +219,9 @@ export class App {
       render: () => this.activeScene().render()
     });
 
-    this.activeScene().enter();
+    const bootScene = this.activeScene();
+    bootScene.enter();
+    this.elements.sceneTitle.textContent = bootScene.displayName;
     this.loop.start();
     this.syncEngine.start();
   }
@@ -238,6 +241,7 @@ export class App {
     this.input.pointerTarget = null;
     this.dialogueUI.hide();
     scene.enter();
+    this.elements.sceneTitle.textContent = scene.displayName;
   }
 
   private async preload(manifest: AssetManifest): Promise<void> {
