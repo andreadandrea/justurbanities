@@ -14,7 +14,16 @@ import scheduleData from "../../src/data/schedule.json";
 import dialoguesData from "../../src/data/dialogues.json";
 import questsData from "../../src/data/quests.json";
 
-const SCENES = ["community_center", "crossroads"];
+const SCENES = [
+  "community_center",
+  "crossroads",
+  "old_blocks",
+  "grey_yards",
+  "youth_court",
+  "coastline",
+  "hill_gardens",
+  "lake_edge"
+];
 const ALL_QUESTS = Array.from({ length: 18 }, (_, i) => `N${String(i + 1).padStart(2, "0")}`);
 
 function world() {
@@ -87,7 +96,7 @@ describe("schedule rollout — all 18 NPC quests", () => {
     }
   });
 
-  it("a player walking both scenes across the days can trigger and complete every N-quest", () => {
+  it("a player walking every district across the days can trigger and complete every N-quest", () => {
     const w = world();
     const opened = playEverything(w);
 

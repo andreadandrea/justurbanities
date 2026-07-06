@@ -1,6 +1,7 @@
 import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
 import { BaseScene, type Blocker, type Interactable, type SceneDeps } from "./BaseScene";
+import districtsData from "../data/districts.json";
 
 type Poi = {
   entity: RenderableEntity;
@@ -19,6 +20,7 @@ export class CrossroadsScene extends BaseScene {
   readonly world: WorldSize = { width: 2200, height: 1500 };
 
   private readonly pois: Poi[];
+  private readonly districtDoors: RenderableEntity[];
   private readonly returnDoor: RenderableEntity = {
     id: "door_community_center",
     label: "← Community Center",
@@ -44,6 +46,24 @@ export class CrossroadsScene extends BaseScene {
       poi("narrow_crossing", "Narrow Crossing", 1640, 520, "#7a5c9e"),
       poi("info_point", "Civic Info Point", 940, 1120, "#6e9a5a")
     ];
+
+    // Bus departures to the outer districts (chapter 2+): a row of stops
+    // along the bottom edge, next to the bus hub's reach.
+    this.districtDoors = districtsData.districts.map((district, index) => ({
+      id: `bus_${district.id}`,
+      label: `🚌 ${district.displayName}`,
+      x: 360 + index * 300,
+      y: 1400,
+      width: 120,
+      height: 90,
+      color: "#3c6b73",
+      interactive: true
+    }));
+  }
+
+  /** Districts open with chapter 2 ("we map the cracks — all of them"). */
+  private districtsUnlocked(): boolean {
+    return this.deps.gameState.variables.chapter2_unlocked === true;
   }
 
   override enter(): void {
@@ -54,12 +74,19 @@ export class CrossroadsScene extends BaseScene {
   }
 
   protected interactables(): Interactable[] {
+    const doors = this.districtsUnlocked()
+      ? this.districtDoors.map((door) => ({
+          entity: door,
+          onInteract: () => this.deps.changeScene(door.id.replace("bus_", ""), { x: 260, y: 700 })
+        }))
+      : [];
     return [
       ...this.npcInteractables(),
       ...this.pois.map((poi) => ({
         entity: poi.entity,
         onInteract: () => this.dialogueRunner.run(poi.dialogueId, poi.speakerLabel)
       })),
+      ...doors,
       {
         entity: this.returnDoor,
         onInteract: () => this.deps.changeScene("community_center", { x: 1900, y: 700 })
@@ -98,6 +125,7 @@ export class CrossroadsScene extends BaseScene {
     const entities: RenderableEntity[] = [
       ...this.pois.map((poi) => poi.entity),
       ...this.npcEntities(),
+      ...(this.districtsUnlocked() ? this.districtDoors : []),
       this.returnDoor,
       this.playerEntity()
     ];

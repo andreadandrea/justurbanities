@@ -165,10 +165,10 @@
     },
     {
       "npcId": "ben",
-      "scene": "community_center",
+      "scene": "crossroads",
       "position": {
-        "x": 1240,
-        "y": 760
+        "x": 1750,
+        "y": 620
       },
       "dialogueId": "ben_n02",
       "conditions": [
@@ -200,10 +200,10 @@
     },
     {
       "npcId": "tom",
-      "scene": "community_center",
+      "scene": "grey_yards",
       "position": {
-        "x": 600,
-        "y": 450
+        "x": 900,
+        "y": 700
       },
       "dialogueId": "tom_n08",
       "timeParts": [
@@ -240,10 +240,10 @@
     },
     {
       "npcId": "donald",
-      "scene": "community_center",
+      "scene": "coastline",
       "position": {
-        "x": 1500,
-        "y": 500
+        "x": 900,
+        "y": 700
       },
       "dialogueId": "donald_n04",
       "timeParts": [
@@ -260,10 +260,10 @@
     },
     {
       "npcId": "sigrid",
-      "scene": "community_center",
+      "scene": "old_blocks",
       "position": {
-        "x": 1100,
-        "y": 1050
+        "x": 900,
+        "y": 700
       },
       "dialogueId": "sigrid_n05",
       "conditions": [
@@ -296,10 +296,10 @@
     },
     {
       "npcId": "mrs_viveca",
-      "scene": "community_center",
+      "scene": "lake_edge",
       "position": {
-        "x": 1750,
-        "y": 650
+        "x": 1350,
+        "y": 850
       },
       "dialogueId": "mrs_viveca_n16",
       "timeParts": [
@@ -316,9 +316,9 @@
     },
     {
       "npcId": "marta",
-      "scene": "community_center",
+      "scene": "hill_gardens",
       "position": {
-        "x": 1650,
+        "x": 1350,
         "y": 950
       },
       "dialogueId": "marta_n17",
@@ -336,10 +336,10 @@
     },
     {
       "npcId": "gwen",
-      "scene": "crossroads",
+      "scene": "hill_gardens",
       "position": {
-        "x": 450,
-        "y": 600
+        "x": 900,
+        "y": 700
       },
       "dialogueId": "gwen_n09",
       "timeParts": [
@@ -372,10 +372,10 @@
     },
     {
       "npcId": "matilda",
-      "scene": "crossroads",
+      "scene": "coastline",
       "position": {
-        "x": 900,
-        "y": 900
+        "x": 1400,
+        "y": 850
       },
       "dialogueId": "matilda_n13",
       "timeParts": [
@@ -392,10 +392,10 @@
     },
     {
       "npcId": "pablo",
-      "scene": "crossroads",
+      "scene": "old_blocks",
       "position": {
-        "x": 600,
-        "y": 1000
+        "x": 1300,
+        "y": 900
       },
       "dialogueId": "pablo_n11",
       "timeParts": [
@@ -412,10 +412,10 @@
     },
     {
       "npcId": "siobhan",
-      "scene": "crossroads",
+      "scene": "lake_edge",
       "position": {
-        "x": 1150,
-        "y": 400
+        "x": 900,
+        "y": 700
       },
       "dialogueId": "siobhan_n15",
       "timeParts": [
@@ -432,9 +432,9 @@
     },
     {
       "npcId": "lia",
-      "scene": "crossroads",
+      "scene": "youth_court",
       "position": {
-        "x": 1450,
+        "x": 900,
         "y": 750
       },
       "dialogueId": "lia_n14",
@@ -471,10 +471,10 @@
     },
     {
       "npcId": "ruben",
-      "scene": "crossroads",
+      "scene": "hill_gardens",
       "position": {
-        "x": 1800,
-        "y": 900
+        "x": 600,
+        "y": 1050
       },
       "dialogueId": "ruben_n06",
       "conditions": [
@@ -487,10 +487,10 @@
     },
     {
       "npcId": "corporate_man",
-      "scene": "crossroads",
+      "scene": "grey_yards",
       "position": {
-        "x": 1900,
-        "y": 1200
+        "x": 1400,
+        "y": 900
       },
       "dialogueId": "corporate_n18",
       "timeParts": [

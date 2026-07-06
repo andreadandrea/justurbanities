@@ -100,13 +100,15 @@ describe("NpcDirector — N02 (Ben) end-to-end in-world", () => {
     expect(npc(director, "ben").dialogueId).toBe("ben_intro");
 
     completePrologue(w);
+    // Ben's N02 offer lives at the Crossing itself (canonical district, 6.3).
+    director.setScene("crossroads");
     expect(npc(director, "ben").dialogueId).toBe("ben_n02");
 
     dialogues.start("ben_n02");
     dialogues.choose("engage");
     expect(quests.getQuestStatus("N02")).toBe("completed");
     expect(state.resources.care).toBeGreaterThan(0);
-    director.refresh();
+    director.setScene("community_center");
     expect(npc(director, "ben").dialogueId).toBe("ben_intro");
   });
 });

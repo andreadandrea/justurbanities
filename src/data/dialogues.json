@@ -3551,6 +3551,192 @@
           ]
         }
       }
+    },
+    {
+      "id": "district_old_blocks_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_old_blocks_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "old_blocksIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "old_blocks"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_old_blocks_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_grey_yards_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_grey_yards_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "grey_yardsIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "grey_yards"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_grey_yards_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_youth_court_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_youth_court_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "youth_courtIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "youth_court"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_youth_court_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_coastline_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_coastline_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "coastlineIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "coastline"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_coastline_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_hill_gardens_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_hill_gardens_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "hill_gardensIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "hill_gardens"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_hill_gardens_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_lake_edge_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_lake_edge_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "lake_edgeIntroSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "district_discovered",
+              "payload": {
+                "district": "lake_edge"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.district_lake_edge_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

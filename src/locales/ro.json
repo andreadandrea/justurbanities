@@ -710,6 +710,54 @@
             "map_cracks": "“Then let's map them.”"
           }
         }
+      },
+      "district_old_blocks_intro": {
+        "start": {
+          "text": "The façades hold each other up. The people stopped.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
+      },
+      "district_grey_yards_intro": {
+        "start": {
+          "text": "A neighbourhood of padlocks nobody remembers the keys to.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
+      },
+      "district_youth_court_intro": {
+        "start": {
+          "text": "You grow up fast here. Deciding, though, is always someone else's job.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
+      },
+      "district_coastline_intro": {
+        "start": {
+          "text": "The photos come out beautifully. The bills, less so.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
+      },
+      "district_hill_gardens_intro": {
+        "start": {
+          "text": "The papers call it a problem. The people who live here call it home.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
+      },
+      "district_lake_edge_intro": {
+        "start": {
+          "text": "The water is close. Everything else is far.",
+          "choices": {
+            "look": "Look around."
+          }
+        }
       }
     },
     "quests": {

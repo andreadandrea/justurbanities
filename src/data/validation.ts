@@ -158,6 +158,31 @@ export const scheduleFileSchema = z.object({
   )
 });
 
+// ---------- districts.json (task 6.3) ----------
+
+export const districtFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  districts: z.array(
+    z.object({
+      id: z.string().min(1),
+      displayName: z.string().min(1),
+      world: z.object({ width: z.number().positive(), height: z.number().positive() }),
+      ground: z.tuple([z.string(), z.string()]),
+      landmark: z
+        .object({
+          x: z.number(),
+          y: z.number(),
+          width: z.number().positive(),
+          height: z.number().positive(),
+          color: z.string(),
+          label: z.string()
+        })
+        .optional()
+    })
+  )
+});
+
 // ---------- promises.json (task 4.3) ----------
 
 export const promiseFileSchema = z.object({

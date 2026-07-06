@@ -12,6 +12,8 @@ import { SyncEngine } from "../sync/SyncEngine";
 import { createRemoteApi } from "../sync/RemoteApiClient";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { CrossroadsScene } from "../scenes/CrossroadsScene";
+import { DistrictScene, type DistrictConfig } from "../scenes/DistrictScene";
+import districtsData from "../data/districts.json";
 import type { BaseScene, SceneDeps } from "../scenes/BaseScene";
 import { DialogueUI } from "../ui/DialogueUI";
 import { DebugPanel } from "../ui/DebugPanel";
@@ -61,6 +63,7 @@ import {
   crisisFileSchema,
   scheduleFileSchema,
   promiseFileSchema,
+  districtFileSchema,
   validateData
 } from "../data/validation";
 import dialoguesData from "../data/dialogues.json";
@@ -145,6 +148,7 @@ export class App {
       crisisFile = validateData("crises.json", crisisFileSchema, crisesData) as CrisisFile;
       scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
       promiseFile = validateData("promises.json", promiseFileSchema, promisesData) as PromiseFile;
+      validateData("districts.json", districtFileSchema, districtsData);
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;
@@ -271,6 +275,9 @@ export class App {
       community_center: new CommunityCenterScene(sceneDeps),
       crossroads: new CrossroadsScene(sceneDeps)
     };
+    for (const district of districtsData.districts as DistrictConfig[]) {
+      this.scenes[district.id] = new DistrictScene(sceneDeps, district);
+    }
     if (!this.scenes[this.state.currentScene]) {
       this.state.currentScene = "community_center";
     }

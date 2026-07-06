@@ -710,6 +710,54 @@
             "map_cracks": "«Allora mappiamole.»"
           }
         }
+      },
+      "district_old_blocks_intro": {
+        "start": {
+          "text": "Le facciate si tengono a vicenda. Le persone hanno smesso.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "district_grey_yards_intro": {
+        "start": {
+          "text": "Un quartiere di lucchetti a cui nessuno ricorda le chiavi.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "district_youth_court_intro": {
+        "start": {
+          "text": "Qui si cresce in fretta. Decidere, però, tocca sempre ad altri.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "district_coastline_intro": {
+        "start": {
+          "text": "Le foto vengono benissimo. Le bollette meno.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "district_hill_gardens_intro": {
+        "start": {
+          "text": "I giornali lo chiamano problema. Chi ci vive lo chiama casa.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
+      },
+      "district_lake_edge_intro": {
+        "start": {
+          "text": "L'acqua è vicina. Tutto il resto è lontano.",
+          "choices": {
+            "look": "Guardati intorno."
+          }
+        }
       }
     },
     "quests": {
