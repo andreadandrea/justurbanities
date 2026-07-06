@@ -202,7 +202,8 @@ export class App {
       npcPlacements: (sceneId) =>
         activePlacements(scheduleFile, sceneId, clock.timePart, (conditions) =>
           this.effectResolver.checkAll(conditions)
-        )
+        ),
+      clock
     };
 
     this.scenes = {
