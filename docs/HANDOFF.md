@@ -3,42 +3,38 @@
 Quick context for continuing development in a fresh session.
 
 ## Repo & deploy
-- **Working branch:** `claude/charming-fermi-xoi7hf` (also merged to `main`).
-- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main` via `.github/workflows/pages.yml`). Hard-refresh after deploy.
-- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (42 tests).
+- **Branch:** `main` (feature branches merged with `--no-ff`, then deleted-on-merge style).
+- **⚠ 30+ local commits NOT pushed** — no GitHub credentials on this Mac (no `gh`, empty keychain, no SSH keys). First thing: authenticate (`brew install gh && gh auth login`) and `git push origin main`.
+- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main`).
+- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (**127 tests**).
 
 ## Read first (for the next agent)
+- `../DEV_PLAN.md` (in the design folder, NOT the repo) — the execution backlog; work top-down from the first `[ ]`.
 - `AGENTS.md` — hard technical rules.
-- `docs/game-design/CORE_THEME.md` — Poly Crisis perceived as **Fragmentation**.
-- `docs/game-design/GAMEPLAY_LOOP.md` — Vivarium-inspired loop, 4 pillars, phased plan, POV.
+- `docs/game-design/CORE_THEME.md`, `docs/game-design/GAMEPLAY_LOOP.md` — design pillars.
+- `docs/specs/SPEC_Dual_Art_Style.md`, `docs/specs/SPEC_Multiplayer.md` — core requirements for Phases 5 and 8.
 
-## Done
-- Engine + data-driven dialogues/quests (zod-validated), offline save, sync (fake adapter), debug panel, educational report.
-- **Opening flow:** title → narrative prologue → character selection → customization (name+pronoun for Custom; presets are fixed identities).
-- **3/4 follow camera** in a world larger than the viewport + **animated directional sprites** (walk/idle ×4 dir) for playables.
-- **Living fabric:** the whole city re-colours with derived **Neighbourhood Vitality**; resource HUD. Vivid palette.
-- **Maya real art** integrated (portrait, icon, full figure) — generated externally, background-removed and wired in.
+## Done (this session, 2026-07-06 — Phases 0–4 of DEV_PLAN complete)
+- **Phase 0:** ratified data fixes (N05→CRISIS_OFFER, RUMOR buffer→N07, voice speakers, corporate_man), canon taglines, cleanup (dynamic scene title, restore() defaults), `{playerName}`/pronoun interpolation.
+- **Phase 1:** `GameClock` (day/part cycle, dayEnded/dayStarted/timeAdvanced hooks) + TimeHud with "Pass time".
+- **Phase 2:** `schedule.json` + `NpcDirector` (first-matching-placement-wins fallbacks; refresh on enter/clock/choice). **All 18 NPC quests live in-world** with canon EN texts (§8). Simulation test completes every N01–N18.
+- **Phase 3:** i18n — `I18n` engine (EN fallback, live switch, missing-key report in DebugPanel), OptionsPanel (⚙) persisted in Dexie `settings` (schema v2), **ALL strings extracted to `content.*`/`ui.*` keys** (EN+IT 100%, 5 partner stubs synced by test), translation kit (`npm run i18n:export` / `i18n:import`, CSV, placeholder validation).
+- **Phase 4:** `CrisisManager` (tier resolution + per-tier data effects), `CrisisWeek` orchestrator (armed by `crisis_week_ready` flag → starts next morning; announcement + tier outcome scenes, EN+IT canon §6 texts; saves resume mid-week; DebugPanel has an "Arm Crisis Week" button until ch.3 content sets the flag), `PromiseManager` + LogbookPanel 📖 (8 canon promises, kept +3 Trust / broken −2 Trust +1 frag).
 
-## Data in the repo, not yet wired
-- **18 NPC quests `N01`–`N18`** appended to `src/data/quests.json`, with their
-  dialogues (`<speaker>_<id>`) in `src/data/dialogues.json` (engage vs shortcut;
-  shortcut raises `fragmentationGlobal`). Some engage choices are gated
-  (`N03`,`N06`,`N08`,`N18`).
-- **Crisis Week**: `src/data/crises.json` (5 crises) + `src/types/Crisis.ts` +
-  `crisisFileSchema` (validated at boot). No `CrisisManager` yet — see
-  `docs/game-design/INTEGRATION_NPC_Quests.md` for the proposed evaluation.
-- These dialogues are **not yet triggered by any scene** — they need the NPC
-  director (below) to place the NPCs and open `<speaker>_<id>` on interaction.
+## Next task
+**Phase 5 — Dual art style** (see `docs/specs/SPEC_Dual_Art_Style.md`): 5.1 variant-aware asset manifest & loader (`realistic`/`animal` path segment, fallback chain, zod). The Dexie `settings` table and OptionsPanel are already in place for 5.2.
 
-## In progress / next
-1. **Day/time + dynamic NPCs** (the user's priority): `GameState.day`/`timePart` fields exist; still to build `GameClock`, time HUD + "pass time", and **data-driven NPC placement that varies by time / quest / story** (NPCs appear/relocate/leave). This is also what wires the N01–N18 dialogues into the world.
-2. **Use name/pronoun in dialogue text** (accepted, not yet done).
-3. **Directional sprite set for Maya** in the new art style (only a front pose exists, so in-world she still uses placeholder walk frames).
-4. Art for the other characters.
+## Architecture notes for the next agent
+- **Content is 100% data-driven:** quests/dialogues/crises/schedule/promises in `src/data/*.json` (zod at boot, loud failures); every text is an i18n key resolved by `DialogueUI`/`OpeningScreens`/etc. Changing dialogue = edit `src/locales/{en,it}.json` + structure in `dialogues.json`. Guard tests fail on hardcoded strings.
+- **Time:** nothing moves without `GameClock.advance()` (Pass time button or future story beats).
+- **NPCs:** `schedule.json` placements (scene × timeParts × conditions); first match wins → put quest offers before intro fallbacks.
+- **Crisis Week:** arm via `crisis_week_ready` variable (ch.3 content should set it in Phase 6); all bookkeeping in `GameState.variables`.
+- **Known content gaps** (Phase 6): `ruben_curious` (N06 engage gate) and `commission_started` (N08 gate) are set by no dialogue yet — Elena's ch.1 route will set `commission_started`; kept-promise triggers not yet wired (crisis transformative outcomes are natural candidates).
+- **DebugPanel is i18n-exempt** (dev tool). It shows the i18n missing-key report.
 
 ## Asset pipeline (works)
-Higgsfield is **not** available as an MCP connector in this environment, so the agent can't drive it. Proven workflow: user generates art (Higgsfield/ChatGPT, from the reference sheets in `public/assets/characters/<id>/references/`) → exports PNG → **puts it in a .zip** (inline-pasted images are NOT saved to disk; zips are) → uploads → the agent removes background (Pillow/scipy, multi-seed flood-fill avoiding hair), crops portrait/icon/full, saves to `public/assets/characters/<id>/{portraits,icons}/` with manifest-matching names, commits + deploys. No code change needed when filenames match the manifest.
+Prompt list ready in `docs/art/PROMPT_LIST.md` (priority: key visual → environments → icons/chromatic states → characters → UI; naming per Guida 04 §3). User generates art externally → **zip upload** (inline images are NOT saved to disk) → agent removes background, crops, commits. No code change needed when filenames match the manifest.
 
 ## Notes
-- Set the model explicitly when starting the new chat (the user prefers **Opus 4.8**).
-- Playable roster + opening data: `src/data/playable.json`, `src/data/prologue.json`. Draft texts pending the official Dialogue Script.
+- Session bootstrap and hard rules live in the design folder's `CLAUDE.md` (parent of this repo checkout).
+- The user prefers the final session summary **in Italian**.
