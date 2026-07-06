@@ -41,6 +41,8 @@ export const charactersSchema = z.array(
     id: z.string().min(1),
     displayName: z.string().min(1),
     type: z.string().optional(),
+    // "voice" = non-character speaker (narrator, places) with no in-world sprite
+    kind: z.enum(["voice"]).optional(),
     priority: z.string().optional(),
     assetStatus: z.string().optional(),
     // null = the character has no reference sheet yet (e.g. "custom")
@@ -157,7 +159,15 @@ export const questFileSchema = z.object({
           })
         )
         .min(1),
-      rewards: z.array(effectSchema).optional()
+      rewards: z.array(effectSchema).optional(),
+      meta: z
+        .object({
+          npc: z.string().optional(),
+          abilityMatch: z.string().optional(),
+          crisisLink: z.string().nullable().optional()
+        })
+        .passthrough()
+        .optional()
     })
   )
 });
