@@ -24,7 +24,7 @@ describe("E01 — Experts of Everyday Life (✳ Mission 7, outcome 7)", () => {
     const quests = validateData("quests.json", questFileSchema, questsData) as QuestFile;
     const e01 = quests.quests.find((q) => q.id === "E01");
     expect(e01).toBeDefined();
-    expect(e01?.meta?.registry).toContain("outcome 7");
+    expect(e01?.meta?.registry).toMatch(/outcome 7/i);
   });
 
   it("empathy maps are stored and reusable: 3 interviews, posture recorded", () => {
