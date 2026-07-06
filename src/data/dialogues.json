@@ -288,7 +288,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Listen Before Fixing: Intervista almeno tre persone in distretti diversi prima di proporre soluzioni.",
+          "text": "Three interviews, three districts, no solutions in your pocket. If you come back with a proposal instead of three stories, you've done the wrong mission.",
           "effects": [
             {
               "type": "startQuest",
@@ -298,7 +298,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "I'll go and listen. To the silences too.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -325,11 +325,11 @@
                   "questId": "N01"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "I've already talked to people, I know what's needed.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -349,6 +349,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(leafing through the empathy maps) Look: three neighbourhoods, three different ways of saying “nobody ever comes back”. That's where we start.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -358,7 +368,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The Crossing: Rendi sicuro un attraversamento che blocca bambini, anziani e disabili.",
+          "text": "That crossing blocks children, older people and anyone on wheels — wheelchair or pram. The Council “will assess”; I've stopped waiting for verbs in the future tense.",
           "effects": [
             {
               "type": "startQuest",
@@ -368,7 +378,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "We do the temporary fix AND the real proposal.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -400,11 +410,11 @@
                   "questId": "N02"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "I'll report the problem to the technical office and be done.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -424,6 +434,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(testing the ramp) It holds. And the difference between today and a ticket is that tonight Lia crosses on her own.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -433,7 +453,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Mandate, Not a Photo Op: Trasforma l'attenzione politica in un impegno reale con responsabilità chiare.",
+          "text": "I can give you a photo with the mayoral sash, or a mandate with delegated powers and a budget. The first is free; the second you have to make defensible in council.",
           "effects": [
             {
               "type": "startQuest",
@@ -443,7 +463,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Here are names, dates and reviews.",
               "conditions": [
                 {
                   "type": "resourceAtLeast",
@@ -477,11 +497,11 @@
                   "questId": "N03"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "Let's hold the event, the rest will sort itself out.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -501,6 +521,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(signing) Know this: skip one review and the council will throw it in my face for years. (smiles) Don't skip it.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -510,7 +540,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Memory Is Not Nostalgia: Usa la memoria del quartiere per legittimare il nuovo invece di frenarlo.",
+          "text": "Thirty years ago that pier was one long party; now you want to “regenerate” it. Regenerate — conjugated from the verb to forget. (theatrical pause) Convince me otherwise.",
           "effects": [
             {
               "type": "startQuest",
@@ -520,7 +550,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Tell me about it. We put it inside the project, not in place of the project.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -542,11 +572,11 @@
                   "questId": "N04"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "The past is past, Donald.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -566,6 +596,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(at the dinner, moved) All right, all right. If memory serves to open the future instead of barring it… then growing old has been of some use.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -575,7 +615,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The Repair Day: Riparazione collettiva di uno spazio con risorse limitate (mini-gioco Modular Repair).",
+          "text": "One Saturday, twenty hands, zero money. Courtyard 17 can become a common room — or stay the place where the Corporate hangs his rendering: pick the Saturday.",
           "effects": [
             {
               "type": "startQuest",
@@ -585,7 +625,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "I'll organise the crews and materials.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -617,11 +657,11 @@
                   "questId": "N05"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "We'll call in a firm, sooner or later.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -646,6 +686,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(wiping her hands) It's not finished — common things never are, you maintain them. That's the beauty of them.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -655,7 +705,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The Story Behind the Headline: Scegli se Ruben alimenta o disinnesca la voce falsa.",
+          "text": "I've got two drafts: “THE USUAL SUSPECTS' CENTER” — twelve thousand guaranteed clicks — or the true story, which is slower and less sexy. My editor wants the first by tonight; give me the second.",
           "effects": [
             {
               "type": "startQuest",
@@ -665,11 +715,11 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Here are the accounts, the photos and three people to interview. Check everything.",
               "conditions": [
                 {
                   "type": "variableEquals",
-                  "key": "talkedTo_ruben",
+                  "key": "ruben_curious",
                   "value": true
                 }
               ],
@@ -694,11 +744,11 @@
                   "questId": "N06"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "Write whatever you want, I don't have time.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -723,6 +773,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(showing the piece) “Participation isn't dead: it changed address.” Fewer clicks, more true. (sighs) I hate it when you people improve me.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -732,7 +792,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "From Rumor to Information: Trasforma l'edicola in un punto info affidabile e multilingue.",
+          "text": "A hundred rumours pass through here every day — eighty true, twenty poisonous — and I sort them by ear. Help me turn this into a proper information point, without switching off the chatter: the chatter is half the neighbourhood.",
           "effects": [
             {
               "type": "startQuest",
@@ -742,7 +802,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "A verified noticeboard, five languages, and your ear stays editor-in-chief.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -769,11 +829,11 @@
                   "questId": "N07"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "A sign with the Council's opening hours will do.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -793,6 +853,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(arranging the noticeboard) Look: notices in Urdu, Polish and Italian, and people's little slips underneath, same as ever. Order and warmth — like tea.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -802,7 +872,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Rules and Open Doors: Trova un modo regolare per aprire una sala comune (mini-gioco Commons Access).",
+          "text": "Everyone asks me to “turn a blind eye” — I have two, and a rulebook. But there is Article 9, collaboration pacts: nobody ever uses it because it takes work… fancy some?",
           "effects": [
             {
               "type": "startQuest",
@@ -812,12 +882,12 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "We write the pact properly, clause by clause.",
               "conditions": [
                 {
-                  "type": "resourceAtLeast",
-                  "key": "trust",
-                  "value": 4
+                  "type": "variableEquals",
+                  "key": "commission_started",
+                  "value": true
                 }
               ],
               "effects": [
@@ -846,11 +916,11 @@
                   "questId": "N08"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "We just open it, we'll see later.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -880,6 +950,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(stamping) Collaboration Pact no. 1. (almost smiling) Did you know that rules, used well, are quite moving?",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -889,7 +969,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "The Last Bus: Documenta un collegamento mancante e costruisci una proposta.",
+          "text": "The last usable run out of Hill Gardens is 19:40; whoever works the evening shift walks home, forty minutes, in the dark. I've had the numbers in my head for years — nobody's ever asked me for them.",
           "effects": [
             {
               "type": "startQuest",
@@ -899,7 +979,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "I'm asking. Let's count a week of runs together.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -931,11 +1011,11 @@
                   "questId": "N09"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "Send the company a complaint.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -955,6 +1035,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(dossier on the dashboard) Twenty-three people on foot every night — now it's in writing. Let's see what weighs more at that table: my odometer or their Excel sheet.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -964,7 +1054,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Care for the Carers: Introduci pratiche di riposo e distribuzione del carico nella rete.",
+          "text": "I've done the sums: twelve active volunteers, four on the edge of burnout — if one collapses, everyone's shifts collapse. Caring for those who care isn't a luxury: it's maintenance of the network.",
           "effects": [
             {
               "type": "startQuest",
@@ -974,7 +1064,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Shifts with mandatory rest, pairs, and the right to say no.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1001,11 +1091,11 @@
                   "questId": "N10"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "They're adults, they can pace themselves.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1025,6 +1115,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(pinning up the rota) “Resting is participating.” Piotr suggested that line — he's back.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1034,7 +1134,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Mixed Tables: Trasforma il bar in luogo d'incontro tra gruppi separati.",
+          "text": "Look at my bar: the pensioners' table, the kids' table, the newcomers' table — three islands. Same walls, zero words between them; I've got the space, what I'm missing is the excuse.",
           "effects": [
             {
               "type": "startQuest",
@@ -1044,7 +1144,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Theme nights and a shared noticeboard. We build the excuse together.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1066,11 +1166,11 @@
                   "questId": "N12"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "Put up a sign saying 'talk to each other'.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1090,6 +1190,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(gesturing at the room) Thursday: backgammon tournament, Donald versus the Youth Court kids. He lost and wants a rematch. (under his breath) When false rumours go round now, they fall apart on their own in here: people know each other.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1099,7 +1209,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Care Made Visible: Verde minimo co-curato dai residenti, che resta nelle loro mani.",
+          "text": "Pots in the windows, a painted bench, an adopted flowerbed — small, yes. But a tended place says “someone is staying here”; what matters is that it stays in the residents' hands and doesn't become a shop window for tourists.",
           "effects": [
             {
               "type": "startQuest",
@@ -1109,7 +1219,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Minimal green, co-tended, with the names of those who look after it.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1131,11 +1241,11 @@
                   "questId": "N13"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "We'll call a garden centre and be done.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1160,6 +1270,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(watering with a little girl) There are three rules: who plants, tends; who tends, signs; who signs, tells the story. Beauty without keepers is only scenery.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1169,7 +1289,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Through a Child's Eyes: Mappa la città dal punto di vista dei bambini.",
+          "text": "You adults measure streets in metres; I measure them in “where I can go on my own”. Want to see my map? It's full of holes.",
           "effects": [
             {
               "type": "startQuest",
@@ -1179,7 +1299,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "You lead. I'll write down everything you say.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1211,11 +1331,11 @@
                   "questId": "N14"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "Children don't decide these things.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1235,6 +1355,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(at the noticeboard, showing the pinned-up map) That red X — I put it there. And they copied it into the real document. (to Zoe) See? Sometimes they do listen to us.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1244,7 +1374,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Before the Water Rises: Prepara reti e percorsi prima della crisi climatica (mini-gioco Crisis Response Map).",
+          "text": "Everyone talks about the climate in the future tense; I have Lake Edge's drains full of leaves now, and a list of low houses that go under after two hours of rain. Prevention is boring — that's why nobody does it.",
           "effects": [
             {
               "type": "startQuest",
@@ -1254,7 +1384,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "A channel-clearing day + evacuation list + assembly point. Boring stuff — let's do it.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1281,11 +1411,11 @@
                   "questId": "N15"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "If it happens, we'll call civil protection.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1305,6 +1435,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(watching the sky) Now we're even allowed to hope it won't be needed. Hoping AFTER you've cleared the channels is a different kind of hope altogether.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1314,7 +1454,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Words to Belong: Corso di lingua e memoria intergenerazionale per partecipare davvero.",
+          "text": "I taught for forty years; now I watch intelligent adults sit silent in meetings for fear of a grammar mistake. Language is the city's first door — I still have the key, if anyone is interested.",
           "effects": [
             {
               "type": "startQuest",
@@ -1324,7 +1464,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "A language and citizenship course. And your former pupils as tutors.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1351,11 +1491,11 @@
                   "questId": "N16"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "There are apps for learning languages.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1375,6 +1515,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(after the first lesson) Mrs Anh asked a question in public today. Wrong subjunctive, perfect courage. (adjusting her glasses) We shall correct the subjunctive.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1384,7 +1534,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Don't Tell Our Story Without Us: Contro-narrazione co-creata con residenti e giovani (mini-gioco Story Routes).",
+          "text": "The papers only ever cover Hill Gardens in the crime pages; I can draw, and the kids at the wall know what needs drawing — it's called counter-narrative. But if I'm the only one signing it, that's just another theft.",
           "effects": [
             {
               "type": "startQuest",
@@ -1394,7 +1544,7 @@
           "choices": [
             {
               "id": "engage",
-              "label": "Affronta la quest insieme alla comunità.",
+              "label": "Co-creation: the residents choose the stories, you draw them, you sign together.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1416,11 +1566,11 @@
                   "questId": "N17"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "shortcut",
-              "label": "Scegli la scorciatoia rapida.",
+              "label": "You do it, you're the artist.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1445,6 +1595,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(in front of the mural signed by 14 hands) My name is the smallest one. I've never been this happy about a bad placement.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1454,7 +1614,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Conosco porte a cui nessuno bussa più. Vuoi che ti mostri chi è rimasto fuori dalla mappa?",
+          "text": "I deliver even where the doorbells have lost their names. Mr Ferro, third floor — I'm the only voice he hears all week, and I know twenty more like him: no list holds them.",
           "effects": [
             {
               "type": "startQuest",
@@ -1537,6 +1697,16 @@
               "end": true
             }
           ]
+        },
+        "resolution": {
+          "text": "(nearly weeping) Mr Ferro made coffee for two neighbours. Twenty-three years without opening his door to anyone — twenty-three! (blows his nose) Excuse me, it's the dust.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
+              "end": true
+            }
+          ]
         }
       }
     },
@@ -1546,7 +1716,7 @@
       "startNode": "start",
       "nodes": {
         "start": {
-          "text": "Un intermediario propone fondi e un rinnovo rapido per Grey Yards. A quali condizioni?",
+          "text": "(flat voice, contract already printed) Full refurbishment, ninety days, twenty-year management to us — the neighbourhood gets a beautiful space, and the use, well… gets regulated. Sign here.",
           "effects": [
             {
               "type": "startQuest",
@@ -1556,7 +1726,7 @@
           "choices": [
             {
               "id": "accept",
-              "label": "Accetta la soluzione rapida.",
+              "label": "Sign the contract. Ninety days, a beautiful space.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1583,16 +1753,16 @@
                   "questId": "N18"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "negotiate",
-              "label": "Negozia a tutela di residenti e commons.",
+              "label": "Countersign the civic pact: guaranteed public hours, social tariffs, an annual review.",
               "conditions": [
                 {
-                  "type": "resourceAtLeast",
-                  "key": "trust",
-                  "value": 5
+                  "type": "questState",
+                  "questId": "N08",
+                  "state": "completed"
                 }
               ],
               "effects": [
@@ -1616,11 +1786,11 @@
                   "questId": "N18"
                 }
               ],
-              "end": true
+              "next": "resolution"
             },
             {
               "id": "refuse",
-              "label": "Rifiuta e cerca alleanze locali.",
+              "label": "We already have ninety neighbours. We don't need ninety days.",
               "effects": [
                 {
                   "type": "completeObjective",
@@ -1642,6 +1812,23 @@
                   "questId": "N18"
                 }
               ],
+              "next": "resolution",
+              "conditions": [
+                {
+                  "type": "questState",
+                  "questId": "N05",
+                  "state": "completed"
+                }
+              ]
+            }
+          ]
+        },
+        "resolution": {
+          "text": "(closing the briefcase, without rancour) Interesting. Tired cities usually sign. (at the door) We'll be back when you're tired.",
+          "choices": [
+            {
+              "id": "close",
+              "label": "…",
               "end": true
             }
           ]
