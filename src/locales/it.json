@@ -514,6 +514,202 @@
             "accept": "«Giovedì. Ci sarò — e noterò chi non c'è.»"
           }
         }
+      },
+      "route_maya": {
+        "shift": {
+          "text": "17:00. Il turno è finito — quasi. Il capo si sporge: «Venti minuti di straordinario? Solo oggi.» L'assemblea è alle sei; Zoe esce dal doposcuola alle sei e mezza.",
+          "choices": {
+            "refuse": "«Stasera non posso, davvero.»",
+            "accept": "Accetta. Venti minuti non hanno mai ucciso nessuno."
+          }
+        },
+        "bus": {
+          "text": "Alla fermata, GWEN dal finestrino: «Il 14 salta la corsa. Guasto, dicono. Il prossimo tra venti minuti — o tagli per il sottopasso.»",
+          "choices": {
+            "wait": "Aspetta il bus.",
+            "underpass": "Il sottopasso. (Buio, a gradini — una vicina col passeggino torna indietro. Maya lo annota.)",
+            "call_farah": "Chiama Farah: «Puoi prendere tu Zoe a scuola?» (Odia chiedere.)"
+          }
+        },
+        "zoe": {
+          "text": "Squilla il telefono. ZOE: «Ho dimenticato il flauto a scuola e domani la maestra controlla. Se non lo prendo mi sgrida. Puoi? Ti prego ti prego—»",
+          "choices": {
+            "go_back": "Torna a scuola. Quindici minuti in più.",
+            "tomorrow": "«Domani spieghiamo alla maestra.» (Zoe musona.)",
+            "farah_again": "Chiedi a Farah anche questo. (Si accende la prima rete di cura.)"
+          }
+        },
+        "dilemma": {
+          "text": "18:05. Le luci del Centro in fondo alla strada. La mano di Zoe è calda e la giornata pesa un quintale.",
+          "choices": {
+            "walk_in": "Entra in ritardo, con Zoe per mano.",
+            "online": "Segui online dal parco giochi — presente a metà.",
+            "give_up": "Rinuncia, ma scrivi ad Anna: «Fate gli incontri quando chi lavora può venire.»"
+          }
+        }
+      },
+      "route_samir": {
+        "invitation": {
+          "text": "«Si invita la S.V. alla sessione consultiva ex art. 12…» SAMIR (tra sé): “S.V.”? È per me o per qualcun altro? (a un collega) Tu ci vai? COLLEGA: Io? Quelle cose non sono per noi. Parlano, mettono a verbale, fine.",
+          "choices": {
+            "ask_abdullah": "Chiedi ad Abdullah cosa significa davvero. («Vieni. Se ti senti fuori posto, ti siedi vicino a me.»)",
+            "write_anna": "Scrivi ad Anna per chiarimenti. (Si scusa per il linguaggio.)",
+            "ignore": "Ignora l'invito. La città ti ci porterà comunque."
+          }
+        },
+        "to_crossing": {
+          "text": "Prima le consegne, poi il Hub. La via più veloce taglia per il Narrow Crossing — da sempre.",
+          "choices": {
+            "ride": "Sali in bici. (Vai al Crossroads: l'attraversamento ti aspetta.)"
+          }
+        }
+      },
+      "route_samir_barrier": {
+        "fence": {
+          "text": "Ti fermi DI COLPO. Una recinzione di cantiere ha sigillato il Narrow Crossing da un giorno all'altro — nessun cartello, nessun percorso alternativo. Dall'altra parte, un signore anziano fa girare il carrello.",
+          "choices": {
+            "kids_gap": "Cerca il varco che usano i ragazzini. (Passi — e vedi esattamente chi non può.)",
+            "photo": "Fotografa e segna sulla mappa. (La prima voce della mappa vissuta.)",
+            "detour": "Fai la deviazione lunga sulla strada trafficata."
+          }
+        },
+        "checkpoint": {
+          "text": "Davanti al Town Hall, un addetto alza la mano — verso di te, non verso l'uomo in giacca entrato prima. «Documento e motivo della visita?»",
+          "choices": {
+            "show_invitation": "Mostra l'invito. (Abdullah compare alle tue spalle: «È con me.»)",
+            "show_invitation_alone": "Mostra l'invito. (Lo studia un attimo di troppo. Entri; il costo si sente.)",
+            "ask_everyone": "«Lo chiede a tutti, o solo a me?»",
+            "leave": "Girati e vattene."
+          }
+        },
+        "dilemma": {
+          "text": "La sala dell'assemblea ronza dietro la porta. Tre barriere tra casa e questa stanza — le hai contate.",
+          "choices": {
+            "sit_back": "Entra e siediti in fondo, in silenzio.",
+            "name_barriers": "Entra e nomina le barriere: recinzione, sottopasso, controllo.",
+            "name_barriers_bridge": "Entra e nomina le barriere — Abdullah ti fa cenno di andare avanti.",
+            "hand_photo": "Non entrare. Consegna ad Anna la foto della recinzione, sulla porta."
+          }
+        }
+      },
+      "route_elena": {
+        "meeting": {
+          "text": "La riunione pre-assemblea non finisce mai. TOM: «Se prometti l'apertura degli spazi senza la commissione sicurezza, la responsabilità è tua. Firmato: tua.»",
+          "choices": {
+            "commission": "«Allora convochiamo la commissione domani.»",
+            "cautious": "«Troverò una formula prudente.»"
+          }
+        },
+        "site_visit": {
+          "text": "Due ore all'assemblea. Grey Yards è a dieci minuti dal percorso — il cortile di cui parlerà è lì, dietro un lucchetto. SIGRID misura l'ingresso a spanne: «Tre giorni di lavoro e questo posto è una sala comune. Tre anni, se aspettiamo un bando.»",
+          "choices": {
+            "show_me": "«Mi faccia vedere cosa serve, esattamente.»",
+            "no_promises": "«Non posso promettere nulla.» — e ascolta comunque. («Meglio di chi promette e sparisce.»)",
+            "skip": "Niente tempo. Dritta all'assemblea, slide pronte."
+          }
+        },
+        "ruben": {
+          "text": "RUBEN, registratore in mano: «Una dichiarazione: il Comune crede in questo processo o è la solita vetrina?»",
+          "choices": {
+            "verifiable_dates": "«Ci credo io. Il Comune si giudica dai fatti, e vi darò date verificabili.»",
+            "no_statement": "«Nessuna dichiarazione.» (Scrive: “il Comune non si sbilancia”.)"
+          }
+        },
+        "dilemma": {
+          "text": "Tocca a lei. La cartellina contiene i numeri veri — più piccoli di quanto chiunque speri.",
+          "choices": {
+            "state_limits": "Dichiara subito i limiti di budget, cifre alla mano.",
+            "simplify": "Semplifica e rimanda i dettagli.",
+            "technical": "Presentazione tecnica completa. (Precisa e fredda — qualcuno sussurra «parla come un PDF».)",
+            "technical_saved": "Presentazione completa — ma apre col lucchetto, non con le slide."
+          }
+        }
+      },
+      "route_luca": {
+        "closing_time": {
+          "text": "17:30. L'ora di punta è la migliore amica della cassa, e l'assemblea inizia alle sei. La consegna è in ritardo, di nuovo.",
+          "choices": {
+            "close_early": "Chiudi prima. La cassa perdonerà — forse.",
+            "ask_neighbour": "Chiedi alla vicina di bottega di coprire l'ultima ora.",
+            "stay_open": "Resta aperto e manda un messaggio: «Con voi con lo spirito.»"
+          }
+        },
+        "email": {
+          "text": "Nuova mail. URBAN RENEWAL PARTNERS: «Gentile titolare, il suo esercizio ricade in un'area di nostro interesse. Proponiamo un incontro conoscitivo, senza impegno.»",
+          "choices": {
+            "bin_it": "Cestinala.",
+            "info_only": "Rispondi «solo per informazione».",
+            "forward_amin": "Girala ad Amin: «Tu ne sai qualcosa?» («Terza bottega questo mese. Comprano dove il quartiere è stanco.»)"
+          }
+        },
+        "amin": {
+          "text": "AMIN, asciugando una tazza: «Vieni all'assemblea. Se ci sei tu, i commercianti non sono più “quelli che non vengono mai”. E porta qualcosa: la gente ragiona meglio a stomaco pieno.»",
+          "choices": {
+            "bring_goods": "Carica cassette d'acqua e frutta.",
+            "just_words": "«Le assemblee sono parole.» («Anche i preventivi, finché non firmi.»)"
+          }
+        },
+        "dilemma": {
+          "text": "17:55. La serranda è a metà. In una tasca le chiavi del negozio, nell'altra l'invito — e quella mail.",
+          "choices": {
+            "go_with_goods": "Vai, con la merce sotto il braccio.",
+            "investor_meeting": "Vai all'incontro con l'investitore invece che all'assemblea.",
+            "keep_shop": "Non andare. Tieni il negozio aperto."
+          }
+        }
+      },
+      "route_custom": {
+        "vignettes": {
+          "text": "Sulla strada per il Centro la città ti mostra quattro scene insieme: Maya che controlla l'orario con la cartellina di Zoe sottobraccio; Samir fermo davanti a una recinzione che ieri non c'era; Elena in equilibrio tra un faldone e un caffè di carta; Luca con la serranda a metà e le cassette ai piedi. Non puoi essere ovunque.",
+          "choices": {
+            "with_maya": "Aspetta il bus con Maya e tieni d'occhio Zoe.",
+            "with_samir": "Aiuta Samir a documentare la recinzione.",
+            "with_elena": "Offri a Elena un caffè e una domanda onesta.",
+            "with_luca": "Dai una mano a Luca a caricare le cassette.",
+            "observe": "Vai dritto all'assemblea e osserva tutto."
+          }
+        }
+      },
+      "assembly_v1": {
+        "who": {
+          "text": "Il Community Center, 18:20. Chi è arrivato siede nel cerchio; chi segue online è una miniatura su uno schermo; chi manca è una sedia vuota con un nome. ANNA: «Prima di parlare di progetti, guardiamoci: chi c'è? E chi manca — e perché?»",
+          "choices": {
+            "look": "(Guarda il cerchio: il primo “Who is in the room”.)"
+          }
+        },
+        "ben": {
+          "text": "BEN: «Che alcune sedie siano vuote non è un dettaglio. È IL dato.»",
+          "choices": {
+            "elena_concrete": "(Elena chiede la parola — oggi ha visto il cortile.)",
+            "elena_pdf": "(Elena apre le slide.)"
+          }
+        },
+        "elena_saw": {
+          "text": "ELENA: «Ho visto il cortile di Grey Yards oggi. Tre giorni di lavoro, dice Sigrid. Verifico cosa serve per darle le chiavi.» (Il cerchio si sporge: questa non è lingua da slide.)",
+          "choices": {
+            "next": "(Continua.)"
+          }
+        },
+        "elena_slides": {
+          "text": "ELENA: «Il quadro normativo prevede…» (Qualcuno guarda il telefono. Le parole sono corrette e non arrivano da nessuna parte.)",
+          "choices": {
+            "next": "(Continua.)"
+          }
+        },
+        "voices": {
+          "text": "Anna apre il giro di parola. La sala trattiene il fiato per un attimo.",
+          "choices": {
+            "maya_line": "MAYA, Zoe in braccio: «Se c'è posto per lei, c'è posto per tutte le madri che stasera non sono qui.»",
+            "samir_line": "SAMIR: «Tre barriere tra casa mia e questa stanza. Le ho contate. Volete la lista?»",
+            "silence": "(Nessuno delle route parla: parlano le sedie vuote.)"
+          }
+        },
+        "closing": {
+          "text": "ANNA, chiudendo: «Proposta — prima di riparare qualsiasi cosa, mappiamo le crepe. Tutte.» (Il Crossroads si sblocca per l'esplorazione: comincia il capitolo 2.)",
+          "choices": {
+            "map_cracks": "«Allora mappiamole.»"
+          }
+        }
       }
     },
     "quests": {

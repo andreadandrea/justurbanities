@@ -27,6 +27,7 @@ import type { PromiseFile } from "../game/promise/PromiseManager";
 import { LogbookPanel } from "../ui/LogbookPanel";
 import promisesData from "../data/promises.json";
 import { CrisisWeek } from "../game/crisis/CrisisWeek";
+import { StoryDirector } from "../game/story/StoryDirector";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
 import { I18n, LOCALES, type LocaleCode } from "../i18n/I18n";
@@ -262,7 +263,8 @@ export class App {
         ),
       clock,
       i18n,
-      art
+      art,
+      onDialogueEnded: () => storyDirector.check()
     };
 
     this.scenes = {
@@ -290,7 +292,16 @@ export class App {
         logProgress("dialogue_choice", { dialogueId, choiceId, scene: this.state.currentScene });
         await this.activeScene().saveNow();
       },
-      (speakerId) => art.portrait(speakerId)
+      (speakerId) => art.portrait(speakerId),
+      (dialogueId) => storyDirector.check()
+    );
+
+    // Chapter-1 story flow: routes after the prologue, assembly after routes.
+    const storyDirector = new StoryDirector(
+      this.state,
+      (dialogueId, speakerLabel) => crisisRunner.run(dialogueId, speakerLabel),
+      () => this.dialogueUI.isOpen,
+      (dialogueId) => this.dialogueManager.has(dialogueId)
     );
     const crisisWeek = new CrisisWeek(
       this.state,
@@ -377,6 +388,7 @@ export class App {
 
     const bootScene = this.activeScene();
     bootScene.enter();
+    storyDirector.check();
     this.elements.sceneTitle.textContent = bootScene.displayName;
     this.loop.start();
     this.syncEngine.start();

@@ -2429,6 +2429,1128 @@
           ]
         }
       }
+    },
+    {
+      "id": "route_maya",
+      "speakerId": "narrator",
+      "startNode": "shift",
+      "nodes": {
+        "shift": {
+          "text": "content.dialogues.route_maya.shift.text",
+          "choices": [
+            {
+              "id": "refuse",
+              "label": "content.dialogues.route_maya.shift.choices.refuse",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "boss_annoyed",
+                  "value": true
+                }
+              ],
+              "next": "bus"
+            },
+            {
+              "id": "accept",
+              "label": "content.dialogues.route_maya.shift.choices.accept",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "maya_late",
+                  "value": true
+                }
+              ],
+              "next": "bus"
+            }
+          ]
+        },
+        "bus": {
+          "text": "content.dialogues.route_maya.bus.text",
+          "choices": [
+            {
+              "id": "wait",
+              "label": "content.dialogues.route_maya.bus.choices.wait",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "maya_late",
+                  "value": true
+                }
+              ],
+              "next": "zoe"
+            },
+            {
+              "id": "underpass",
+              "label": "content.dialogues.route_maya.bus.choices.underpass",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "underpass_noted",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "next": "zoe"
+            },
+            {
+              "id": "call_farah",
+              "label": "content.dialogues.route_maya.bus.choices.call_farah",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "farah_asked",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "zoe"
+            }
+          ]
+        },
+        "zoe": {
+          "text": "content.dialogues.route_maya.zoe.text",
+          "choices": [
+            {
+              "id": "go_back",
+              "label": "content.dialogues.route_maya.zoe.choices.go_back",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "tomorrow",
+              "label": "content.dialogues.route_maya.zoe.choices.tomorrow",
+              "next": "dilemma"
+            },
+            {
+              "id": "farah_again",
+              "label": "content.dialogues.route_maya.zoe.choices.farah_again",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "farah_asked",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "care_net_started",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 2
+                }
+              ],
+              "next": "dilemma"
+            }
+          ]
+        },
+        "dilemma": {
+          "text": "content.dialogues.route_maya.dilemma.text",
+          "choices": [
+            {
+              "id": "walk_in",
+              "label": "content.dialogues.route_maya.dilemma.choices.walk_in",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "maya_arrived_with_zoe",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "online",
+              "label": "content.dialogues.route_maya.dilemma.choices.online",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "maya_half_present",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "give_up",
+              "label": "content.dialogues.route_maya.dilemma.choices.give_up",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "maya_logbook_line",
+                  "value": true
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "logbook_entry",
+                  "payload": {
+                    "entry": "maya_meeting_hours",
+                    "chapter": "ch1"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "route_samir",
+      "speakerId": "narrator",
+      "startNode": "invitation",
+      "nodes": {
+        "invitation": {
+          "text": "content.dialogues.route_samir.invitation.text",
+          "choices": [
+            {
+              "id": "ask_abdullah",
+              "label": "content.dialogues.route_samir.invitation.choices.ask_abdullah",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "abdullah_bridge",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "to_crossing"
+            },
+            {
+              "id": "write_anna",
+              "label": "content.dialogues.route_samir.invitation.choices.write_anna",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "invito_da_correggere",
+                  "value": true
+                }
+              ],
+              "next": "to_crossing"
+            },
+            {
+              "id": "ignore",
+              "label": "content.dialogues.route_samir.invitation.choices.ignore",
+              "next": "to_crossing"
+            }
+          ]
+        },
+        "to_crossing": {
+          "text": "content.dialogues.route_samir.to_crossing.text",
+          "choices": [
+            {
+              "id": "ride",
+              "label": "content.dialogues.route_samir.to_crossing.choices.ride",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "samir_route_stage",
+                  "value": "barrier"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "route_samir_barrier",
+      "speakerId": "narrator",
+      "startNode": "fence",
+      "nodes": {
+        "fence": {
+          "text": "content.dialogues.route_samir_barrier.fence.text",
+          "choices": [
+            {
+              "id": "kids_gap",
+              "label": "content.dialogues.route_samir_barrier.fence.choices.kids_gap",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "crossing_blocked",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "next": "checkpoint"
+            },
+            {
+              "id": "photo",
+              "label": "content.dialogues.route_samir_barrier.fence.choices.photo",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "fence_photographed",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "checkpoint"
+            },
+            {
+              "id": "detour",
+              "label": "content.dialogues.route_samir_barrier.fence.choices.detour",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "samir_detour",
+                  "value": true
+                }
+              ],
+              "next": "checkpoint"
+            }
+          ],
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "samir_route_stage",
+              "value": "checkpoint"
+            }
+          ]
+        },
+        "checkpoint": {
+          "text": "content.dialogues.route_samir_barrier.checkpoint.text",
+          "choices": [
+            {
+              "id": "show_invitation",
+              "label": "content.dialogues.route_samir_barrier.checkpoint.choices.show_invitation",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "abdullah_bridge",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "show_invitation_alone",
+              "label": "content.dialogues.route_samir_barrier.checkpoint.choices.show_invitation_alone",
+              "conditions": [
+                {
+                  "type": "variableNotEquals",
+                  "key": "abdullah_bridge",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "ask_everyone",
+              "label": "content.dialogues.route_samir_barrier.checkpoint.choices.ask_everyone",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "leave",
+              "label": "content.dialogues.route_samir_barrier.checkpoint.choices.leave",
+              "next": "dilemma"
+            }
+          ]
+        },
+        "dilemma": {
+          "text": "content.dialogues.route_samir_barrier.dilemma.text",
+          "choices": [
+            {
+              "id": "sit_back",
+              "label": "content.dialogues.route_samir_barrier.dilemma.choices.sit_back",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "samir_present_mute",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "name_barriers",
+              "label": "content.dialogues.route_samir_barrier.dilemma.choices.name_barriers",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "crossing_blocked",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "samir_spoke",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 2
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "name_barriers_bridge",
+              "label": "content.dialogues.route_samir_barrier.dilemma.choices.name_barriers_bridge",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "abdullah_bridge",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "samir_spoke",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 2
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "hand_photo",
+              "label": "content.dialogues.route_samir_barrier.dilemma.choices.hand_photo",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "samir_photo_delivered",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "route_elena",
+      "speakerId": "narrator",
+      "startNode": "meeting",
+      "nodes": {
+        "meeting": {
+          "text": "content.dialogues.route_elena.meeting.text",
+          "choices": [
+            {
+              "id": "commission",
+              "label": "content.dialogues.route_elena.meeting.choices.commission",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "commission_started",
+                  "value": true
+                }
+              ],
+              "next": "site_visit"
+            },
+            {
+              "id": "cautious",
+              "label": "content.dialogues.route_elena.meeting.choices.cautious",
+              "next": "site_visit"
+            }
+          ]
+        },
+        "site_visit": {
+          "text": "content.dialogues.route_elena.site_visit.text",
+          "choices": [
+            {
+              "id": "show_me",
+              "label": "content.dialogues.route_elena.site_visit.choices.show_me",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_saw_it",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "ruben"
+            },
+            {
+              "id": "no_promises",
+              "label": "content.dialogues.route_elena.site_visit.choices.no_promises",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_saw_it",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "ruben"
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.route_elena.site_visit.choices.skip",
+              "next": "ruben"
+            }
+          ]
+        },
+        "ruben": {
+          "text": "content.dialogues.route_elena.ruben.text",
+          "choices": [
+            {
+              "id": "verifiable_dates",
+              "label": "content.dialogues.route_elena.ruben.choices.verifiable_dates",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_dates_promised",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "no_statement",
+              "label": "content.dialogues.route_elena.ruben.choices.no_statement",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            }
+          ]
+        },
+        "dilemma": {
+          "text": "content.dialogues.route_elena.dilemma.text",
+          "choices": [
+            {
+              "id": "state_limits",
+              "label": "content.dialogues.route_elena.dilemma.choices.state_limits",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_stated_limits",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 2
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "simplify",
+              "label": "content.dialogues.route_elena.dilemma.choices.simplify",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "overpromise_risk",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "technical",
+              "label": "content.dialogues.route_elena.dilemma.choices.technical",
+              "conditions": [
+                {
+                  "type": "variableNotEquals",
+                  "key": "elena_saw_it",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_talked_slides",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": -1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "technical_saved",
+              "label": "content.dialogues.route_elena.dilemma.choices.technical_saved",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "elena_saw_it",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_talked_padlock",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "route_luca",
+      "speakerId": "narrator",
+      "startNode": "closing_time",
+      "nodes": {
+        "closing_time": {
+          "text": "content.dialogues.route_luca.closing_time.text",
+          "choices": [
+            {
+              "id": "close_early",
+              "label": "content.dialogues.route_luca.closing_time.choices.close_early",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "luca_closed_early",
+                  "value": true
+                }
+              ],
+              "next": "email"
+            },
+            {
+              "id": "ask_neighbour",
+              "label": "content.dialogues.route_luca.closing_time.choices.ask_neighbour",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "shop_net",
+                  "value": true
+                }
+              ],
+              "next": "email"
+            },
+            {
+              "id": "stay_open",
+              "label": "content.dialogues.route_luca.closing_time.choices.stay_open",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "luca_absent_excused",
+                  "value": true
+                }
+              ],
+              "next": "email"
+            }
+          ]
+        },
+        "email": {
+          "text": "content.dialogues.route_luca.email.text",
+          "choices": [
+            {
+              "id": "bin_it",
+              "label": "content.dialogues.route_luca.email.choices.bin_it",
+              "next": "amin"
+            },
+            {
+              "id": "info_only",
+              "label": "content.dialogues.route_luca.email.choices.info_only",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "corporate_contact",
+                  "value": true
+                }
+              ],
+              "next": "amin"
+            },
+            {
+              "id": "forward_amin",
+              "label": "content.dialogues.route_luca.email.choices.forward_amin",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "amin"
+            }
+          ]
+        },
+        "amin": {
+          "text": "content.dialogues.route_luca.amin.text",
+          "choices": [
+            {
+              "id": "bring_goods",
+              "label": "content.dialogues.route_luca.amin.choices.bring_goods",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "luca_brought_goods",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "just_words",
+              "label": "content.dialogues.route_luca.amin.choices.just_words",
+              "next": "dilemma"
+            }
+          ]
+        },
+        "dilemma": {
+          "text": "content.dialogues.route_luca.dilemma.text",
+          "choices": [
+            {
+              "id": "go_with_goods",
+              "label": "content.dialogues.route_luca.dilemma.choices.go_with_goods",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "luca_arrived",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "investor_meeting",
+              "label": "content.dialogues.route_luca.dilemma.choices.investor_meeting",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "corporate_meeting",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "keep_shop",
+              "label": "content.dialogues.route_luca.dilemma.choices.keep_shop",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "luca_stayed",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "route_custom",
+      "speakerId": "narrator",
+      "startNode": "vignettes",
+      "nodes": {
+        "vignettes": {
+          "text": "content.dialogues.route_custom.vignettes.text",
+          "choices": [
+            {
+              "id": "with_maya",
+              "label": "content.dialogues.route_custom.vignettes.choices.with_maya",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "custom_position",
+                  "value": "facilitator"
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "with_samir",
+              "label": "content.dialogues.route_custom.vignettes.choices.with_samir",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "custom_position",
+                  "value": "ally"
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "with_elena",
+              "label": "content.dialogues.route_custom.vignettes.choices.with_elena",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "custom_position",
+                  "value": "bridge"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "with_luca",
+              "label": "content.dialogues.route_custom.vignettes.choices.with_luca",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "custom_position",
+                  "value": "activator"
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "observe",
+              "label": "content.dialogues.route_custom.vignettes.choices.observe",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "custom_position",
+                  "value": "observer"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "logbook_entry",
+                  "payload": {
+                    "entry": "observer_notes",
+                    "chapter": "ch1"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "assembly_v1",
+      "speakerId": "anna",
+      "startNode": "who",
+      "nodes": {
+        "who": {
+          "text": "content.dialogues.assembly_v1.who.text",
+          "choices": [
+            {
+              "id": "look",
+              "label": "content.dialogues.assembly_v1.who.choices.look",
+              "next": "ben"
+            }
+          ],
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "assembly_v1_seen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "who_is_in_the_room",
+              "payload": {
+                "version": 1,
+                "chapter": "ch1"
+              }
+            }
+          ]
+        },
+        "ben": {
+          "text": "content.dialogues.assembly_v1.ben.text",
+          "choices": [
+            {
+              "id": "elena_concrete",
+              "label": "content.dialogues.assembly_v1.ben.choices.elena_concrete",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "elena_saw_it",
+                  "value": true
+                }
+              ],
+              "next": "elena_saw"
+            },
+            {
+              "id": "elena_pdf",
+              "label": "content.dialogues.assembly_v1.ben.choices.elena_pdf",
+              "conditions": [
+                {
+                  "type": "variableNotEquals",
+                  "key": "elena_saw_it",
+                  "value": true
+                }
+              ],
+              "next": "elena_slides"
+            }
+          ]
+        },
+        "elena_saw": {
+          "text": "content.dialogues.assembly_v1.elena_saw.text",
+          "choices": [
+            {
+              "id": "next",
+              "label": "content.dialogues.assembly_v1.elena_saw.choices.next",
+              "next": "voices"
+            }
+          ]
+        },
+        "elena_slides": {
+          "text": "content.dialogues.assembly_v1.elena_slides.text",
+          "choices": [
+            {
+              "id": "next",
+              "label": "content.dialogues.assembly_v1.elena_slides.choices.next",
+              "next": "voices"
+            }
+          ]
+        },
+        "voices": {
+          "text": "content.dialogues.assembly_v1.voices.text",
+          "choices": [
+            {
+              "id": "maya_line",
+              "label": "content.dialogues.assembly_v1.voices.choices.maya_line",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "maya_arrived_with_zoe",
+                  "value": true
+                }
+              ],
+              "next": "closing"
+            },
+            {
+              "id": "samir_line",
+              "label": "content.dialogues.assembly_v1.voices.choices.samir_line",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "samir_spoke",
+                  "value": true
+                }
+              ],
+              "next": "closing"
+            },
+            {
+              "id": "silence",
+              "label": "content.dialogues.assembly_v1.voices.choices.silence",
+              "next": "closing"
+            }
+          ]
+        },
+        "closing": {
+          "text": "content.dialogues.assembly_v1.closing.text",
+          "choices": [
+            {
+              "id": "map_cracks",
+              "label": "content.dialogues.assembly_v1.closing.choices.map_cracks",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "chapter2_unlocked",
+                  "value": true
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "P02",
+                  "objectiveId": "choose_route"
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "P02"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }
