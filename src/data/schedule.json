@@ -5,143 +5,504 @@
     {
       "npcId": "anna",
       "scene": "community_center",
-      "position": { "x": 900, "y": 620 },
-      "dialogueId": "anna_n01",
+      "position": {
+        "x": 900,
+        "y": 620
+      },
+      "dialogueId": "anna_map_glitch",
       "conditions": [
-        { "type": "variableEquals", "key": "talkedTo_anna", "value": true },
-        { "type": "questState", "questId": "N01", "state": "locked" }
+        {
+          "type": "questState",
+          "questId": "P01",
+          "state": "completed"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "giorgia",
+      "scene": "community_center",
+      "position": {
+        "x": 400,
+        "y": 800
+      },
+      "dialogueId": "giorgia_prologue",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "ruben",
+      "scene": "community_center",
+      "position": {
+        "x": 250,
+        "y": 600
+      },
+      "dialogueId": "ruben_prologue",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "community_center",
+      "position": {
+        "x": 1100,
+        "y": 1050
+      },
+      "dialogueId": "sigrid_prologue",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "amin",
+      "scene": "community_center",
+      "position": {
+        "x": 1450,
+        "y": 1150
+      },
+      "dialogueId": "amin_prologue",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "elena",
+      "scene": "community_center",
+      "position": {
+        "x": 850,
+        "y": 1150
+      },
+      "dialogueId": "elena_prologue",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
       ]
     },
     {
       "npcId": "anna",
       "scene": "community_center",
-      "position": { "x": 900, "y": 620 },
+      "position": {
+        "x": 900,
+        "y": 620
+      },
+      "dialogueId": "anna_n01",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_anna",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "N01",
+          "state": "locked"
+        },
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "position": {
+        "x": 900,
+        "y": 620
+      },
       "dialogueId": "anna_intro"
     },
     {
       "npcId": "ben",
       "scene": "community_center",
-      "position": { "x": 1240, "y": 760 },
+      "position": {
+        "x": 1240,
+        "y": 760
+      },
       "dialogueId": "ben_n02",
       "conditions": [
-        { "type": "variableEquals", "key": "talkedTo_ben", "value": true },
-        { "type": "questState", "questId": "N02", "state": "locked" }
+        {
+          "type": "variableEquals",
+          "key": "talkedTo_ben",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "N02",
+          "state": "locked"
+        },
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
       ]
     },
     {
       "npcId": "ben",
       "scene": "community_center",
-      "position": { "x": 1240, "y": 760 },
+      "position": {
+        "x": 1240,
+        "y": 760
+      },
       "dialogueId": "ben_intro"
     },
     {
       "npcId": "tom",
       "scene": "community_center",
-      "position": { "x": 600, "y": 450 },
+      "position": {
+        "x": 600,
+        "y": 450
+      },
       "dialogueId": "tom_n08",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "alexandria",
       "scene": "community_center",
-      "position": { "x": 700, "y": 900 },
+      "position": {
+        "x": 700,
+        "y": 900
+      },
       "dialogueId": "alexandria_n03",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "donald",
       "scene": "community_center",
-      "position": { "x": 1500, "y": 500 },
+      "position": {
+        "x": 1500,
+        "y": 500
+      },
       "dialogueId": "donald_n04",
-      "timeParts": [1, 2]
+      "timeParts": [
+        1,
+        2
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "sigrid",
       "scene": "community_center",
-      "position": { "x": 1100, "y": 1050 },
-      "dialogueId": "sigrid_n05"
+      "position": {
+        "x": 1100,
+        "y": 1050
+      },
+      "dialogueId": "sigrid_n05",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "giorgia",
       "scene": "community_center",
-      "position": { "x": 400, "y": 800 },
+      "position": {
+        "x": 400,
+        "y": 800
+      },
       "dialogueId": "giorgia_n10",
-      "timeParts": [0, 2]
+      "timeParts": [
+        0,
+        2
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "mrs_viveca",
       "scene": "community_center",
-      "position": { "x": 1750, "y": 650 },
+      "position": {
+        "x": 1750,
+        "y": 650
+      },
       "dialogueId": "mrs_viveca_n16",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "marta",
       "scene": "community_center",
-      "position": { "x": 1650, "y": 950 },
+      "position": {
+        "x": 1650,
+        "y": 950
+      },
       "dialogueId": "marta_n17",
-      "timeParts": [1, 2]
+      "timeParts": [
+        1,
+        2
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "gwen",
       "scene": "crossroads",
-      "position": { "x": 450, "y": 600 },
+      "position": {
+        "x": 450,
+        "y": 600
+      },
       "dialogueId": "gwen_n09",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "abdullah",
       "scene": "crossroads",
-      "position": { "x": 750, "y": 650 },
-      "dialogueId": "abdullah_n07"
+      "position": {
+        "x": 750,
+        "y": 650
+      },
+      "dialogueId": "abdullah_n07",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "matilda",
       "scene": "crossroads",
-      "position": { "x": 900, "y": 900 },
+      "position": {
+        "x": 900,
+        "y": 900
+      },
       "dialogueId": "matilda_n13",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "pablo",
       "scene": "crossroads",
-      "position": { "x": 600, "y": 1000 },
+      "position": {
+        "x": 600,
+        "y": 1000
+      },
       "dialogueId": "pablo_n11",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "siobhan",
       "scene": "crossroads",
-      "position": { "x": 1150, "y": 400 },
+      "position": {
+        "x": 1150,
+        "y": 400
+      },
       "dialogueId": "siobhan_n15",
-      "timeParts": [0, 1]
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "lia",
       "scene": "crossroads",
-      "position": { "x": 1450, "y": 750 },
+      "position": {
+        "x": 1450,
+        "y": 750
+      },
       "dialogueId": "lia_n14",
-      "timeParts": [1]
+      "timeParts": [
+        1
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "amin",
       "scene": "crossroads",
-      "position": { "x": 1350, "y": 1150 },
+      "position": {
+        "x": 1350,
+        "y": 1150
+      },
       "dialogueId": "amin_n12",
-      "timeParts": [1, 2]
+      "timeParts": [
+        1,
+        2
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "ruben",
       "scene": "crossroads",
-      "position": { "x": 1800, "y": 900 },
-      "dialogueId": "ruben_n06"
+      "position": {
+        "x": 1800,
+        "y": 900
+      },
+      "dialogueId": "ruben_n06",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     },
     {
       "npcId": "corporate_man",
       "scene": "crossroads",
-      "position": { "x": 1900, "y": 1200 },
+      "position": {
+        "x": 1900,
+        "y": 1200
+      },
       "dialogueId": "corporate_n18",
-      "timeParts": [2]
+      "timeParts": [
+        2
+      ],
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "prologue_complete",
+          "value": true
+        }
+      ]
     }
   ]
 }

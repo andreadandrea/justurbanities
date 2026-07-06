@@ -40,20 +40,30 @@ function npc(director: ReturnType<typeof world>["director"], id: string) {
   return found;
 }
 
-describe("NpcDirector — N01 (Anna) end-to-end in-world", () => {
-  it("intro -> quest offer -> completion -> fallback, with persistent quest state", () => {
-    const { quests, dialogues, director } = world();
+/** Play the whole §2 prologue so chapter-2 offers (N01/N02) unlock. */
+function completePrologue(w: ReturnType<typeof world>): void {
+  w.dialogues.start("anna_intro");
+  w.dialogues.choose("alive");
+  w.dialogues.choose("close");
+  w.dialogues.start("ben_intro");
+  w.dialogues.choose("assembly_mind");
+  w.dialogues.start("anna_map_glitch");
+  w.dialogues.choose("headline");
+  w.dialogues.choose("accept");
+  w.director.refresh();
+}
 
-    // Fresh game: Anna offers her intro, not the quest.
+describe("NpcDirector — N01 (Anna) end-to-end in-world", () => {
+  it("intro -> prologue -> quest offer -> completion -> fallback, with persistent quest state", () => {
+    const w = world();
+    const { quests, dialogues, director } = w;
+
+    // Fresh game: Anna offers her prologue opening, not the quest.
     expect(npc(director, "anna").dialogueId).toBe("anna_intro");
 
-    // Play the intro: listen, then close the map explanation.
-    dialogues.start("anna_intro");
-    dialogues.choose("listen");
-    dialogues.choose("close");
-    director.refresh();
+    completePrologue(w);
 
-    // talkedTo_anna is set and N01 is still locked -> the quest placement wins.
+    // talkedTo_anna is set, prologue complete, N01 still locked -> quest offer wins.
     expect(npc(director, "anna").dialogueId).toBe("anna_n01");
 
     // Play N01 and engage (the relational route).
@@ -84,14 +94,12 @@ describe("NpcDirector — N01 (Anna) end-to-end in-world", () => {
 
 describe("NpcDirector — N02 (Ben) end-to-end in-world", () => {
   it("intro -> quest offer -> completion -> fallback", () => {
-    const { state, quests, dialogues, director } = world();
+    const w = world();
+    const { state, quests, dialogues, director } = w;
 
     expect(npc(director, "ben").dialogueId).toBe("ben_intro");
 
-    dialogues.start("ben_intro");
-    dialogues.choose("ask_barrier");
-    dialogues.choose("close");
-    director.refresh();
+    completePrologue(w);
     expect(npc(director, "ben").dialogueId).toBe("ben_n02");
 
     dialogues.start("ben_n02");

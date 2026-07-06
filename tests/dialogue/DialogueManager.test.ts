@@ -19,16 +19,17 @@ function setup() {
 }
 
 describe("DialogueManager + QuestManager integration (Task 1)", () => {
-  it("plays Anna's dialogue from JSON: starts P01 and completes talk_to_anna", () => {
+  it("plays Anna's prologue opening (§2.1): starts P01 and completes talk_to_anna", () => {
     const { state, quests, dialogues } = setup();
 
     const start = dialogues.start("anna_intro");
     expect(start.text).toBe("content.dialogues.anna_intro.start.text");
     expect(quests.getQuestStatus("P01")).toBe("active");
 
-    const result = dialogues.choose("listen");
+    // "Why is the big hall empty?" — Anna appreciates people who notice.
+    const result = dialogues.choose("empty_hall");
     expect(result.ended).toBe(false);
-    expect(result.node?.text).toBe("content.dialogues.anna_intro.map.text");
+    expect(result.node?.text).toBe("content.dialogues.anna_intro.assembly.text");
     expect(state.variables.talkedTo_anna).toBe(true);
     expect(state.resources.voice).toBe(1);
 
@@ -36,21 +37,31 @@ describe("DialogueManager + QuestManager integration (Task 1)", () => {
     expect(closing.ended).toBe(true);
   });
 
-  it("completes P01 after talking to both Anna and Ben", () => {
+  it("the noticeboard detour unlocks the attendance detail", () => {
+    const { state, dialogues } = setup();
+    dialogues.start("anna_intro");
+    dialogues.choose("noticeboard");
+    expect(state.variables.noticed_attendance).toBe(true);
+    dialogues.choose("back");
+    dialogues.choose("close");
+    expect(state.variables.talkedTo_anna).toBe(true);
+  });
+
+  it("completes P01 after talking to both Anna and Ben (§2.2)", () => {
     const { state, quests, dialogues } = setup();
 
     dialogues.start("anna_intro");
-    dialogues.choose("listen");
+    dialogues.choose("alive");
     dialogues.choose("close");
     expect(quests.getQuestStatus("P01")).toBe("active");
 
     dialogues.start("ben_intro");
-    dialogues.choose("ask_barrier");
+    const result = dialogues.choose("show_where");
+    expect(result.ended).toBe(false);
     dialogues.choose("close");
 
     expect(state.variables.talkedTo_ben).toBe(true);
     expect(state.resources.care).toBe(1);
-    expect(state.variables.promised_check_entrance).toBe(true);
     expect(quests.getQuestStatus("P01")).toBe("completed");
   });
 

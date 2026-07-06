@@ -96,29 +96,38 @@
     "dialogues": {
       "anna_intro": {
         "start": {
-          "text": "Bene, ce l'hai fatta, {playerName}. La mappa della città non parla solo di strade. Parla di chi può davvero usarle.",
+          "text": "Sei arrivato, {playerName}. Guarda pure in giro — c'è tanta storia su questi muri. E qualche crepa, se guardi bene.",
           "choices": {
-            "listen": "Ascolta con attenzione."
+            "alive": "«È bello vedere il Centro ancora vivo.»",
+            "empty_hall": "«Perché la sala grande è vuota?»",
+            "noticeboard": "(Osserva la bacheca prima di rispondere.)"
           }
         },
-        "map": {
-          "text": "Guarda qui. La stessa città crea percorsi diversi per persone diverse.",
+        "noticeboard": {
+          "text": "(La bacheca elenca dodici eventi questo mese. Presenze medie: quattro.)",
           "choices": {
-            "close": "Apri la mappa più tardi."
+            "back": "Torna da Anna."
+          }
+        },
+        "assembly": {
+          "text": "Sto preparando una nuova assemblea cittadina. Il Centro funziona… per chi ci arriva. Il punto è tutta la città che non entra da quella porta.",
+          "choices": {
+            "close": "«Allora scopriamo chi non entra.»"
           }
         }
       },
       "ben_intro": {
         "start": {
-          "text": "L'accessibilità non è una richiesta speciale. È il modo in cui la città diventa pubblica.",
+          "text": "Tre fermate saltate stamattina. Metà delle persone che vorrebbero venire alle riunioni, semplicemente non ci arrivano. Non è disinteresse — è geografia.",
           "choices": {
-            "ask_barrier": "Chiedi quale barriera sistemare per prima."
+            "show_where": "«Mi mostri dove?»",
+            "assembly_mind": "«Preparerò l'assemblea pensando anche a questo.»"
           }
         },
-        "entrance": {
-          "text": "Comincia dall'ingresso. Se le persone non possono entrare, non possono partecipare.",
+        "map": {
+          "text": "(Ben apre la mappa del distretto: tre croci dove il bus non è passato, un sottopasso con gradini, un attraversamento troppo stretto per le ruote.)",
           "choices": {
-            "close": "Prometti di controllare l'ingresso."
+            "close": "Annota tutto."
           }
         }
       },
@@ -447,6 +456,62 @@
           "text": "(richiudendo la valigetta, senza rancore) Interessante. Di solito le città stanche firmano. (alla porta) Torneremo quando sarete stanchi.",
           "choices": {
             "close": "…"
+          }
+        }
+      },
+      "giorgia_prologue": {
+        "start": {
+          "text": "Vedi Piotr? Terzo turno di volontariato questa settimana. Nessuno glielo ha chiesto — è che nessun altro si offre. (abbassa la voce) La partecipazione che brucia le persone non è partecipazione.",
+          "choices": {
+            "close": "«Me lo ricorderò.»"
+          }
+        }
+      },
+      "ruben_prologue": {
+        "start": {
+          "text": "«Il solito club dei soliti noti» — ottantaquattro commenti. Sto scrivendo un pezzo sulla crisi della partecipazione. Mi serve solo il titolo giusto.",
+          "choices": {
+            "other_story": "«E se la storia fosse un'altra?»",
+            "write_what_you_see": "«Scrivi quello che vedi.»"
+          }
+        }
+      },
+      "sigrid_prologue": {
+        "start": {
+          "text": "Ci sono almeno quattro spazi vuoti tra Grey Yards e Old Blocks. Buoni muri, buone ossa. Mancano chiavi, permessi e gente con tempo. Tre cose che nessuna assemblea ha mai prodotto.",
+          "choices": {
+            "close": "«Magari questa sì.»"
+          }
+        }
+      },
+      "amin_prologue": {
+        "start": {
+          "text": "Al bar sento cose che qui dentro nessuno direbbe mai. Se vuoi capire la città, passa da me — l'espresso è più onesto dei verbali.",
+          "choices": {
+            "close": "«Ti prendo in parola.»"
+          }
+        }
+      },
+      "elena_prologue": {
+        "start": {
+          "text": "(Sullo schermo del Centro, un messaggio dal Town Hall: «Si apre la consultazione sui quartieri. Servono risultati concreti, non un altro documento. — A.S.») Elena, ufficio partecipazione. Sarò onesta da subito: non ci sono fondi per tutto, e non firmerò promesse che non possiamo mantenere.",
+          "choices": {
+            "clear_limit": "«Meglio un limite chiaro che una promessa vuota.»",
+            "institutions_always": "«Le istituzioni dicono sempre così.»"
+          }
+        }
+      },
+      "anna_map_glitch": {
+        "start": {
+          "text": "…e qui Lake Edge, dove— (la mappa proiettata GLITCHA: le linee tra i quartieri si spezzano, i colori calano, notifiche contraddittorie si sovrappongono) Non è la prima volta. I tecnici dicono che la mappa è a posto. È come se fosse la città a non tenere più insieme. RUBEN (scattando una foto): «\"Eurbania is fragmenting.\" Ecco il titolo.»",
+          "choices": {
+            "headline": "(Il logbook registra la sua prima voce.)"
+          }
+        },
+        "invite": {
+          "text": "Assemblea, giovedì. Ma stavolta niente «porte aperte e vediamo chi viene». Voglio sapere chi non viene, e perché.",
+          "choices": {
+            "accept": "«Giovedì. Ci sarò — e noterò chi non c'è.»"
           }
         }
       }

@@ -15,35 +15,71 @@
           ],
           "choices": [
             {
-              "id": "listen",
-              "label": "content.dialogues.anna_intro.start.choices.listen",
+              "id": "alive",
+              "label": "content.dialogues.anna_intro.start.choices.alive",
               "effects": [
                 {
-                  "type": "setVariable",
-                  "key": "talkedTo_anna",
-                  "value": true
-                },
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                }
+              ],
+              "next": "assembly"
+            },
+            {
+              "id": "empty_hall",
+              "label": "content.dialogues.anna_intro.start.choices.empty_hall",
+              "effects": [
                 {
                   "type": "addResource",
                   "key": "voice",
                   "value": 1
-                },
-                {
-                  "type": "completeObjective",
-                  "questId": "P01",
-                  "objectiveId": "talk_to_anna"
                 }
               ],
-              "next": "map"
+              "next": "assembly"
+            },
+            {
+              "id": "noticeboard",
+              "label": "content.dialogues.anna_intro.start.choices.noticeboard",
+              "next": "noticeboard"
             }
           ]
         },
-        "map": {
-          "text": "content.dialogues.anna_intro.map.text",
+        "noticeboard": {
+          "text": "content.dialogues.anna_intro.noticeboard.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "noticed_attendance",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "back",
+              "label": "content.dialogues.anna_intro.noticeboard.choices.back",
+              "next": "assembly"
+            }
+          ]
+        },
+        "assembly": {
+          "text": "content.dialogues.anna_intro.assembly.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "talkedTo_anna",
+              "value": true
+            },
+            {
+              "type": "completeObjective",
+              "questId": "P01",
+              "objectiveId": "talk_to_anna"
+            }
+          ],
           "choices": [
             {
               "id": "close",
-              "label": "content.dialogues.anna_intro.map.choices.close",
+              "label": "content.dialogues.anna_intro.assembly.choices.close",
               "end": true
             }
           ]
@@ -57,44 +93,51 @@
       "nodes": {
         "start": {
           "text": "content.dialogues.ben_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "talkedTo_ben",
+              "value": true
+            },
+            {
+              "type": "completeObjective",
+              "questId": "P01",
+              "objectiveId": "talk_to_ben"
+            }
+          ],
           "choices": [
             {
-              "id": "ask_barrier",
-              "label": "content.dialogues.ben_intro.start.choices.ask_barrier",
+              "id": "show_where",
+              "label": "content.dialogues.ben_intro.start.choices.show_where",
               "effects": [
-                {
-                  "type": "setVariable",
-                  "key": "talkedTo_ben",
-                  "value": true
-                },
                 {
                   "type": "addResource",
                   "key": "care",
                   "value": 1
-                },
-                {
-                  "type": "completeObjective",
-                  "questId": "P01",
-                  "objectiveId": "talk_to_ben"
                 }
               ],
-              "next": "entrance"
-            }
-          ]
-        },
-        "entrance": {
-          "text": "content.dialogues.ben_intro.entrance.text",
-          "choices": [
+              "next": "map"
+            },
             {
-              "id": "close",
-              "label": "content.dialogues.ben_intro.entrance.choices.close",
+              "id": "assembly_mind",
+              "label": "content.dialogues.ben_intro.start.choices.assembly_mind",
               "effects": [
                 {
                   "type": "setVariable",
-                  "key": "promised_check_entrance",
+                  "key": "ben_seed",
                   "value": true
                 }
               ],
+              "end": true
+            }
+          ]
+        },
+        "map": {
+          "text": "content.dialogues.ben_intro.map.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.ben_intro.map.choices.close",
               "end": true
             }
           ]
@@ -2169,6 +2212,218 @@
             {
               "id": "close",
               "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "giorgia_prologue",
+      "speakerId": "giorgia",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.giorgia_prologue.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.giorgia_prologue.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "giorgia_seed",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ruben_prologue",
+      "speakerId": "ruben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.ruben_prologue.start.text",
+          "choices": [
+            {
+              "id": "other_story",
+              "label": "content.dialogues.ruben_prologue.start.choices.other_story",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "ruben_curious",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "write_what_you_see",
+              "label": "content.dialogues.ruben_prologue.start.choices.write_what_you_see",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "ruben_noted",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sigrid_prologue",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.sigrid_prologue.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.sigrid_prologue.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "sigrid_seed",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "amin_prologue",
+      "speakerId": "amin",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.amin_prologue.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.amin_prologue.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "amin_seed",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "elena_prologue",
+      "speakerId": "elena",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.elena_prologue.start.text",
+          "choices": [
+            {
+              "id": "clear_limit",
+              "label": "content.dialogues.elena_prologue.start.choices.clear_limit",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_respect",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "institutions_always",
+              "label": "content.dialogues.elena_prologue.start.choices.institutions_always",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "anna_map_glitch",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.anna_map_glitch.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "mapGlitchSeen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "logbook_entry",
+              "payload": {
+                "entry": "map_glitch",
+                "chapter": "prologue"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "headline",
+              "label": "content.dialogues.anna_map_glitch.start.choices.headline",
+              "next": "invite"
+            }
+          ]
+        },
+        "invite": {
+          "text": "content.dialogues.anna_map_glitch.invite.text",
+          "choices": [
+            {
+              "id": "accept",
+              "label": "content.dialogues.anna_map_glitch.invite.choices.accept",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "prologue_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "assembly_invited",
+                  "value": true
+                },
+                {
+                  "type": "startQuest",
+                  "questId": "P02"
+                }
+              ],
               "end": true
             }
           ]

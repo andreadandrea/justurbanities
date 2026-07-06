@@ -96,29 +96,38 @@
     "dialogues": {
       "anna_intro": {
         "start": {
-          "text": "Good, you made it, {playerName}. The city map is not just about streets. It is about who can actually use them.",
+          "text": "You made it, {playerName}. Have a look around — there's a lot of history on these walls. And a few cracks, if you look closely.",
           "choices": {
-            "listen": "Listen carefully."
+            "alive": "“It's good to see the Center still alive.”",
+            "empty_hall": "“Why is the big hall empty?”",
+            "noticeboard": "(Study the noticeboard before answering.)"
           }
         },
-        "map": {
-          "text": "Look here. The same city creates different routes for different people.",
+        "noticeboard": {
+          "text": "(The board lists twelve events this month. Average attendance: four.)",
           "choices": {
-            "close": "Open the map later."
+            "back": "Turn back to Anna."
+          }
+        },
+        "assembly": {
+          "text": "I'm preparing a new citizens' assembly. The Center works… for those who reach it — the point is the whole city that never comes through that door.",
+          "choices": {
+            "close": "“Then let's find out who doesn't.”"
           }
         }
       },
       "ben_intro": {
         "start": {
-          "text": "Accessibility is not a special request. It is how the city becomes public.",
+          "text": "Three stops skipped this morning. Half the people who'd like to come to meetings simply can't get here — it's not apathy, it's geography.",
           "choices": {
-            "ask_barrier": "Ask what barrier should be fixed first."
+            "show_where": "“Can you show me where?”",
+            "assembly_mind": "“I'll prepare the assembly with this in mind too.”"
           }
         },
-        "entrance": {
-          "text": "Start with the entrance. If people cannot enter, they cannot participate.",
+        "map": {
+          "text": "(Ben opens the district map: three crosses where the bus never came, one underpass with steps, a crossing too narrow for wheels.)",
           "choices": {
-            "close": "Promise to check the entrance."
+            "close": "Note it all down."
           }
         }
       },
@@ -447,6 +456,62 @@
           "text": "(closing the briefcase, without rancour) Interesting. Tired cities usually sign. (at the door) We'll be back when you're tired.",
           "choices": {
             "close": "…"
+          }
+        }
+      },
+      "giorgia_prologue": {
+        "start": {
+          "text": "See Piotr? Third volunteer shift this week — nobody asked him, it's just that nobody else steps up. (lowering her voice) Participation that burns people out isn't participation.",
+          "choices": {
+            "close": "“I'll remember that.”"
+          }
+        }
+      },
+      "ruben_prologue": {
+        "start": {
+          "text": "“Same old club, same old faces” — eighty-four comments. I'm writing a piece on the participation crisis; all I need is the right headline.",
+          "choices": {
+            "other_story": "“What if the story were a different one?”",
+            "write_what_you_see": "“Write what you see.”"
+          }
+        }
+      },
+      "sigrid_prologue": {
+        "start": {
+          "text": "There are at least four empty spaces between Grey Yards and Old Blocks — good walls, good bones. What's missing is keys, permits and people with time: three things no assembly has ever produced.",
+          "choices": {
+            "close": "“Maybe this one will.”"
+          }
+        }
+      },
+      "amin_prologue": {
+        "start": {
+          "text": "At my bar I hear things nobody in here would ever say. If you want to understand the city, come by — the espresso is more honest than the minutes.",
+          "choices": {
+            "close": "“I'll take you up on that.”"
+          }
+        }
+      },
+      "elena_prologue": {
+        "start": {
+          "text": "(On the Center's screen, a message from the Town Hall: “Consultation on the neighbourhoods opening. We need concrete results, not another document. — A.S.”) Elena, participation office. I'll be honest from the start: there are no funds for everything, and I won't sign promises we can't keep.",
+          "choices": {
+            "clear_limit": "“Better a clear limit than an empty promise.”",
+            "institutions_always": "“That's what institutions always say.”"
+          }
+        }
+      },
+      "anna_map_glitch": {
+        "start": {
+          "text": "…and here Lake Edge, where— (the projected map GLITCHES: lines between neighbourhoods snap, colours drop, contradictory notifications overlap) It's not the first time. The technicians say the map is fine — it's as if it were the city that no longer holds together. RUBEN (snapping a photo): “Eurbania is fragmenting. There's my headline.”",
+          "choices": {
+            "headline": "(The logbook records its first entry.)"
+          }
+        },
+        "invite": {
+          "text": "Assembly, Thursday. But this time no “open doors and let's see who turns up” — I want to know who doesn't come, and why.",
+          "choices": {
+            "accept": "“Thursday. I'll be there — and I'll notice who isn't.”"
           }
         }
       }
