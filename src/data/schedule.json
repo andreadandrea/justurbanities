@@ -1,0 +1,18 @@
+{
+  "schema": "npc-schedule@1",
+  "note": "NPC placements per scene / part of day / conditions. timeParts omitted = always present; conditions omitted = unconditional. Dialogue ids follow <speaker>_<id>.",
+  "placements": [
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "position": { "x": 900, "y": 620 },
+      "dialogueId": "anna_intro"
+    },
+    {
+      "npcId": "ben",
+      "scene": "community_center",
+      "position": { "x": 1240, "y": 760 },
+      "dialogueId": "ben_intro"
+    }
+  ]
+}

@@ -140,6 +140,23 @@ export const dialogueFileSchema = z
     }
   });
 
+// ---------- schedule.json (NPC director placements) ----------
+
+export const scheduleFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  placements: z.array(
+    z.object({
+      npcId: z.string().min(1),
+      scene: z.string().min(1),
+      position: z.object({ x: z.number(), y: z.number() }),
+      dialogueId: z.string().min(1),
+      timeParts: z.array(z.number().int().min(0).max(2)).nonempty().optional(),
+      conditions: z.array(conditionSchema).optional()
+    })
+  )
+});
+
 // ---------- quests.json ----------
 
 export const questFileSchema = z.object({

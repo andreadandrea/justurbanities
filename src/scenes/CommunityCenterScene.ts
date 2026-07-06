@@ -1,7 +1,7 @@
 import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
 import type { AnimatedSprite } from "../engine/AnimatedSprite";
-import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
+import { BaseScene, type Interactable } from "./BaseScene";
 import charactersData from "../data/characters.json";
 
 const DISPLAY_NAMES = new Map(
@@ -11,17 +11,15 @@ const DISPLAY_NAMES = new Map(
   ])
 );
 
-type Npc = { id: string; x: number; y: number; sprite: AnimatedSprite | null };
+type Npc = { id: string; x: number; y: number; dialogueId: string; sprite: AnimatedSprite | null };
 
 export class CommunityCenterScene extends BaseScene {
   readonly sceneId = "community_center";
   readonly displayName = "Community Center";
   readonly world: WorldSize = { width: 2000, height: 1300 };
 
-  private readonly npcs: Npc[] = [
-    { id: "anna", x: 900, y: 620, sprite: null },
-    { id: "ben", x: 1240, y: 760, sprite: null }
-  ];
+  /** Populated from schedule.json on enter() — no hardcoded NPCs. */
+  private npcs: Npc[] = [];
 
   private readonly exitDoor: RenderableEntity = {
     id: "door_crossroads",
@@ -34,16 +32,26 @@ export class CommunityCenterScene extends BaseScene {
     interactive: true
   };
 
-  constructor(deps: SceneDeps) {
-    super(deps);
-    for (const npc of this.npcs) npc.sprite = this.deps.sprites.createSprite(npc.id);
+  override enter(): void {
+    this.refreshNpcs();
+  }
+
+  /** Re-evaluates data-driven placements (schedule.json × time × conditions). */
+  private refreshNpcs(): void {
+    this.npcs = this.deps.npcPlacements(this.sceneId).map((placement) => ({
+      id: placement.npcId,
+      x: placement.position.x,
+      y: placement.position.y,
+      dialogueId: placement.dialogueId,
+      sprite: this.deps.sprites.createSprite(placement.npcId)
+    }));
   }
 
   protected interactables(): Interactable[] {
     return [
       ...this.npcs.map((npc) => ({
         entity: this.npcEntity(npc),
-        onInteract: () => this.dialogueRunner.run(`${npc.id}_intro`, DISPLAY_NAMES.get(npc.id) ?? npc.id)
+        onInteract: () => this.dialogueRunner.run(npc.dialogueId, DISPLAY_NAMES.get(npc.id) ?? npc.id)
       })),
       {
         entity: this.exitDoor,
