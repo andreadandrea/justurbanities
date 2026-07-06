@@ -1,0 +1,29 @@
+{
+  "ui": {
+    "time": {
+      "day": "Day",
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "passTime": "Pass time",
+      "passTimeHint": "Let time pass to the next part of the day"
+    },
+    "resources": {
+      "vitality": "City vitality",
+      "trust": "Trust",
+      "care": "Care",
+      "commons": "Commons",
+      "voice": "Voice",
+      "resilience": "Resilience"
+    },
+    "state": {
+      "fragmented": "Fragmented",
+      "awakening": "Awakening",
+      "connected": "Connected",
+      "thriving": "Thriving"
+    },
+    "language": {
+      "label": "Language"
+    }
+  }
+}

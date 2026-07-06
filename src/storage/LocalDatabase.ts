@@ -39,11 +39,17 @@ export type SyncQueueItem = {
   updatedAt: string;
 };
 
+export type LocalSetting = {
+  key: string;
+  value: unknown;
+};
+
 export class LocalDatabase extends Dexie {
   sessions!: Table<LocalSession, string>;
   savegames!: Table<LocalSaveGame, string>;
   progress_events!: Table<ProgressEvent, string>;
   sync_queue!: Table<SyncQueueItem, string>;
+  settings!: Table<LocalSetting, string>;
 
   constructor() {
     super("justurbanities_local_db");
@@ -52,6 +58,10 @@ export class LocalDatabase extends Dexie {
       savegames: "id, sessionId, userId, updatedAt",
       progress_events: "id, sessionId, userId, type, createdAt, synced",
       sync_queue: "id, entityType, entityId, status, updatedAt"
+    });
+    // v2: device-level settings (language now; art-style variant in Phase 5).
+    this.version(2).stores({
+      settings: "key"
     });
   }
 

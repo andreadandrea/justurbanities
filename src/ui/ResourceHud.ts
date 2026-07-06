@@ -1,20 +1,6 @@
 import type { Resources } from "../game/resources/ResourceManager";
 import { neighbourhoodVitality, cityState, POSITIVE_RESOURCES } from "../game/resources/ResourceManager";
-
-const RESOURCE_LABEL: Record<string, string> = {
-  trust: "Trust",
-  care: "Care",
-  commons: "Commons",
-  voice: "Voice",
-  resilience: "Resilience"
-};
-
-const STATE_LABEL: Record<string, string> = {
-  fragmented: "Fragmented",
-  awakening: "Awakening",
-  connected: "Connected",
-  thriving: "Thriving"
-};
+import type { I18n } from "../i18n/I18n";
 
 /**
  * On-screen HUD for the collective resources and the derived Neighbourhood
@@ -25,12 +11,15 @@ const STATE_LABEL: Record<string, string> = {
 export class ResourceHud {
   private readonly panel: HTMLElement;
   private readonly values = new Map<string, HTMLElement>();
+  private readonly names = new Map<string, HTMLElement>();
+  private readonly vitalityTitle: HTMLElement;
   private readonly vitalityValue: HTMLElement;
   private readonly vitalityFill: HTMLElement;
   private readonly stateLabel: HTMLElement;
+  private lastState = "fragmented";
   private lastSignature = "";
 
-  constructor(root: HTMLElement) {
+  constructor(root: HTMLElement, private readonly i18n: I18n) {
     this.panel = document.createElement("section");
     this.panel.className = "hud-resources";
     this.panel.setAttribute("aria-label", "Collective resources and neighbourhood vitality");
@@ -40,13 +29,12 @@ export class ResourceHud {
 
     const vitalityHeader = document.createElement("div");
     vitalityHeader.className = "hud-vitality-header";
-    const vitalityTitle = document.createElement("span");
-    vitalityTitle.textContent = "City vitality";
+    this.vitalityTitle = document.createElement("span");
     this.stateLabel = document.createElement("span");
     this.stateLabel.className = "hud-state";
     this.vitalityValue = document.createElement("span");
     this.vitalityValue.className = "hud-vitality-value";
-    vitalityHeader.append(vitalityTitle, this.stateLabel, this.vitalityValue);
+    vitalityHeader.append(this.vitalityTitle, this.stateLabel, this.vitalityValue);
 
     const track = document.createElement("div");
     track.className = "hud-vitality-track";
@@ -68,17 +56,29 @@ export class ResourceHud {
       item.className = "hud-resource";
       const name = document.createElement("span");
       name.className = "hud-resource-name";
-      name.textContent = RESOURCE_LABEL[key];
       const value = document.createElement("span");
       value.className = "hud-resource-value";
       value.textContent = "0";
       item.append(name, value);
       list.appendChild(item);
       this.values.set(key, value);
+      this.names.set(key, name);
     }
     this.panel.appendChild(list);
 
     root.appendChild(this.panel);
+
+    i18n.onChange(() => this.renderLabels());
+    this.renderLabels();
+  }
+
+  private renderLabels(): void {
+    this.vitalityTitle.textContent = this.i18n.t("ui.resources.vitality");
+    this.stateLabel.textContent = this.i18n.t(`ui.state.${this.lastState}`);
+    for (const key of POSITIVE_RESOURCES) {
+      const el = this.names.get(key);
+      if (el) el.textContent = this.i18n.t(`ui.resources.${key}`);
+    }
   }
 
   update(resources: Resources): void {
@@ -87,10 +87,11 @@ export class ResourceHud {
     const signature = `${vitality}|${POSITIVE_RESOURCES.map((k) => resources[k]).join(",")}`;
     if (signature === this.lastSignature) return;
     this.lastSignature = signature;
+    this.lastState = state;
 
     this.vitalityValue.textContent = String(vitality);
     this.vitalityFill.style.width = `${vitality}%`;
-    this.stateLabel.textContent = STATE_LABEL[state];
+    this.stateLabel.textContent = this.i18n.t(`ui.state.${state}`);
     this.panel.dataset.state = state;
 
     const track = this.vitalityFill.parentElement;
