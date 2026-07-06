@@ -251,5 +251,43 @@
     "icon": "assets/characters/custom/icons/icon_custom.png",
     "portrait": "assets/characters/custom/portraits/portrait_custom_neutral.png",
     "atlas": "assets/characters/custom/atlas/custom_atlas"
+  },
+  {
+    "id": "corporate_man",
+    "displayName": "Corporate Man",
+    "type": "npc",
+    "priority": "B",
+    "assetStatus": "no_assets_yet",
+    "reference": null
+  },
+  {
+    "id": "narrator",
+    "displayName": "Narrator",
+    "kind": "voice",
+    "reference": null
+  },
+  {
+    "id": "bus_hub",
+    "displayName": "Bus Hub",
+    "kind": "voice",
+    "reference": null
+  },
+  {
+    "id": "market",
+    "displayName": "Market",
+    "kind": "voice",
+    "reference": null
+  },
+  {
+    "id": "narrow_crossing",
+    "displayName": "Narrow Crossing",
+    "kind": "voice",
+    "reference": null
+  },
+  {
+    "id": "info_point",
+    "displayName": "Info Point",
+    "kind": "voice",
+    "reference": null
   }
 ]

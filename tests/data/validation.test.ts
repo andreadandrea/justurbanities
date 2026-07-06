@@ -43,6 +43,49 @@ describe("bundled JSON data is valid", () => {
   });
 });
 
+describe("cross-file data consistency", () => {
+  it("every dialogue speakerId exists in characters.json", () => {
+    const dialogues = validateData("dialogues.json", dialogueFileSchema, dialoguesData);
+    const characters = validateData("characters.json", charactersSchema, charactersData);
+    const characterIds = new Set(characters.map((c) => c.id));
+    for (const dialogue of dialogues.dialogues) {
+      expect(characterIds.has(dialogue.speakerId), `speaker "${dialogue.speakerId}" of "${dialogue.id}" missing from characters.json`).toBe(true);
+    }
+  });
+
+  it("every crisis questState condition references an existing quest", () => {
+    const quests = validateData("quests.json", questFileSchema, questsData);
+    const crises = validateData("crises.json", crisisFileSchema, crisesData);
+    const questIds = new Set(quests.quests.map((q) => q.id));
+    for (const crisis of crises.crises) {
+      for (const tier of Object.values(crisis.tiers)) {
+        for (const condition of tier.conditions) {
+          if (condition.type === "questState") {
+            expect(questIds.has(condition.questId), `crisis ${crisis.id} references missing quest ${condition.questId}`).toBe(true);
+          }
+        }
+      }
+    }
+  });
+
+  it("applies the ratified crisis-link fixes (N05 → CRISIS_OFFER, RUMOR buffer = N07)", () => {
+    const quests = validateData("quests.json", questFileSchema, questsData);
+    const crises = validateData("crises.json", crisisFileSchema, crisesData);
+    const n05 = quests.quests.find((q) => q.id === "N05");
+    expect(n05?.meta?.crisisLink).toBe("CRISIS_OFFER");
+    const rumor = crises.crises.find((c) => c.id === "CRISIS_RUMOR");
+    const questConditions = rumor?.tiers.transformative.conditions.filter((c) => c.type === "questState") ?? [];
+    // resilience is built BEFORE Crisis Week: the buffer quest is N07, not N06 (day-4 quest)
+    expect(questConditions.map((c) => (c.type === "questState" ? c.questId : ""))).toEqual(["N07"]);
+  });
+
+  it("N18 is voiced by corporate_man, not the narrator", () => {
+    const dialogues = validateData("dialogues.json", dialogueFileSchema, dialoguesData);
+    const n18 = dialogues.dialogues.find((d) => d.id === "corporate_n18");
+    expect(n18?.speakerId).toBe("corporate_man");
+  });
+});
+
 describe("validation errors are clear", () => {
   it("names the file and the offending path", () => {
     const broken = { quests: [{ id: "X", title: "", description: "", status: "weird", objectives: [] }] };
