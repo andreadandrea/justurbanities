@@ -1,10 +1,11 @@
-import type { Condition } from "./Dialogue";
+import type { Condition, Effect } from "./Dialogue";
 
 /**
- * Crisis Week extension (proposal). Not yet consumed by the engine — a
- * future CrisisManager evaluates `tiers` in order transformative →
- * coordinated → reactive using the existing Condition vocabulary
- * (resourceAtLeast / questState). `reactive` has no conditions (always true).
+ * Crisis Week data. The CrisisManager evaluates `tiers` in order
+ * transformative → coordinated → reactive using the existing Condition
+ * vocabulary (resourceAtLeast / questState). `reactive` has no conditions
+ * (always true). Optional per-tier `effects` are applied on resolution
+ * (balancing data lands in Phase 9.4).
  * See docs/game-design/INTEGRATION_NPC_Quests.md.
  */
 export type CrisisTier = "transformative" | "coordinated" | "reactive";
@@ -17,7 +18,7 @@ export type Crisis = {
   convergingNeeds: string[];
   bufferResources: string[];
   resultVariable: string;
-  tiers: Record<CrisisTier, { conditions: Condition[] }>;
+  tiers: Record<CrisisTier, { conditions: Condition[]; effects?: Effect[] }>;
 };
 
 export type CrisisFile = {

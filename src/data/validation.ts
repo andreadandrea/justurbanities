@@ -191,7 +191,7 @@ export const questFileSchema = z.object({
 
 // ---------- crises.json (Crisis Week extension) ----------
 
-const crisisTierSchema = z.object({ conditions: z.array(conditionSchema) });
+const crisisTierSchema = z.object({ conditions: z.array(conditionSchema), effects: z.array(effectSchema).optional() });
 
 export const crisisFileSchema = z.object({
   schema: z.string().optional(),
