@@ -344,11 +344,6 @@
               "label": "content.dialogues.anna_n01.start.choices.engage",
               "effects": [
                 {
-                  "type": "completeObjective",
-                  "questId": "N01",
-                  "objectiveId": "interview_three"
-                },
-                {
                   "type": "addResource",
                   "key": "voice",
                   "value": 1
@@ -360,15 +355,11 @@
                 },
                 {
                   "type": "setVariable",
-                  "key": "listenBeforeFixingDone",
+                  "key": "n01_interviews_started",
                   "value": true
-                },
-                {
-                  "type": "completeQuest",
-                  "questId": "N01"
                 }
               ],
-              "next": "resolution"
+              "end": true
             },
             {
               "id": "shortcut",
@@ -389,16 +380,6 @@
                   "questId": "N01"
                 }
               ],
-              "end": true
-            }
-          ]
-        },
-        "resolution": {
-          "text": "content.dialogues.anna_n01.resolution.text",
-          "choices": [
-            {
-              "id": "close",
-              "label": "content.dialogues.anna_n01.resolution.choices.close",
               "end": true
             }
           ]
@@ -3732,6 +3713,387 @@
             {
               "id": "look",
               "label": "content.dialogues.district_lake_edge_intro.start.choices.look",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "interview_viveca",
+      "speakerId": "mrs_viveca",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.interview_viveca.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "interview_viveca_done",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "ask",
+              "label": "content.dialogues.interview_viveca.start.choices.ask",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_viveca",
+                  "value": "ask"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "viveca",
+                    "posture": "ask"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "rephrase",
+              "label": "content.dialogues.interview_viveca.start.choices.rephrase",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_viveca",
+                  "value": "rephrase"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "viveca",
+                    "posture": "rephrase"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "silence",
+              "label": "content.dialogues.interview_viveca.start.choices.silence",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_viveca",
+                  "value": "silence"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "viveca",
+                    "posture": "silence"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "interview_pablo",
+      "speakerId": "pablo",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.interview_pablo.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "interview_pablo_done",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "ask",
+              "label": "content.dialogues.interview_pablo.start.choices.ask",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_pablo",
+                  "value": "ask"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "pablo",
+                    "posture": "ask"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "rephrase",
+              "label": "content.dialogues.interview_pablo.start.choices.rephrase",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_pablo",
+                  "value": "rephrase"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "pablo",
+                    "posture": "rephrase"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "silence",
+              "label": "content.dialogues.interview_pablo.start.choices.silence",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_pablo",
+                  "value": "silence"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "pablo",
+                    "posture": "silence"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "interview_gwen",
+      "speakerId": "gwen",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.interview_gwen.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "interview_gwen_done",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "ask",
+              "label": "content.dialogues.interview_gwen.start.choices.ask",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_gwen",
+                  "value": "ask"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "gwen",
+                    "posture": "ask"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "rephrase",
+              "label": "content.dialogues.interview_gwen.start.choices.rephrase",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_gwen",
+                  "value": "rephrase"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "gwen",
+                    "posture": "rephrase"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "silence",
+              "label": "content.dialogues.interview_gwen.start.choices.silence",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "empathyMap_gwen",
+                  "value": "silence"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "empathy_map",
+                  "payload": {
+                    "who": "gwen",
+                    "posture": "silence"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "anna_n01_resolution",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.anna_n01_resolution.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.anna_n01_resolution.start.choices.close",
+              "effects": [
+                {
+                  "type": "completeObjective",
+                  "questId": "N01",
+                  "objectiveId": "interview_three"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "listenBeforeFixingDone",
+                  "value": true
+                },
+                {
+                  "type": "completeQuest",
+                  "questId": "N01"
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "elena_e01",
+      "speakerId": "elena",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.elena_e01.start.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "E01"
+            }
+          ],
+          "choices": [
+            {
+              "id": "bring_maps",
+              "label": "content.dialogues.elena_e01.start.choices.bring_maps",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "interview_viveca_done",
+                  "value": true
+                },
+                {
+                  "type": "variableEquals",
+                  "key": "interview_pablo_done",
+                  "value": true
+                },
+                {
+                  "type": "variableEquals",
+                  "key": "interview_gwen_done",
+                  "value": true
+                }
+              ],
+              "next": "table"
+            },
+            {
+              "id": "too_few",
+              "label": "content.dialogues.elena_e01.start.choices.too_few",
+              "conditions": [
+                {
+                  "type": "variableNotEquals",
+                  "key": "interview_gwen_done",
+                  "value": true
+                }
+              ],
+              "next": "too_few"
+            }
+          ]
+        },
+        "table": {
+          "text": "content.dialogues.elena_e01.table.text",
+          "effects": [
+            {
+              "type": "completeObjective",
+              "questId": "E01",
+              "objectiveId": "knowledge_table"
+            },
+            {
+              "type": "addResource",
+              "key": "voice",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "trust",
+              "value": 1
+            },
+            {
+              "type": "setVariable",
+              "key": "knowledge_table_held",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "knowledge_table",
+              "payload": {
+                "maps": [
+                  "viveca",
+                  "pablo",
+                  "gwen"
+                ]
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.elena_e01.table.choices.close",
+              "effects": [
+                {
+                  "type": "completeQuest",
+                  "questId": "E01"
+                }
+              ],
+              "end": true
+            }
+          ]
+        },
+        "too_few": {
+          "text": "content.dialogues.elena_e01.too_few.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.elena_e01.too_few.choices.close",
               "end": true
             }
           ]

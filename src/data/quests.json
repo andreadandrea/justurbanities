@@ -539,6 +539,38 @@
         "abilityMatch": "tentazione (Luca)",
         "crisisLink": "CRISIS_OFFER"
       }
+    },
+    {
+      "id": "E01",
+      "title": "content.quests.E01.title",
+      "description": "content.quests.E01.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "knowledge_table",
+          "description": "content.quests.E01.objectives.knowledge_table",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "rewards": [
+        {
+          "type": "addResource",
+          "key": "voice",
+          "value": 2
+        },
+        {
+          "type": "addResource",
+          "key": "trust",
+          "value": 1
+        }
+      ],
+      "meta": {
+        "npc": "Elena",
+        "abilityMatch": "Elena · Institutional Bridge",
+        "crisisLink": null,
+        "registry": "New quest (✳ ratified): Mission 7 'Experts of Everyday Life', fills Learning Outcome 7. Origin layer: Narrative v2 §5.7. See Guida 02 §4 quest registry."
+      }
     }
   ]
 }

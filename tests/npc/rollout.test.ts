@@ -118,9 +118,12 @@ describe("schedule rollout — all 18 NPC quests", () => {
     const dialogueFile = validateData("dialogues.json", dialogueFileSchema, dialoguesData) as DialogueFile;
     const nDialogues = dialogueFile.dialogues.filter((d) => /_n\d\d$/.test(d.id));
     expect(nDialogues).toHaveLength(18);
+    const ids = new Set(dialogueFile.dialogues.map((d) => d.id));
     for (const dialogue of nDialogues) {
-      // every quest dialogue got its canon resolution beat
-      expect(dialogue.nodes.resolution, `${dialogue.id} has no resolution node`).toBeDefined();
+      // every quest dialogue got its canon resolution beat (N01's lives in
+      // its own dialogue since Mission 1 made the interviews real)
+      const hasResolution = dialogue.nodes.resolution !== undefined || ids.has(`${dialogue.id}_resolution`);
+      expect(hasResolution, `${dialogue.id} has no resolution beat`).toBe(true);
       for (const node of Object.values(dialogue.nodes)) {
         expect(node.text).not.toMatch(/Affronta la quest|Scegli la scorciatoia/);
         for (const choice of node.choices) {

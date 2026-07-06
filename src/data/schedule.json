@@ -3,6 +3,121 @@
   "note": "NPC placements per scene / part of day / conditions. timeParts omitted = always present (0 morning, 1 afternoon, 2 evening); conditions omitted = unconditional. When several placements match one NPC, the FIRST wins - list quest offers before intro fallbacks. Dialogue ids follow <speaker>_<id>. District placements are placeholders in the two existing scenes until Phase 6.3 moves NPCs to their canonical districts.",
   "placements": [
     {
+      "npcId": "mrs_viveca",
+      "scene": "lake_edge",
+      "position": {
+        "x": 1350,
+        "y": 850
+      },
+      "dialogueId": "interview_viveca",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "n01_interviews_started",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "interview_viveca_done",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "pablo",
+      "scene": "old_blocks",
+      "position": {
+        "x": 1300,
+        "y": 900
+      },
+      "dialogueId": "interview_pablo",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "n01_interviews_started",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "interview_pablo_done",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "gwen",
+      "scene": "hill_gardens",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
+      "dialogueId": "interview_gwen",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "n01_interviews_started",
+          "value": true
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "interview_gwen_done",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "position": {
+        "x": 900,
+        "y": 620
+      },
+      "dialogueId": "anna_n01_resolution",
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "N01",
+          "state": "active"
+        },
+        {
+          "type": "variableEquals",
+          "key": "interview_viveca_done",
+          "value": true
+        },
+        {
+          "type": "variableEquals",
+          "key": "interview_pablo_done",
+          "value": true
+        },
+        {
+          "type": "variableEquals",
+          "key": "interview_gwen_done",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "elena",
+      "scene": "community_center",
+      "position": {
+        "x": 850,
+        "y": 1150
+      },
+      "dialogueId": "elena_e01",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter2_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "E01",
+          "state": "locked"
+        }
+      ]
+    },
+    {
       "npcId": "anna",
       "scene": "community_center",
       "position": {
