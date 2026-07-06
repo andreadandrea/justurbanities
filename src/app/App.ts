@@ -21,6 +21,10 @@ import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
 import { TimeHud } from "../ui/TimeHud";
 import { GameClock } from "../game/time/GameClock";
+import { CrisisManager } from "../game/crisis/CrisisManager";
+import { CrisisWeek } from "../game/crisis/CrisisWeek";
+import { DialogueRunner } from "../game/dialogue/DialogueRunner";
+import type { CrisisFile } from "../types/Crisis";
 import { I18n, LOCALES, type LocaleCode } from "../i18n/I18n";
 import { OptionsPanel } from "../ui/OptionsPanel";
 import { SettingsRepository } from "../storage/SettingsRepository";
@@ -118,6 +122,7 @@ export class App {
     let dialogueFile: DialogueFile;
     let questFile: QuestFile;
     let scheduleFile: ScheduleFile;
+    let crisisFile: CrisisFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -126,7 +131,7 @@ export class App {
       questFile = validateData("quests.json", questFileSchema, questsData) as QuestFile;
       validateData("playable.json", playableSchema, playableData);
       validateData("prologue.json", prologueSchema, prologueData);
-      validateData("crises.json", crisisFileSchema, crisesData);
+      crisisFile = validateData("crises.json", crisisFileSchema, crisesData) as CrisisFile;
       scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
     } catch (error) {
       console.error(error);
@@ -236,6 +241,28 @@ export class App {
       this.state.currentScene = "community_center";
     }
 
+    // Crisis Week: manager + orchestrator over the clock. Crisis scenes run
+    // through an app-level dialogue runner so they appear in any scene.
+    const logProgress = (eventType: string, payload: Record<string, unknown>) => {
+      void (async () => {
+        const event = await this.progressRepository.append(session.id, "local-user", eventType, payload);
+        await this.syncQueue.enqueue("progress_event", event.id, "create", event);
+      })();
+    };
+    const crisisManager = new CrisisManager(this.state, this.effectResolver, logProgress);
+    crisisManager.load(crisisFile);
+    const crisisRunner = new DialogueRunner(this.dialogueUI, this.dialogueManager, async (dialogueId, choiceId) => {
+      logProgress("dialogue_choice", { dialogueId, choiceId, scene: this.state.currentScene });
+      await this.activeScene().saveNow();
+    });
+    const crisisWeek = new CrisisWeek(
+      this.state,
+      clock,
+      crisisManager,
+      (dialogueId, speakerLabel) => crisisRunner.run(dialogueId, speakerLabel),
+      () => this.dialogueUI.isOpen
+    );
+
     // The time HUD lives at app level so every scene shows it; passing time
     // autosaves so the clock survives reloads.
     new TimeHud(this.elements.appRoot, clock, i18n, () => {
@@ -255,7 +282,8 @@ export class App {
       syncQueue: this.syncQueue,
       db: this.db,
       sessionId: session.id,
-      i18n
+      i18n,
+      armCrisisWeek: () => crisisWeek.arm()
     });
 
     new OfflineControls(

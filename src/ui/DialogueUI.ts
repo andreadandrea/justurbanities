@@ -54,6 +54,10 @@ export class DialogueUI {
     this.root.append(speaker, text, choices);
   }
 
+  get isOpen(): boolean {
+    return !this.root.hidden;
+  }
+
   hide(): void {
     this.root.hidden = true;
     this.root.innerHTML = "";

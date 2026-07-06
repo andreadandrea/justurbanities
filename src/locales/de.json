@@ -638,6 +638,42 @@
       "custom": {
         "tagline": "Your own route through Eurbania: choose who to help, knowing you can't help everyone."
       }
+    },
+    "crisisWeek": {
+      "heatwave": {
+        "announce": "Heat alert: 38° forecast. Isolated elders and fragile housing at risk in districts without shade. GIORGIA: “I have the Old Blocks vulnerable list… two years out of date.”",
+        "reactive": "Water gets handed out wherever. By evening an elderly man is taken to hospital — the logbook records his name.",
+        "coordinated": "The Center opens as a cool refuge, with shifts. MAYA (evening, tired): “Zoe did her homework in the courtyard today with six other kids. It's 36 degrees and it was… nice?”",
+        "transformative": "Pablo's door-to-door network and the neighbourhood cool rooms hold the day — the permanent “cool map” is born. PABLO: “Mine is from yesterday — twenty-three names, floor by floor. Let's go.”"
+      },
+      "rumor": {
+        "announce": "Viral post: “EXCLUSIVE: Community Center funds go only to SOME groups. Guess which ones.” SAMIR: “The ‘which ones’ is me, isn't it?”",
+        "reactive": "A denial press release goes out. Nobody reads it.",
+        "coordinated": "Public accounts on the noticeboard and an open clarification assembly. Trust steadies.",
+        "transformative": "Abdullah's info kiosk publishes the numbers in five languages; Ruben signs the piece that dismantles the rumour with sources; Marta turns it into a comic strip on the wall. ABDULLAH: “The rumour ran. But this time the truth had a kiosk, and it was open.”"
+      },
+      "offer": {
+        "announce": "The Mystery Corporate Man turns up at the Town Hall with a rendering: “GREY YARDS SQUARE — opening in 90 days. Zero cost to the Council. Sign, and the problem disappears.” ALEXANDRIA: “Give me a credible alternative today.”",
+        "reactive": "A refusal on principle, with no alternative. The Offer will return, stronger.",
+        "coordinated": "Public conditions are negotiated: guaranteed hours, social tariffs. The commons hold, but don't grow.",
+        "transformative": "A civic stewardship pact answers the rendering: Tom's regulation, Sigrid's works, the traders' fund. The Corporate Man withdraws: “We'll be back when you're tired.”"
+      },
+      "closure": {
+        "announce": "Notice: “Temporary suspension: evening bus line 14 + Lake Edge after-school room. Resource rationalisation.” GWEN: “‘Temporary’. Like Viveca's Thursdays, three years ago.”",
+        "reactive": "A petition circulates. Signatures without data get filed away.",
+        "coordinated": "Gwen's real counts reach the committee with Elena. The line is saved on a reduced timetable.",
+        "transformative": "Three riders tell the committee what the last bus means — the resolution quotes their words. The after-school club reopens in the courtyard, Viveca volunteering. ZOE: “The new teacher is exactly as strict as the old one.”"
+      },
+      "flood": {
+        "announce": "Torrential rain over Lake Edge and Old Blocks. Teams, sandbags, assembly points: who goes to whom? BEN: “The new crossing is the only dry route for wheelchairs. I told you it wasn't ‘a detail’.”",
+        "reactive": "Pure emergency. A district sinks into fragmentation.",
+        "coordinated": "The networks activate; the damage is contained.",
+        "transformative": "The response becomes protocol — the “Water Plan” enters the civic pact. ANNA (that evening, in the half-flooded but crowded Center): “Look at yourselves — THIS is the network. Tomorrow we put it in writing.”"
+      },
+      "common": {
+        "faceDay": "Face the day.",
+        "close": "…"
+      }
     }
   }
 }

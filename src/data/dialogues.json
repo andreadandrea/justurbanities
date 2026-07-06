@@ -1834,6 +1834,346 @@
           ]
         }
       }
+    },
+    {
+      "id": "crisis_heatwave_announce",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.heatwave.announce",
+          "choices": [
+            {
+              "id": "face",
+              "label": "content.crisisWeek.common.faceDay",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_heatwave_reactive",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.heatwave.reactive",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_heatwave_coordinated",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.heatwave.coordinated",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_heatwave_transformative",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.heatwave.transformative",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_rumor_announce",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.rumor.announce",
+          "choices": [
+            {
+              "id": "face",
+              "label": "content.crisisWeek.common.faceDay",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_rumor_reactive",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.rumor.reactive",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_rumor_coordinated",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.rumor.coordinated",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_rumor_transformative",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.rumor.transformative",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_offer_announce",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.offer.announce",
+          "choices": [
+            {
+              "id": "face",
+              "label": "content.crisisWeek.common.faceDay",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_offer_reactive",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.offer.reactive",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_offer_coordinated",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.offer.coordinated",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_offer_transformative",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.offer.transformative",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_closure_announce",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.closure.announce",
+          "choices": [
+            {
+              "id": "face",
+              "label": "content.crisisWeek.common.faceDay",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_closure_reactive",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.closure.reactive",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_closure_coordinated",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.closure.coordinated",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_closure_transformative",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.closure.transformative",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_flood_announce",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.flood.announce",
+          "choices": [
+            {
+              "id": "face",
+              "label": "content.crisisWeek.common.faceDay",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_flood_reactive",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.flood.reactive",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_flood_coordinated",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.flood.coordinated",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crisis_flood_transformative",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.crisisWeek.flood.transformative",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.crisisWeek.common.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

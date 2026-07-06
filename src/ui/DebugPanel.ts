@@ -12,6 +12,7 @@ type DebugPanelDeps = {
   db: LocalDatabase;
   sessionId: string;
   i18n: I18n;
+  armCrisisWeek?: () => void;
 };
 
 const REFRESH_MS = 500;
@@ -99,6 +100,7 @@ export class DebugPanel {
         this.deps.i18n.missingKeys().slice(0, 20),
         ["(none)"]
       ),
+      this.crisisWeekButton(),
       this.clearButton()
     );
   }
@@ -114,6 +116,16 @@ export class DebugPanel {
       box.appendChild(row);
     }
     return box;
+  }
+
+  private crisisWeekButton(): HTMLElement {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "debug-clear";
+    button.textContent = "Arm Crisis Week (starts next morning)";
+    button.disabled = !this.deps.armCrisisWeek;
+    button.addEventListener("click", () => this.deps.armCrisisWeek?.());
+    return button;
   }
 
   private clearButton(): HTMLElement {
