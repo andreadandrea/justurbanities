@@ -2,6 +2,7 @@ import type { GameState } from "../game/GameState";
 import type { QuestManager } from "../game/quest/QuestManager";
 import type { SyncQueue } from "../sync/SyncQueue";
 import type { LocalDatabase } from "../storage/LocalDatabase";
+import type { I18n } from "../i18n/I18n";
 
 type DebugPanelDeps = {
   root: HTMLElement;
@@ -10,6 +11,7 @@ type DebugPanelDeps = {
   syncQueue: SyncQueue;
   db: LocalDatabase;
   sessionId: string;
+  i18n: I18n;
 };
 
 const REFRESH_MS = 500;
@@ -91,6 +93,11 @@ export class DebugPanel {
         `Sync queue (${pending.length} pending)`,
         pending.slice(0, 8).map((item) => `${item.entityType}/${item.operation} ${item.entityId.slice(0, 8)}…`),
         ["(empty)"]
+      ),
+      this.section(
+        `i18n missing keys (${this.deps.i18n.missingKeys().length}) — locale: ${this.deps.i18n.locale}`,
+        this.deps.i18n.missingKeys().slice(0, 20),
+        ["(none)"]
       ),
       this.clearButton()
     );

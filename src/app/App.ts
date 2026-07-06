@@ -21,6 +21,16 @@ import { OpeningScreens, type PlayableCharacter } from "../ui/OpeningScreens";
 import { ResourceHud } from "../ui/ResourceHud";
 import { TimeHud } from "../ui/TimeHud";
 import { GameClock } from "../game/time/GameClock";
+import { I18n, LOCALES, type LocaleCode } from "../i18n/I18n";
+import { OptionsPanel } from "../ui/OptionsPanel";
+import { SettingsRepository } from "../storage/SettingsRepository";
+import enLocale from "../locales/en.json";
+import itLocale from "../locales/it.json";
+import deLocale from "../locales/de.json";
+import huLocale from "../locales/hu.json";
+import plLocale from "../locales/pl.json";
+import svLocale from "../locales/sv.json";
+import roLocale from "../locales/ro.json";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
 import { GameState } from "../game/GameState";
@@ -125,6 +135,14 @@ export class App {
     await this.db.openDatabase();
     await this.preload(manifest);
 
+    // i18n: register all locales, restore the saved language before any UI.
+    const i18n = new I18n();
+    const localeData = { en: enLocale, it: itLocale, de: deLocale, hu: huLocale, pl: plLocale, sv: svLocale, ro: roLocale };
+    for (const locale of LOCALES) i18n.register(locale, localeData[locale]);
+    const settings = new SettingsRepository(this.db);
+    const savedLocale = await settings.get<LocaleCode>("locale");
+    if (savedLocale && LOCALES.includes(savedLocale)) i18n.setLocale(savedLocale);
+
     this.questManager.load(questFile);
     this.dialogueManager.load(dialogueFile);
 
@@ -192,7 +210,7 @@ export class App {
       gameState: this.state,
       dialogueManager: this.dialogueManager,
       questManager: this.questManager,
-      resourceHud: new ResourceHud(this.elements.appRoot),
+      resourceHud: new ResourceHud(this.elements.appRoot, i18n),
       saveRepository: this.saveRepository,
       progressRepository: this.progressRepository,
       syncQueue: this.syncQueue,
@@ -216,9 +234,14 @@ export class App {
 
     // The time HUD lives at app level so every scene shows it; passing time
     // autosaves so the clock survives reloads.
-    new TimeHud(this.elements.appRoot, clock, () => {
+    new TimeHud(this.elements.appRoot, clock, i18n, () => {
       clock.advance();
       void this.activeScene().saveNow();
+    });
+
+    // Options (⚙): runtime language switch, persisted per device.
+    new OptionsPanel(this.elements.appRoot, i18n, (locale) => {
+      void settings.set("locale", locale);
     });
 
     new DebugPanel({
@@ -227,7 +250,8 @@ export class App {
       questManager: this.questManager,
       syncQueue: this.syncQueue,
       db: this.db,
-      sessionId: session.id
+      sessionId: session.id,
+      i18n
     });
 
     new OfflineControls(

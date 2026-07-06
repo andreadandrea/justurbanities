@@ -1,0 +1,29 @@
+{
+  "ui": {
+    "time": {
+      "day": "Giorno",
+      "morning": "Mattina",
+      "afternoon": "Pomeriggio",
+      "evening": "Sera",
+      "passTime": "Lascia passare il tempo",
+      "passTimeHint": "Fai passare il tempo alla parte successiva della giornata"
+    },
+    "resources": {
+      "vitality": "Vitalità della città",
+      "trust": "Fiducia",
+      "care": "Cura",
+      "commons": "Beni comuni",
+      "voice": "Voce",
+      "resilience": "Resilienza"
+    },
+    "state": {
+      "fragmented": "Frammentata",
+      "awakening": "Risveglio",
+      "connected": "Connessa",
+      "thriving": "Fiorente"
+    },
+    "language": {
+      "label": "Lingua"
+    }
+  }
+}

@@ -1,11 +1,5 @@
 import type { GameClock } from "../game/time/GameClock";
-import { TIME_PARTS } from "../game/time/GameClock";
-
-const PART_LABEL: Record<(typeof TIME_PARTS)[number], string> = {
-  morning: "Morning",
-  afternoon: "Afternoon",
-  evening: "Evening"
-};
+import type { I18n } from "../i18n/I18n";
 
 /**
  * On-screen day/time indicator plus the "Pass time" action (the REST verb):
@@ -15,10 +9,12 @@ const PART_LABEL: Record<(typeof TIME_PARTS)[number], string> = {
 export class TimeHud {
   private readonly panel: HTMLElement;
   private readonly label: HTMLElement;
+  private readonly button: HTMLButtonElement;
 
   constructor(
     root: HTMLElement,
     private readonly clock: GameClock,
+    private readonly i18n: I18n,
     onPassTime: () => void
   ) {
     this.panel = document.createElement("section");
@@ -29,22 +25,24 @@ export class TimeHud {
     this.label.className = "hud-time-label";
     this.label.setAttribute("role", "status");
 
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "hud-time-pass";
-    button.textContent = "Pass time";
-    button.title = "Let time pass to the next part of the day";
-    button.addEventListener("click", onPassTime);
+    this.button = document.createElement("button");
+    this.button.type = "button";
+    this.button.className = "hud-time-pass";
+    this.button.addEventListener("click", onPassTime);
 
-    this.panel.append(this.label, button);
+    this.panel.append(this.label, this.button);
     root.appendChild(this.panel);
 
     clock.on(() => this.render());
+    i18n.onChange(() => this.render());
     this.render();
   }
 
   private render(): void {
-    this.label.textContent = `Day ${this.clock.day} · ${PART_LABEL[this.clock.timePartName]}`;
+    const part = this.i18n.t(`ui.time.${this.clock.timePartName}`);
+    this.label.textContent = `${this.i18n.t("ui.time.day")} ${this.clock.day} · ${part}`;
     this.panel.dataset.part = this.clock.timePartName;
+    this.button.textContent = this.i18n.t("ui.time.passTime");
+    this.button.title = this.i18n.t("ui.time.passTimeHint");
   }
 }
