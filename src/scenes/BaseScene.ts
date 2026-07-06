@@ -196,6 +196,11 @@ export abstract class BaseScene {
     await this.autosave();
   }
 
+  /** Save immediately (used by app-level actions like "Pass time"). */
+  saveNow(): Promise<void> {
+    return this.autosave();
+  }
+
   protected async autosave(): Promise<void> {
     await this.deps.saveRepository.save(this.userId, this.deps.sessionId, {
       ...this.deps.gameState.snapshot(),
