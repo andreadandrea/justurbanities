@@ -5,7 +5,7 @@
       "displayName": "Maya",
       "pronoun": "she",
       "customizable": false,
-      "tagline": "A student heading to her first city assembly.",
+      "tagline": "A shift worker and Zoe's mother. For her the city is a puzzle of schedules that barely fit.",
       "portrait": "assets/characters/maya/portraits/portrait_maya_neutral.png"
     },
     {
@@ -21,7 +21,7 @@
       "displayName": "Elena",
       "pronoun": "she",
       "customizable": false,
-      "tagline": "A civic worker who still believes institutions can listen.",
+      "tagline": "A Town Hall official who must turn listening into real decisions, without overpromising.",
       "portrait": "assets/characters/elena/portraits/portrait_elena_neutral.png"
     },
     {
@@ -29,7 +29,7 @@
       "displayName": "Luca",
       "pronoun": "he",
       "customizable": false,
-      "tagline": "A father balancing care at home and life in the neighbourhood.",
+      "tagline": "A small business owner trying to serve the neighbourhood without going under.",
       "portrait": "assets/characters/luca/portraits/portrait_luca_neutral.png"
     },
     {
@@ -37,7 +37,7 @@
       "displayName": "New citizen",
       "pronoun": "they",
       "customizable": true,
-      "tagline": "Someone new to Eurbania. Write your own route.",
+      "tagline": "Your own route through Eurbania: choose who to help, knowing you can't help everyone.",
       "portrait": "assets/characters/custom/portraits/portrait_custom_neutral.png"
     }
   ]

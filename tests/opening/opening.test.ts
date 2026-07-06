@@ -17,6 +17,19 @@ describe("opening data", () => {
     }
   });
 
+  it("taglines follow Character Bible canon", () => {
+    const parsed = validateData("playable.json", playableSchema, playableData);
+    const byId = new Map(parsed.playable.map((c) => [c.id, c]));
+    // Maya is a shift worker and Zoe's mother — never "a student"
+    expect(byId.get("maya")?.tagline.toLowerCase()).not.toContain("student");
+    expect(byId.get("maya")?.tagline).toContain("Zoe");
+    // Luca is a small business owner (economic route), not a care-at-home father
+    expect(byId.get("luca")?.tagline.toLowerCase()).toMatch(/business|shop/);
+    expect(byId.get("luca")?.tagline.toLowerCase()).not.toContain("father");
+    // Elena represents the Town Hall (institutional route)
+    expect(byId.get("elena")?.tagline).toContain("Town Hall");
+  });
+
   it("prologue.json is valid and non-empty", () => {
     const parsed = validateData("prologue.json", prologueSchema, prologueData);
     expect(parsed.panels.length).toBeGreaterThan(0);
