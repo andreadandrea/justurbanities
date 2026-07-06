@@ -78,7 +78,10 @@ export class App {
   constructor(private readonly elements: AppElements) {
     this.renderer = new CanvasRenderer(elements.canvas);
     this.input = new InputManager(elements.canvas);
-    this.dialogueUI = new DialogueUI(elements.dialogueRoot);
+    this.dialogueUI = new DialogueUI(elements.dialogueRoot, () => ({
+      playerName: this.state.playerName || this.state.currentCharacter,
+      pronoun: this.state.playerPronoun
+    }));
     this.saveRepository = new SaveRepository(this.db);
     this.progressRepository = new ProgressRepository(this.db);
     this.syncQueue = new SyncQueue(this.db);
