@@ -25,9 +25,18 @@ export class DialogueUI {
     text: string;
     choices: DialogueChoice[];
     onChoice: (choice: DialogueChoice) => void;
+    portrait?: HTMLImageElement;
   }): void {
     this.root.hidden = false;
     this.root.innerHTML = "";
+
+    if (config.portrait) {
+      const portrait = document.createElement("img");
+      portrait.className = "dialogue-portrait";
+      portrait.alt = "";
+      portrait.src = config.portrait.src;
+      this.root.appendChild(portrait);
+    }
 
     const speaker = document.createElement("div");
     speaker.className = "dialogue-speaker";

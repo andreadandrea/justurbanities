@@ -213,6 +213,20 @@ body,
   background: #fffdf7;
 }
 
+/* ---------- Dialogue portrait ---------- */
+.dialogue-portrait {
+  position: absolute;
+  left: 16px;
+  top: -84px;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border: 2px solid #b89a6a;
+  border-radius: 12px;
+  background: #fff8ec;
+  box-shadow: 0 6px 18px rgba(42, 39, 35, 0.24);
+}
+
 /* ---------- Logbook ---------- */
 .logbook-toggle {
   position: fixed;

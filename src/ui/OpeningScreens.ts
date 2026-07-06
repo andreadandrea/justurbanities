@@ -1,4 +1,5 @@
 import type { I18n } from "../i18n/I18n";
+import { variantPath, type ArtVariant } from "../assets/ArtStyle";
 
 export type Pronoun = "she" | "he" | "they";
 
@@ -24,6 +25,8 @@ type OpeningDeps = {
   canContinue: boolean;
   baseUrl: string;
   i18n: I18n;
+  /** Dual art style preview on the select screen; persists the preference. */
+  artStyle?: { initial: ArtVariant; onChange: (variant: ArtVariant) => void };
 };
 
 const PRONOUN_KEY: Record<Pronoun, string> = {
@@ -41,8 +44,10 @@ const PRONOUN_KEY: Record<Pronoun, string> = {
 export class OpeningScreens {
   private readonly overlay: HTMLElement;
   private resolve!: (result: OpeningResult) => void;
+  private previewVariant: ArtVariant = "realistic";
 
   constructor(private readonly deps: OpeningDeps) {
+    this.previewVariant = deps.artStyle?.initial ?? "realistic";
     this.overlay = document.createElement("div");
     this.overlay.className = "opening";
     this.overlay.setAttribute("role", "dialog");
@@ -159,6 +164,7 @@ export class OpeningScreens {
     }
 
     card.append(heading, hint, grid);
+    if (this.deps.artStyle) card.appendChild(this.artToggle());
     const firstButton = grid.querySelector<HTMLButtonElement>("button");
     firstButton?.focus();
   }
@@ -171,9 +177,15 @@ export class OpeningScreens {
     const img = document.createElement("img");
     img.className = "opening-portrait";
     img.alt = "";
-    img.src = `${this.deps.baseUrl}${character.portrait}`;
+    const realisticSrc = `${this.deps.baseUrl}${character.portrait}`;
+    img.src = `${this.deps.baseUrl}${variantPath(character.portrait, this.previewVariant)}`;
     img.addEventListener("error", () => {
-      img.hidden = true;
+      // Fallback chain: missing variant art -> realistic -> hide.
+      if (img.src !== realisticSrc && !img.src.endsWith(realisticSrc)) {
+        img.src = realisticSrc;
+      } else {
+        img.hidden = true;
+      }
     });
 
     const name = document.createElement("span");
@@ -199,6 +211,24 @@ export class OpeningScreens {
     });
 
     return cell;
+  }
+
+  /** Realistic/animal preview toggle on the select screen (spec §3). */
+  private artToggle(): HTMLElement {
+    const wrap = document.createElement("div");
+    wrap.className = "opening-art-toggle";
+    const other: ArtVariant = this.previewVariant === "realistic" ? "animal" : "realistic";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "opening-secondary";
+    toggle.textContent = `${this.t("ui.options.artStyle")}: ${this.t(`ui.options.art.${other}`)}`;
+    toggle.addEventListener("click", () => {
+      this.previewVariant = other;
+      this.deps.artStyle?.onChange(other);
+      this.showSelect();
+    });
+    wrap.appendChild(toggle);
+    return wrap;
   }
 
   private showCustomize(character: PlayableCharacter): void {
