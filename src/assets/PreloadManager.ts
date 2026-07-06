@@ -43,8 +43,9 @@ export class PreloadManager {
       const atlasImage = assets?.atlasImage ?? character.atlasImage;
       const atlasJson = assets?.atlasJson ?? character.atlasJson;
 
-      if (icon) jobs.push(() => this.loader.loadImage(`${character.id}:icon`, `${base}${icon}`));
-      if (portrait) jobs.push(() => this.loader.loadImage(`${character.id}:portrait`, `${base}${portrait}`));
+      // Character art keys are variant-scoped; the flat layout is the realistic set.
+      if (icon) jobs.push(() => this.loader.loadImage(`realistic:${character.id}:icon`, `${base}${icon}`));
+      if (portrait) jobs.push(() => this.loader.loadImage(`realistic:${character.id}:portrait`, `${base}${portrait}`));
       if (atlasImage) jobs.push(() => this.loader.loadImage(`${character.id}:atlas`, `${base}${atlasImage}`));
       if (atlasJson) jobs.push(() => this.loader.loadJson(`${character.id}:atlasJson`, `${base}${atlasJson}`));
     }

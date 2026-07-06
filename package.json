@@ -10,7 +10,8 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "i18n:export": "vite-node scripts/i18n-export.ts",
-    "i18n:import": "vite-node scripts/i18n-import.ts"
+    "i18n:import": "vite-node scripts/i18n-import.ts",
+    "assets:report": "vite-node scripts/asset-report.ts"
   },
   "dependencies": {
     "dexie": "^4.0.11",

@@ -18,6 +18,7 @@ import { cityFilter, cityState, neighbourhoodVitality } from "../game/resources/
 import type { NpcPlacement } from "../types/Schedule";
 import { NpcDirector } from "../game/npc/NpcDirector";
 import type { GameClock } from "../game/time/GameClock";
+import type { CharacterArt } from "../assets/CharacterArt";
 import type { I18n } from "../i18n/I18n";
 import charactersData from "../data/characters.json";
 
@@ -48,6 +49,7 @@ export type SceneDeps = {
   npcPlacements: (sceneId: string) => NpcPlacement[];
   clock: GameClock;
   i18n: I18n;
+  art: CharacterArt;
 };
 
 /** An entity the player can walk up to and activate with space/enter/tap. */
@@ -90,9 +92,15 @@ export abstract class BaseScene {
     // time passes; story-state changes are picked up after every choice.
     this.npcDirector = new NpcDirector<AnimatedSprite>({
       placements: deps.npcPlacements,
-      createSprite: (npcId) => deps.sprites.createSprite(npcId)
+      createSprite: (npcId) => deps.sprites.createSprite(npcId, deps.art.variant)
     });
     deps.clock.on(() => this.npcDirector.refresh());
+    // Art-style switch: throw away variant-bound sprites; the director and
+    // player rebuild them from the new variant's frames (instant swap).
+    deps.art.onChange(() => {
+      this.playerSprite = null;
+      this.npcDirector.rebuildSprites();
+    });
   }
 
   /** Scene id used in GameState.currentScene and progress events. */
@@ -129,7 +137,7 @@ export abstract class BaseScene {
   }
 
   private npcEntity(npc: { id: string; x: number; y: number; sprite: AnimatedSprite | null }): RenderableEntity {
-    const image = npc.sprite?.image() ?? this.deps.assets.getImage(`${npc.id}:icon`);
+    const image = npc.sprite?.image() ?? this.deps.art.icon(npc.id);
     return {
       id: npc.id,
       label: DISPLAY_NAMES.get(npc.id) ?? npc.id,
@@ -199,7 +207,7 @@ export abstract class BaseScene {
 
   private updatePlayerSprite(dx: number, dy: number, dt: number): void {
     if (!this.playerSprite) {
-      this.playerSprite = this.deps.sprites.createSprite(this.deps.gameState.currentCharacter);
+      this.playerSprite = this.deps.sprites.createSprite(this.deps.gameState.currentCharacter, this.deps.art.variant);
     }
     const { name, direction } = movementAnimation(dx, dy, this.facing);
     this.facing = direction;
@@ -212,7 +220,7 @@ export abstract class BaseScene {
   protected playerEntity(): RenderableEntity {
     const player = this.deps.gameState.player;
     const sprite = this.playerSprite?.image();
-    const fallback = this.deps.assets.getImage(`${this.deps.gameState.currentCharacter}:icon`);
+    const fallback = this.deps.art.icon(this.deps.gameState.currentCharacter);
     return {
       id: "player",
       label: this.deps.gameState.playerName || this.deps.gameState.currentCharacter,

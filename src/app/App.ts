@@ -41,6 +41,8 @@ import svLocale from "../locales/sv.json";
 import roLocale from "../locales/ro.json";
 import { OfflineAssetCache, collectAssetUrls, type AnimationsData } from "../assets/OfflineAssetCache";
 import { SpriteRepository } from "../assets/SpriteRepository";
+import { CharacterArt } from "../assets/CharacterArt";
+import type { ArtVariant } from "../assets/ArtStyle";
 import { GameState } from "../game/GameState";
 import { QuestManager } from "../game/quest/QuestManager";
 import { EffectResolver } from "../game/effects/EffectResolver";
@@ -100,6 +102,8 @@ export class App {
   private readonly dialogueManager = new DialogueManager(this.effectResolver);
   private scenes!: Record<string, BaseScene>;
   private loop!: GameLoop;
+  /** Set during start(); the Phase 5.2 options toggle calls this. */
+  private applyArtStyle: ((variant: ArtVariant) => Promise<void>) | null = null;
 
   constructor(private readonly elements: AppElements) {
     this.renderer = new CanvasRenderer(elements.canvas);
@@ -204,12 +208,20 @@ export class App {
       manifest,
       import.meta.env.BASE_URL
     );
-    // Player sprite plus every NPC that can appear via the schedule.
+    // Variant-aware character art (icons/portraits) + sprite frames.
+    // The flat asset layout is the realistic set; animal loads lazily on switch.
+    const art = new CharacterArt(this.assetLoader, manifest, import.meta.env.BASE_URL);
     const spriteIds = new Set<string>([
       this.state.currentCharacter,
       ...scheduleFile.placements.map((placement) => placement.npcId)
     ]);
     await Promise.all([...spriteIds].map((id) => sprites.load(id)));
+    const applyArtStyle = async (variant: ArtVariant) => {
+      // Frames first, so the swap notification finds the new variant ready.
+      await Promise.all([...spriteIds].map((id) => sprites.load(id, variant)));
+      await art.setVariant(variant);
+    };
+    this.applyArtStyle = applyArtStyle;
 
     // Day/time cycle: time only moves through explicit actions ("Pass time"
     // now; story beats later). Created before the scenes so placements can
@@ -237,7 +249,8 @@ export class App {
           this.effectResolver.checkAll(conditions)
         ),
       clock,
-      i18n
+      i18n,
+      art
     };
 
     this.scenes = {

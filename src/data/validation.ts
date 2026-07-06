@@ -11,6 +11,7 @@ import { z } from "zod";
 
 export const assetManifestSchema = z.object({
   version: z.string().optional(),
+  variants: z.array(z.enum(["realistic", "animal"])).optional(),
   characters: z
     .array(
       z.object({
