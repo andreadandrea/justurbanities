@@ -37,6 +37,23 @@
               "questId": "N11",
               "state": "completed"
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "commons",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "resilience",
+              "value": 1
+            },
+            {
+              "type": "setVariable",
+              "key": "cool_map",
+              "value": true
+            }
           ]
         },
         "coordinated": {
@@ -51,10 +68,27 @@
               "key": "commons",
               "value": 3
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "care",
+              "value": 1
+            }
           ]
         },
         "reactive": {
-          "conditions": []
+          "conditions": [],
+          "effects": [
+            {
+              "type": "createProgressEvent",
+              "eventType": "crisis_toll",
+              "payload": {
+                "crisisId": "CRISIS_HEATWAVE",
+                "toll": "elder_hospitalised"
+              }
+            }
+          ]
         }
       }
     },
@@ -93,6 +127,18 @@
               "questId": "N07",
               "state": "completed"
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "trust",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "voice",
+              "value": 1
+            }
           ]
         },
         "coordinated": {
@@ -110,7 +156,14 @@
           ]
         },
         "reactive": {
-          "conditions": []
+          "conditions": [],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "trust",
+              "value": -1
+            }
+          ]
         }
       }
     },
@@ -149,6 +202,18 @@
               "questId": "N08",
               "state": "completed"
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "commons",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "trust",
+              "value": 1
+            }
           ]
         },
         "coordinated": {
@@ -166,7 +231,14 @@
           ]
         },
         "reactive": {
-          "conditions": []
+          "conditions": [],
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "offer_returns",
+              "value": true
+            }
+          ]
         }
       }
     },
@@ -205,6 +277,23 @@
               "questId": "N09",
               "state": "completed"
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "voice",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "care",
+              "value": 1
+            },
+            {
+              "type": "setVariable",
+              "key": "afterschool_reopened",
+              "value": true
+            }
           ]
         },
         "coordinated": {
@@ -218,6 +307,13 @@
               "type": "resourceAtLeast",
               "key": "care",
               "value": 3
+            }
+          ],
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "bus_line_saved",
+              "value": true
             }
           ]
         },
@@ -261,6 +357,23 @@
               "questId": "N15",
               "state": "completed"
             }
+          ],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "resilience",
+              "value": 2
+            },
+            {
+              "type": "addResource",
+              "key": "commons",
+              "value": 1
+            },
+            {
+              "type": "setVariable",
+              "key": "water_plan",
+              "value": true
+            }
           ]
         },
         "coordinated": {
@@ -278,7 +391,14 @@
           ]
         },
         "reactive": {
-          "conditions": []
+          "conditions": [],
+          "effects": [
+            {
+              "type": "addResource",
+              "key": "fragmentationGlobal",
+              "value": 2
+            }
+          ]
         }
       }
     }

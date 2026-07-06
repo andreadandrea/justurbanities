@@ -638,6 +638,42 @@
       "custom": {
         "tagline": "La tua route attraverso Eurbania: scegli chi aiutare, sapendo che non puoi aiutare tutti."
       }
+    },
+    "crisisWeek": {
+      "heatwave": {
+        "announce": "Allerta calore: 38° previsti. Anziani soli e case fragili a rischio nei quartieri senza ombra. GIORGIA: «Ho la lista dei fragili di Old Blocks… vecchia di due anni.»",
+        "reactive": "L'acqua si distribuisce dove capita. In serata un anziano finisce in ospedale — il logbook registra il suo nome.",
+        "coordinated": "Il Centro apre come rifugio fresco, con turni. MAYA (sera, stanca): «Oggi Zoe ha fatto i compiti nel cortile con altri sei bambini. Fa 36 gradi ed è stato… bello?»",
+        "transformative": "La rete porta-a-porta di Pablo e le sale fresche di quartiere reggono la giornata — nasce la «mappa del fresco» permanente. PABLO: «La mia è di ieri. Ventitré nomi, piano per piano. Andiamo.»"
+      },
+      "rumor": {
+        "announce": "Post virale: «ESCLUSIVO: i fondi del Community Center vanno solo ad ALCUNI gruppi. Indovinate quali.» SAMIR: «“Quali” sono io, vero?»",
+        "reactive": "Esce un comunicato di smentita. Nessuno lo legge.",
+        "coordinated": "Conti pubblici in bacheca e assemblea aperta di chiarimento. La fiducia si stabilizza.",
+        "transformative": "L'edicola-info di Abdullah pubblica i numeri in cinque lingue; Ruben firma il pezzo che smonta la voce con le fonti; Marta ne fa un fumetto sul muro. ABDULLAH: «La voce è corsa. Ma stavolta la verità aveva un chiosco, ed era aperto.»"
+      },
+      "offer": {
+        "announce": "Il Mystery Corporate Man si presenta al Town Hall con un rendering: «GREY YARDS SQUARE — apertura in 90 giorni. Zero costi per il Comune. Firmate, e il problema sparisce.» ALEXANDRIA: «Datemi un'alternativa credibile oggi.»",
+        "reactive": "Un rifiuto di principio, senza alternativa. L'Offerta tornerà, più forte.",
+        "coordinated": "Si negoziano vincoli pubblici: orari garantiti, tariffe sociali. I beni comuni reggono, ma non crescono.",
+        "transformative": "Al rendering risponde un patto di gestione civica: il regolamento di Tom, il cantiere di Sigrid, il fondo dei commercianti. Il Corporate Man ritira: «Torneremo quando sarete stanchi.»"
+      },
+      "closure": {
+        "announce": "Avviso: «Sospensione temporanea: linea bus 14 serale + sala doposcuola Lake Edge. Razionalizzazione risorse.» GWEN: «“Temporanea”. Come tre anni fa il giovedì di Viveca.»",
+        "reactive": "Gira una raccolta firme. Le firme senza dati si archiviano.",
+        "coordinated": "I conteggi reali di Gwen arrivano in commissione con Elena. La linea si salva a orario ridotto.",
+        "transformative": "Tre utenti raccontano in commissione cosa significa l'ultimo bus — la delibera cita le loro parole. Il doposcuola riapre nel cortile, con Viveca volontaria. ZOE: «La maestra nuova è severa uguale a quella vecchia.»"
+      },
+      "flood": {
+        "announce": "Pioggia torrenziale su Lake Edge e Old Blocks. Squadre, sacchi, punti di raccolta: chi va da chi? BEN: «L'attraversamento nuovo è l'unico percorso asciutto per le carrozzine. Ve l'avevo detto che non era “un dettaglio”.»",
+        "reactive": "Emergenza pura. Un distretto sprofonda nella frammentazione.",
+        "coordinated": "Le reti si attivano; i danni sono contenuti.",
+        "transformative": "La risposta diventa protocollo — il «Piano Acqua» entra nel patto civico. ANNA (la sera, nel Centro mezzo allagato ma pieno di gente): «Guardatevi. QUESTA è la rete. Domani la mettiamo per iscritto.»"
+      },
+      "common": {
+        "faceDay": "Affronta la giornata.",
+        "close": "…"
+      }
     }
   }
 }
