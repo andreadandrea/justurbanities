@@ -37,7 +37,11 @@ describe("MP-2 SupabaseRemoteApi (SPEC_Multiplayer §2.4)", () => {
 
     expect(result).toEqual({ ok: true });
     expect(calls).toHaveLength(1);
-    expect(calls[0].input).toBe(`https://eu-project.supabase.co/rest/v1/${SESSION_EVENTS_TABLE}`);
+    // on_conflict must target the (session_code, entity_id) unique key,
+    // or PostgREST answers 409 on replays instead of ignoring them.
+    expect(calls[0].input).toBe(
+      `https://eu-project.supabase.co/rest/v1/${SESSION_EVENTS_TABLE}?on_conflict=session_code,entity_id`
+    );
     const headers = calls[0].init?.headers as Record<string, string>;
     expect(headers.apikey).toBe("anon-key");
     expect(headers.authorization).toBe("Bearer anon-key");

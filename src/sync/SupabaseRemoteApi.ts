@@ -84,7 +84,10 @@ export class SupabaseRemoteApi implements RemoteApiAdapter {
     };
     try {
       const response = await this.fetchImpl(
-        `${this.config.url.replace(/\/$/, "")}/rest/v1/${SESSION_EVENTS_TABLE}`,
+        // on_conflict targets the (session_code, entity_id) unique key:
+        // without it PostgREST answers 409 on replays instead of ignoring
+        // them (verified against the live EU project, 2026-07-07).
+        `${this.config.url.replace(/\/$/, "")}/rest/v1/${SESSION_EVENTS_TABLE}?on_conflict=session_code,entity_id`,
         {
           method: "POST",
           headers: {
