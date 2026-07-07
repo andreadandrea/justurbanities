@@ -6123,6 +6123,104 @@
           ]
         }
       }
+    },
+    {
+      "id": "luca_m36",
+      "speakerId": "luca",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.luca_m36.start.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M36"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M36"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "accept_limit",
+              "label": "content.dialogues.luca_m36.start.choices.accept_limit",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "shop_net_extended",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "commons",
+                  "value": 1
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M36",
+                  "objectiveId": "local_economy"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "local_economy",
+                  "payload": {
+                    "outcome": "limit_accepted"
+                  }
+                }
+              ],
+              "next": "thanks"
+            },
+            {
+              "id": "ask_more",
+              "label": "content.dialogues.luca_m36.start.choices.ask_more",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "luca_pulled_back",
+                  "value": true
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M36",
+                  "objectiveId": "local_economy"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "local_economy",
+                  "payload": {
+                    "outcome": "asked_more"
+                  }
+                }
+              ],
+              "next": "pulled_back"
+            }
+          ]
+        },
+        "thanks": {
+          "text": "content.dialogues.luca_m36.thanks.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.luca_m36.thanks.choices.close",
+              "end": true
+            }
+          ]
+        },
+        "pulled_back": {
+          "text": "content.dialogues.luca_m36.pulled_back.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.luca_m36.pulled_back.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

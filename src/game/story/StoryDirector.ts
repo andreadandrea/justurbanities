@@ -14,7 +14,7 @@ const ROUTE_DIALOGUE: Record<string, string> = {
 export const CH2_DISTRICTS_NEEDED = 3;
 
 /** §5 — the chapter-3 interventions; "you choose 3–4 — not everything". */
-export const CH3_INTERVENTIONS = ["M31", "M32", "M33", "M34", "E01", "N08"];
+export const CH3_INTERVENTIONS = ["M31", "M32", "M33", "M34", "M36", "E01", "N08"];
 export const CH3_INTERVENTIONS_NEEDED = 3;
 
 /**

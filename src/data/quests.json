@@ -723,6 +723,26 @@
         "crisisLink": null,
         "registry": "Chapter 3 Mission 4 'Care Is Infrastructure' (Narrative v2 §5.4): design the events care kit — schedules, kids' space, volunteer rest shifts (N10 hook), accessibility (N02 hook, Ben's ramp). Each active element: Care +1 — attendance flows through the assembly's invitedConditions care thresholds."
       }
+    },
+    {
+      "id": "M36",
+      "title": "content.quests.M36.title",
+      "description": "content.quests.M36.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "local_economy",
+          "description": "content.quests.M36.objectives.local_economy",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Luca",
+        "abilityMatch": "Luca · Resource Mobilizer",
+        "crisisLink": null,
+        "registry": "Chapter 3 Mission 6 'Local Economy, Common Good' (Narrative v2 §5.6): Luca offers the van, the shared kitty and a volunteers' discount — accepting his limit extends shop_net; asking for more makes him pull back."
+      }
     }
   ]
 }
