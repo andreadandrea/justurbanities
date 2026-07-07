@@ -26,6 +26,44 @@ export type FetchLike = (input: string, init?: RequestInit) => Promise<Pick<Resp
 
 export const SESSION_EVENTS_TABLE = "session_events";
 
+/**
+ * MP-4: read the ordered session log (facilitator dashboard). Returns the
+ * raw rows mapped to CityReducer-shaped events; throws on HTTP errors so
+ * the dashboard can show a retry state.
+ */
+export async function fetchSessionEvents(
+  config: Pick<SupabaseConfig, "url" | "anonKey" | "sessionCode">,
+  fetchImpl: (input: string, init?: RequestInit) => Promise<Pick<Response, "ok" | "status" | "json">> = (
+    input,
+    init
+  ) => fetch(input, init)
+): Promise<Array<{ id: string; userId: string; type: string; payload: Record<string, unknown>; createdAt: string }>> {
+  const base = config.url.replace(/\/$/, "");
+  const query = `session_code=eq.${encodeURIComponent(config.sessionCode)}&order=seq.asc&select=entity_id,player_id,payload,ts`;
+  const response = await fetchImpl(`${base}/rest/v1/${SESSION_EVENTS_TABLE}?${query}`, {
+    headers: { apikey: config.anonKey, authorization: `Bearer ${config.anonKey}` }
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const rows = (await response.json()) as Array<{
+    entity_id: string;
+    player_id: string;
+    payload: Record<string, unknown>;
+    ts: string;
+  }>;
+  // The queue pushes the whole ProgressEvent as the row payload
+  // ({type, payload, createdAt, ...}) — unwrap it for the reducer.
+  return rows.map((row) => {
+    const progressEvent = row.payload as { type?: string; payload?: Record<string, unknown>; createdAt?: string };
+    return {
+      id: row.entity_id,
+      userId: row.player_id,
+      type: String(progressEvent.type ?? ""),
+      payload: progressEvent.payload ?? {},
+      createdAt: String(progressEvent.createdAt ?? row.ts)
+    };
+  });
+}
+
 export class SupabaseRemoteApi implements RemoteApiAdapter {
   readonly mode = "rest" as const;
 

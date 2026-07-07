@@ -195,6 +195,18 @@
       "join": "Join the city",
       "invalid": "Check the code (6 characters, no 0/O/1/I) and your name.",
       "joinedAs": "In session as"
+    },
+    "facilitator": {
+      "toggle": "🧑‍🏫 Class",
+      "title": "Facilitator — session dashboard",
+      "hint": "Read-only class dashboard",
+      "players": "Players",
+      "resources": "Collective resources",
+      "promises": "Promises board",
+      "crises": "Crisis tiers",
+      "plan": "Signed plan",
+      "export": "⬇ Class report (JSON)",
+      "loadFailed": "Could not load the session log — check the connection and retry."
     }
   },
   "content": {
