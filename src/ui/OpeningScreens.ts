@@ -1,4 +1,4 @@
-import type { I18n } from "../i18n/I18n";
+import { LOCALES, LOCALE_NAMES, type I18n, type LocaleCode } from "../i18n/I18n";
 import { variantPath, type ArtVariant } from "../assets/ArtStyle";
 
 export type Pronoun = "she" | "he" | "they";
@@ -27,6 +27,8 @@ type OpeningDeps = {
   i18n: I18n;
   /** Dual art style preview on the select screen; persists the preference. */
   artStyle?: { initial: ArtVariant; onChange: (variant: ArtVariant) => void };
+  /** Language picker on the title screen; persists the choice per device. */
+  locale?: { onChange: (locale: LocaleCode) => void };
 };
 
 const PRONOUN_KEY: Record<Pronoun, string> = {
@@ -104,7 +106,32 @@ export class OpeningScreens {
     }
 
     card.append(title, subtitle, actions);
+    if (this.deps.locale) card.appendChild(this.localePicker());
     newGame.focus();
+  }
+
+  /** Language picker on the title screen (each language in its own name). */
+  private localePicker(): HTMLElement {
+    const wrap = document.createElement("label");
+    wrap.className = "opening-locale";
+    const caption = document.createElement("span");
+    caption.textContent = this.t("ui.language.label");
+    const select = document.createElement("select");
+    for (const locale of LOCALES) {
+      const option = document.createElement("option");
+      option.value = locale;
+      option.textContent = LOCALE_NAMES[locale];
+      option.selected = locale === this.deps.i18n.locale;
+      select.appendChild(option);
+    }
+    select.addEventListener("change", () => {
+      const locale = select.value as LocaleCode;
+      this.deps.i18n.setLocale(locale);
+      this.deps.locale?.onChange(locale);
+      this.showTitle(); // re-render the title texts in the new language
+    });
+    wrap.append(caption, select);
+    return wrap;
   }
 
   private showPrologue(index: number): void {

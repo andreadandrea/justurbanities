@@ -14,6 +14,20 @@ export const LOCALE_NAMES: Record<LocaleCode, string> = {
 
 const FALLBACK: LocaleCode = "en";
 
+/**
+ * Pick the best project locale from the browser's preference list
+ * (navigator.languages): first exact/base-language match wins, EN when
+ * nothing matches. Pure, so first-run auto-detection is testable.
+ */
+export function detectLocale(preferred: readonly string[]): LocaleCode {
+  for (const candidate of preferred) {
+    const base = candidate.toLowerCase().split("-")[0];
+    const match = LOCALES.find((locale) => locale === base);
+    if (match) return match;
+  }
+  return FALLBACK;
+}
+
 type LocaleTree = { [key: string]: string | LocaleTree };
 
 function lookup(tree: LocaleTree | undefined, key: string): string | undefined {
