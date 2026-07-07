@@ -4580,6 +4580,306 @@
           ]
         }
       }
+    },
+    {
+      "id": "sigrid_m24",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.sigrid_m24.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.sigrid_m24.start.choices.engage",
+              "next": "brief"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.sigrid_m24.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "brief": {
+          "text": "content.dialogues.sigrid_m24.brief.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M24"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M24"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "go",
+              "label": "content.dialogues.sigrid_m24.brief.choices.go",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "courtyard_assessment",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.courtyard_assessment.start.text",
+          "choices": [
+            {
+              "id": "begin",
+              "label": "content.dialogues.courtyard_assessment.start.choices.begin",
+              "next": "aesthetic"
+            },
+            {
+              "id": "leave",
+              "label": "content.dialogues.courtyard_assessment.start.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "aesthetic": {
+          "text": "content.dialogues.courtyard_assessment.aesthetic.text",
+          "choices": [
+            {
+              "id": "works",
+              "label": "content.dialogues.courtyard_assessment.aesthetic.choices.works",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_aesthetic",
+                  "value": "works"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "aesthetic",
+                    "verdict": "works"
+                  }
+                }
+              ],
+              "next": "social"
+            },
+            {
+              "id": "fails",
+              "label": "content.dialogues.courtyard_assessment.aesthetic.choices.fails",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_aesthetic",
+                  "value": "fails"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "aesthetic",
+                    "verdict": "fails"
+                  }
+                }
+              ],
+              "next": "social"
+            }
+          ]
+        },
+        "social": {
+          "text": "content.dialogues.courtyard_assessment.social.text",
+          "choices": [
+            {
+              "id": "works",
+              "label": "content.dialogues.courtyard_assessment.social.choices.works",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_social",
+                  "value": "works"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "social",
+                    "verdict": "works"
+                  }
+                }
+              ],
+              "next": "practical"
+            },
+            {
+              "id": "fails",
+              "label": "content.dialogues.courtyard_assessment.social.choices.fails",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_social",
+                  "value": "fails"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "social",
+                    "verdict": "fails"
+                  }
+                }
+              ],
+              "next": "practical"
+            }
+          ]
+        },
+        "practical": {
+          "text": "content.dialogues.courtyard_assessment.practical.text",
+          "choices": [
+            {
+              "id": "works",
+              "label": "content.dialogues.courtyard_assessment.practical.choices.works",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_practical",
+                  "value": "works"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "practical",
+                    "verdict": "works"
+                  }
+                }
+              ],
+              "next": "accessible"
+            },
+            {
+              "id": "fails",
+              "label": "content.dialogues.courtyard_assessment.practical.choices.fails",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_practical",
+                  "value": "fails"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "practical",
+                    "verdict": "fails"
+                  }
+                }
+              ],
+              "next": "accessible"
+            }
+          ]
+        },
+        "accessible": {
+          "text": "content.dialogues.courtyard_assessment.accessible.text",
+          "choices": [
+            {
+              "id": "works",
+              "label": "content.dialogues.courtyard_assessment.accessible.choices.works",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_accessible",
+                  "value": "works"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "accessible",
+                    "verdict": "works"
+                  }
+                }
+              ],
+              "next": "done"
+            },
+            {
+              "id": "fails",
+              "label": "content.dialogues.courtyard_assessment.accessible.choices.fails",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_accessible",
+                  "value": "fails"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "axis_assessed",
+                  "payload": {
+                    "axis": "accessible",
+                    "verdict": "fails"
+                  }
+                }
+              ],
+              "next": "done"
+            }
+          ]
+        },
+        "done": {
+          "text": "content.dialogues.courtyard_assessment.done.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "m24_assessed",
+              "value": true
+            },
+            {
+              "type": "completeObjective",
+              "questId": "M24",
+              "objectiveId": "assess_courtyard"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "courtyard_assessed",
+              "payload": {
+                "missionId": "M24"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.courtyard_assessment.done.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sigrid_m24_resolution",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.sigrid_m24_resolution.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.sigrid_m24_resolution.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m24_resolution_seen",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

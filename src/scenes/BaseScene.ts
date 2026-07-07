@@ -21,6 +21,7 @@ import type { GameClock } from "../game/time/GameClock";
 import type { CharacterArt } from "../assets/CharacterArt";
 import type { I18n } from "../i18n/I18n";
 import type { BarrierMap } from "../game/story/BarrierMap";
+import type { Condition } from "../types/Dialogue";
 import charactersData from "../data/characters.json";
 
 const DISPLAY_NAMES = new Map(
@@ -55,6 +56,8 @@ export type SceneDeps = {
   art: CharacterArt;
   /** Mission 2 §4.2 — lived-barrier overlay state (pins per district). */
   barrierMap: BarrierMap;
+  /** Evaluate data-driven conditions (district POIs use the same grammar as placements). */
+  checkConditions: (conditions?: Condition[]) => boolean;
   /** App-level story director check, fired when any dialogue ends. */
   onDialogueEnded?: (dialogueId: string) => void;
 };

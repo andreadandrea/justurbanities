@@ -464,6 +464,48 @@
         "x": 900,
         "y": 700
       },
+      "dialogueId": "sigrid_m24_resolution",
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M24",
+          "state": "completed"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m24_resolution_seen",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "old_blocks",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
+      "dialogueId": "sigrid_m24",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter2_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M24",
+          "state": "locked"
+        }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "old_blocks",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
       "dialogueId": "sigrid_n05",
       "conditions": [
         {

@@ -1012,6 +1012,72 @@
             "close": "“Arriving is already participation.”"
           }
         }
+      },
+      "sigrid_m24": {
+        "start": {
+          "text": "Juries love renderings. People use power sockets, toilets and chairs that don't break.",
+          "choices": {
+            "engage": "“So we judge the courtyard by what people can use.”",
+            "later": "Not now."
+          }
+        },
+        "brief": {
+          "text": "Maya puts down Zoe's drawing: “And opening hours. A space that's open when everyone's at work is closed, however beautiful it is.” Take the sheet to Courtyard 17 in the Grey Yards. Four lenses: aesthetic, social, practical, accessible. Be honest on all four.",
+          "choices": {
+            "go": "“Useful, not beautiful. Got it.”"
+          }
+        }
+      },
+      "courtyard_assessment": {
+        "start": {
+          "text": "Courtyard 17, clipboard in hand. Four lenses, one honest sheet.",
+          "choices": {
+            "begin": "Start the assessment.",
+            "leave": "Come back later."
+          }
+        },
+        "aesthetic": {
+          "text": "AESTHETIC — The arches hold, and under the grime a mural survives. A rendering would sell this place in a heartbeat.",
+          "choices": {
+            "works": "Mark it: the beauty is already here — it needs care, not design.",
+            "fails": "Mark it: even the beauty needs repair before it shows."
+          }
+        },
+        "social": {
+          "text": "SOCIAL — Two benches face away from each other. Nowhere to sit together, nowhere for kids while the adults talk.",
+          "choices": {
+            "works": "Mark it: the bones for gathering exist — benches, shade, a corner.",
+            "fails": "Mark it: nothing here invites anyone to stay."
+          }
+        },
+        "practical": {
+          "text": "PRACTICAL — One power socket, dead. No water tap. The nearest toilet is a bar that expects you to buy something.",
+          "choices": {
+            "works": "Mark it: with one working socket and a tap, this place runs events.",
+            "fails": "Mark it: sockets, water, toilets — the invisible things are all missing."
+          }
+        },
+        "accessible": {
+          "text": "ACCESSIBLE — Three steps at the only gate. No ramp, no rail. A stroller or a wheelchair simply does not enter.",
+          "choices": {
+            "works": "Mark it: one ramp at the gate would open it to everyone.",
+            "fails": "Mark it: as it stands, the courtyard chooses its visitors."
+          }
+        },
+        "done": {
+          "text": "The sheet is full. Useful, not beautiful: now the repair Saturday knows where to start.",
+          "choices": {
+            "close": "Close the clipboard."
+          }
+        }
+      },
+      "sigrid_m24_resolution": {
+        "start": {
+          "text": "Good sheet. No renderings, no promises — sockets, steps, benches, hours. When the repair Saturday comes, we start from exactly this.",
+          "choices": {
+            "close": "“Useful, not beautiful.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1188,6 +1254,13 @@
           "source_pablo": "Ask Pablo who stopped opening the door.",
           "source_gwen": "Ask Gwen who no longer boards the 14.",
           "source_amin": "Ask Amin who no longer comes into the bar."
+        }
+      },
+      "M24": {
+        "title": "Useful, Not Beautiful",
+        "description": "Assess Courtyard 17 on four axes — aesthetic, social, practical, accessible. The honest sheet pre-fills the repair Saturday.",
+        "objectives": {
+          "assess_courtyard": "Assess the courtyard through all four lenses."
         }
       }
     },
@@ -1502,6 +1575,11 @@
       "office_forms": {
         "label": "Forms in one language",
         "text": "The municipal desk at Lake Edge. Forms in one language only; the queue speaks five."
+      }
+    },
+    "pois": {
+      "courtyard_17": {
+        "label": "Courtyard 17 — assessment"
       }
     }
   }

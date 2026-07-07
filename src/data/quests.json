@@ -623,6 +623,26 @@
         "crisisLink": null,
         "registry": "Chapter 2 Mission 3 'Who Is Missing?' (Narrative v2 §4.3): cross 3 sources — Pablo (mail rounds), Gwen (bus), Amin (bar). Each missing group opens a hook: elders→N11, families without the language→N16, Youth Court kids→N14."
       }
+    },
+    {
+      "id": "M24",
+      "title": "content.quests.M24.title",
+      "description": "content.quests.M24.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "assess_courtyard",
+          "description": "content.quests.M24.objectives.assess_courtyard",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Sigrid + Maya",
+        "abilityMatch": "Sigrid · Practical repair",
+        "crisisLink": null,
+        "registry": "Chapter 2 Mission 4 'Useful, Not Beautiful' (Narrative v2 §4.4): assess Courtyard 17 on 4 axes — aesthetic/social/practical/accessible; the sheet pre-fills ch.3 Mission 2 'Make It Usable'."
+      }
     }
   ]
 }

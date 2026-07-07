@@ -317,6 +317,7 @@ export class App {
       i18n,
       art,
       barrierMap,
+      checkConditions: (conditions) => this.effectResolver.checkAll(conditions),
       onDialogueEnded: () => {
         storyDirector.check();
         checkMinigames();

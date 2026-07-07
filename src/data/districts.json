@@ -56,6 +56,27 @@
           "y": 640,
           "layer": "physical"
         }
+      ],
+      "pois": [
+        {
+          "id": "courtyard_17",
+          "x": 1030,
+          "y": 430,
+          "labelKey": "content.pois.courtyard_17.label",
+          "dialogueId": "courtyard_assessment",
+          "conditions": [
+            {
+              "type": "questState",
+              "questId": "M24",
+              "state": "active"
+            },
+            {
+              "type": "variableNotEquals",
+              "key": "m24_assessed",
+              "value": true
+            }
+          ]
+        }
       ]
     },
     {
