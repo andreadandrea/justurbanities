@@ -1301,6 +1301,27 @@
             "close": "…"
           }
         }
+      },
+      "luca_m36": {
+        "start": {
+          "text": "I can put in the van, the shared kitty for materials and a real discount for volunteers. I can't put in a month's turnover.",
+          "choices": {
+            "accept_limit": "Accept the limit — and thank him publicly, by name.",
+            "ask_more": "Ask him for more. The neighbourhood needs it."
+          }
+        },
+        "thanks": {
+          "text": "The notice goes up at the Center with his name on it. Luca reads it twice and pretends he hasn't. The van is outside on Saturday, engine running.",
+          "choices": {
+            "close": "“Local economy, common good.”"
+          }
+        },
+        "pulled_back": {
+          "text": "LUCA: “See? This is why shopkeepers don't come.” The van still shows up — the kitty doesn't.",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -1512,6 +1533,13 @@
         "description": "Design the events care kit — hours, kids' corner, volunteer rest shifts, accessibility. Every active element widens who can arrive.",
         "objectives": {
           "design_care_kit": "Design the care kit with Maya."
+        }
+      },
+      "M36": {
+        "title": "Local Economy, Common Good",
+        "description": "Luca offers the van, the shared kitty and a volunteers' discount. What he can't offer is a month's turnover.",
+        "objectives": {
+          "local_economy": "Settle what the shop can put in — and how the city says thank you."
         }
       }
     },

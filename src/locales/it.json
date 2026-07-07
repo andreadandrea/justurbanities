@@ -1301,6 +1301,27 @@
             "close": "…"
           }
         }
+      },
+      "luca_m36": {
+        "start": {
+          "text": "Posso metterci il furgone, la cassa comune per i materiali e uno sconto vero ai volontari. Non posso metterci il mese di fatturato.",
+          "choices": {
+            "accept_limit": "Accetta il limite — e ringrazialo pubblicamente, per nome.",
+            "ask_more": "Chiedigli di più. Al quartiere serve."
+          }
+        },
+        "thanks": {
+          "text": "L'avviso va in bacheca al Centro, col suo nome. Luca lo legge due volte e fa finta di niente. Il furgone sabato è fuori, col motore acceso.",
+          "choices": {
+            "close": "«Economia locale, bene comune.»"
+          }
+        },
+        "pulled_back": {
+          "text": "LUCA: «Vedi? Per questo i negozianti non vengono.» Il furgone arriva lo stesso — la cassa comune no.",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -1512,6 +1533,13 @@
         "description": "Progetta il kit cura degli eventi — orari, angolo bimbi, turni di riposo dei volontari, accessibilità. Ogni elemento attivo allarga chi può arrivare.",
         "objectives": {
           "design_care_kit": "Progetta il kit cura con Maya."
+        }
+      },
+      "M36": {
+        "title": "Economia locale, bene comune",
+        "description": "Luca offre il furgone, la cassa comune e uno sconto vero ai volontari. Quello che non può offrire è un mese di fatturato.",
+        "objectives": {
+          "local_economy": "Stabilisci cosa può metterci il negozio — e come la città dice grazie."
         }
       }
     },
