@@ -4880,6 +4880,81 @@
           ]
         }
       }
+    },
+    {
+      "id": "chapter2_closing",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.chapter2_closing.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "chapter2_closing_seen",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter2_closing.start.choices.continue",
+              "next": "questions"
+            }
+          ]
+        },
+        "questions": {
+          "text": "content.dialogues.chapter2_closing.questions.text",
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter2_closing.questions.choices.continue",
+              "next": "ruben"
+            }
+          ]
+        },
+        "ruben": {
+          "text": "content.dialogues.chapter2_closing.ruben.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "ruben_curious",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter2_closing.ruben.choices.continue",
+              "next": "closing"
+            }
+          ]
+        },
+        "closing": {
+          "text": "content.dialogues.chapter2_closing.closing.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "chapter3_unlocked",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "chapter_advanced",
+              "payload": {
+                "chapter": 3
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.chapter2_closing.closing.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

@@ -1078,6 +1078,32 @@
             "close": "«Utile, non bello.»"
           }
         }
+      },
+      "chapter2_closing": {
+        "start": {
+          "text": "Ritorno al Centro: mappe sul tavolo, storie ai margini, tensioni che nessuno ha ancora nominato. ELENA: «Ora trasformiamo tutto questo in priorità, o resterà un bellissimo archivio del dolore altrui.»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "questions": {
+          "text": "LUCA: «E chi paga?» MAYA: «E chi ha il tempo?» SAMIR: «E chi manca ancora?»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "ruben": {
+          "text": "RUBEN: «Io intanto una storia ce l'avrei.» (Anna lo guarda.) «Tranquilli: aspetto il finale.»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "closing": {
+          "text": "ANNA: «Piccole riparazioni. Concrete, visibili, mantenute. Partiamo da lì.»",
+          "choices": {
+            "close": "Capitolo 3 — Small Repairs."
+          }
+        }
       }
     },
     "quests": {
