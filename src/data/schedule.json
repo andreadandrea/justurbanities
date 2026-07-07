@@ -72,6 +72,27 @@
         "x": 900,
         "y": 620
       },
+      "dialogueId": "anna_m31",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter3_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M31",
+          "state": "locked"
+        }
+      ]
+    },
+    {
+      "npcId": "anna",
+      "scene": "community_center",
+      "position": {
+        "x": 900,
+        "y": 620
+      },
       "dialogueId": "anna_n01_resolution",
       "conditions": [
         {

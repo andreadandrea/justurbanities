@@ -1104,6 +1104,32 @@
             "close": "Capitolo 3 — Small Repairs."
           }
         }
+      },
+      "anna_m31": {
+        "start": {
+          "text": "Una promessa sola, piccola, con una data. Il quartiere non ricorda i progetti: ricorda se torni davvero giovedì.",
+          "choices": {
+            "engage": "«Una promessa. Scegliamola.»",
+            "later": "Non ancora."
+          }
+        },
+        "choose": {
+          "text": "Anna fa scivolare la lista sul tavolo. «Piccole riparazioni — concrete, visibili, mantenute. Scegline UNA. Il logbook prende la data; il quartiere prende il giovedì.»",
+          "choices": {
+            "common_room": "La sala comune — riaprirla con le carte di Tom fatte bene.",
+            "crossing": "L'attraversamento — mettere in sicurezza l'angolo di Ben.",
+            "young_event": "Un evento young-led — i ragazzi di Youth Court decidono l'agenda.",
+            "translated_comms": "Comunicazioni che la gente possa leggere — orari e avvisi, tradotti.",
+            "care_network": "Una rete di cura — qualcuno bussa, gli ultimi piani rispondono.",
+            "courtyard": "Il cortile — un sabato di riparazioni al Cortile 17."
+          }
+        },
+        "sealed": {
+          "text": "Entra nel logbook, con una data. ANNA: «Il quartiere non ricorda i progetti. Torna giovedì.»",
+          "choices": {
+            "close": "«Ci sarò.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1287,6 +1313,13 @@
         "description": "Valuta il Cortile 17 su quattro assi — estetico, sociale, pratico, accessibile. La scheda onesta pre-compila il sabato delle riparazioni.",
         "objectives": {
           "assess_courtyard": "Valuta il cortile con tutte e quattro le lenti."
+        }
+      },
+      "M31": {
+        "title": "La prima promessa",
+        "description": "Scegli un intervento su sei e promettilo con una data. Il quartiere ricorda se torni davvero giovedì.",
+        "objectives": {
+          "make_promise": "Scegli un intervento e mettilo nel logbook con una scadenza."
         }
       }
     },
