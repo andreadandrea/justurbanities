@@ -1078,6 +1078,32 @@
             "close": "“Useful, not beautiful.”"
           }
         }
+      },
+      "chapter2_closing": {
+        "start": {
+          "text": "Back at the Center: maps on the table, stories in the margins, tensions nobody has named yet. ELENA: “Now we turn all this into priorities, or it will remain a beautiful archive of other people's pain.”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "questions": {
+          "text": "LUCA: “And who pays?” MAYA: “And who has the time?” SAMIR: “And who's still missing?”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "ruben": {
+          "text": "RUBEN: “Meanwhile, I do have a story.” (Anna looks at him.) “Relax — I'm waiting for the ending.”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "closing": {
+          "text": "ANNA: “Small repairs — concrete, visible, maintained. We start there.”",
+          "choices": {
+            "close": "Chapter 3 — Small Repairs."
+          }
+        }
       }
     },
     "quests": {

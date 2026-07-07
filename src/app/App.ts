@@ -366,7 +366,8 @@ export class App {
       this.state,
       (dialogueId, speakerLabel) => crisisRunner.run(dialogueId, speakerLabel),
       () => this.dialogueUI.isOpen,
-      (dialogueId) => this.dialogueManager.has(dialogueId)
+      (dialogueId) => this.dialogueManager.has(dialogueId),
+      (districtsData.districts as DistrictConfig[]).map((district) => district.id)
     );
     const crisisWeek = new CrisisWeek(
       this.state,
