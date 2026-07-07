@@ -1,0 +1,27 @@
+{
+  "schema": "balancing/v1",
+  "note": "Task 9.4 — the balancing sheet (Guida 02 §5), repo scale (the guide's 0–100 draft was superseded by the ratified §9 repo-scale numbers). This file holds the system-level knobs; the other tunables live next to their content: crisis tiers in crises.json (3/6 thresholds), endings in endings.json, assembly costs/slots in assembly.json (tuning block), minigame rewards in minigames.json. Validate every change in playtest M-E.",
+  "startingResources": {
+    "trust": 0,
+    "care": 0,
+    "commons": 0,
+    "voice": 0,
+    "resilience": 0,
+    "fragmentationGlobal": 5
+  },
+  "promises": {
+    "keptTrust": 3,
+    "brokenTrust": -2,
+    "brokenFrag": 1
+  },
+  "vitality": {
+    "base": 50,
+    "fragmentationWeight": 2,
+    "interventionBonus": 8,
+    "states": {
+      "awakening": 40,
+      "connected": 60,
+      "thriving": 85
+    }
+  }
+}

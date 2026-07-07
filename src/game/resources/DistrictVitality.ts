@@ -1,9 +1,11 @@
 import type { Resources } from "./ResourceManager";
 import { neighbourhoodVitality } from "./ResourceManager";
 import type { ScheduleFile } from "../../types/Schedule";
+import balancing from "../../data/balancing.json";
 
-/** Vitality points each completed local intervention gives its district. */
-export const INTERVENTION_BONUS = 8;
+/** Vitality points each completed local intervention gives its district
+ *  (balancing sheet, task 9.4). */
+export const INTERVENTION_BONUS = balancing.vitality.interventionBonus;
 
 const QUEST_DIALOGUE = /_n\d\d$/;
 

@@ -1,4 +1,5 @@
 import type { GameState } from "../GameState";
+import balancing from "../../data/balancing.json";
 
 export type PromiseDefinition = {
   id: string;
@@ -27,10 +28,11 @@ export type PromiseProgressLogger = (eventType: string, payload: Record<string, 
 const MADE_PREFIX = "promiseMadeDay_";
 const SCORED_PREFIX = "promiseScored_";
 
-/** Scoring constants — the MP city reducer mirrors these (single source). */
-export const PROMISE_KEPT_TRUST = 3;
-export const PROMISE_BROKEN_TRUST = -2;
-export const PROMISE_BROKEN_FRAG = 1;
+/** Scoring values from the balancing sheet (task 9.4) — the MP city
+ *  reducer imports these too, so there is a single source. */
+export const PROMISE_KEPT_TRUST = balancing.promises.keptTrust;
+export const PROMISE_BROKEN_TRUST = balancing.promises.brokenTrust;
+export const PROMISE_BROKEN_FRAG = balancing.promises.brokenFrag;
 
 /**
  * Promises system (ratified ✳): dialogue effects set the promise variable
