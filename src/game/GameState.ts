@@ -1,5 +1,6 @@
 import type { Quest } from "../types/Quest";
 import type { ArtVariant } from "../assets/ArtStyle";
+import balancing from "../data/balancing.json";
 
 export type Pronoun = "she" | "he" | "they";
 
@@ -29,8 +30,9 @@ export type SerializableGameState = {
   };
 };
 
+// Starting values are balancing data (task 9.4), not code.
 function freshResources() {
-  return { trust: 0, care: 0, commons: 0, voice: 0, resilience: 0, fragmentationGlobal: 5 };
+  return { ...balancing.startingResources };
 }
 
 export class GameState {

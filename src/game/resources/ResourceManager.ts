@@ -1,4 +1,5 @@
 import type { GameState } from "../GameState";
+import balancing from "../../data/balancing.json";
 
 export type Resources = GameState["resources"];
 
@@ -12,19 +13,20 @@ const clamp = (value: number, min: number, max: number) => Math.max(min, Math.mi
 /**
  * Neighbourhood Vitality (0..100): how alive the whole city looks.
  * Derived from the five collective resources minus Fragmentation
- * pressure. Placeholder weighting — tunable as content grows.
- * Starts slightly below the midpoint (resources at 0, fragmentation at 5).
+ * pressure. Weights come from the balancing sheet (task 9.4).
  */
 export function neighbourhoodVitality(resources: Resources): number {
   const positives = POSITIVE_RESOURCES.reduce((sum, key) => sum + resources[key], 0);
-  return Math.round(clamp(50 + positives - resources.fragmentationGlobal * 2, 0, 100));
+  return Math.round(
+    clamp(balancing.vitality.base + positives - resources.fragmentationGlobal * balancing.vitality.fragmentationWeight, 0, 100)
+  );
 }
 
 /** Maps Vitality to a discrete colour-state for the whole scene. */
 export function cityState(vitality: number): CityState {
-  if (vitality < 40) return "fragmented";
-  if (vitality < 60) return "awakening";
-  if (vitality < 85) return "connected";
+  if (vitality < balancing.vitality.states.awakening) return "fragmented";
+  if (vitality < balancing.vitality.states.connected) return "awakening";
+  if (vitality < balancing.vitality.states.thriving) return "connected";
   return "thriving";
 }
 

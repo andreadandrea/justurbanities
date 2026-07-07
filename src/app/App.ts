@@ -25,6 +25,7 @@ import { MinigamePanel } from "../ui/MinigamePanel";
 import { PlaytestInstrumentation } from "../game/playtest/PlaytestInstrumentation";
 import type { MinigameDefinition } from "../game/minigame/AllocationMinigame";
 import minigamesData from "../data/minigames.json";
+import balancingData from "../data/balancing.json";
 import { fetchSessionEvents } from "../sync/SupabaseRemoteApi";
 import type { CityEvent } from "../game/mp/CityReducer";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
@@ -80,6 +81,7 @@ import {
   animationsSchema,
   assemblyFileSchema,
   assetManifestSchema,
+  balancingFileSchema,
   endingsFileSchema,
   minigamesFileSchema,
   charactersSchema,
@@ -188,6 +190,7 @@ export class App {
         }
       ).minigames;
       validateData("districts.json", districtFileSchema, districtsData);
+      validateData("balancing.json", balancingFileSchema, balancingData);
     } catch (error) {
       console.error(error);
       this.elements.loadingProgress.hidden = true;

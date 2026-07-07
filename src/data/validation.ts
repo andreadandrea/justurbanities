@@ -337,6 +337,41 @@ export const assemblyFileSchema = z
     }
   });
 
+// ---------- balancing.json (task 9.4) ----------
+
+export const balancingFileSchema = z.object({
+  schema: z.string().optional(),
+  note: z.string().optional(),
+  startingResources: z.object({
+    trust: z.number(),
+    care: z.number(),
+    commons: z.number(),
+    voice: z.number(),
+    resilience: z.number(),
+    fragmentationGlobal: z.number()
+  }),
+  promises: z.object({
+    keptTrust: z.number(),
+    brokenTrust: z.number(),
+    brokenFrag: z.number()
+  }),
+  vitality: z
+    .object({
+      base: z.number(),
+      fragmentationWeight: z.number().nonnegative(),
+      interventionBonus: z.number().nonnegative(),
+      states: z.object({
+        awakening: z.number(),
+        connected: z.number(),
+        thriving: z.number()
+      })
+    })
+    .refine(
+      (vitality) => vitality.states.awakening < vitality.states.connected && vitality.states.connected < vitality.states.thriving,
+      { message: "vitality.states thresholds must be strictly increasing" }
+    )
+});
+
 // ---------- minigames.json (task 9.1) ----------
 
 export const minigamesFileSchema = z
