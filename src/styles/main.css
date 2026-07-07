@@ -1127,3 +1127,23 @@ body.high-contrast .mp-badge {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* Title-screen language picker */
+.opening-locale {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: calc(14px * var(--font-scale, 1));
+  color: #d8cdbb;
+}
+
+.opening-locale select {
+  background: #2e2a24;
+  color: #f3ead9;
+  border: 1px solid #b89a6a;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: calc(14px * var(--font-scale, 1));
+}

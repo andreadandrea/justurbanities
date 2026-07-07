@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { I18n, LOCALES } from "../../src/i18n/I18n";
+import { I18n, LOCALES, detectLocale } from "../../src/i18n/I18n";
 import en from "../../src/locales/en.json";
 import it_ from "../../src/locales/it.json";
 import de from "../../src/locales/de.json";
@@ -73,5 +73,18 @@ describe("locale files", () => {
   it("IT is genuinely translated (not an EN stub)", () => {
     expect(it_.ui.time.morning).not.toBe(en.ui.time.morning);
     expect(it_.ui.resources.trust).not.toBe(en.ui.resources.trust);
+  });
+});
+
+describe("first-run language auto-detection", () => {
+  it("picks the first browser language the project ships", () => {
+    expect(detectLocale(["it-IT", "en-US"])).toBe("it");
+    expect(detectLocale(["de"])).toBe("de");
+    expect(detectLocale(["ro-RO"])).toBe("ro");
+  });
+
+  it("falls back to EN when nothing matches (and on empty lists)", () => {
+    expect(detectLocale(["fr-FR", "es-ES"])).toBe("en");
+    expect(detectLocale([])).toBe("en");
   });
 });

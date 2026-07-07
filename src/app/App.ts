@@ -58,7 +58,7 @@ import { StoryDirector } from "../game/story/StoryDirector";
 import { BarrierMap } from "../game/story/BarrierMap";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
-import { I18n, LOCALES, type LocaleCode } from "../i18n/I18n";
+import { I18n, LOCALES, detectLocale, type LocaleCode } from "../i18n/I18n";
 import { OptionsPanel } from "../ui/OptionsPanel";
 import { SettingsRepository } from "../storage/SettingsRepository";
 import enLocale from "../locales/en.json";
@@ -203,11 +203,16 @@ export class App {
     await this.db.openDatabase();
     await this.preload(manifest);
 
-    // i18n: restore the saved language before any UI shows.
+    // i18n: restore the saved language before any UI shows; on a fresh
+    // device, follow the browser's preferred language (classroom-friendly).
     const i18n = this.i18n;
     const settings = new SettingsRepository(this.db);
     const savedLocale = await settings.get<LocaleCode>("locale");
-    if (savedLocale && LOCALES.includes(savedLocale)) i18n.setLocale(savedLocale);
+    if (savedLocale && LOCALES.includes(savedLocale)) {
+      i18n.setLocale(savedLocale);
+    } else {
+      i18n.setLocale(detectLocale(navigator.languages ?? [navigator.language]));
+    }
 
     this.questManager.load(questFile);
     this.dialogueManager.load(dialogueFile);
@@ -229,6 +234,9 @@ export class App {
       artStyle: {
         initial: preferredArt,
         onChange: (variant) => void settings.set("artStyle", variant)
+      },
+      locale: {
+        onChange: (locale) => void settings.set("locale", locale)
       }
     });
     const choice = await opening.run();
