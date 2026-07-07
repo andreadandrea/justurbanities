@@ -29,7 +29,7 @@ Quick context for continuing development in a fresh session.
 - **A11y:** HUD `aria-live="polite"` announcements for resource deltas and city-state transitions; `.visually-hidden` utility; checklist ticked.
 
 ## Next work (pick from here)
-1. **Supabase EU provisioning** (user action) + run `docs/mp/session_events.sql` + `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` → real 2-device test (MP-2/3 AC).
+1. **Supabase: DONE (2026-07-07).** EU project `osuwbcwphhnfzluiyhqs` provisioned by Andrea; `session_events` table + RLS created; config committed in `.env.production` (publishable key — public by design). Live smoke test passed (insert/select/replay); replay bug fixed (`on_conflict` param). **Still open:** real 2-device classroom test (MP-3 AC on hardware) and the 30-day purge cron (`pg_cron` extension + the commented `cron.schedule` line in `docs/mp/session_events.sql`); a TEST01 smoke row is left in the table (harmless, purge will clear it).
 2. **Content polish:** `promiseChildFriendlyMeeting` has no kept-trigger yet (natural candidate: an event held with `careKit_kids_space`); Ben's ramp line inside the assembly Phase 1 (read `careKit_ramp_by_ben`); Town Hall entry text is minimal connective tissue — replace if canon lands.
 3. **Assembly/endings polish:** the final map re-colour shot (§7.8 "a mirror, not a victory screen") — currently a text epilogue in the panel.
 4. **Art pipeline:** prompt list ready in `docs/art/PROMPT_LIST.md`; zip upload flow works. Town Hall needs a landmark/scene visual eventually.
