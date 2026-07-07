@@ -13,7 +13,16 @@ export class DialogueUI {
     private readonly i18n?: I18n,
     /** Supplies the current player identity for {playerName}/{they} tokens. */
     private readonly interpolation?: () => InterpolationContext
-  ) {}
+  ) {
+    // Keyboard-only play (task 9.2): 1–9 picks the matching choice.
+    window.addEventListener("keydown", (event) => {
+      if (this.root.hidden) return;
+      const index = Number.parseInt(event.key, 10) - 1;
+      if (Number.isNaN(index) || index < 0) return;
+      const buttons = this.root.querySelectorAll<HTMLButtonElement>(".dialogue-choices button");
+      buttons[index]?.click();
+    });
+  }
 
   private resolve(text: string): string {
     const localized = this.i18n ? this.i18n.t(text) : text;
@@ -49,18 +58,21 @@ export class DialogueUI {
     const choices = document.createElement("div");
     choices.className = "dialogue-choices";
 
-    for (const choice of config.choices) {
+    config.choices.forEach((choice, index) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = this.resolve(choice.label);
+      // The numeric prefix doubles as the keyboard shortcut (task 9.2).
+      button.textContent = `${index + 1}. ${this.resolve(choice.label)}`;
       button.addEventListener("click", () => {
         config.onChoice(choice);
         this.hide();
       });
       choices.appendChild(button);
-    }
+    });
 
     this.root.append(speaker, text, choices);
+    // Tab/Enter work immediately — focus starts on the first choice.
+    choices.querySelector("button")?.focus();
   }
 
   get isOpen(): boolean {

@@ -5,11 +5,16 @@ import { ART_VARIANTS, type ArtVariant } from "../assets/ArtStyle";
  * Options overlay (⚙): runtime language switch and the dual-art-style
  * toggle. Same toggle-panel pattern as the offline controls.
  */
+/** Font sizes offered to the player (task 9.2) — multipliers of the base. */
+export const FONT_SCALES = [1, 1.25, 1.5] as const;
+
 export class OptionsPanel {
   private readonly panel: HTMLElement;
   private readonly label: HTMLElement;
   private readonly artLabel: HTMLElement;
   private readonly artOptions = new Map<ArtVariant, HTMLOptionElement>();
+  private readonly scaleLabel: HTMLElement | null = null;
+  private readonly contrastLabel: HTMLElement | null = null;
 
   constructor(
     root: HTMLElement,
@@ -18,6 +23,12 @@ export class OptionsPanel {
     artStyle?: {
       current: ArtVariant;
       onChange: (variant: ArtVariant) => void;
+    },
+    accessibility?: {
+      fontScale: number;
+      onFontScale: (scale: number) => void;
+      highContrast: boolean;
+      onHighContrast: (enabled: boolean) => void;
     }
   ) {
     this.panel = document.createElement("aside");
@@ -66,6 +77,40 @@ export class OptionsPanel {
     artRow.appendChild(artSelect);
     this.panel.appendChild(artRow);
 
+    // Accessibility (task 9.2): font scale and high-contrast mode.
+    if (accessibility) {
+      const scaleRow = document.createElement("label");
+      scaleRow.className = "options-row";
+      this.scaleLabel = document.createElement("span");
+      scaleRow.appendChild(this.scaleLabel);
+      const scaleSelect = document.createElement("select");
+      for (const scale of FONT_SCALES) {
+        const option = document.createElement("option");
+        option.value = String(scale);
+        option.textContent = `${Math.round(scale * 100)}%`;
+        scaleSelect.appendChild(option);
+      }
+      scaleSelect.value = String(accessibility.fontScale);
+      scaleSelect.addEventListener("change", () => {
+        accessibility.onFontScale(Number(scaleSelect.value));
+      });
+      scaleRow.appendChild(scaleSelect);
+      this.panel.appendChild(scaleRow);
+
+      const contrastRow = document.createElement("label");
+      contrastRow.className = "options-row";
+      this.contrastLabel = document.createElement("span");
+      contrastRow.appendChild(this.contrastLabel);
+      const contrastInput = document.createElement("input");
+      contrastInput.type = "checkbox";
+      contrastInput.checked = accessibility.highContrast;
+      contrastInput.addEventListener("change", () => {
+        accessibility.onHighContrast(contrastInput.checked);
+      });
+      contrastRow.appendChild(contrastInput);
+      this.panel.appendChild(contrastRow);
+    }
+
     root.appendChild(this.panel);
 
     const toggle = document.createElement("button");
@@ -88,5 +133,7 @@ export class OptionsPanel {
     for (const [variant, option] of this.artOptions) {
       option.textContent = this.i18n.t(`ui.options.art.${variant}`);
     }
+    if (this.scaleLabel) this.scaleLabel.textContent = this.i18n.t("ui.options.fontScale");
+    if (this.contrastLabel) this.contrastLabel.textContent = this.i18n.t("ui.options.highContrast");
   }
 }

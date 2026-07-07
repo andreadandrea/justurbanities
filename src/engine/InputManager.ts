@@ -5,6 +5,11 @@ export class InputManager {
 
   constructor(private readonly canvas: HTMLCanvasElement) {
     window.addEventListener("keydown", (event) => {
+      // Typing in a form control (or pressing Enter on a focused button)
+      // must never move the player or fire a scene interaction (task 9.2).
+      if (event.target instanceof HTMLElement && event.target.closest("input, select, textarea, button")) {
+        return;
+      }
       this.keys.add(event.key.toLowerCase());
       if (event.key === " " || event.key === "Enter") {
         this.justInteracted = true;
