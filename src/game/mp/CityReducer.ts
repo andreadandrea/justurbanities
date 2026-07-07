@@ -28,6 +28,11 @@ export type SharedCity = {
   promises: Record<string, { owner: string; status: "kept" | "broken" }>;
   /** crisisId → tier of the first resolution event. */
   crises: Record<string, { tier: string }>;
+  /**
+   * MP-3: empathy maps from ALL players — the assembly's story pool is the
+   * union of everyone's listening (first posture per interviewee wins).
+   */
+  empathyMaps: Record<string, { posture: string; by: string }>;
   /** The signed plan (last assembly_plan event in the total order wins). */
   planMeasures: Array<{ measureId: string; owner: string }>;
   /** Distinct players that contributed at least one event. */
@@ -53,6 +58,7 @@ export function reduceSharedCity(events: CityEvent[]): SharedCity {
     quests: {},
     promises: {},
     crises: {},
+    empathyMaps: {},
     planMeasures: [],
     contributors: []
   };
@@ -101,6 +107,13 @@ export function reduceSharedCity(events: CityEvent[]): SharedCity {
           // (CrisisManager applies them through the EffectResolver), so the
           // reducer only records the outcome — no double counting.
           city.crises[crisisId] = { tier: String(event.payload.tier ?? "") };
+        }
+        break;
+      }
+      case "empathy_map": {
+        const who = String(event.payload.who ?? "");
+        if (who && !city.empathyMaps[who]) {
+          city.empathyMaps[who] = { posture: String(event.payload.posture ?? ""), by: event.userId };
         }
         break;
       }

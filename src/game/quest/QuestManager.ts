@@ -10,6 +10,10 @@ export class QuestManager {
     }
   }
 
+  has(questId: string): boolean {
+    return this.quests.has(questId);
+  }
+
   getQuestStatus(questId: string): QuestStatus {
     return this.quests.get(questId)?.status ?? "locked";
   }
