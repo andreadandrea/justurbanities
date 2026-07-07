@@ -27,6 +27,11 @@ export type PromiseProgressLogger = (eventType: string, payload: Record<string, 
 const MADE_PREFIX = "promiseMadeDay_";
 const SCORED_PREFIX = "promiseScored_";
 
+/** Scoring constants — the MP city reducer mirrors these (single source). */
+export const PROMISE_KEPT_TRUST = 3;
+export const PROMISE_BROKEN_TRUST = -2;
+export const PROMISE_BROKEN_FRAG = 1;
+
 /**
  * Promises system (ratified ✳): dialogue effects set the promise variable
  * to "active"; content marks it "kept". Past the deadline an active promise
@@ -64,7 +69,7 @@ export class PromiseManager {
       if (this.state.variables[scoredKey] === true) continue;
 
       if (value === "kept") {
-        this.state.resources.trust += 3;
+        this.state.resources.trust += PROMISE_KEPT_TRUST;
         this.state.variables[scoredKey] = true;
         this.logProgress?.("promise_kept", { promiseId: definition.id, owner: definition.owner });
         continue;
@@ -74,8 +79,8 @@ export class PromiseManager {
         const madeOnDay = Number(this.state.variables[madeKey]);
         if (this.state.day > madeOnDay + definition.deadlineDays) {
           this.state.variables[definition.id] = "broken";
-          this.state.resources.trust -= 2;
-          this.state.resources.fragmentationGlobal += 1;
+          this.state.resources.trust += PROMISE_BROKEN_TRUST;
+          this.state.resources.fragmentationGlobal += PROMISE_BROKEN_FRAG;
           this.state.variables[scoredKey] = true;
           this.logProgress?.("promise_broken", { promiseId: definition.id, owner: definition.owner });
         }
