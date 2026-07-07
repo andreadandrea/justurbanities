@@ -450,6 +450,18 @@ export class App {
       void this.activeScene().saveNow();
     });
 
+    // Accessibility (task 9.2): font scale + high contrast, per device.
+    const applyFontScale = (scale: number) => {
+      document.documentElement.style.setProperty("--font-scale", String(scale));
+    };
+    const applyHighContrast = (enabled: boolean) => {
+      document.body.classList.toggle("high-contrast", enabled);
+    };
+    const savedFontScale = (await settings.get<number>("fontScale")) ?? 1;
+    const savedContrast = (await settings.get<boolean>("highContrast")) ?? false;
+    applyFontScale(savedFontScale);
+    applyHighContrast(savedContrast);
+
     // Options (⚙): language + art style, both persisted per device; the
     // art style also lives in the save snapshot (a save remembers its skin).
     new OptionsPanel(
@@ -464,6 +476,18 @@ export class App {
           this.state.artStyle = variant;
           void settings.set("artStyle", variant);
           void this.applyArtStyle?.(variant).then(() => this.activeScene().saveNow());
+        }
+      },
+      {
+        fontScale: savedFontScale,
+        onFontScale: (scale) => {
+          applyFontScale(scale);
+          void settings.set("fontScale", scale);
+        },
+        highContrast: savedContrast,
+        onHighContrast: (enabled) => {
+          applyHighContrast(enabled);
+          void settings.set("highContrast", enabled);
         }
       }
     );
