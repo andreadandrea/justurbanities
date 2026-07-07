@@ -1197,6 +1197,50 @@
             "close": "Mandalo in giro."
           }
         }
+      },
+      "maya_m34": {
+        "start": {
+          "text": "Se all'incontro non c'è un angolo bimbi e un orario decente, avete già deciso chi non verrà.",
+          "choices": {
+            "engage": "«Allora progettiamo il kit cura.»",
+            "later": "Non ora."
+          }
+        },
+        "schedules": {
+          "text": "Maya apre un foglio bianco. «Elemento uno: l'orario. Dopo i turni, prima delle favole. Un evento alle 15:00 di martedì è un evento per chi non lavora.»",
+          "choices": {
+            "include": "Orari costruiti sulle vite vere. (Care +1)",
+            "skip": "Lascia la solita fascia oraria."
+          }
+        },
+        "kids_space": {
+          "text": "«Elemento due: l'angolo bimbi. Zoe fa i compiti in fondo alle mie riunioni — la maggior parte dei genitori, invece, resta a casa.»",
+          "choices": {
+            "include": "Un angolo con un tavolo, i colori e qualcuno che guarda. (Care +1)",
+            "skip": "Niente spazio, per questa volta."
+          }
+        },
+        "rest_shifts": {
+          "text": "«Elemento tre: i volontari. Giorgia dice che Piotr non ha mollato perché era arrabbiato — era finito. Nessuno versa da una tazza vuota.»",
+          "choices": {
+            "include": "Turni di riposo nel calendario — nessuno porta un evento da solo. (Care +1)",
+            "skip": "I volontari se la caveranno."
+          }
+        },
+        "accessibility": {
+          "text": "«Elemento quattro: entrare, proprio. Tre gradini sono un muro se sei su ruote — Ben lo ripete ogni volta.»",
+          "choices": {
+            "ben_ramp": "La rampa la costruisce Ben — l'attraversamento gli ha insegnato come. (Care +1)",
+            "include": "Noleggia una rampa e segna un percorso accessibile. (Care +1)",
+            "skip": "Si vedrà il giorno stesso."
+          }
+        },
+        "done": {
+          "text": "Maya rilegge il kit. «Questa è infrastruttura. Non gentilezza — infrastruttura. Ora guarda chi arriva.»",
+          "choices": {
+            "close": "«La cura è infrastruttura.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1401,6 +1445,13 @@
         "description": "Rifai l'invito — tono, lingue, canali — e portalo dove la gente sta già.",
         "objectives": {
           "compose_invitation": "Componi il nuovo invito con Samir e Anna."
+        }
+      },
+      "M34": {
+        "title": "La cura è infrastruttura",
+        "description": "Progetta il kit cura degli eventi — orari, angolo bimbi, turni di riposo dei volontari, accessibilità. Ogni elemento attivo allarga chi può arrivare.",
+        "objectives": {
+          "design_care_kit": "Progetta il kit cura con Maya."
         }
       }
     },

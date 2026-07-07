@@ -1197,6 +1197,50 @@
             "close": "Send it out."
           }
         }
+      },
+      "maya_m34": {
+        "start": {
+          "text": "If the meeting has no kids' corner and no decent hour, you've already decided who won't come.",
+          "choices": {
+            "engage": "“Then let's design the care kit.”",
+            "later": "Not now."
+          }
+        },
+        "schedules": {
+          "text": "Maya opens a blank sheet. “Element one: the hour. After the shifts, before the bedtime stories. An event at 15:00 on a Tuesday is an event for people who don't work.”",
+          "choices": {
+            "include": "Set the hours around real lives. (Care +1)",
+            "skip": "Leave the usual time slot."
+          }
+        },
+        "kids_space": {
+          "text": "“Element two: a kids' corner. Zoe does her homework in the back of my meetings — most parents just stay home instead.”",
+          "choices": {
+            "include": "A corner with a table, colours and someone watching. (Care +1)",
+            "skip": "No space for it this time."
+          }
+        },
+        "rest_shifts": {
+          "text": "“Element three: the volunteers. Giorgia says Piotr didn't quit because he was angry — he was spent. Nobody can pour from an empty cup.”",
+          "choices": {
+            "include": "Rest shifts on the rota — nobody carries a whole event alone. (Care +1)",
+            "skip": "The volunteers will manage."
+          }
+        },
+        "accessibility": {
+          "text": "“Element four: getting in at all. Three steps are a wall if you're on wheels — Ben says it every time.”",
+          "choices": {
+            "ben_ramp": "Ben builds the ramp himself — the crossing taught him how. (Care +1)",
+            "include": "Rent a ramp and mark an accessible route. (Care +1)",
+            "skip": "Deal with it on the day."
+          }
+        },
+        "done": {
+          "text": "Maya reads the kit back. “This is infrastructure. Not kindness — infrastructure. Now watch who shows up.”",
+          "choices": {
+            "close": "“Care is infrastructure.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1401,6 +1445,13 @@
         "description": "Rewrite the invitation — tone, languages, channels — and take it where people already are.",
         "objectives": {
           "compose_invitation": "Compose the new invitation with Samir and Anna."
+        }
+      },
+      "M34": {
+        "title": "Care Is Infrastructure",
+        "description": "Design the events care kit — hours, kids' corner, volunteer rest shifts, accessibility. Every active element widens who can arrive.",
+        "objectives": {
+          "design_care_kit": "Design the care kit with Maya."
         }
       }
     },
