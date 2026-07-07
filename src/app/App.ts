@@ -10,6 +10,9 @@ import { ProgressRepository } from "../storage/ProgressRepository";
 import { SyncQueue } from "../sync/SyncQueue";
 import { SyncEngine } from "../sync/SyncEngine";
 import { createRemoteApi } from "../sync/RemoteApiClient";
+import { SupabaseRemoteApi } from "../sync/SupabaseRemoteApi";
+import { chooseRemoteAdapter, mpEnabled, MP_SESSION_SETTING, type MpJoinInfo } from "../game/mp/MpConfig";
+import { MpJoinPanel } from "../ui/MpJoinPanel";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { CrossroadsScene } from "../scenes/CrossroadsScene";
 import { DistrictScene, type DistrictConfig } from "../scenes/DistrictScene";
@@ -110,7 +113,8 @@ export class App {
   private readonly saveRepository: SaveRepository;
   private readonly progressRepository: ProgressRepository;
   private readonly syncQueue: SyncQueue;
-  private readonly syncEngine: SyncEngine;
+  /** Reassigned when MP-2 swaps in the real adapter (join-by-code). */
+  private syncEngine: SyncEngine;
   private readonly questManager = new QuestManager();
   private readonly effectResolver = new EffectResolver(this.state, this.questManager);
   private readonly dialogueManager = new DialogueManager(this.effectResolver);
@@ -453,6 +457,35 @@ export class App {
       i18n,
       displayName: (id) => displayNames.get(id) ?? id
     });
+
+    // MP-2 (feature-flagged ?mp=1): join-by-code UI + Supabase adapter.
+    // With the flag off nothing here runs — single player stays offline
+    // with the in-memory fake adapter (zero network calls).
+    if (mpEnabled(window.location.search)) {
+      const mpEnv = {
+        supabaseUrl: import.meta.env.VITE_SUPABASE_URL as string | undefined,
+        supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+      };
+      const applyMpAdapter = (info: MpJoinInfo | undefined, boot: boolean) => {
+        const choice = chooseRemoteAdapter(window.location.search, info, mpEnv);
+        if (choice.kind !== "supabase") return;
+        this.syncEngine.stop();
+        this.syncEngine = new SyncEngine(this.syncQueue, new SupabaseRemoteApi(choice.config));
+        if (boot) this.syncEngine.start();
+      };
+      const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
+      new MpJoinPanel({
+        root: this.elements.appRoot,
+        i18n,
+        joined,
+        character: () => this.state.currentCharacter,
+        onJoin: (info) => {
+          void settings.set(MP_SESSION_SETTING, info);
+          applyMpAdapter(info, true);
+        }
+      });
+      applyMpAdapter(joined, false); // the final start() boots whichever engine is current
+    }
 
     this.loop = new GameLoop({
       update: (dt) => this.activeScene().update(dt),
