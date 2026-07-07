@@ -3,51 +3,46 @@
 Quick context for continuing development in a fresh session.
 
 ## Repo & deploy
-- **Branch:** `main` (feature branches merged with `--no-ff`, then deleted-on-merge style).
-- **⚠ 55+ local commits NOT pushed** — no GitHub credentials on this Mac (no `gh`, empty keychain, no SSH keys). First thing: authenticate (`brew install gh && gh auth login`) and `git push origin main`.
-- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main`).
-- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (**172 tests**).
+- **Branch:** `main` (feature branches merged with `--no-ff`, deleted on merge).
+- **⚠ 75+ local commits NOT pushed** — no GitHub credentials on this Mac (no `gh`, empty keychain, no SSH keys). First thing: authenticate (`brew install gh && gh auth login`) and `git push origin main`.
+- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main` — currently STALE, shows a pre-Phase-5 build).
+- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (**261 tests**).
 
 ## Read first (for the next agent)
-- `../DEV_PLAN.md` (in the design folder, NOT the repo) — the execution backlog; work top-down from the first `[ ]`.
+- `../DEV_PLAN.md` (in the design folder, NOT the repo) — **ALL phases 0–9 are now complete**; next work comes from the list below or new direction from Andrea.
 - `AGENTS.md` — hard technical rules.
 - `docs/game-design/CORE_THEME.md`, `docs/game-design/GAMEPLAY_LOOP.md` — design pillars.
-- `docs/specs/SPEC_Dual_Art_Style.md`, `docs/specs/SPEC_Multiplayer.md` — core requirements for Phases 5 and 8.
+- `docs/specs/SPEC_Dual_Art_Style.md`, `docs/specs/SPEC_Multiplayer.md`.
 
-## Done (this session, 2026-07-06 — Phases 0–6 of DEV_PLAN complete, 172 tests)
-- **Phase 6.3:** the 6 outer district scenes (districts.json + generic DistrictScene, §4.5 entry texts, bus stops from the Crossroads unlocked with ch.2); 13 NPC placements moved to canonical districts.
-- **Phase 6.4:** N01 is the real Mission 1 (3 interviews / 3 postures → empathy maps in variables, reusable in ch.5; Anna's resolution closes it); quest **E01** "Experts of Everyday Life" (knowledge table gated on 3 maps, registry note in meta).
-- **Phase 6.5:** district-level vitality — districtVitality = global fabric + bonus per completed anchored quest (anchors derived from schedule.json); every scene colours by ITS vitality; §5.8 first-colour-returns reproducible in test.
+## Done (this session, 2026-07-07 — Phases 7, 8, 9: the DEV_PLAN is COMPLETE)
+- **7.1 Assembly engine:** `assembly.json` (19 attendees with groups + invite fallbacks, 10 stories/data, 3 conflicts, 20 measures × 10 categories, tuning) + `AssemblyEngine` (5 phases §7, whole state JSON-serialized in `variables.assemblyState`, resumes mid-assembly) + `AssemblyPanel` 🏛. Crisis Week completion raises `assembly_ready`; debug button too. Ending signals: `overpromise`, `assemblyCoverage`, `assemblyAbsentGroups`, `assemblyEvasions`, `assemblyTone`.
+- **7.2 Endings engine:** `endings.json` (recursive all/any rules, ordered first-match, `fragile_progress` default; ≥2 absent groups blocks Thriving) + pure `computeEndingMetrics`/`resolveEnding`; `endingId` sticky in the save; epilogue (canon §9 EN/IT) in the assembly done view.
+- **7.3 Report v2:** `buildReport` 2.0 — lists Who arrived / What changed / What was missed from progress_events + 3 debrief cards (Guida 06 §3) with evidence + ending; `printableReportHtml` (print → PDF offline) + 🖨 button.
+- **8.1 MP-1:** `SessionModel` (6-char codes, pseudonymous players, TTL 30d) + `CityReducer` (deterministic total order + dedupe; commutative resource deltas; quests/crises first-event-wins with `questTakenByOther` ✳ hook; per-owner promises; last plan wins). `EffectResolver` now emits `resource_delta` and `quest_completed` — the single-player log is merge-safe.
+- **8.2 MP-2:** `SupabaseRemoteApi` (fetch/PostgREST, no SDK, swappable `RemoteApiAdapter`); pure `chooseRemoteAdapter` (Supabase ONLY with `?mp=1` + joined + env config, else fake = zero network, test-enforced); `MpJoinPanel` join-by-code; `docs/mp/session_events.sql` (table+RLS+30d purge). **Needs real provisioning: Supabase EU project + `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` at build time.**
+- **8.3 MP-3:** reducer collects the union of empathy maps; `applySharedCity` folds the city into a client (spec §3 split, idempotent, promises pre-scored). AC test: 2 devices → merge → assembly on A with B's stories/NPCs → plan back in the log.
+- **8.4 MP-4:** `ClassReport` + `fetchSessionEvents` + `FacilitatorPanel` 🧑‍🏫 behind `?facilitator=1` (remote via `?session=CODE`, local log otherwise) + JSON class export.
+- **9.1 Minigame:** reusable `AllocationMinigame` + `minigames.json` (zod, solvability-checked) + `MinigamePanel`; Modular Repair triggered by `sigrid_n05` engage (move to ch.3 M2 when that structure ships); Commons +1 per valid need via EffectResolver.
+- **9.2 Accessibility:** dialogue hotkeys 1–9 + autofocus; typing guard in InputManager; `:focus-visible`; all font-sizes via `--font-scale` (⚙ 100/125/150%); high-contrast mode; `docs/accessibility/CHECKLIST.md` (open: DOM mirror for canvas hotspots, live regions).
+- **9.3 Playtest:** `PlaytestInstrumentation` → `node_timing` (per-node ms + closing choice) and `day_resources` events; DialogueManager hooks; DebugPanel raw JSON export (M-E protocol).
+- **9.4 Balancing:** `balancing.json` (starting resources, promise scoring, vitality formula/thresholds) — no gameplay threshold hardcoded; other knobs live in crises/endings/assembly/minigames json.
 
-## Done (earlier — Phases 5 + 6.1–6.2)
-- **Phase 5:** dual art style — variant-aware loader (flat layout = realistic, `animal/` subfolder; hard fallback chain; `npm run assets:report`), art-style toggle (⚙ + save snapshot + Dexie), dialogue speaker portraits, per-variant offline packs, 110 generated animal placeholders (sepia + ears + paw badge).
-- **Phase 6.1:** Prologue v2 (§2) — Anna's opening, voices round, map glitch, invitation; seed flags incl. `ruben_curious`; all 18 chapter placements gated on `prologue_complete`.
-- **Phase 6.2:** Chapter 1 five routes (§3) + first assembly — StoryDirector (auto-runs route post-prologue, assembly post-route), Samir's PHYSICAL fence (BaseScene blockers) in the Crossroads, `elena_saw_it`/`commission_started` seeds, assembly_v1 branches on outcomes, completes P02.
-
-## Done (earlier in the session — Phases 0–4)
-- **Phase 0:** ratified data fixes (N05→CRISIS_OFFER, RUMOR buffer→N07, voice speakers, corporate_man), canon taglines, cleanup (dynamic scene title, restore() defaults), `{playerName}`/pronoun interpolation.
-- **Phase 1:** `GameClock` (day/part cycle, dayEnded/dayStarted/timeAdvanced hooks) + TimeHud with "Pass time".
-- **Phase 2:** `schedule.json` + `NpcDirector` (first-matching-placement-wins fallbacks; refresh on enter/clock/choice). **All 18 NPC quests live in-world** with canon EN texts (§8). Simulation test completes every N01–N18.
-- **Phase 3:** i18n — `I18n` engine (EN fallback, live switch, missing-key report in DebugPanel), OptionsPanel (⚙) persisted in Dexie `settings` (schema v2), **ALL strings extracted to `content.*`/`ui.*` keys** (EN+IT 100%, 5 partner stubs synced by test), translation kit (`npm run i18n:export` / `i18n:import`, CSV, placeholder validation).
-- **Phase 4:** `CrisisManager` (tier resolution + per-tier data effects), `CrisisWeek` orchestrator (armed by `crisis_week_ready` flag → starts next morning; announcement + tier outcome scenes, EN+IT canon §6 texts; saves resume mid-week; DebugPanel has an "Arm Crisis Week" button until ch.3 content sets the flag), `PromiseManager` + LogbookPanel 📖 (8 canon promises, kept +3 Trust / broken −2 Trust +1 frag).
-
-## Next task
-**Phase 7 — Finale & endings**: 7.1 assembly engine (5 phases from §7: presence calc, stories, conflict table, plan builder 10 categories, commitments with owner/date/verify + overpromise flag), 7.2 endings engine (6 endings, §9 conditions as tunable data), 7.3 report v2. The empathy maps (variables `empathyMap_*`), promises, crisis resolutions and who_is_in_the_room progress events are all in place to feed it.
-
-## Content debt queued for polish
-- Mission mechanics beyond dialogues: M2 map-barrier overlay, M3 invitation composer, M4 care kit (need small UI systems).
-- Elena's site visit as an in-world Grey Yards event (currently a route beat).
-- "Who is in the room" visual composition (currently a progress event).
-- Kept-promise triggers (crisis transformative outcomes are the natural candidates).
-- Town Hall scene (Alexandria placeholder at the hub).
+## Next work (no unchecked DEV_PLAN tasks — pick from here)
+1. **Push to GitHub** (user action: credentials) → Pages redeploy.
+2. **Supabase EU provisioning** + run `docs/mp/session_events.sql` + env vars → real 2-device test (MP-2/3 AC on hardware).
+3. **Content debt:** ch.2–3 mission structure (M1–M4, M7 beyond dialogues: M2 map-barrier overlay, M3 invitation composer, M4 care kit — the care kit feeds assembly attendance and Ben's ramp line); Elena's site visit as a Grey Yards event; kept-promise triggers (crisis transformative outcomes are the natural candidates); Town Hall scene; `ruben_curious` setter; ch.3 content to set `crisis_week_ready` and later host the minigame trigger (M2 "Make It Usable").
+4. **Assembly/endings polish:** the final map re-colour shot (§7.8 "a mirror, not a victory screen") — currently a text epilogue in the panel.
+5. **Art pipeline:** prompt list ready in `docs/art/PROMPT_LIST.md`; zip upload flow works.
+6. **A11y open items:** DOM mirror for canvas hotspots, aria-live resource announcements.
 
 ## Architecture notes for the next agent
-- **Content is 100% data-driven:** quests/dialogues/crises/schedule/promises in `src/data/*.json` (zod at boot, loud failures); every text is an i18n key resolved by `DialogueUI`/`OpeningScreens`/etc. Changing dialogue = edit `src/locales/{en,it}.json` + structure in `dialogues.json`. Guard tests fail on hardcoded strings.
-- **Time:** nothing moves without `GameClock.advance()` (Pass time button or future story beats).
-- **NPCs:** `schedule.json` placements (scene × timeParts × conditions); first match wins → put quest offers before intro fallbacks.
-- **Crisis Week:** arm via `crisis_week_ready` variable (ch.3 content should set it in Phase 6); all bookkeeping in `GameState.variables`.
-- **Known content gaps** (Phase 6): `ruben_curious` (N06 engage gate) and `commission_started` (N08 gate) are set by no dialogue yet — Elena's ch.1 route will set `commission_started`; kept-promise triggers not yet wired (crisis transformative outcomes are natural candidates).
-- **DebugPanel is i18n-exempt** (dev tool). It shows the i18n missing-key report.
+- **Content is 100% data-driven** (zod at boot, loud failures): quests/dialogues/crises/schedule/promises/assembly/endings/minigames/balancing in `src/data/*.json`; every text is an i18n key (EN+IT full, 5 partner stubs synced by test).
+- **Assembly:** `AssemblyEngine` state lives in `variables.assemblyState` (JSON string); scalar summaries feed endings. The panel only issues engine calls — rules live in the engine.
+- **Endings:** pure functions; `endingId` computed once (sticky) when the pact is signed; thresholds in `endings.json`.
+- **MP:** the event log IS the city. `EffectResolver` emits `resource_delta`/`quest_completed`; `reduceSharedCity` folds any order into the same state; `applySharedCity` respects the shared/personal split (spec §3). Adapter selection is pure (`chooseRemoteAdapter`) — flag off = zero network.
+- **Instrumentation** flows through `progress_events` — report v2, class report and sync all read the same stream.
+- **Balancing:** every gameplay number is in a json file; tests pin code↔sheet.
+- **DebugPanel is i18n-exempt** (dev tool): arm Crisis Week, open Assembly, export playtest, clear DB.
 
 ## Asset pipeline (works)
 Prompt list ready in `docs/art/PROMPT_LIST.md` (priority: key visual → environments → icons/chromatic states → characters → UI; naming per Guida 04 §3). User generates art externally → **zip upload** (inline images are NOT saved to disk) → agent removes background, crops, commits. No code change needed when filenames match the manifest.
