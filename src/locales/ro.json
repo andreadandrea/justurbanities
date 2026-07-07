@@ -47,7 +47,50 @@
     "report": {
       "button": "📄 Report",
       "hint": "Download the educational report (JSON)",
-      "downloaded": "Report downloaded:"
+      "downloaded": "Report downloaded:",
+      "printButton": "🖨 Print",
+      "printHint": "Printable report (print or save as PDF)",
+      "popupBlocked": "The report window was blocked — allow pop-ups and retry.",
+      "title": "Justurbanities — Educational report",
+      "emptyList": "Nothing recorded.",
+      "empathyMap": "Empathy map",
+      "districtDiscovered": "District discovered",
+      "ending": "Ending",
+      "resources": "Collective resources",
+      "debriefTitle": "Debrief cards",
+      "lists": {
+        "whoArrived": "Who arrived",
+        "whatChanged": "What changed",
+        "whatWasMissed": "What was missed"
+      },
+      "debrief": {
+        "empathic_knowledge": "Empathic knowledge",
+        "reality_policy_bridge": "Reality ↔ policy bridge",
+        "institutions_vs_participation": "Distrust in institutions vs trust in participation"
+      },
+      "evidence": {
+        "empathyMaps": "Empathy maps collected",
+        "knowledgeTableHeld": "Knowledge table held",
+        "storiesInAssembly": "Stories brought to the assembly",
+        "commissionStarted": "Commission started",
+        "realMandate": "Real mandate secured",
+        "planCoverage": "Plan categories covered",
+        "overpromise": "Promised beyond the resources",
+        "trust": "Trust",
+        "voice": "Voice",
+        "conflictsEvaded": "Conflicts evaded",
+        "absentGroups": "Groups fully absent"
+      },
+      "tier": {
+        "transformative": "transformative",
+        "coordinated": "coordinated",
+        "reactive": "reactive"
+      },
+      "slot": {
+        "story": "An untold story (empty slot)",
+        "data": "A data set left home (empty slot)",
+        "invite": "An invitation never sent (empty slot)"
+      }
     },
     "save": {
       "ready": "Local save ready",
