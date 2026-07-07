@@ -352,9 +352,11 @@ export class App {
       if (crisisWeek.completed) this.state.variables[ASSEMBLY_READY_FLAG] = true;
     });
     const displayNames = new Map<string, string>(
-      [...(charactersData as Array<{ id: string; displayName: string }>), ...playableData.playable].map(
-        (character) => [character.id, character.displayName]
-      )
+      [
+        ...(charactersData as Array<{ id: string; displayName: string }>),
+        ...playableData.playable,
+        ...(districtsData.districts as Array<{ id: string; displayName: string }>)
+      ].map((entry) => [entry.id, entry.displayName])
     );
     new AssemblyPanel({
       root: this.elements.appRoot,
@@ -448,7 +450,8 @@ export class App {
       syncQueue: this.syncQueue,
       session,
       saveStatus: this.elements.saveStatus,
-      i18n
+      i18n,
+      displayName: (id) => displayNames.get(id) ?? id
     });
 
     this.loop = new GameLoop({

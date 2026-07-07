@@ -47,7 +47,50 @@
     "report": {
       "button": "📄 Report",
       "hint": "Scarica il report educativo (JSON)",
-      "downloaded": "Report scaricato:"
+      "downloaded": "Report scaricato:",
+      "printButton": "🖨 Stampa",
+      "printHint": "Report stampabile (stampa o salva come PDF)",
+      "popupBlocked": "La finestra del report è stata bloccata — consenti i pop-up e riprova.",
+      "title": "Justurbanities — Report educativo",
+      "emptyList": "Niente da registrare.",
+      "empathyMap": "Mappa d'empatia",
+      "districtDiscovered": "Distretto scoperto",
+      "ending": "Finale",
+      "resources": "Risorse collettive",
+      "debriefTitle": "Schede di debrief",
+      "lists": {
+        "whoArrived": "Chi è arrivato",
+        "whatChanged": "Cosa è cambiato",
+        "whatWasMissed": "Cosa è mancato"
+      },
+      "debrief": {
+        "empathic_knowledge": "Conoscenza empatica",
+        "reality_policy_bridge": "Ponte realtà ↔ policy",
+        "institutions_vs_participation": "Sfiducia nelle istituzioni vs fiducia nella partecipazione"
+      },
+      "evidence": {
+        "empathyMaps": "Mappe d'empatia raccolte",
+        "knowledgeTableHeld": "Tavolo della conoscenza tenuto",
+        "storiesInAssembly": "Storie portate in assemblea",
+        "commissionStarted": "Commissione avviata",
+        "realMandate": "Mandato vero ottenuto",
+        "planCoverage": "Categorie del piano coperte",
+        "overpromise": "Promesso oltre le risorse",
+        "trust": "Fiducia",
+        "voice": "Voce",
+        "conflictsEvaded": "Conflitti evitati",
+        "absentGroups": "Gruppi del tutto assenti"
+      },
+      "tier": {
+        "transformative": "trasformativa",
+        "coordinated": "coordinata",
+        "reactive": "reattiva"
+      },
+      "slot": {
+        "story": "Una storia non raccontata (slot vuoto)",
+        "data": "Un set di dati rimasto a casa (slot vuoto)",
+        "invite": "Un invito mai spedito (slot vuoto)"
+      }
     },
     "save": {
       "ready": "Salvataggio locale pronto",

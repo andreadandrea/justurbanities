@@ -50,7 +50,7 @@ describe("buildReport (Task 7)", () => {
       initialResources: initial
     });
 
-    expect(report.reportVersion).toBe("1.0");
+    expect(report.reportVersion).toBe("2.0");
     expect(report.session.id).toBe("session-1");
     expect(report.player).toEqual({ character: "maya", lastScene: "crossroads" });
 
@@ -93,5 +93,117 @@ describe("buildReport (Task 7)", () => {
     expect(report.participation.totalEvents).toBe(0);
     expect(report.participation.firstEventAt).toBeNull();
     expect(report.observations).toEqual({});
+    expect(report.lists).toEqual({ whoArrived: [], whatChanged: [], whatWasMissed: [] });
+    expect(report.ending).toBeUndefined();
+    expect(report.debrief.map((card) => card.id)).toEqual([
+      "empathic_knowledge",
+      "reality_policy_bridge",
+      "institutions_vs_participation"
+    ]);
+  });
+});
+
+describe("buildReport v2 — the three debrief lists (task 7.3)", () => {
+  /** A full playthrough in miniature: interviews, crisis week, assembly. */
+  function fullPlaythrough() {
+    const state = new GameState();
+    Object.assign(state.resources, { trust: 6, care: 5, commons: 5, voice: 4, resilience: 3 });
+    Object.assign(state.variables, {
+      knowledge_table_held: true,
+      commission_started: true,
+      assemblyMandateReal: true,
+      assemblyCoverage: 4,
+      assemblyAbsentGroups: 1,
+      assemblyEvasions: 1,
+      overpromise: false,
+      endingId: "fragile_progress",
+      promiseRepairDay: "broken"
+    });
+
+    const quests = new QuestManager();
+    quests.load(questsData as unknown as QuestFile);
+
+    const events = [
+      makeEvent("empathy_map", "2026-06-12T10:01:00.000Z", { who: "viveca", posture: "silence" }),
+      makeEvent("district_discovered", "2026-06-12T10:02:00.000Z", { district: "old_blocks" }),
+      makeEvent("crisis_resolved", "2026-06-12T10:03:00.000Z", { crisisId: "CRISIS_HEATWAVE", tier: "transformative" }),
+      makeEvent("promise_kept", "2026-06-12T10:04:00.000Z", { promiseId: "promiseSaferCrossing", owner: "ben" }),
+      makeEvent("promise_broken", "2026-06-12T10:05:00.000Z", { promiseId: "promiseRepairDay", owner: "sigrid" }),
+      makeEvent("assembly_room", "2026-06-12T10:06:00.000Z", {
+        present: ["anna", "alexandria", "ben"],
+        absent: ["tom", "gwen"]
+      }),
+      makeEvent("assembly_conflict", "2026-06-12T10:07:00.000Z", {
+        conflictId: "urgency_vs_procedure",
+        positionId: "synthesis",
+        kind: "synthesis"
+      }),
+      makeEvent("assembly_conflict", "2026-06-12T10:08:00.000Z", {
+        conflictId: "center_vs_network",
+        positionId: "evade",
+        kind: "evasion"
+      }),
+      makeEvent("assembly_plan", "2026-06-12T10:09:00.000Z", {
+        coverage: 4,
+        missedSlots: ["story", "invite"],
+        measures: [{ measureId: "m_open_courtyards", owner: "anna", deadlineDay: 21, verification: "public_review" }]
+      })
+    ];
+
+    return buildReport({
+      session,
+      state: state.snapshot(),
+      quests: quests.snapshot(),
+      events,
+      initialResources: { ...new GameState().resources }
+    });
+  }
+
+  it("who arrived: the assembly room shot, empty chairs on the missed list", () => {
+    const report = fullPlaythrough();
+    expect(report.lists.whoArrived.map((entry) => entry.id)).toEqual(["anna", "alexandria", "ben"]);
+    expect(report.lists.whatWasMissed).toContainEqual({ kind: "empty_chair", id: "tom" });
+    expect(report.lists.whatWasMissed).toContainEqual({ kind: "empty_chair", id: "gwen" });
+  });
+
+  it("what changed: empathy maps, districts, crises, kept promises, synthesis, measures", () => {
+    const report = fullPlaythrough();
+    const changed = report.lists.whatChanged;
+    expect(changed).toContainEqual({ kind: "empathy_map", id: "viveca", detail: "silence" });
+    expect(changed).toContainEqual({ kind: "district", id: "old_blocks" });
+    expect(changed).toContainEqual({ kind: "crisis", id: "CRISIS_HEATWAVE", detail: "transformative" });
+    expect(changed).toContainEqual({ kind: "promise_kept", id: "promiseSaferCrossing" });
+    expect(changed).toContainEqual({ kind: "conflict", id: "urgency_vs_procedure", detail: "synthesis" });
+    expect(changed).toContainEqual({ kind: "measure", id: "m_open_courtyards", detail: "anna" });
+  });
+
+  it("what was missed: broken promises, evasions, empty slots — each exactly once", () => {
+    const report = fullPlaythrough();
+    const missed = report.lists.whatWasMissed;
+    expect(missed.filter((entry) => entry.kind === "promise_broken")).toEqual([
+      { kind: "promise_broken", id: "promiseRepairDay" }
+    ]);
+    expect(missed).toContainEqual({ kind: "conflict_evaded", id: "center_vs_network", detail: "evade" });
+    expect(missed).toContainEqual({ kind: "missed_slot", id: "story" });
+    expect(missed).toContainEqual({ kind: "missed_slot", id: "invite" });
+  });
+
+  it("debrief cards carry the evidence, the ending travels with the report", () => {
+    const report = fullPlaythrough();
+    expect(report.ending).toBe("fragile_progress");
+    const byId = Object.fromEntries(report.debrief.map((card) => [card.id, card.evidence]));
+    expect(byId.empathic_knowledge).toEqual({ empathyMaps: 1, knowledgeTableHeld: true, storiesInAssembly: true });
+    expect(byId.reality_policy_bridge).toEqual({
+      commissionStarted: true,
+      realMandate: true,
+      planCoverage: 4,
+      overpromise: false
+    });
+    expect(byId.institutions_vs_participation).toEqual({
+      trust: 6,
+      voice: 4,
+      conflictsEvaded: 1,
+      absentGroups: 1
+    });
   });
 });
