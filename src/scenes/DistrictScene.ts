@@ -1,6 +1,7 @@
 import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
 import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
+import type { BarrierPin } from "../game/story/BarrierMap";
 
 export type DistrictConfig = {
   id: string;
@@ -8,6 +9,8 @@ export type DistrictConfig = {
   world: WorldSize;
   ground: [string, string];
   landmark?: { x: number; y: number; width: number; height: number; color: string; label: string };
+  /** §4.2 Mission 2 — documentable lived-barrier spots. */
+  barriers?: BarrierPin[];
 };
 
 /**
@@ -50,14 +53,49 @@ export class DistrictScene extends BaseScene {
     }
   }
 
+  /** Mission-2 pins: visible only while M22 is active and undocumented. */
+  private activeBarrierPins(): BarrierPin[] {
+    if (!this.deps.barrierMap.active()) return [];
+    return (this.config.barriers ?? []).filter((pin) => !this.deps.barrierMap.documented(pin.id));
+  }
+
+  private barrierEntity(pin: BarrierPin): RenderableEntity {
+    return {
+      id: `barrier_${pin.id}`,
+      label: `📍 ${this.deps.i18n.t(`content.barriers.${pin.id}.label`)}`,
+      x: pin.x,
+      y: pin.y,
+      width: 110,
+      height: 110,
+      color: "#b04a3c",
+      interactive: true
+    };
+  }
+
   protected interactables(): Interactable[] {
     return [
       ...this.npcInteractables(),
+      ...this.activeBarrierPins().map((pin) => ({
+        entity: this.barrierEntity(pin),
+        onInteract: () =>
+          this.dialogueRunner.run(`barrier_${pin.id}`, this.deps.i18n.t(`content.barriers.${pin.id}.label`))
+      })),
       {
         entity: this.returnDoor,
         onInteract: () => this.deps.changeScene("crossroads", { x: 350, y: 700 })
       }
     ];
+  }
+
+  protected override async recordChoice(dialogueId: string, choiceId: string): Promise<void> {
+    // §4.2 — "document" turns the spot into a pin: Voice (capped), progress
+    // event, and the third pin completes M22. Mechanics live in BarrierMap.
+    if (choiceId === "document" && dialogueId.startsWith("barrier_")) {
+      const pinId = dialogueId.slice("barrier_".length);
+      const pin = (this.config.barriers ?? []).find((candidate) => candidate.id === pinId);
+      if (pin) this.deps.barrierMap.document(pin.id, pin.layer);
+    }
+    await super.recordChoice(dialogueId, choiceId);
   }
 
   protected drawScene(): void {
@@ -67,6 +105,11 @@ export class DistrictScene extends BaseScene {
     if (landmark) {
       renderer.drawLandmark(landmark.x, landmark.y, landmark.width, landmark.height, landmark.color, landmark.label);
     }
-    renderer.drawEntities([...this.npcEntities(), this.returnDoor, this.playerEntity()]);
+    renderer.drawEntities([
+      ...this.activeBarrierPins().map((pin) => this.barrierEntity(pin)),
+      ...this.npcEntities(),
+      this.returnDoor,
+      this.playerEntity()
+    ]);
   }
 }

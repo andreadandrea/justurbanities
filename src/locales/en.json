@@ -941,6 +941,30 @@
             "close": "…"
           }
         }
+      },
+      "ben_m22": {
+        "start": {
+          "text": "The official map says everything here is connected. Now try crossing it in a wheelchair, or with two bags of shopping, or alone at ten at night.",
+          "choices": {
+            "engage": "“Then let's make the map tell the truth.”",
+            "later": "Not now."
+          }
+        },
+        "brief": {
+          "text": "Stairs. Fear. Language. Costs. Schedules. Five layers the official map doesn't print. Document three lived barriers out there — pin them — and this map starts arguing back.",
+          "choices": {
+            "first_pin": "“I already have the first pin: the photo of the fence.”",
+            "begin": "“Where do I start?”"
+          }
+        }
+      },
+      "ben_m22_resolution": {
+        "start": {
+          "text": "Three pins. Whatever they were — stairs, fear, schedules — the map is no longer innocent. Bring it to the Center: this is what we argue with.",
+          "choices": {
+            "close": "“The map is not the territory.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1101,6 +1125,13 @@
         "description": "Bring three residents' empathy maps to the Town Hall knowledge table, alongside the technicians.",
         "objectives": {
           "knowledge_table": "Hold the first knowledge table with 3 empathy maps."
+        }
+      },
+      "M22": {
+        "title": "The Map Is Not the Territory",
+        "description": "Overlay the official map with the layers of lived barriers — stairs, fear, language, costs, schedules. Document three of them.",
+        "objectives": {
+          "document_three": "Document 3 lived barriers (Samir's photo counts as the first pin)."
         }
       }
     },
@@ -1383,6 +1414,38 @@
           "planter": "A planter that stays put",
           "noticeboard": "A noticeboard people read"
         }
+      }
+    },
+    "barriers": {
+      "documented": "Pinned to the map. One more layer the official map never shows.",
+      "choices": {
+        "document": "Document this barrier (pin it on the map)",
+        "leave": "Leave it for now",
+        "close": "Continue"
+      },
+      "stairwell": {
+        "label": "Stairwell without a ramp",
+        "text": "Four steps between the block and the street. No ramp, no rail on the left side. The step that breaks shopping trolleys — and keeps wheelchairs at home."
+      },
+      "locked_gate": {
+        "label": "Courtyard 17",
+        "text": "Courtyard 17. Three padlocks, one rusted through. Nobody remembers whose keys these are."
+      },
+      "evening_lockout": {
+        "label": "The six o'clock gate",
+        "text": "The court's gate closes at six — exactly when the kids who need it get out. Open when everyone's away, closed when anyone's around."
+      },
+      "seasonal_prices": {
+        "label": "Season prices",
+        "text": "Coastline in season: two prices for the same coffee. The photos come out beautifully. The bills, less so."
+      },
+      "underpass": {
+        "label": "The underpass",
+        "text": "Hill Gardens' shortcut to the bus. By day, a passage. After dark, a place people walk around — twenty minutes farther, but lit."
+      },
+      "office_forms": {
+        "label": "Forms in one language",
+        "text": "The municipal desk at Lake Edge. Forms in one language only; the queue speaks five."
       }
     }
   }

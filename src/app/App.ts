@@ -55,6 +55,7 @@ import { computeEndingMetrics, resolveEnding, ENDING_VAR } from "../game/endings
 import endingsData from "../data/endings.json";
 import type { EndingsFile } from "../types/Endings";
 import { StoryDirector } from "../game/story/StoryDirector";
+import { BarrierMap } from "../game/story/BarrierMap";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
 import { I18n, LOCALES, type LocaleCode } from "../i18n/I18n";
@@ -287,6 +288,10 @@ export class App {
     // depend on the current part of day.
     const clock = new GameClock(this.state);
 
+    // Mission 2 §4.2: the lived-barrier overlay. Ben's briefing arms it;
+    // sync() seeds Samir's ch.1 photo as the first pin once armed.
+    const barrierMap = new BarrierMap(this.state, this.effectResolver);
+
     const anchors = questAnchors(scheduleFile);
     const sceneDeps: SceneDeps = {
       renderer: this.renderer,
@@ -311,9 +316,11 @@ export class App {
       clock,
       i18n,
       art,
+      barrierMap,
       onDialogueEnded: () => {
         storyDirector.check();
         checkMinigames();
+        barrierMap.sync();
       },
       sceneVitality: (sceneId) =>
         districtVitality(sceneId, this.state.resources, anchors, (questId) =>
@@ -633,6 +640,7 @@ export class App {
     bootScene.enter();
     storyDirector.check();
     checkMinigames(); // resume a Saturday saved mid-trigger
+    barrierMap.sync(); // resume a save armed before the fence photo seeded
     this.elements.sceneTitle.textContent = bootScene.displayName;
     this.loop.start();
     this.syncEngine.start();

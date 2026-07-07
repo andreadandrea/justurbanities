@@ -178,6 +178,17 @@ export const districtFileSchema = z.object({
           color: z.string(),
           label: z.string()
         })
+        .optional(),
+      // §4.2 Mission 2: documentable lived-barrier spots (BarrierMap).
+      barriers: z
+        .array(
+          z.object({
+            id: z.string().min(1),
+            x: z.number(),
+            y: z.number(),
+            layer: z.enum(["stairs", "fear", "language", "costs", "schedules", "physical"])
+          })
+        )
         .optional()
     })
   )

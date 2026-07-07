@@ -1,48 +1,174 @@
 {
   "schema": "districts@1",
-  "note": "The 6 outer districts (Crossroads and the Hub have bespoke scenes). Simple layouts until the visual pass; entry texts are section 4.5 canon. Doors depart from the Crossroads bus hub and unlock with chapter 2.",
+  "note": "The 6 outer districts (Crossroads and the Hub have bespoke scenes). Simple layouts until the visual pass; entry texts are section 4.5 canon. Doors depart from the Crossroads bus hub and unlock with chapter 2. Barriers are section 4.2 Mission-2 pins (BarrierMap).",
   "districts": [
     {
       "id": "old_blocks",
       "displayName": "Old Blocks",
-      "world": { "width": 2000, "height": 1300 },
-      "ground": ["#cfc0a0", "#a8977a"],
-      "landmark": { "x": 700, "y": 300, "width": 600, "height": 220, "color": "#9d8f74", "label": "Modular housing" }
+      "world": {
+        "width": 2000,
+        "height": 1300
+      },
+      "ground": [
+        "#cfc0a0",
+        "#a8977a"
+      ],
+      "landmark": {
+        "x": 700,
+        "y": 300,
+        "width": 600,
+        "height": 220,
+        "color": "#9d8f74",
+        "label": "Modular housing"
+      },
+      "barriers": [
+        {
+          "id": "stairwell",
+          "x": 1450,
+          "y": 520,
+          "layer": "stairs"
+        }
+      ]
     },
     {
       "id": "grey_yards",
       "displayName": "Grey Yards",
-      "world": { "width": 2000, "height": 1300 },
-      "ground": ["#c2c4c0", "#989a96"],
-      "landmark": { "x": 750, "y": 320, "width": 560, "height": 220, "color": "#7e807c", "label": "Courtyard 17 (locked)" }
+      "world": {
+        "width": 2000,
+        "height": 1300
+      },
+      "ground": [
+        "#c2c4c0",
+        "#989a96"
+      ],
+      "landmark": {
+        "x": 750,
+        "y": 320,
+        "width": 560,
+        "height": 220,
+        "color": "#7e807c",
+        "label": "Courtyard 17 (locked)"
+      },
+      "barriers": [
+        {
+          "id": "locked_gate",
+          "x": 1030,
+          "y": 640,
+          "layer": "physical"
+        }
+      ]
     },
     {
       "id": "youth_court",
       "displayName": "Youth Court",
-      "world": { "width": 2000, "height": 1300 },
-      "ground": ["#d8c9a2", "#b09a6e"],
-      "landmark": { "x": 720, "y": 300, "width": 580, "height": 220, "color": "#b3703f", "label": "The court & the wall" }
+      "world": {
+        "width": 2000,
+        "height": 1300
+      },
+      "ground": [
+        "#d8c9a2",
+        "#b09a6e"
+      ],
+      "landmark": {
+        "x": 720,
+        "y": 300,
+        "width": 580,
+        "height": 220,
+        "color": "#b3703f",
+        "label": "The court & the wall"
+      },
+      "barriers": [
+        {
+          "id": "evening_lockout",
+          "x": 1500,
+          "y": 700,
+          "layer": "schedules"
+        }
+      ]
     },
     {
       "id": "coastline",
       "displayName": "Coastline Quarter",
-      "world": { "width": 2200, "height": 1300 },
-      "ground": ["#e7d9ae", "#8fb6b3"],
-      "landmark": { "x": 800, "y": 300, "width": 600, "height": 200, "color": "#5e94a8", "label": "The promenade" }
+      "world": {
+        "width": 2200,
+        "height": 1300
+      },
+      "ground": [
+        "#e7d9ae",
+        "#8fb6b3"
+      ],
+      "landmark": {
+        "x": 800,
+        "y": 300,
+        "width": 600,
+        "height": 200,
+        "color": "#5e94a8",
+        "label": "The promenade"
+      },
+      "barriers": [
+        {
+          "id": "seasonal_prices",
+          "x": 1500,
+          "y": 820,
+          "layer": "costs"
+        }
+      ]
     },
     {
       "id": "hill_gardens",
       "displayName": "Hill Gardens",
-      "world": { "width": 2000, "height": 1400 },
-      "ground": ["#cfd6a4", "#93a26b"],
-      "landmark": { "x": 700, "y": 300, "width": 620, "height": 220, "color": "#7c8f52", "label": "Gardens & murals" }
+      "world": {
+        "width": 2000,
+        "height": 1400
+      },
+      "ground": [
+        "#cfd6a4",
+        "#93a26b"
+      ],
+      "landmark": {
+        "x": 700,
+        "y": 300,
+        "width": 620,
+        "height": 220,
+        "color": "#7c8f52",
+        "label": "Gardens & murals"
+      },
+      "barriers": [
+        {
+          "id": "underpass",
+          "x": 1450,
+          "y": 980,
+          "layer": "fear"
+        }
+      ]
     },
     {
       "id": "lake_edge",
       "displayName": "Lake Edge",
-      "world": { "width": 2000, "height": 1300 },
-      "ground": ["#c8d3c4", "#7fa197"],
-      "landmark": { "x": 750, "y": 320, "width": 560, "height": 200, "color": "#5c8479", "label": "The water edge" }
+      "world": {
+        "width": 2000,
+        "height": 1300
+      },
+      "ground": [
+        "#c8d3c4",
+        "#7fa197"
+      ],
+      "landmark": {
+        "x": 750,
+        "y": 320,
+        "width": 560,
+        "height": 200,
+        "color": "#5c8479",
+        "label": "The water edge"
+      },
+      "barriers": [
+        {
+          "id": "office_forms",
+          "x": 1350,
+          "y": 560,
+          "layer": "language"
+        }
+      ]
     }
   ]
 }

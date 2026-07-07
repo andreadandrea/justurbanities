@@ -941,6 +941,30 @@
             "close": "…"
           }
         }
+      },
+      "ben_m22": {
+        "start": {
+          "text": "La mappa ufficiale dice che qui è tutto collegato. Ora prova ad attraversarla su una sedia a rotelle, o con due buste della spesa, o alle dieci di sera da sola.",
+          "choices": {
+            "engage": "«Allora facciamo dire la verità alla mappa.»",
+            "later": "Non ora."
+          }
+        },
+        "brief": {
+          "text": "Scale. Paura. Lingua. Costi. Orari. Cinque strati che la mappa ufficiale non stampa. Documenta tre barriere vissute là fuori — appuntale — e questa mappa comincerà a rispondere.",
+          "choices": {
+            "first_pin": "«Il primo pin ce l'ho già: la foto della recinzione.»",
+            "begin": "«Da dove comincio?»"
+          }
+        }
+      },
+      "ben_m22_resolution": {
+        "start": {
+          "text": "Tre pin. Qualunque cosa fossero — scale, paura, orari — la mappa non è più innocente. Portala al Centro: è con questa che discutiamo.",
+          "choices": {
+            "close": "«La mappa non è il territorio.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1101,6 +1125,13 @@
         "description": "Porta le mappe d'empatia di tre residenti al tavolo dei saperi del Town Hall, accanto ai tecnici.",
         "objectives": {
           "knowledge_table": "Tieni il primo tavolo dei saperi con 3 mappe d'empatia."
+        }
+      },
+      "M22": {
+        "title": "La mappa non è il territorio",
+        "description": "Sovrapponi alla mappa ufficiale i layer delle barriere vissute — scale, paura, lingua, costi, orari. Documentane tre.",
+        "objectives": {
+          "document_three": "Documenta 3 barriere vissute (la foto di Samir vale come primo pin)."
         }
       }
     },
@@ -1383,6 +1414,38 @@
           "planter": "Una fioriera che sta ferma",
           "noticeboard": "Una bacheca che si legge"
         }
+      }
+    },
+    "barriers": {
+      "documented": "Appuntato sulla mappa. Uno strato in più che la mappa ufficiale non mostra.",
+      "choices": {
+        "document": "Documenta questa barriera (pin sulla mappa)",
+        "leave": "Lascia stare per ora",
+        "close": "Continua"
+      },
+      "stairwell": {
+        "label": "Scalinata senza rampa",
+        "text": "Quattro gradini tra il blocco e la strada. Nessuna rampa, nessun corrimano a sinistra. Il gradino che rompe i carrelli — e tiene a casa le sedie a rotelle."
+      },
+      "locked_gate": {
+        "label": "Cortile 17",
+        "text": "Il Cortile 17. Tre lucchetti, uno mangiato dalla ruggine. Nessuno ricorda di chi siano le chiavi."
+      },
+      "evening_lockout": {
+        "label": "Il cancello delle sei",
+        "text": "Il cancello del campetto chiude alle sei — esattamente quando escono i ragazzi che ne avrebbero bisogno. Aperto quando non c'è nessuno, chiuso quando ci sarebbe qualcuno."
+      },
+      "seasonal_prices": {
+        "label": "Prezzi di stagione",
+        "text": "Coastline in stagione: due prezzi per lo stesso caffè. Le foto vengono benissimo. Le bollette meno."
+      },
+      "underpass": {
+        "label": "Il sottopasso",
+        "text": "La scorciatoia di Hill Gardens verso il bus. Di giorno, un passaggio. Col buio, un posto che la gente aggira — venti minuti in più, ma illuminati."
+      },
+      "office_forms": {
+        "label": "Moduli in una lingua sola",
+        "text": "Lo sportello comunale di Lake Edge. Moduli in una lingua sola; la fila ne parla cinque."
       }
     }
   }
