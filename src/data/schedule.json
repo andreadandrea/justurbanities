@@ -97,6 +97,48 @@
       ]
     },
     {
+      "npcId": "samir",
+      "scene": "community_center",
+      "position": {
+        "x": 1000,
+        "y": 950
+      },
+      "dialogueId": "samir_m23_resolution",
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M23",
+          "state": "completed"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m23_resolution_seen",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "samir",
+      "scene": "community_center",
+      "position": {
+        "x": 1000,
+        "y": 950
+      },
+      "dialogueId": "samir_m23",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter2_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M23",
+          "state": "locked"
+        }
+      ]
+    },
+    {
       "npcId": "elena",
       "scene": "community_center",
       "position": {
@@ -498,6 +540,31 @@
         "x": 900,
         "y": 700
       },
+      "dialogueId": "gwen_m23_source",
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M23",
+          "state": "active"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m23_source_gwen",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "gwen",
+      "scene": "hill_gardens",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
       "dialogueId": "gwen_n09",
       "timeParts": [
         0,
@@ -543,6 +610,31 @@
         {
           "type": "variableEquals",
           "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "pablo",
+      "scene": "old_blocks",
+      "position": {
+        "x": 1300,
+        "y": 900
+      },
+      "dialogueId": "pablo_m23_source",
+      "timeParts": [
+        0,
+        1
+      ],
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M23",
+          "state": "active"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m23_source_pablo",
           "value": true
         }
       ]
@@ -602,6 +694,31 @@
         {
           "type": "variableEquals",
           "key": "prologue_complete",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "amin",
+      "scene": "crossroads",
+      "position": {
+        "x": 1350,
+        "y": 1150
+      },
+      "dialogueId": "amin_m23_source",
+      "timeParts": [
+        1,
+        2
+      ],
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M23",
+          "state": "active"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m23_source_amin",
           "value": true
         }
       ]

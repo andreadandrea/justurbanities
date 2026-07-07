@@ -4377,6 +4377,209 @@
           ]
         }
       }
+    },
+    {
+      "id": "samir_m23",
+      "speakerId": "samir",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.samir_m23.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.samir_m23.start.choices.engage",
+              "next": "brief"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.samir_m23.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "brief": {
+          "text": "content.dialogues.samir_m23.brief.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M23"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M23"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "go",
+              "label": "content.dialogues.samir_m23.brief.choices.go",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pablo_m23_source",
+      "speakerId": "pablo",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.pablo_m23_source.start.text",
+          "choices": [
+            {
+              "id": "note",
+              "label": "content.dialogues.pablo_m23_source.start.choices.note",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m23_source_pablo",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "missing_group_elders",
+                  "value": true
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M23",
+                  "objectiveId": "source_pablo"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "missing_group",
+                  "payload": {
+                    "group": "isolated_elders",
+                    "hook": "N11",
+                    "source": "pablo"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gwen_m23_source",
+      "speakerId": "gwen",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.gwen_m23_source.start.text",
+          "choices": [
+            {
+              "id": "note",
+              "label": "content.dialogues.gwen_m23_source.start.choices.note",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m23_source_gwen",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "missing_group_no_language",
+                  "value": true
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M23",
+                  "objectiveId": "source_gwen"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "missing_group",
+                  "payload": {
+                    "group": "families_without_language",
+                    "hook": "N16",
+                    "source": "gwen"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "amin_m23_source",
+      "speakerId": "amin",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.amin_m23_source.start.text",
+          "choices": [
+            {
+              "id": "note",
+              "label": "content.dialogues.amin_m23_source.start.choices.note",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m23_source_amin",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "missing_group_youth",
+                  "value": true
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M23",
+                  "objectiveId": "source_amin"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "missing_group",
+                  "payload": {
+                    "group": "youth_court_kids",
+                    "hook": "N14",
+                    "source": "amin"
+                  }
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "samir_m23_resolution",
+      "speakerId": "samir",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.samir_m23_resolution.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.samir_m23_resolution.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "who_is_missing_done",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m23_resolution_seen",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }
