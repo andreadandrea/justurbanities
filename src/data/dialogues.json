@@ -679,6 +679,11 @@
                 {
                   "type": "completeQuest",
                   "questId": "N05"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "minigame_repair_start",
+                  "value": true
                 }
               ],
               "next": "resolution"

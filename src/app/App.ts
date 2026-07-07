@@ -21,6 +21,9 @@ import {
 } from "../game/mp/MpConfig";
 import { MpJoinPanel } from "../ui/MpJoinPanel";
 import { FacilitatorPanel } from "../ui/FacilitatorPanel";
+import { MinigamePanel } from "../ui/MinigamePanel";
+import type { MinigameDefinition } from "../game/minigame/AllocationMinigame";
+import minigamesData from "../data/minigames.json";
 import { fetchSessionEvents } from "../sync/SupabaseRemoteApi";
 import type { CityEvent } from "../game/mp/CityReducer";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
@@ -77,6 +80,7 @@ import {
   assemblyFileSchema,
   assetManifestSchema,
   endingsFileSchema,
+  minigamesFileSchema,
   charactersSchema,
   dialogueFileSchema,
   questFileSchema,
@@ -163,6 +167,7 @@ export class App {
     let promiseFile: PromiseFile;
     let assemblyFile: AssemblyFile;
     let endingsFile: EndingsFile;
+    let minigameDefs: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string }>;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -176,6 +181,11 @@ export class App {
       promiseFile = validateData("promises.json", promiseFileSchema, promisesData) as PromiseFile;
       assemblyFile = validateData("assembly.json", assemblyFileSchema, assemblyData) as AssemblyFile;
       endingsFile = validateData("endings.json", endingsFileSchema, endingsData) as EndingsFile;
+      minigameDefs = (
+        validateData("minigames.json", minigamesFileSchema, minigamesData) as {
+          minigames: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string }>;
+        }
+      ).minigames;
       validateData("districts.json", districtFileSchema, districtsData);
     } catch (error) {
       console.error(error);
@@ -297,7 +307,10 @@ export class App {
       clock,
       i18n,
       art,
-      onDialogueEnded: () => storyDirector.check(),
+      onDialogueEnded: () => {
+        storyDirector.check();
+        checkMinigames();
+      },
       sceneVitality: (sceneId) =>
         districtVitality(sceneId, this.state.resources, anchors, (questId) =>
           this.questManager.getQuestStatus(questId)
@@ -395,6 +408,33 @@ export class App {
         return endingId;
       }
     });
+
+    // Mini-games (task 9.1): dialogue effects raise the trigger variable;
+    // the panel opens as soon as the conversation closes. Reusable module —
+    // the pilot is Sigrid's Modular Repair (§5.2).
+    const minigamePanel = new MinigamePanel({
+      root: this.elements.appRoot,
+      i18n,
+      applyEffects: (effects) => this.effectResolver.applyAll(effects),
+      logProgress,
+      onFinished: (minigameId) => {
+        const definition = minigameDefs.find((candidate) => candidate.id === minigameId);
+        if (definition) this.state.variables[definition.doneVariable] = true;
+        void this.activeScene().saveNow();
+      }
+    });
+    const checkMinigames = () => {
+      if (minigamePanel.isOpen || this.dialogueUI.isOpen) return;
+      for (const definition of minigameDefs) {
+        if (
+          this.state.variables[definition.triggerVariable] === true &&
+          this.state.variables[definition.doneVariable] !== true
+        ) {
+          minigamePanel.open(definition);
+          return;
+        }
+      }
+    };
 
     // Promises (ratified): dialogue effects make them, deadlines break them.
     const promiseManager = new PromiseManager(this.state, logProgress);
@@ -539,6 +579,7 @@ export class App {
     const bootScene = this.activeScene();
     bootScene.enter();
     storyDirector.check();
+    checkMinigames(); // resume a Saturday saved mid-trigger
     this.elements.sceneTitle.textContent = bootScene.displayName;
     this.loop.start();
     this.syncEngine.start();

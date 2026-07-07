@@ -207,6 +207,11 @@
       "plan": "Signed plan",
       "export": "⬇ Class report (JSON)",
       "loadFailed": "Could not load the session log — check the connection and retry."
+    },
+    "minigame": {
+      "pileEmpty": "The pile is empty.",
+      "score": "Valid combinations",
+      "finish": "Finish the Saturday"
     }
   },
   "content": {
@@ -1353,6 +1358,29 @@
         "title": "Fragmented",
         "epilogue": "No collapse: only frictions that win. The big hall empty again, the noticeboard frozen, the Corporate's rendering hanging where Anna's map used to be. People still greet each other — from a distance. The map goes dark neighbourhood by neighbourhood, without a sound.",
         "quote": "The Fragmentation didn't win a battle. It won by habit."
+      }
+    },
+    "minigames": {
+      "modular_repair": {
+        "title": "Modular Repair — one Saturday",
+        "brief": "Sigrid: \"Budget: near zero; materials: what you see; time: one Saturday. A lot can be done, if nobody demands perfect.\"",
+        "retry": "Sigrid: \"Again. Wood forgives.\"",
+        "materials": {
+          "pallet_wood": "Pallet wood",
+          "old_door": "An old door",
+          "tarp": "A tarp",
+          "rope": "Rope",
+          "bricks": "Bricks",
+          "paint_cans": "Paint cans",
+          "crates": "Crates",
+          "net_curtain": "A net curtain"
+        },
+        "needs": {
+          "bench": "A bench that holds",
+          "shade": "Shade for the hot hours",
+          "planter": "A planter that stays put",
+          "noticeboard": "A noticeboard people read"
+        }
       }
     }
   }
