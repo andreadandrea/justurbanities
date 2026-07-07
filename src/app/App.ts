@@ -29,6 +29,10 @@ import type { PromiseFile } from "../game/promise/PromiseManager";
 import { LogbookPanel } from "../ui/LogbookPanel";
 import promisesData from "../data/promises.json";
 import { CrisisWeek } from "../game/crisis/CrisisWeek";
+import { AssemblyEngine, ASSEMBLY_READY_FLAG } from "../game/assembly/AssemblyEngine";
+import { AssemblyPanel } from "../ui/AssemblyPanel";
+import assemblyData from "../data/assembly.json";
+import type { AssemblyFile } from "../types/Assembly";
 import { StoryDirector } from "../game/story/StoryDirector";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
@@ -54,6 +58,7 @@ import type { DialogueFile } from "../types/Dialogue";
 import type { QuestFile } from "../types/Quest";
 import {
   animationsSchema,
+  assemblyFileSchema,
   assetManifestSchema,
   charactersSchema,
   dialogueFileSchema,
@@ -138,6 +143,7 @@ export class App {
     let scheduleFile: ScheduleFile;
     let crisisFile: CrisisFile;
     let promiseFile: PromiseFile;
+    let assemblyFile: AssemblyFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -149,6 +155,7 @@ export class App {
       crisisFile = validateData("crises.json", crisisFileSchema, crisesData) as CrisisFile;
       scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
       promiseFile = validateData("promises.json", promiseFileSchema, promisesData) as PromiseFile;
+      assemblyFile = validateData("assembly.json", assemblyFileSchema, assemblyData) as AssemblyFile;
       validateData("districts.json", districtFileSchema, districtsData);
     } catch (error) {
       console.error(error);
@@ -324,6 +331,33 @@ export class App {
       () => this.dialogueUI.isOpen
     );
 
+    // Chapter 5 — the assembly (task 7.1). The engine lives on GameState
+    // variables (the plan travels with the save); the panel drives it.
+    // Until ch.4 closing content raises the flag itself, finishing Crisis
+    // Week opens the assembly on the next clock tick.
+    const assemblyEngine = new AssemblyEngine(
+      this.state,
+      (conditions) => this.effectResolver.checkAll(conditions),
+      (effects) => this.effectResolver.applyAll(effects),
+      logProgress
+    );
+    assemblyEngine.load(assemblyFile);
+    clock.on(() => {
+      if (crisisWeek.completed) this.state.variables[ASSEMBLY_READY_FLAG] = true;
+    });
+    const displayNames = new Map<string, string>(
+      [...(charactersData as Array<{ id: string; displayName: string }>), ...playableData.playable].map(
+        (character) => [character.id, character.displayName]
+      )
+    );
+    new AssemblyPanel({
+      root: this.elements.appRoot,
+      engine: assemblyEngine,
+      i18n,
+      npcName: (id) => displayNames.get(id) ?? id,
+      saveNow: () => void this.activeScene().saveNow()
+    });
+
     // Promises (ratified): dialogue effects make them, deadlines break them.
     const promiseManager = new PromiseManager(this.state, logProgress);
     promiseManager.load(promiseFile);
@@ -364,7 +398,10 @@ export class App {
       db: this.db,
       sessionId: session.id,
       i18n,
-      armCrisisWeek: () => crisisWeek.arm()
+      armCrisisWeek: () => crisisWeek.arm(),
+      openAssembly: () => {
+        this.state.variables[ASSEMBLY_READY_FLAG] = true;
+      }
     });
 
     // One offline pack per art variant (the animal pack includes the
