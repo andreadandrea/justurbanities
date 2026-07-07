@@ -285,6 +285,48 @@
         "x": 1750,
         "y": 620
       },
+      "dialogueId": "ben_m22_resolution",
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M22",
+          "state": "completed"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m22_resolution_seen",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "ben",
+      "scene": "crossroads",
+      "position": {
+        "x": 1750,
+        "y": 620
+      },
+      "dialogueId": "ben_m22",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter2_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M22",
+          "state": "locked"
+        }
+      ]
+    },
+    {
+      "npcId": "ben",
+      "scene": "crossroads",
+      "position": {
+        "x": 1750,
+        "y": 620
+      },
       "dialogueId": "ben_n02",
       "conditions": [
         {

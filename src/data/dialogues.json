@@ -4104,6 +4104,279 @@
           ]
         }
       }
+    },
+    {
+      "id": "ben_m22",
+      "speakerId": "ben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.ben_m22.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.ben_m22.start.choices.engage",
+              "next": "brief"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.ben_m22.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "brief": {
+          "text": "content.dialogues.ben_m22.brief.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M22"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M22"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "first_pin",
+              "label": "content.dialogues.ben_m22.brief.choices.first_pin",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "fence_photographed",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "begin",
+              "label": "content.dialogues.ben_m22.brief.choices.begin",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ben_m22_resolution",
+      "speakerId": "ben",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.ben_m22_resolution.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.ben_m22_resolution.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m22_resolution_seen",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_stairwell",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.stairwell.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_locked_gate",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.locked_gate.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_evening_lockout",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.evening_lockout.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_seasonal_prices",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.seasonal_prices.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_underpass",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.underpass.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_office_forms",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.office_forms.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

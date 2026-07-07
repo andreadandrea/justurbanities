@@ -571,6 +571,26 @@
         "crisisLink": null,
         "registry": "New quest (✳ ratified): Mission 7 'Experts of Everyday Life', fills Learning Outcome 7. Origin layer: Narrative v2 §5.7. See Guida 02 §4 quest registry."
       }
+    },
+    {
+      "id": "M22",
+      "title": "content.quests.M22.title",
+      "description": "content.quests.M22.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "document_three",
+          "description": "content.quests.M22.objectives.document_three",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Ben",
+        "abilityMatch": "Samir · Spatial documentation",
+        "crisisLink": null,
+        "registry": "Chapter 2 Mission 2 'The Map Is Not the Territory' (Narrative v2 §4.2): lived-barrier overlay; Samir's ch.1 fence photo is the first pin ✳; Voice +1 per pin, max 3."
+      }
     }
   ]
 }
