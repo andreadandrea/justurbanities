@@ -90,6 +90,59 @@
         "kept": "mantenuta",
         "broken": "rotta"
       }
+    },
+    "assembly": {
+      "toggle": "🏛 Assemblea",
+      "title": "Assemblea dei Futuri Giusti",
+      "hint": "Capitolo 5 — l'assemblea",
+      "notReady": "L'assemblea non è ancora stata convocata. La città sta ancora vivendo la sua settimana.",
+      "begin": "Prendi posto",
+      "free": "gratuita",
+      "prep": {
+        "title": "Preparazione — cosa porti sul tavolo",
+        "stories": "Storie dal logbook (fino a 3)",
+        "data": "Set di dati (fino a 2)",
+        "invites": "Inviti personali (fino a 3)",
+        "nothing": "Niente di disponibile.",
+        "enterRoom": "Entra nella sala"
+      },
+      "room": {
+        "title": "Fase 1 — Chi c'è nella stanza?",
+        "present": "In sala",
+        "empty": "Sedie vuote",
+        "continue": "Apri l'assemblea"
+      },
+      "stories": {
+        "title": "Fase 2 — Cosa abbiamo imparato?",
+        "read": "Leggi ad alta voce",
+        "continue": "Al tavolo dei conflitti",
+        "toneLabel": "Tono della sala",
+        "tone": {
+          "heart": "solo cuore — il consiglio si sfila",
+          "cold": "solo numeri — la sala si raffredda",
+          "balanced": "equilibrato"
+        }
+      },
+      "conflicts": {
+        "title": "Fase 3 — Tavolo dei conflitti",
+        "continue": "Costruisci il piano"
+      },
+      "plan": {
+        "title": "Fase 4 — Costruisci il piano",
+        "coverage": "Copertura",
+        "continue": "Agli impegni"
+      },
+      "commit": {
+        "title": "Fase 5 — Impegno",
+        "days": "giorni",
+        "sign": "Firma il patto"
+      },
+      "done": {
+        "title": "Il patto è firmato",
+        "summary": "Riepilogo",
+        "overpromise": "Il piano promette più di quanto la città abbia — peserà sul finale.",
+        "withinMeans": "Il piano resta nei mezzi della città."
+      }
     }
   },
   "content": {
@@ -1076,6 +1129,135 @@
       "promiseChildFriendlyMeeting": "Portare la mappa dei bambini in una riunione vera.",
       "promiseClimatePrep": "Pulire i canali, fare la lista delle case basse, fissare il punto di raccolta.",
       "promiseSupportLonelyElders": "Costruire la lista porta-a-porta con un volto per ogni nome."
+    },
+    "assembly": {
+      "intro": "Di nuovo la sala grande. Stavolta la mappa sul muro è tua: storie, promesse, cinque giorni di crisi. Alexandria aspetta al tavolo — stasera la città decide il suo piano.",
+      "closing": "Nessuna schermata di vittoria. L'ultima inquadratura è sempre la mappa della città, ricolorata secondo lo stato reale. La Fragmentation non è sparita: può essere ridotta, contenuta, attraversata da nuove connessioni.",
+      "room": {
+        "ben_ramp": "Ben, guardando la rampa nuova all'ingresso: «Meglio dell'altra volta.»",
+        "ben_stairs": "Ben: «Ancora scale. Ancora le 18:00. Non avete ascoltato niente.»"
+      },
+      "commitment": {
+        "alexandria": "Alexandria: «Non firmo visioni. Firmo nomi, date e verifiche. Chi fa cosa, con quali risorse, entro quando — e come lo sapremo.»"
+      },
+      "groups": {
+        "organizers": "Organizzatori",
+        "institutions": "Istituzioni",
+        "elderly": "Anziani",
+        "caregivers": "Chi si prende cura",
+        "workers": "Lavoratori",
+        "newcomers": "Nuovi arrivati",
+        "youth": "Giovani",
+        "media": "Media",
+        "business": "Commercio"
+      },
+      "verifications": {
+        "public_review": "Verifica pubblica nella sala grande",
+        "usage_count": "Contare chi la usa davvero",
+        "followup_assembly": "Controllo alla prossima assemblea"
+      },
+      "stories": {
+        "story_viveca": {
+          "title": "La finestra della signora Viveca",
+          "line": "Il cortile che vede ma non raggiunge — la sua strada, imparata a memoria, letta ad alta voce alla sala."
+        },
+        "story_pablo": {
+          "title": "I giri di Pablo",
+          "line": "Nessuno è fuori mappa: il percorso di Pablo dimostra che la cura è già infrastruttura — solo non pagata."
+        },
+        "story_gwen": {
+          "title": "Gwen e l'ultimo bus",
+          "line": "Quando tagli l'ultima corsa non finisce un orario. Finiscono i martedì al mercato."
+        },
+        "story_zoe": {
+          "title": "Zoe attraversa la città",
+          "line": "Maya è arrivata con Zoe. Una città che un bambino può attraversare da solo è una città che mantiene le promesse."
+        },
+        "story_samir_fence": {
+          "title": "La recinzione al Crossroads",
+          "line": "Samir l'ha detto ad alta voce: una porta chiusa non ti chiede chi sei — risponde al posto tuo."
+        },
+        "story_repair_day": {
+          "title": "Il Repair Day",
+          "line": "I novanta vicini di Sigrid hanno riparato più che oggetti: hanno riparato l'abitudine di chiedere aiuto."
+        },
+        "data_knowledge_table": {
+          "title": "Il tavolo della conoscenza",
+          "line": "Il tavolo di Elena: tre mappe d'empatia una accanto all'altra — l'esperienza, archiviata come prova."
+        },
+        "data_bus_counts": {
+          "title": "I conteggi dei passeggeri",
+          "line": "Chi sale, quando, e chi ha smesso di salire il giorno in cui è stata tagliata la corsa serale."
+        },
+        "data_map_holes": {
+          "title": "I vuoti della mappa",
+          "line": "Il rilievo di Ben sull'attraversamento: dove la mappa ufficiale tace, le persone cadono."
+        },
+        "data_commission": {
+          "title": "Il fascicolo della commissione",
+          "line": "La commissione di Elena: limiti detti ad alta voce, procedure con i nomi accanto."
+        }
+      },
+      "conflicts": {
+        "residents_vs_investors": {
+          "title": "Residenti vs investitori",
+          "positions": {
+            "synthesis": "Sigrid: «Anche la nostra: novanta vicini.» Metti le due offerte sullo stesso tavolo",
+            "residents": "Stai con i residenti — il cortile non è in vendita",
+            "evade": "Vai oltre e lascia l'offerta sul tavolo"
+          }
+        },
+        "urgency_vs_procedure": {
+          "title": "Urgenza vs procedura",
+          "positions": {
+            "synthesis": "Una commissione con una scadenza: reggono la delibera e il cortile",
+            "urgency": "Prima Anna — aprire ora, le carte dopo",
+            "evade": "Rinvia alla prossima seduta"
+          }
+        },
+        "center_vs_network": {
+          "title": "Centro vs rete",
+          "positions": {
+            "synthesis": "La via di Amin: il Centro diventa uno dei tanti tavolini",
+            "center": "Il Centro resta il cuore della città",
+            "evade": "Lascia la questione aperta"
+          }
+        }
+      },
+      "categories": {
+        "common_spaces": "Spazi comuni",
+        "mobility": "Mobilità",
+        "care": "Cura",
+        "youth": "Giovani",
+        "communication": "Comunicazione",
+        "climate": "Clima",
+        "local_economy": "Economia locale",
+        "governance": "Governance",
+        "accessibility": "Accessibilità",
+        "crisis_response": "Risposta alle crisi"
+      },
+      "measures": {
+        "m_open_courtyards": "Aprire i cortili al quartiere",
+        "m_common_room_hours": "Orari serali per la sala comune",
+        "m_bus_evening_run": "Ripristinare la corsa serale del bus",
+        "m_safe_crossing": "Un attraversamento sicuro al Crossroads",
+        "m_care_rounds": "Giri di cura di quartiere retribuiti",
+        "m_carers_relief": "Turni di sollievo per chi cura",
+        "m_youth_court": "Un consiglio dei giovani con mandato vero",
+        "m_zoe_afterschool": "Spazi doposcuola raggiungibili da soli",
+        "m_info_point_multilingual": "Un info point multilingue",
+        "m_rumor_desk": "Uno sportello voci — verificare prima che circoli",
+        "m_cool_rooms": "Stanze fresche per la prossima ondata di calore",
+        "m_flood_kit": "Kit alluvione in ogni isolato",
+        "m_local_market_day": "Una giornata mensile del mercato locale",
+        "m_repair_workshop": "Un'officina delle riparazioni permanente",
+        "m_open_commission": "Una commissione aperta con verbali pubblici",
+        "m_neighborhood_tables": "Tavoli di quartiere in ogni distretto",
+        "m_ramps_hours": "Prima le rampe, poi orari che funzionano",
+        "m_accessible_info": "Orari e segnaletica accessibili",
+        "m_alert_network": "Una rete di allerta porta a porta",
+        "m_mutual_aid_roster": "Una turnazione di mutuo aiuto per i giorni di crisi"
+      }
     }
   }
 }

@@ -254,6 +254,89 @@ export const crisisFileSchema = z.object({
   )
 });
 
+// ---------- assembly.json (task 7.1) ----------
+
+const resourceCostSchema = z.record(z.string(), z.number().nonnegative());
+
+export const assemblyFileSchema = z
+  .object({
+    schema: z.string().optional(),
+    note: z.string().optional(),
+    tuning: z.object({
+      storySlots: z.number().int().positive(),
+      dataSlots: z.number().int().positive(),
+      inviteSlots: z.number().int().nonnegative(),
+      storyDiscount: z.number().int().nonnegative(),
+      toneGap: z.number().int().nonnegative(),
+      deadlineOptions: z.array(z.number().int().positive()).nonempty(),
+      verificationOptions: z.array(z.string().min(1)).nonempty()
+    }),
+    attendance: z.array(
+      z.object({
+        npcId: z.string().min(1),
+        group: z.string().min(1),
+        conditions: z.array(conditionSchema),
+        invitedConditions: z.array(conditionSchema).optional()
+      })
+    ),
+    stories: z.array(
+      z.object({
+        id: z.string().min(1),
+        kind: z.enum(["story", "data"]),
+        requires: z.array(conditionSchema),
+        measures: z.array(z.string().min(1))
+      })
+    ),
+    conflicts: z.array(
+      z.object({
+        id: z.string().min(1),
+        conditions: z.array(conditionSchema),
+        positions: z
+          .array(
+            z.object({
+              id: z.string().min(1),
+              kind: z.enum(["synthesis", "partisan", "evasion"]),
+              cost: resourceCostSchema.optional(),
+              effects: z.array(effectSchema).optional()
+            })
+          )
+          .min(2)
+      })
+    ),
+    categories: z.array(z.string().min(1)).min(1),
+    measures: z.array(
+      z.object({
+        id: z.string().min(1),
+        category: z.string().min(1),
+        cost: resourceCostSchema,
+        effects: z.array(effectSchema).optional()
+      })
+    )
+  })
+  .superRefine((file, ctx) => {
+    // Referential integrity: measures point at known categories, stories at known measures.
+    const categories = new Set(file.categories);
+    const measureIds = new Set(file.measures.map((measure) => measure.id));
+    for (const measure of file.measures) {
+      if (!categories.has(measure.category)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Measure "${measure.id}": unknown category "${measure.category}".`
+        });
+      }
+    }
+    for (const story of file.stories) {
+      for (const measureId of story.measures) {
+        if (!measureIds.has(measureId)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Story "${story.id}": unknown measure "${measureId}".`
+          });
+        }
+      }
+    }
+  });
+
 // ---------- playable.json ----------
 
 export const playableSchema = z.object({

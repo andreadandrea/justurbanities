@@ -13,6 +13,7 @@ type DebugPanelDeps = {
   sessionId: string;
   i18n: I18n;
   armCrisisWeek?: () => void;
+  openAssembly?: () => void;
 };
 
 const REFRESH_MS = 500;
@@ -101,6 +102,7 @@ export class DebugPanel {
         ["(none)"]
       ),
       this.crisisWeekButton(),
+      this.assemblyButton(),
       this.clearButton()
     );
   }
@@ -125,6 +127,16 @@ export class DebugPanel {
     button.textContent = "Arm Crisis Week (starts next morning)";
     button.disabled = !this.deps.armCrisisWeek;
     button.addEventListener("click", () => this.deps.armCrisisWeek?.());
+    return button;
+  }
+
+  private assemblyButton(): HTMLElement {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "debug-clear";
+    button.textContent = "Open the Assembly (ch.5, 🏛 button)";
+    button.disabled = !this.deps.openAssembly;
+    button.addEventListener("click", () => this.deps.openAssembly?.());
     return button;
   }
 

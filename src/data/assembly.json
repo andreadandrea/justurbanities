@@ -1,0 +1,506 @@
+{
+  "schema": "assembly/v1",
+  "note": "Chapter 5 — Assembly of Just Futures (§7). Attendance from Trust/Voice/quests/relationships; invitedConditions are the relaxed check when the player spends an invite slot. Accessibility/chosen-times inputs arrive as extra conditions when those systems ship. Story ids gate on ch.2 variables; measure costs are first-pass numbers for playtest calibration (9.x).",
+  "tuning": {
+    "storySlots": 3,
+    "dataSlots": 2,
+    "inviteSlots": 3,
+    "storyDiscount": 1,
+    "toneGap": 2,
+    "deadlineOptions": [7, 14, 30],
+    "verificationOptions": ["public_review", "usage_count", "followup_assembly"]
+  },
+  "attendance": [
+    { "npcId": "anna", "group": "organizers", "conditions": [] },
+    { "npcId": "alexandria", "group": "institutions", "conditions": [] },
+    {
+      "npcId": "ben",
+      "group": "elderly",
+      "conditions": [
+        { "type": "questState", "questId": "N02", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "care", "value": 3 }
+      ]
+    },
+    {
+      "npcId": "mrs_viveca",
+      "group": "elderly",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "interview_viveca_done",
+          "value": true
+        }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "trust", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "donald",
+      "group": "elderly",
+      "conditions": [
+        { "type": "questState", "questId": "N04", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "trust", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "pablo",
+      "group": "caregivers",
+      "conditions": [
+        { "type": "questState", "questId": "N11", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "care", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "giorgia",
+      "group": "caregivers",
+      "conditions": [
+        { "type": "questState", "questId": "N10", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "care", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "gwen",
+      "group": "workers",
+      "conditions": [
+        { "type": "questState", "questId": "N09", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "voice", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "group": "workers",
+      "conditions": [
+        { "type": "questState", "questId": "N05", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "commons", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "abdullah",
+      "group": "newcomers",
+      "conditions": [
+        { "type": "questState", "questId": "N07", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "voice", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "amin",
+      "group": "newcomers",
+      "conditions": [
+        { "type": "questState", "questId": "N12", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "commons", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "matilda",
+      "group": "youth",
+      "conditions": [
+        { "type": "questState", "questId": "N13", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "voice", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "lia",
+      "group": "youth",
+      "conditions": [
+        { "type": "questState", "questId": "N14", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "voice", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "zoe",
+      "group": "youth",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "maya_arrived_with_zoe",
+          "value": true
+        }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "care", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "siobhan",
+      "group": "media",
+      "conditions": [
+        { "type": "questState", "questId": "N15", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "voice", "value": 4 }
+      ]
+    },
+    {
+      "npcId": "ruben",
+      "group": "media",
+      "conditions": [
+        { "type": "questState", "questId": "N06", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "trust", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "tom",
+      "group": "institutions",
+      "conditions": [
+        { "type": "questState", "questId": "N08", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "trust", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "marta",
+      "group": "business",
+      "conditions": [
+        { "type": "questState", "questId": "N17", "state": "completed" }
+      ],
+      "invitedConditions": [
+        { "type": "resourceAtLeast", "key": "commons", "value": 5 }
+      ]
+    },
+    {
+      "npcId": "corporate_man",
+      "group": "business",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "offerResolution",
+          "value": "reactive"
+        }
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "story_viveca",
+      "kind": "story",
+      "requires": [
+        {
+          "type": "variableEquals",
+          "key": "interview_viveca_done",
+          "value": true
+        }
+      ],
+      "measures": ["m_open_courtyards", "m_ramps_hours"]
+    },
+    {
+      "id": "story_pablo",
+      "kind": "story",
+      "requires": [
+        {
+          "type": "variableEquals",
+          "key": "interview_pablo_done",
+          "value": true
+        }
+      ],
+      "measures": ["m_care_rounds", "m_mutual_aid_roster"]
+    },
+    {
+      "id": "story_gwen",
+      "kind": "story",
+      "requires": [
+        {
+          "type": "variableEquals",
+          "key": "interview_gwen_done",
+          "value": true
+        }
+      ],
+      "measures": ["m_bus_evening_run", "m_accessible_info"]
+    },
+    {
+      "id": "story_zoe",
+      "kind": "story",
+      "requires": [
+        {
+          "type": "variableEquals",
+          "key": "maya_arrived_with_zoe",
+          "value": true
+        }
+      ],
+      "measures": ["m_safe_crossing", "m_zoe_afterschool"]
+    },
+    {
+      "id": "story_samir_fence",
+      "kind": "story",
+      "requires": [
+        { "type": "variableEquals", "key": "samir_spoke", "value": true }
+      ],
+      "measures": ["m_info_point_multilingual", "m_youth_court"]
+    },
+    {
+      "id": "story_repair_day",
+      "kind": "story",
+      "requires": [
+        { "type": "questState", "questId": "N05", "state": "completed" }
+      ],
+      "measures": ["m_repair_workshop", "m_flood_kit"]
+    },
+    {
+      "id": "data_knowledge_table",
+      "kind": "data",
+      "requires": [
+        {
+          "type": "variableEquals",
+          "key": "knowledge_table_held",
+          "value": true
+        }
+      ],
+      "measures": ["m_open_commission", "m_carers_relief"]
+    },
+    {
+      "id": "data_bus_counts",
+      "kind": "data",
+      "requires": [
+        { "type": "questState", "questId": "N09", "state": "completed" }
+      ],
+      "measures": ["m_bus_evening_run", "m_accessible_info"]
+    },
+    {
+      "id": "data_map_holes",
+      "kind": "data",
+      "requires": [
+        { "type": "questState", "questId": "N02", "state": "completed" }
+      ],
+      "measures": ["m_ramps_hours", "m_alert_network"]
+    },
+    {
+      "id": "data_commission",
+      "kind": "data",
+      "requires": [
+        { "type": "variableEquals", "key": "commission_started", "value": true }
+      ],
+      "measures": ["m_open_commission", "m_neighborhood_tables"]
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "residents_vs_investors",
+      "conditions": [
+        {
+          "type": "variableNotEquals",
+          "key": "offerResolution",
+          "value": "transformative"
+        }
+      ],
+      "positions": [
+        {
+          "id": "synthesis",
+          "kind": "synthesis",
+          "cost": { "commons": 2, "trust": 2 },
+          "effects": [
+            { "type": "addResource", "key": "commons", "value": 2 },
+            { "type": "addResource", "key": "trust", "value": 1 }
+          ]
+        },
+        {
+          "id": "residents",
+          "kind": "partisan",
+          "effects": [
+            { "type": "addResource", "key": "voice", "value": 1 },
+            { "type": "addResource", "key": "trust", "value": -1 }
+          ]
+        },
+        {
+          "id": "evade",
+          "kind": "evasion",
+          "effects": [
+            { "type": "addResource", "key": "fragmentationGlobal", "value": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "urgency_vs_procedure",
+      "conditions": [],
+      "positions": [
+        {
+          "id": "synthesis",
+          "kind": "synthesis",
+          "cost": { "trust": 2, "voice": 1 },
+          "effects": [
+            { "type": "addResource", "key": "trust", "value": 1 },
+            { "type": "addResource", "key": "commons", "value": 1 }
+          ]
+        },
+        {
+          "id": "urgency",
+          "kind": "partisan",
+          "effects": [
+            { "type": "addResource", "key": "voice", "value": 1 },
+            { "type": "addResource", "key": "trust", "value": -1 }
+          ]
+        },
+        {
+          "id": "evade",
+          "kind": "evasion",
+          "effects": [
+            { "type": "addResource", "key": "fragmentationGlobal", "value": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "center_vs_network",
+      "conditions": [],
+      "positions": [
+        {
+          "id": "synthesis",
+          "kind": "synthesis",
+          "cost": { "voice": 2, "commons": 1 },
+          "effects": [
+            { "type": "addResource", "key": "voice", "value": 1 },
+            { "type": "addResource", "key": "commons", "value": 1 }
+          ]
+        },
+        {
+          "id": "center",
+          "kind": "partisan",
+          "effects": [
+            { "type": "addResource", "key": "commons", "value": 1 },
+            { "type": "addResource", "key": "voice", "value": -1 }
+          ]
+        },
+        {
+          "id": "evade",
+          "kind": "evasion",
+          "effects": [
+            { "type": "addResource", "key": "fragmentationGlobal", "value": 1 }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "common_spaces",
+    "mobility",
+    "care",
+    "youth",
+    "communication",
+    "climate",
+    "local_economy",
+    "governance",
+    "accessibility",
+    "crisis_response"
+  ],
+  "measures": [
+    {
+      "id": "m_open_courtyards",
+      "category": "common_spaces",
+      "cost": { "commons": 2, "trust": 1 }
+    },
+    {
+      "id": "m_common_room_hours",
+      "category": "common_spaces",
+      "cost": { "commons": 1, "voice": 1 }
+    },
+    {
+      "id": "m_bus_evening_run",
+      "category": "mobility",
+      "cost": { "voice": 2, "care": 1 }
+    },
+    {
+      "id": "m_safe_crossing",
+      "category": "mobility",
+      "cost": { "care": 1, "resilience": 1 }
+    },
+    { "id": "m_care_rounds", "category": "care", "cost": { "care": 2 } },
+    {
+      "id": "m_carers_relief",
+      "category": "care",
+      "cost": { "care": 2, "trust": 1 }
+    },
+    {
+      "id": "m_youth_court",
+      "category": "youth",
+      "cost": { "voice": 2, "commons": 1 }
+    },
+    {
+      "id": "m_zoe_afterschool",
+      "category": "youth",
+      "cost": { "care": 1, "commons": 1 }
+    },
+    {
+      "id": "m_info_point_multilingual",
+      "category": "communication",
+      "cost": { "voice": 1, "trust": 1 }
+    },
+    {
+      "id": "m_rumor_desk",
+      "category": "communication",
+      "cost": { "trust": 2 }
+    },
+    {
+      "id": "m_cool_rooms",
+      "category": "climate",
+      "cost": { "resilience": 2, "care": 1 }
+    },
+    {
+      "id": "m_flood_kit",
+      "category": "climate",
+      "cost": { "resilience": 2, "commons": 1 }
+    },
+    {
+      "id": "m_local_market_day",
+      "category": "local_economy",
+      "cost": { "commons": 2 }
+    },
+    {
+      "id": "m_repair_workshop",
+      "category": "local_economy",
+      "cost": { "commons": 1, "resilience": 1 }
+    },
+    {
+      "id": "m_open_commission",
+      "category": "governance",
+      "cost": { "trust": 2, "voice": 1 }
+    },
+    {
+      "id": "m_neighborhood_tables",
+      "category": "governance",
+      "cost": { "voice": 2 }
+    },
+    {
+      "id": "m_ramps_hours",
+      "category": "accessibility",
+      "cost": { "care": 2, "commons": 1 }
+    },
+    {
+      "id": "m_accessible_info",
+      "category": "accessibility",
+      "cost": { "voice": 1, "care": 1 }
+    },
+    {
+      "id": "m_alert_network",
+      "category": "crisis_response",
+      "cost": { "resilience": 1, "voice": 1 }
+    },
+    {
+      "id": "m_mutual_aid_roster",
+      "category": "crisis_response",
+      "cost": { "care": 1, "resilience": 1 }
+    }
+  ]
+}

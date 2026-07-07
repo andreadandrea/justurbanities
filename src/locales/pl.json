@@ -90,6 +90,59 @@
         "kept": "kept",
         "broken": "broken"
       }
+    },
+    "assembly": {
+      "toggle": "🏛 Assembly",
+      "title": "Assembly of Just Futures",
+      "hint": "Chapter 5 — the assembly",
+      "notReady": "The assembly has not been called yet. The city is still living its week.",
+      "begin": "Take your seat",
+      "free": "free",
+      "prep": {
+        "title": "Preparation — what you bring to the table",
+        "stories": "Stories from the logbook (up to 3)",
+        "data": "Data sets (up to 2)",
+        "invites": "Personal invitations (up to 3)",
+        "nothing": "Nothing available.",
+        "enterRoom": "Enter the room"
+      },
+      "room": {
+        "title": "Phase 1 — Who is in the room?",
+        "present": "In the room",
+        "empty": "Empty chairs",
+        "continue": "Open the assembly"
+      },
+      "stories": {
+        "title": "Phase 2 — What did we learn?",
+        "read": "Read aloud",
+        "continue": "To the conflict table",
+        "toneLabel": "Room tone",
+        "tone": {
+          "heart": "all heart — the council drifts",
+          "cold": "all numbers — the room goes cold",
+          "balanced": "balanced"
+        }
+      },
+      "conflicts": {
+        "title": "Phase 3 — Conflict table",
+        "continue": "Build the plan"
+      },
+      "plan": {
+        "title": "Phase 4 — Build the plan",
+        "coverage": "Coverage",
+        "continue": "To the commitments"
+      },
+      "commit": {
+        "title": "Phase 5 — Commitment",
+        "days": "days",
+        "sign": "Sign the pact"
+      },
+      "done": {
+        "title": "The pact is signed",
+        "summary": "Summary",
+        "overpromise": "The plan promises more than the city has — it will weigh on the ending.",
+        "withinMeans": "The plan stays within the city's means."
+      }
     }
   },
   "content": {
@@ -1076,6 +1129,135 @@
       "promiseChildFriendlyMeeting": "Bring the children's map into a real meeting.",
       "promiseClimatePrep": "Clear the channels, list the low houses, set the assembly point.",
       "promiseSupportLonelyElders": "Build the door-to-door list with a face for every name."
+    },
+    "assembly": {
+      "intro": "The big hall again. This time the map on the wall is yours: stories, promises, five days of crisis. Alexandria waits at the table — tonight the city decides its plan.",
+      "closing": "No victory screen. The final shot is always the city map, re-coloured to its actual state. The Fragmentation has not vanished: it can be reduced, contained, crossed by new connections.",
+      "room": {
+        "ben_ramp": "Ben, looking at the new ramp at the entrance: \"Better than last time.\"",
+        "ben_stairs": "Ben: \"Still stairs, still 18:00. You haven't listened to a thing.\""
+      },
+      "commitment": {
+        "alexandria": "Alexandria: \"I don't sign visions — I sign names, dates and reviews. Who does what, with which resources, by when — and how we'll know.\""
+      },
+      "groups": {
+        "organizers": "Organizers",
+        "institutions": "Institutions",
+        "elderly": "Elders",
+        "caregivers": "Caregivers",
+        "workers": "Workers",
+        "newcomers": "Newcomers",
+        "youth": "Youth",
+        "media": "Media",
+        "business": "Business"
+      },
+      "verifications": {
+        "public_review": "Public review in the big hall",
+        "usage_count": "Count who actually uses it",
+        "followup_assembly": "Check at the next assembly"
+      },
+      "stories": {
+        "story_viveca": {
+          "title": "Mrs Viveca's window",
+          "line": "The courtyard she can see but not reach — her street, learned by heart, read aloud to the room."
+        },
+        "story_pablo": {
+          "title": "Pablo's rounds",
+          "line": "Nobody is off the map: Pablo's route proves care is already infrastructure — just unpaid."
+        },
+        "story_gwen": {
+          "title": "Gwen and the last bus",
+          "line": "When the last run is cut, it isn't a timetable that ends. It's Tuesdays at the market."
+        },
+        "story_zoe": {
+          "title": "Zoe crosses the city",
+          "line": "Maya arrived with Zoe. A city a child can cross alone is a city that keeps its promises."
+        },
+        "story_samir_fence": {
+          "title": "The fence at the Crossroads",
+          "line": "Samir said it out loud: a closed door doesn't ask who you are — it answers for you."
+        },
+        "story_repair_day": {
+          "title": "The Repair Day",
+          "line": "Sigrid's ninety neighbours fixed more than objects: they fixed the habit of asking for help."
+        },
+        "data_knowledge_table": {
+          "title": "The knowledge table",
+          "line": "Elena's table: three empathy maps side by side — experience, filed as evidence."
+        },
+        "data_bus_counts": {
+          "title": "Ridership counts",
+          "line": "Who boards, when, and who stopped boarding the day the evening run was cut."
+        },
+        "data_map_holes": {
+          "title": "The map's blank spots",
+          "line": "Ben's survey of the crossing: where the official map says nothing, people fall through."
+        },
+        "data_commission": {
+          "title": "The commission file",
+          "line": "Elena's commission: limits said out loud, procedures with names attached."
+        }
+      },
+      "conflicts": {
+        "residents_vs_investors": {
+          "title": "Residents vs investors",
+          "positions": {
+            "synthesis": "Sigrid: \"So is ours: ninety neighbours.\" Put both offers on the same table",
+            "residents": "Side with the residents — the courtyard is not for sale",
+            "evade": "Move on and leave the offer on the table"
+          }
+        },
+        "urgency_vs_procedure": {
+          "title": "Urgency vs procedure",
+          "positions": {
+            "synthesis": "A commission with a deadline: the resolution and the courtyard both hold",
+            "urgency": "Anna first — open now, paperwork later",
+            "evade": "Table it for the next session"
+          }
+        },
+        "center_vs_network": {
+          "title": "Center vs network",
+          "positions": {
+            "synthesis": "Amin's way: the Center becomes one little table among many",
+            "center": "Keep the Center as the heart of the city",
+            "evade": "Leave the question open"
+          }
+        }
+      },
+      "categories": {
+        "common_spaces": "Common spaces",
+        "mobility": "Mobility",
+        "care": "Care",
+        "youth": "Youth",
+        "communication": "Communication",
+        "climate": "Climate",
+        "local_economy": "Local economy",
+        "governance": "Governance",
+        "accessibility": "Accessibility",
+        "crisis_response": "Crisis response"
+      },
+      "measures": {
+        "m_open_courtyards": "Open the courtyards to the neighbourhood",
+        "m_common_room_hours": "Evening hours for the common room",
+        "m_bus_evening_run": "Restore the evening bus run",
+        "m_safe_crossing": "A safe crossing at the Crossroads",
+        "m_care_rounds": "Paid neighbourhood care rounds",
+        "m_carers_relief": "Relief shifts for the carers",
+        "m_youth_court": "A youth court with a real mandate",
+        "m_zoe_afterschool": "After-school spaces children reach alone",
+        "m_info_point_multilingual": "A multilingual info point",
+        "m_rumor_desk": "A rumours desk — check before it spreads",
+        "m_cool_rooms": "Cool rooms for the next heatwave",
+        "m_flood_kit": "Flood kits on every block",
+        "m_local_market_day": "A monthly local market day",
+        "m_repair_workshop": "A permanent repair workshop",
+        "m_open_commission": "An open commission with public minutes",
+        "m_neighborhood_tables": "Neighbourhood tables in every district",
+        "m_ramps_hours": "Ramps first, then meeting times that work",
+        "m_accessible_info": "Accessible schedules and signage",
+        "m_alert_network": "A door-to-door alert network",
+        "m_mutual_aid_roster": "A mutual-aid roster for crisis days"
+      }
     }
   }
 }
