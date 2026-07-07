@@ -1147,3 +1147,131 @@ body.high-contrast .mp-badge {
   padding: 6px 10px;
   font-size: calc(14px * var(--font-scale, 1));
 }
+
+/* ---------- Account panel (👤) + player dashboard (📊) ---------- */
+
+.account-toggle,
+.dashboard-toggle {
+  position: fixed;
+  top: 12px;
+  z-index: 40;
+  padding: 8px 14px;
+  font-size: calc(13px * var(--font-scale, 1));
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #fff8ec;
+  cursor: pointer;
+}
+
+.account-toggle {
+  right: 12px;
+}
+
+.dashboard-toggle {
+  right: 132px;
+}
+
+.account-panel,
+.dashboard-panel {
+  position: fixed;
+  top: 56px;
+  right: 12px;
+  z-index: 45;
+  width: min(360px, calc(100vw - 24px));
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 14px 16px;
+  border: 1px solid #b89a6a;
+  border-radius: 14px;
+  background: #fff8ec;
+  color: #2a2723;
+  box-shadow: 0 10px 26px rgba(42, 39, 35, 0.3);
+  font-size: calc(14px * var(--font-scale, 1));
+}
+
+.account-panel h3,
+.dashboard-panel h3 {
+  margin: 0 0 8px;
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
+.dashboard-panel h4 {
+  margin: 12px 0 4px;
+  font-size: calc(14px * var(--font-scale, 1));
+}
+
+.account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.account-field input {
+  padding: 6px 8px;
+  border: 1px solid #b89a6a;
+  border-radius: 8px;
+  font-size: calc(14px * var(--font-scale, 1));
+}
+
+.account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.account-actions button {
+  padding: 6px 12px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #f0dfc2;
+  cursor: pointer;
+  font-size: calc(13px * var(--font-scale, 1));
+}
+
+.account-status {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #f0e6d2;
+  font-size: calc(13px * var(--font-scale, 1));
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.dashboard-tabs button {
+  padding: 5px 10px;
+  border: 1px solid #b89a6a;
+  border-radius: 999px;
+  background: #fff8ec;
+  cursor: pointer;
+  font-size: calc(13px * var(--font-scale, 1));
+}
+
+.dashboard-tabs button[aria-pressed="true"] {
+  background: #e0a458;
+  font-weight: 700;
+}
+
+.dashboard-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.dashboard-broken {
+  text-decoration: line-through;
+  color: #8a4a3c;
+}
+
+body.high-contrast .account-panel,
+body.high-contrast .dashboard-panel {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+}

@@ -221,6 +221,49 @@
         "practical": "pratico",
         "accessible": "accessibile"
       }
+    },
+    "account": {
+      "toggle": "👤 Account",
+      "hint": "Registrati o accedi — riprendi la partita da qualsiasi dispositivo",
+      "title": "Account",
+      "signedInAs": "Connesso come",
+      "email": "Email",
+      "password": "Password",
+      "displayName": "Nome visibile (mostrato alla classe)",
+      "signIn": "Accedi",
+      "signUp": "Registrati",
+      "signOut": "Esci",
+      "welcome": "Benvenutə! La tua identità ora viaggia con te.",
+      "error": "Qualcosa è andato storto",
+      "confirmEmail": "Account creato — conferma l'email, poi accedi.",
+      "pushSave": "⬆ Salva sul cloud",
+      "pullSave": "⬇ Riprendi dal cloud",
+      "pushOk": "Salvato sul cloud.",
+      "pushFail": "Salvataggio cloud non riuscito — controlla la connessione.",
+      "pullOk": "Partita ripristinata dal cloud.",
+      "pullNone": "Nessun salvataggio cloud — gioca, poi usa Salva sul cloud."
+    },
+    "dashboard": {
+      "toggle": "📊 La mia dashboard",
+      "hint": "La tua partita e il tuo contributo alla città condivisa",
+      "title": "Dashboard giocatore",
+      "tab": {
+        "game": "La mia partita",
+        "contribution": "Il mio contributo"
+      },
+      "chapter": "Capitolo",
+      "day": "Giorno",
+      "activeQuests": "Quest attive",
+      "promises": "Le mie promesse",
+      "none": "— ancora niente —",
+      "loading": "Leggo il registro della città…",
+      "deadline": "entro il giorno",
+      "myEvents": "I miei eventi nel registro",
+      "myQuests": "Quest che la città riconosce a me",
+      "myMaps": "Le mie empathy map",
+      "promisesKept": "Promesse mantenute / rotte",
+      "resourcesContributed": "Il tessuto che ho aiutato a tessere",
+      "classTotals": "Tutta la classe"
     }
   },
   "content": {

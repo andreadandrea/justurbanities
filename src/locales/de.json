@@ -221,6 +221,49 @@
         "practical": "practical",
         "accessible": "accessible"
       }
+    },
+    "account": {
+      "toggle": "👤 Account",
+      "hint": "Register or sign in — resume your game on any device",
+      "title": "Account",
+      "signedInAs": "Signed in as",
+      "email": "Email",
+      "password": "Password",
+      "displayName": "Display name (shown to the class)",
+      "signIn": "Sign in",
+      "signUp": "Register",
+      "signOut": "Sign out",
+      "welcome": "Welcome! Your identity now travels with you.",
+      "error": "Something went wrong",
+      "confirmEmail": "Account created — check your email to confirm it, then sign in.",
+      "pushSave": "⬆ Save to cloud",
+      "pullSave": "⬇ Resume from cloud",
+      "pushOk": "Saved to the cloud.",
+      "pushFail": "Cloud save failed — check the connection.",
+      "pullOk": "Game restored from the cloud.",
+      "pullNone": "No cloud save yet — play, then use Save to cloud."
+    },
+    "dashboard": {
+      "toggle": "📊 My dashboard",
+      "hint": "Your game and your contribution to the shared city",
+      "title": "Player dashboard",
+      "tab": {
+        "game": "My game",
+        "contribution": "My contribution"
+      },
+      "chapter": "Chapter",
+      "day": "Day",
+      "activeQuests": "Active quests",
+      "promises": "My promises",
+      "none": "— nothing yet —",
+      "loading": "Reading the city log…",
+      "deadline": "by day",
+      "myEvents": "My events in the city log",
+      "myQuests": "Quests the city credits to me",
+      "myMaps": "My empathy maps",
+      "promisesKept": "Promises kept / broken",
+      "resourcesContributed": "Fabric I helped weave",
+      "classTotals": "Whole class"
     }
   },
   "content": {
