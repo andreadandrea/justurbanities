@@ -45,17 +45,29 @@ export class EffectResolver {
       case "addResource": {
         const key = effect.key as keyof typeof this.gameState.resources;
         this.gameState.resources[key] = Number(this.gameState.resources[key] ?? 0) + effect.value;
+        // MP-1: resource changes are commutative increments in the event
+        // log, so a shared city folds them in any order (spec §2.2).
+        this.progressEventHandler?.("resource_delta", { key: effect.key, value: effect.value });
         break;
       }
       case "startQuest":
         this.questManager.startQuest(effect.questId);
         break;
-      case "completeObjective":
+      case "completeObjective": {
+        const wasCompleted = this.questManager.getQuestStatus(effect.questId) === "completed";
         this.questManager.completeObjective(effect.questId, effect.objectiveId);
+        if (!wasCompleted && this.questManager.getQuestStatus(effect.questId) === "completed") {
+          this.progressEventHandler?.("quest_completed", { questId: effect.questId });
+        }
         break;
-      case "completeQuest":
+      }
+      case "completeQuest": {
+        const wasCompleted = this.questManager.getQuestStatus(effect.questId) === "completed";
         this.questManager.completeQuest(effect.questId);
+        // First completion only: the shared city is first-event-wins.
+        if (!wasCompleted) this.progressEventHandler?.("quest_completed", { questId: effect.questId });
         break;
+      }
       case "createProgressEvent":
         this.progressEventHandler?.(effect.eventType, effect.payload);
         break;
