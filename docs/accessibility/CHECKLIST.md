@@ -42,7 +42,7 @@ Re-run this checklist whenever a new UI surface ships.
 - ✅ Toggle buttons expose pressed state via `aria-pressed` where stateful
   (art-style measures, minigame pile).
 - ✅ Decorative portraits have empty `alt`.
-- ⬜ Live-region announcements for resource changes (screen readers) — open.
+- ✅ Live-region announcements for resource changes (screen readers) — the HUD announces deltas ("Trust +1") and city-state transitions through a visually-hidden `aria-live="polite"` region (2026-07-07).
 
 ## How to verify
 

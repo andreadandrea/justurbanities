@@ -34,4 +34,12 @@ describe("accessibility plumbing (task 9.2)", () => {
   it("offers the documented text sizes", () => {
     expect(FONT_SCALES).toEqual([1, 1.25, 1.5]);
   });
+
+  it("announces resource changes through a polite live region", () => {
+    // Checklist open item: aria-live resource announcements.
+    const hud = readFileSync(join(__dirname, "../../src/ui/ResourceHud.ts"), "utf8");
+    expect(hud).toContain('setAttribute("aria-live", "polite")');
+    expect(hud).toContain("visually-hidden");
+    expect(css).toContain(".visually-hidden");
+  });
 });

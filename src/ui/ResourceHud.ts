@@ -16,8 +16,10 @@ export class ResourceHud {
   private readonly vitalityValue: HTMLElement;
   private readonly vitalityFill: HTMLElement;
   private readonly stateLabel: HTMLElement;
+  private readonly liveRegion: HTMLElement;
   private lastState = "fragmented";
   private lastSignature = "";
+  private lastResources: Partial<Resources> | null = null;
 
   constructor(root: HTMLElement, private readonly i18n: I18n) {
     this.panel = document.createElement("section");
@@ -66,6 +68,12 @@ export class ResourceHud {
     }
     this.panel.appendChild(list);
 
+    // a11y (task 9.2 open item): announce fabric changes to screen readers.
+    this.liveRegion = document.createElement("p");
+    this.liveRegion.className = "visually-hidden";
+    this.liveRegion.setAttribute("aria-live", "polite");
+    this.panel.appendChild(this.liveRegion);
+
     root.appendChild(this.panel);
 
     i18n.onChange(() => this.renderLabels());
@@ -87,7 +95,9 @@ export class ResourceHud {
     const signature = `${vitality}|${POSITIVE_RESOURCES.map((k) => resources[k]).join(",")}`;
     if (signature === this.lastSignature) return;
     this.lastSignature = signature;
+    this.announce(resources, state);
     this.lastState = state;
+    this.lastResources = { ...resources };
 
     this.vitalityValue.textContent = String(vitality);
     this.vitalityFill.style.width = `${vitality}%`;
@@ -101,5 +111,21 @@ export class ResourceHud {
       const el = this.values.get(key);
       if (el) el.textContent = String(resources[key]);
     }
+  }
+
+  /** Politely announce deltas ("Trust +1") and city-state transitions. */
+  private announce(resources: Resources, state: string): void {
+    if (!this.lastResources) return; // first paint is not a change
+    const parts: string[] = [];
+    for (const key of POSITIVE_RESOURCES) {
+      const delta = resources[key] - (this.lastResources[key] ?? 0);
+      if (delta !== 0) {
+        parts.push(`${this.i18n.t(`ui.resources.${key}`)} ${delta > 0 ? "+" : ""}${delta}`);
+      }
+    }
+    if (state !== this.lastState) {
+      parts.push(this.i18n.t(`ui.state.${state}`));
+    }
+    if (parts.length) this.liveRegion.textContent = parts.join(", ");
   }
 }
