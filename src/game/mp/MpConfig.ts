@@ -25,6 +25,17 @@ export function mpEnabled(search: string): boolean {
   return new URLSearchParams(search).get("mp") === "1";
 }
 
+/** MP-4: read-only teacher dashboard (`?facilitator=1`). */
+export function facilitatorEnabled(search: string): boolean {
+  return new URLSearchParams(search).get("facilitator") === "1";
+}
+
+/** Session code passed on the URL (`?session=ABC234`) — facilitator flow. */
+export function sessionCodeFromUrl(search: string): string | undefined {
+  const code = new URLSearchParams(search).get("session")?.toUpperCase();
+  return code || undefined;
+}
+
 /**
  * The remote adapter to use. Supabase only when: flag on, session joined,
  * and the build ships the EU-project config. Everything else stays on the

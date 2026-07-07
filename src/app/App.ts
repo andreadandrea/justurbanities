@@ -11,8 +11,18 @@ import { SyncQueue } from "../sync/SyncQueue";
 import { SyncEngine } from "../sync/SyncEngine";
 import { createRemoteApi } from "../sync/RemoteApiClient";
 import { SupabaseRemoteApi } from "../sync/SupabaseRemoteApi";
-import { chooseRemoteAdapter, mpEnabled, MP_SESSION_SETTING, type MpJoinInfo } from "../game/mp/MpConfig";
+import {
+  chooseRemoteAdapter,
+  facilitatorEnabled,
+  mpEnabled,
+  sessionCodeFromUrl,
+  MP_SESSION_SETTING,
+  type MpJoinInfo
+} from "../game/mp/MpConfig";
 import { MpJoinPanel } from "../ui/MpJoinPanel";
+import { FacilitatorPanel } from "../ui/FacilitatorPanel";
+import { fetchSessionEvents } from "../sync/SupabaseRemoteApi";
+import type { CityEvent } from "../game/mp/CityReducer";
 import { CommunityCenterScene } from "../scenes/CommunityCenterScene";
 import { CrossroadsScene } from "../scenes/CrossroadsScene";
 import { DistrictScene, type DistrictConfig } from "../scenes/DistrictScene";
@@ -485,6 +495,38 @@ export class App {
         }
       });
       applyMpAdapter(joined, false); // the final start() boots whichever engine is current
+    }
+
+    // MP-4 (?facilitator=1): read-only dashboard + class report export.
+    // With Supabase configured it reads the remote session log (the code
+    // comes from ?session=CODE or the joined session); otherwise it folds
+    // the LOCAL event log — which also covers pass-and-play on one device.
+    if (facilitatorEnabled(window.location.search)) {
+      const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
+      const facilitatorCode = sessionCodeFromUrl(window.location.search) ?? joined?.code ?? "LOCAL";
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+      const loadEvents = async (): Promise<CityEvent[]> => {
+        if (supabaseUrl && supabaseAnonKey && facilitatorCode !== "LOCAL") {
+          return fetchSessionEvents({ url: supabaseUrl, anonKey: supabaseAnonKey, sessionCode: facilitatorCode });
+        }
+        const local = await this.progressRepository.listBySession(session.id);
+        return local.map((event) => ({
+          id: event.id,
+          userId: event.userId,
+          type: event.type,
+          payload: event.payload,
+          createdAt: event.createdAt
+        }));
+      };
+      new FacilitatorPanel({
+        root: this.elements.appRoot,
+        i18n,
+        sessionCode: () => facilitatorCode,
+        loadEvents,
+        playerName: (playerId) =>
+          joined && joined.playerId === playerId ? joined.displayName : displayNames.get(playerId) ?? playerId
+      });
     }
 
     this.loop = new GameLoop({

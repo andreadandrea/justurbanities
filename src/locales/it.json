@@ -195,6 +195,18 @@
       "join": "Entra nella città",
       "invalid": "Controlla il codice (6 caratteri, senza 0/O/1/I) e il tuo nome.",
       "joinedAs": "In sessione come"
+    },
+    "facilitator": {
+      "toggle": "🧑‍🏫 Classe",
+      "title": "Facilitatore — cruscotto di sessione",
+      "hint": "Cruscotto di classe in sola lettura",
+      "players": "Giocatori",
+      "resources": "Risorse collettive",
+      "promises": "Bacheca delle promesse",
+      "crises": "Esiti delle crisi",
+      "plan": "Piano firmato",
+      "export": "⬇ Report di classe (JSON)",
+      "loadFailed": "Impossibile caricare il log di sessione — controlla la connessione e riprova."
     }
   },
   "content": {
