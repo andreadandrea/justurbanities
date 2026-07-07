@@ -189,6 +189,20 @@ export const districtFileSchema = z.object({
             layer: z.enum(["stairs", "fear", "language", "costs", "schedules", "physical"])
           })
         )
+        .optional(),
+      // Story hotspots: condition-gated places that open a dialogue
+      // (e.g. §4.4 Courtyard 17 assessment, §3.3 Elena's site visit).
+      pois: z
+        .array(
+          z.object({
+            id: z.string().min(1),
+            x: z.number(),
+            y: z.number(),
+            labelKey: z.string().min(1),
+            dialogueId: z.string().min(1),
+            conditions: z.array(conditionSchema).optional()
+          })
+        )
         .optional()
     })
   )

@@ -1012,6 +1012,72 @@
             "close": "«Arrivare è già partecipare.»"
           }
         }
+      },
+      "sigrid_m24": {
+        "start": {
+          "text": "Le giurie amano i rendering. Le persone usano le prese elettriche, i bagni e le sedie che non si rompono.",
+          "choices": {
+            "engage": "«Allora giudichiamo il cortile da quello che la gente può usare.»",
+            "later": "Non ora."
+          }
+        },
+        "brief": {
+          "text": "Maya posa il disegno di Zoe: «E gli orari. Uno spazio aperto quando tutti lavorano è chiuso, anche se è bellissimo.» Porta la scheda al Cortile 17 dei Grey Yards. Quattro lenti: estetico, sociale, pratico, accessibile. Sii onesta su tutte e quattro.",
+          "choices": {
+            "go": "«Utile, non bello. Capito.»"
+          }
+        }
+      },
+      "courtyard_assessment": {
+        "start": {
+          "text": "Cortile 17, blocco per appunti in mano. Quattro lenti, una scheda onesta.",
+          "choices": {
+            "begin": "Inizia la valutazione.",
+            "leave": "Torna più tardi."
+          }
+        },
+        "aesthetic": {
+          "text": "ESTETICO — Gli archi reggono e sotto lo sporco sopravvive un murale. Un rendering venderebbe questo posto in un attimo.",
+          "choices": {
+            "works": "Segna: la bellezza c'è già — serve cura, non design.",
+            "fails": "Segna: anche la bellezza va riparata prima che si veda."
+          }
+        },
+        "social": {
+          "text": "SOCIALE — Due panchine che si danno le spalle. Nessun posto per sedersi insieme, niente per i bambini mentre gli adulti parlano.",
+          "choices": {
+            "works": "Segna: le ossa per stare insieme ci sono — panchine, ombra, un angolo.",
+            "fails": "Segna: niente qui invita qualcuno a restare."
+          }
+        },
+        "practical": {
+          "text": "PRATICO — Una presa elettrica, morta. Niente rubinetto. Il bagno più vicino è un bar che si aspetta che tu consumi.",
+          "choices": {
+            "works": "Segna: con una presa funzionante e un rubinetto, qui si fanno eventi.",
+            "fails": "Segna: prese, acqua, bagni — mancano tutte le cose invisibili."
+          }
+        },
+        "accessible": {
+          "text": "ACCESSIBILE — Tre gradini all'unico cancello. Niente rampa, niente corrimano. Un passeggino o una sedia a rotelle semplicemente non entrano.",
+          "choices": {
+            "works": "Segna: una rampa al cancello lo aprirebbe a tutti.",
+            "fails": "Segna: così com'è, il cortile sceglie i suoi visitatori."
+          }
+        },
+        "done": {
+          "text": "La scheda è piena. Utile, non bello: ora il sabato delle riparazioni sa da dove cominciare.",
+          "choices": {
+            "close": "Chiudi il blocco."
+          }
+        }
+      },
+      "sigrid_m24_resolution": {
+        "start": {
+          "text": "Buona scheda. Niente rendering, niente promesse — prese, gradini, panchine, orari. Quando arriva il sabato delle riparazioni, partiamo esattamente da qui.",
+          "choices": {
+            "close": "«Utile, non bello.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1188,6 +1254,13 @@
           "source_pablo": "Chiedi a Pablo chi ha smesso di aprire la porta.",
           "source_gwen": "Chiedi a Gwen chi non sale più sulla 14.",
           "source_amin": "Chiedi ad Amin chi non entra più nel bar."
+        }
+      },
+      "M24": {
+        "title": "Utile, non bello",
+        "description": "Valuta il Cortile 17 su quattro assi — estetico, sociale, pratico, accessibile. La scheda onesta pre-compila il sabato delle riparazioni.",
+        "objectives": {
+          "assess_courtyard": "Valuta il cortile con tutte e quattro le lenti."
         }
       }
     },
@@ -1502,6 +1575,11 @@
       "office_forms": {
         "label": "Moduli in una lingua sola",
         "text": "Lo sportello comunale di Lake Edge. Moduli in una lingua sola; la fila ne parla cinque."
+      }
+    },
+    "pois": {
+      "courtyard_17": {
+        "label": "Cortile 17 — valutazione"
       }
     }
   }

@@ -2,6 +2,17 @@ import type { RenderableEntity } from "../types/Entity";
 import type { WorldSize } from "../engine/CanvasRenderer";
 import { BaseScene, type Interactable, type SceneDeps } from "./BaseScene";
 import type { BarrierPin } from "../game/story/BarrierMap";
+import type { Condition } from "../types/Dialogue";
+
+/** Condition-gated hotspot opening a dialogue (assessments, site visits). */
+export type DistrictPoi = {
+  id: string;
+  x: number;
+  y: number;
+  labelKey: string;
+  dialogueId: string;
+  conditions?: Condition[];
+};
 
 export type DistrictConfig = {
   id: string;
@@ -11,6 +22,8 @@ export type DistrictConfig = {
   landmark?: { x: number; y: number; width: number; height: number; color: string; label: string };
   /** §4.2 Mission 2 — documentable lived-barrier spots. */
   barriers?: BarrierPin[];
+  /** Story hotspots (e.g. §4.4 Courtyard 17 assessment). */
+  pois?: DistrictPoi[];
 };
 
 /**
@@ -59,6 +72,24 @@ export class DistrictScene extends BaseScene {
     return (this.config.barriers ?? []).filter((pin) => !this.deps.barrierMap.documented(pin.id));
   }
 
+  /** Story hotspots whose conditions currently hold. */
+  private activePois(): DistrictPoi[] {
+    return (this.config.pois ?? []).filter((poi) => this.deps.checkConditions(poi.conditions));
+  }
+
+  private poiEntity(poi: DistrictPoi): RenderableEntity {
+    return {
+      id: `poi_${poi.id}`,
+      label: this.deps.i18n.t(poi.labelKey),
+      x: poi.x,
+      y: poi.y,
+      width: 130,
+      height: 130,
+      color: "#6e9a5a",
+      interactive: true
+    };
+  }
+
   private barrierEntity(pin: BarrierPin): RenderableEntity {
     return {
       id: `barrier_${pin.id}`,
@@ -79,6 +110,10 @@ export class DistrictScene extends BaseScene {
         entity: this.barrierEntity(pin),
         onInteract: () =>
           this.dialogueRunner.run(`barrier_${pin.id}`, this.deps.i18n.t(`content.barriers.${pin.id}.label`))
+      })),
+      ...this.activePois().map((poi) => ({
+        entity: this.poiEntity(poi),
+        onInteract: () => this.dialogueRunner.run(poi.dialogueId, this.deps.i18n.t(poi.labelKey))
       })),
       {
         entity: this.returnDoor,
@@ -107,6 +142,7 @@ export class DistrictScene extends BaseScene {
     }
     renderer.drawEntities([
       ...this.activeBarrierPins().map((pin) => this.barrierEntity(pin)),
+      ...this.activePois().map((poi) => this.poiEntity(poi)),
       ...this.npcEntities(),
       this.returnDoor,
       this.playerEntity()
