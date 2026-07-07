@@ -9,6 +9,11 @@ type AssemblyPanelDeps = {
   npcName: (id: string) => string;
   /** Persist the save after meaningful steps (the plan lives in variables). */
   saveNow: () => void;
+  /**
+   * Resolve (and persist) the §9 ending id once the plan is signed.
+   * Optional so the panel works before the endings engine is wired.
+   */
+  ending?: () => string;
 };
 
 /**
@@ -358,6 +363,21 @@ export class AssemblyPanel {
           : "ui.assembly.done.withinMeans",
       ),
     ]);
+
+    // §7.8/§9 — the ending is computed once the pact is signed; the final
+    // shot is always a mirror, never a victory screen.
+    const endingId = this.deps.ending?.();
+    if (!endingId) return;
+    const epilogue = document.createElement("div");
+    epilogue.className = "assembly-epilogue";
+    const title = document.createElement("h4");
+    title.textContent = `${i18n.t("ui.assembly.done.epilogueTitle")} — ${i18n.t(`content.endings.${endingId}.title`)}`;
+    const text = document.createElement("p");
+    text.textContent = i18n.t(`content.endings.${endingId}.epilogue`);
+    const quote = document.createElement("em");
+    quote.textContent = `«${i18n.t(`content.endings.${endingId}.quote`)}»`;
+    epilogue.append(title, text, quote);
+    this.body.appendChild(epilogue);
   }
 
   // ---------- helpers ----------

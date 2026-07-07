@@ -141,7 +141,8 @@
         "title": "The pact is signed",
         "summary": "Summary",
         "overpromise": "The plan promises more than the city has — it will weigh on the ending.",
-        "withinMeans": "The plan stays within the city's means."
+        "withinMeans": "The plan stays within the city's means.",
+        "epilogueTitle": "Epilogue"
       }
     }
   },
@@ -1257,6 +1258,38 @@
         "m_accessible_info": "Accessible schedules and signage",
         "m_alert_network": "A door-to-door alert network",
         "m_mutual_aid_roster": "A mutual-aid roster for crisis days"
+      }
+    },
+    "endings": {
+      "thriving_network": {
+        "title": "Thriving Network",
+        "epilogue": "The map lights up district by district — not in the same colour: each in its own. The Community Center is still there, but it is one light among many. Zoe crosses Ben's Crossing on her own. In Amin's bar, Tom explains Article 9 to the Youth Court kids. The Fragmentation has not vanished: it has become the visible seam along which the city has learned to stitch.",
+        "quote": "Eurbania wasn't saved. It picked itself back up — which is another thing, and lasts longer."
+      },
+      "fragile_progress": {
+        "title": "Fragile Progress",
+        "epilogue": "Some neighbourhoods breathe, others remain in shadow. The pact is signed, with tight margins and real reviews. Gwen drives the last run — saved, for this year.",
+        "quote": "This is not the ending. It is the point where the story decides to go on."
+      },
+      "institutional_capture": {
+        "title": "Institutional Capture",
+        "epilogue": "The plan exists: bound, filed, quoted in press releases. The spaces have new plaques and office hours. Anna moves the meetings to Amin's bar — later and later, smaller and smaller.",
+        "quote": "The city won a document. The people lost a place."
+      },
+      "commons_without_voice": {
+        "title": "Commons Without Voice",
+        "epilogue": "The courtyards are open, the walls painted, the plants tended. But the same faces are missing from every opening-day photo. Samir looks at the full room and counts the right chairs with the wrong names.",
+        "quote": "A more colourful city is not yet a more just city."
+      },
+      "resistance": {
+        "title": "Resistance",
+        "epilogue": "The council votes down the pact. The network does not dissolve: it tightens. Pablo's rounds, Siobhan's channels, Amin's mixed tables — everything holds, without stamps, with effort. Elena, at the Town Hall, keeps a drawer full of drafts at the ready.",
+        "quote": "Vulnerable, autonomous, alive. Just waiting for the institution to come knocking again — politely, this time."
+      },
+      "fragmented": {
+        "title": "Fragmented",
+        "epilogue": "No collapse: only frictions that win. The big hall empty again, the noticeboard frozen, the Corporate's rendering hanging where Anna's map used to be. People still greet each other — from a distance. The map goes dark neighbourhood by neighbourhood, without a sound.",
+        "quote": "The Fragmentation didn't win a battle. It won by habit."
       }
     }
   }

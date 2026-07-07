@@ -141,7 +141,8 @@
         "title": "Il patto è firmato",
         "summary": "Riepilogo",
         "overpromise": "Il piano promette più di quanto la città abbia — peserà sul finale.",
-        "withinMeans": "Il piano resta nei mezzi della città."
+        "withinMeans": "Il piano resta nei mezzi della città.",
+        "epilogueTitle": "Epilogo"
       }
     }
   },
@@ -1257,6 +1258,38 @@
         "m_accessible_info": "Orari e segnaletica accessibili",
         "m_alert_network": "Una rete di allerta porta a porta",
         "m_mutual_aid_roster": "Una turnazione di mutuo aiuto per i giorni di crisi"
+      }
+    },
+    "endings": {
+      "thriving_network": {
+        "title": "Thriving Network",
+        "epilogue": "La mappa si accende distretto per distretto — non dello stesso colore: ciascuno del suo. Il Community Center è ancora lì, ma è una luce tra tante. Zoe attraversa da sola il Crossing di Ben. Nel bar di Amin, Tom spiega l'articolo 9 ai ragazzi di Youth Court. La Fragmentation non è sparita: è diventata il bordo visibile lungo cui la città ha imparato a cucire.",
+        "quote": "Eurbania non è stata salvata. Si è ripresa — che è un'altra cosa, e dura di più."
+      },
+      "fragile_progress": {
+        "title": "Fragile Progress",
+        "epilogue": "Alcuni quartieri respirano, altri restano in ombra. Il patto è firmato, con margini stretti e verifiche vere. Gwen guida l'ultima corsa — salvata, per quest'anno.",
+        "quote": "Non è il finale. È il punto in cui la storia decide di continuare."
+      },
+      "institutional_capture": {
+        "title": "Institutional Capture",
+        "epilogue": "Il piano esiste: rilegato, protocollato, citato nei comunicati. Gli spazi hanno targhe nuove e orari d'ufficio. Anna sposta le riunioni al bar di Amin, sempre più tardi, sempre più piccole.",
+        "quote": "La città ha vinto un documento. Le persone hanno perso un posto."
+      },
+      "commons_without_voice": {
+        "title": "Commons Without Voice",
+        "epilogue": "I cortili sono aperti, i muri dipinti, le piante curate. Ma nelle foto dell'inaugurazione mancano sempre le stesse facce. Samir guarda la sala piena e conta le sedie giuste con i nomi sbagliati.",
+        "quote": "Una città più colorata non è ancora una città più giusta."
+      },
+      "resistance": {
+        "title": "Resistance",
+        "epilogue": "Il consiglio boccia il patto. La rete non si scioglie: si stringe. Turni di Pablo, canali di Siobhan, tavoli misti di Amin — tutto regge, senza timbri, con fatica. Elena, in municipio, tiene un cassetto pieno di bozze pronte.",
+        "quote": "Vulnerabile, autonoma, viva. Aspetta solo che l'istituzione torni a bussare — stavolta educatamente."
+      },
+      "fragmented": {
+        "title": "Fragmented",
+        "epilogue": "Nessun crollo: solo attriti che vincono. La sala grande di nuovo vuota, la bacheca ferma, il rendering del Corporate appeso dove c'era la mappa di Anna. Le persone si salutano ancora — da lontano. La mappa si spegne quartiere per quartiere, senza rumore.",
+        "quote": "La Fragmentation non ha vinto una battaglia. Ha vinto l'abitudine."
       }
     }
   }

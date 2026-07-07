@@ -1,0 +1,77 @@
+{
+  "schema": "endings/v1",
+  "note": "§9 — six endings, first match wins (order is the tie-break policy: best first, flavored failures before the generic one, fragile_progress is the default middle). Metrics computed by EndingsEngine: R (sum of the 5 collective resources), frag, T (transformative crises), reactive (reactive crises), P (kept-promise ratio 0..1, 1 when none made), coverage/overpromise/absentGroups (assembly), n03 (engage|shortcut|none), trustCare, plus each resource. Thresholds are the ✳ first quantitative proposal — calibrate in playtests (task 9.4).",
+  "endings": [
+    {
+      "id": "thriving_network",
+      "when": {
+        "all": [
+          { "metric": "R", "op": "gte", "value": 25 },
+          { "metric": "frag", "op": "lte", "value": 2 },
+          { "metric": "coverage", "op": "gte", "value": 4 },
+          { "metric": "n03", "op": "eq", "value": "engage" },
+          { "metric": "P", "op": "gte", "value": 0.75 },
+          { "metric": "absentGroups", "op": "lte", "value": 1 }
+        ]
+      }
+    },
+    {
+      "id": "institutional_capture",
+      "when": {
+        "all": [
+          {
+            "any": [
+              { "metric": "n03", "op": "eq", "value": "shortcut" },
+              {
+                "all": [
+                  { "metric": "overpromise", "op": "eq", "value": true },
+                  { "metric": "voice", "op": "lte", "value": 3 }
+                ]
+              }
+            ]
+          },
+          { "metric": "trust", "op": "gte", "value": 6 },
+          { "metric": "commons", "op": "lte", "value": 3 }
+        ]
+      }
+    },
+    {
+      "id": "commons_without_voice",
+      "when": {
+        "any": [
+          {
+            "all": [
+              { "metric": "commons", "op": "gte", "value": 6 },
+              { "metric": "voice", "op": "lte", "value": 3 }
+            ]
+          },
+          { "metric": "absentGroups", "op": "gte", "value": 2 }
+        ]
+      }
+    },
+    {
+      "id": "resistance",
+      "when": {
+        "all": [
+          { "metric": "n03", "op": "neq", "value": "engage" },
+          { "metric": "trustCare", "op": "gte", "value": 12 },
+          { "metric": "T", "op": "gte", "value": 2 }
+        ]
+      }
+    },
+    {
+      "id": "fragmented",
+      "when": {
+        "any": [
+          { "metric": "R", "op": "lte", "value": 12 },
+          { "metric": "reactive", "op": "gte", "value": 3 },
+          { "metric": "P", "op": "lte", "value": 0.25 }
+        ]
+      }
+    },
+    {
+      "id": "fragile_progress",
+      "default": true
+    }
+  ]
+}
