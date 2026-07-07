@@ -207,6 +207,11 @@
       "plan": "Piano firmato",
       "export": "⬇ Report di classe (JSON)",
       "loadFailed": "Impossibile caricare il log di sessione — controlla la connessione e riprova."
+    },
+    "minigame": {
+      "pileEmpty": "Il mucchio è vuoto.",
+      "score": "Combinazioni valide",
+      "finish": "Chiudi il sabato"
     }
   },
   "content": {
@@ -1353,6 +1358,29 @@
         "title": "Fragmented",
         "epilogue": "Nessun crollo: solo attriti che vincono. La sala grande di nuovo vuota, la bacheca ferma, il rendering del Corporate appeso dove c'era la mappa di Anna. Le persone si salutano ancora — da lontano. La mappa si spegne quartiere per quartiere, senza rumore.",
         "quote": "La Fragmentation non ha vinto una battaglia. Ha vinto l'abitudine."
+      }
+    },
+    "minigames": {
+      "modular_repair": {
+        "title": "Modular Repair — un sabato",
+        "brief": "Sigrid: «Budget: quasi zero. Materiali: quelli che vedi. Tempo: un sabato. Si può fare molto, se nessuno pretende il perfetto.»",
+        "retry": "Sigrid: «Riproviamo. Il legno perdona.»",
+        "materials": {
+          "pallet_wood": "Legno di pallet",
+          "old_door": "Una vecchia porta",
+          "tarp": "Un telone",
+          "rope": "Corda",
+          "bricks": "Mattoni",
+          "paint_cans": "Barattoli di vernice",
+          "crates": "Cassette",
+          "net_curtain": "Una tenda a rete"
+        },
+        "needs": {
+          "bench": "Una panchina che regge",
+          "shade": "Ombra per le ore calde",
+          "planter": "Una fioriera che sta ferma",
+          "noticeboard": "Una bacheca che si legge"
+        }
       }
     }
   }

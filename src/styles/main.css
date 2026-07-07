@@ -981,3 +981,90 @@ body,
   cursor: pointer;
   font-weight: 700;
 }
+
+/* ---------- Mini-games (task 9.1) ---------- */
+.minigame-panel {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 46;
+  width: min(520px, 94vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 16px 18px;
+  border: 1px solid #b89a6a;
+  border-radius: 12px;
+  background: #fff8ec;
+  box-shadow: 0 12px 32px rgba(42, 39, 35, 0.28);
+  font-size: 13px;
+}
+
+.minigame-panel[hidden] {
+  display: none;
+}
+
+.minigame-body {
+  display: grid;
+  gap: 10px;
+}
+
+.minigame-body h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.minigame-body p {
+  margin: 0;
+}
+
+.minigame-pile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border: 1px dashed #b89a6a;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.minigame-panel button {
+  border: 1px solid #b89a6a;
+  border-radius: 8px;
+  background: #fffdf6;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.minigame-pile button[aria-pressed="true"] {
+  background: #e8f0dc;
+  border-color: #4b7a3d;
+}
+
+.minigame-need {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.minigame-need[data-status="valid"] .minigame-need-label { border-color: #4b7a3d; background: #e8f0dc; }
+.minigame-need[data-status="invalid"] .minigame-need-label { border-color: #a2412c; }
+
+.minigame-piece {
+  font-style: italic;
+}
+
+.minigame-hint {
+  color: #a2412c;
+  font-size: 11px;
+}
+
+.minigame-score {
+  color: #6d6459;
+}
+
+.minigame-finish {
+  justify-self: start;
+  font-weight: 700;
+}

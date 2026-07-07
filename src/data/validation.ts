@@ -337,6 +337,46 @@ export const assemblyFileSchema = z
     }
   });
 
+// ---------- minigames.json (task 9.1) ----------
+
+export const minigamesFileSchema = z
+  .object({
+    schema: z.string().optional(),
+    note: z.string().optional(),
+    minigames: z.array(
+      z.object({
+        id: z.string().min(1),
+        triggerVariable: z.string().min(1),
+        doneVariable: z.string().min(1),
+        materials: z
+          .array(z.object({ id: z.string().min(1), tags: z.array(z.string().min(1)).nonempty() }))
+          .min(1),
+        needs: z
+          .array(
+            z.object({
+              id: z.string().min(1),
+              accepts: z.array(z.string().min(1)).nonempty(),
+              required: z.number().int().positive()
+            })
+          )
+          .min(1),
+        rewardPerValidNeed: z.array(effectSchema).nonempty()
+      })
+    )
+  })
+  .superRefine((file, ctx) => {
+    for (const minigame of file.minigames) {
+      const pieces = minigame.materials.length;
+      const slots = minigame.needs.reduce((sum, need) => sum + need.required, 0);
+      if (pieces < slots) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Minigame "${minigame.id}": ${slots} slots but only ${pieces} materials — unsolvable.`
+        });
+      }
+    }
+  });
+
 // ---------- endings.json (task 7.2) ----------
 
 const endingConditionSchema = z.object({
