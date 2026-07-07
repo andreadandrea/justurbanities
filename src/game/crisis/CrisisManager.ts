@@ -61,6 +61,17 @@ export class CrisisManager {
     const tier = this.evaluateTier(crisis);
     this.state.variables[crisis.resultVariable] = tier;
     this.resolver.applyAll(crisis.tiers[tier].effects);
+
+    // Kept-promise triggers: a transformative outcome is the community
+    // delivering — active promises tied to this crisis's buffer quests
+    // are kept (the PromiseManager scores them on the next clock tick).
+    if (tier === "transformative") {
+      for (const promiseId of crisis.keepsPromises ?? []) {
+        if (this.state.variables[promiseId] === "active") {
+          this.state.variables[promiseId] = "kept";
+        }
+      }
+    }
     this.logProgress?.("crisis_resolved", {
       crisisId: crisis.id,
       day: crisis.day,

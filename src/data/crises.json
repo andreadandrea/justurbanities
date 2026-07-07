@@ -90,7 +90,10 @@
             }
           ]
         }
-      }
+      },
+      "keepsPromises": [
+        "promiseSupportLonelyElders"
+      ]
     },
     {
       "id": "CRISIS_RUMOR",
@@ -165,7 +168,10 @@
             }
           ]
         }
-      }
+      },
+      "keepsPromises": [
+        "promiseOpenInfoPoint"
+      ]
     },
     {
       "id": "CRISIS_OFFER",
@@ -240,7 +246,11 @@
             }
           ]
         }
-      }
+      },
+      "keepsPromises": [
+        "promiseRepairDay",
+        "promiseOpenCommonRoom"
+      ]
     },
     {
       "id": "CRISIS_CLOSURE",
@@ -320,7 +330,10 @@
         "reactive": {
           "conditions": []
         }
-      }
+      },
+      "keepsPromises": [
+        "promiseAccessibleBusInfo"
+      ]
     },
     {
       "id": "CRISIS_FLOOD",
@@ -400,7 +413,11 @@
             }
           ]
         }
-      }
+      },
+      "keepsPromises": [
+        "promiseSaferCrossing",
+        "promiseClimatePrep"
+      ]
     }
   ]
 }
