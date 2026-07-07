@@ -3,45 +3,45 @@
 Quick context for continuing development in a fresh session.
 
 ## Repo & deploy
-- **Branch:** `main` (feature branches merged with `--no-ff`, deleted on merge).
-- **⚠ 75+ local commits NOT pushed** — no GitHub credentials on this Mac (no `gh`, empty keychain, no SSH keys). First thing: authenticate (`brew install gh && gh auth login`) and `git push origin main`.
-- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main` — currently STALE, shows a pre-Phase-5 build).
-- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (**261 tests**).
+- **Branch:** `main` (feature branches merged with `--no-ff`, deleted on merge). **Everything is pushed** — origin/main is in sync.
+- **Live preview:** https://andreadandrea.github.io/justurbanities/ (auto-deploys on push to `main`).
+- **Stack:** TypeScript + Vite + Canvas 2D, offline-first (Dexie/IndexedDB), PWA. No framework (see `AGENTS.md`). `npm run dev` / `npm run build` / `npm test` (**300 tests**).
 
 ## Read first (for the next agent)
-- `../DEV_PLAN.md` (in the design folder, NOT the repo) — **ALL phases 0–9 are now complete**; next work comes from the list below or new direction from Andrea.
+- `../DEV_PLAN.md` (in the design folder, NOT the repo) — ALL phases 0–9 complete; the content-debt session notes are at the bottom.
 - `AGENTS.md` — hard technical rules.
 - `docs/game-design/CORE_THEME.md`, `docs/game-design/GAMEPLAY_LOOP.md` — design pillars.
 - `docs/specs/SPEC_Dual_Art_Style.md`, `docs/specs/SPEC_Multiplayer.md`.
 
-## Done (this session, 2026-07-07 — Phases 7, 8, 9: the DEV_PLAN is COMPLETE)
-- **7.1 Assembly engine:** `assembly.json` (19 attendees with groups + invite fallbacks, 10 stories/data, 3 conflicts, 20 measures × 10 categories, tuning) + `AssemblyEngine` (5 phases §7, whole state JSON-serialized in `variables.assemblyState`, resumes mid-assembly) + `AssemblyPanel` 🏛. Crisis Week completion raises `assembly_ready`; debug button too. Ending signals: `overpromise`, `assemblyCoverage`, `assemblyAbsentGroups`, `assemblyEvasions`, `assemblyTone`.
-- **7.2 Endings engine:** `endings.json` (recursive all/any rules, ordered first-match, `fragile_progress` default; ≥2 absent groups blocks Thriving) + pure `computeEndingMetrics`/`resolveEnding`; `endingId` sticky in the save; epilogue (canon §9 EN/IT) in the assembly done view.
-- **7.3 Report v2:** `buildReport` 2.0 — lists Who arrived / What changed / What was missed from progress_events + 3 debrief cards (Guida 06 §3) with evidence + ending; `printableReportHtml` (print → PDF offline) + 🖨 button.
-- **8.1 MP-1:** `SessionModel` (6-char codes, pseudonymous players, TTL 30d) + `CityReducer` (deterministic total order + dedupe; commutative resource deltas; quests/crises first-event-wins with `questTakenByOther` ✳ hook; per-owner promises; last plan wins). `EffectResolver` now emits `resource_delta` and `quest_completed` — the single-player log is merge-safe.
-- **8.2 MP-2:** `SupabaseRemoteApi` (fetch/PostgREST, no SDK, swappable `RemoteApiAdapter`); pure `chooseRemoteAdapter` (Supabase ONLY with `?mp=1` + joined + env config, else fake = zero network, test-enforced); `MpJoinPanel` join-by-code; `docs/mp/session_events.sql` (table+RLS+30d purge). **Needs real provisioning: Supabase EU project + `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` at build time.**
-- **8.3 MP-3:** reducer collects the union of empathy maps; `applySharedCity` folds the city into a client (spec §3 split, idempotent, promises pre-scored). AC test: 2 devices → merge → assembly on A with B's stories/NPCs → plan back in the log.
-- **8.4 MP-4:** `ClassReport` + `fetchSessionEvents` + `FacilitatorPanel` 🧑‍🏫 behind `?facilitator=1` (remote via `?session=CODE`, local log otherwise) + JSON class export.
-- **9.1 Minigame:** reusable `AllocationMinigame` + `minigames.json` (zod, solvability-checked) + `MinigamePanel`; Modular Repair triggered by `sigrid_n05` engage (move to ch.3 M2 when that structure ships); Commons +1 per valid need via EffectResolver.
-- **9.2 Accessibility:** dialogue hotkeys 1–9 + autofocus; typing guard in InputManager; `:focus-visible`; all font-sizes via `--font-scale` (⚙ 100/125/150%); high-contrast mode; `docs/accessibility/CHECKLIST.md` (open: DOM mirror for canvas hotspots, live regions).
-- **9.3 Playtest:** `PlaytestInstrumentation` → `node_timing` (per-node ms + closing choice) and `day_resources` events; DialogueManager hooks; DebugPanel raw JSON export (M-E protocol).
-- **9.4 Balancing:** `balancing.json` (starting resources, promise scoring, vitality formula/thresholds) — no gameplay threshold hardcoded; other knobs live in crises/endings/assembly/minigames json.
+## Done (this session, 2026-07-07 — content debt: ch.2–3 mission structure, all of Narrative v2 §4–§5)
+- **Ch.2 M2 (M22) "The Map Is Not the Territory":** `BarrierMap` + one documentable barrier pin per district (`districts.json barriers`, zod layer enum). Voice +1 per pin (max 3); 3rd pin completes M22. ✳ Samir's ch.1 `fence_photographed` seeds the first pin without double Voice (`barrierMap.sync()` on dialogue end/boot).
+- **Ch.2 M3 (M23) "Who Is Missing?":** cross 3 sources (Pablo/Gwen/Amin, placements retire after their note); hooks set `missing_group_elders/no_language/youth` + `missing_group` events (→N11/N16/N14); Samir hook + resolution at the Center.
+- **Ch.2 M4 (M24) "Useful, Not Beautiful":** generic **district POIs** (condition-gated hotspots in `districts.json pois`, `SceneDeps.checkConditions`); Courtyard 17 assessment on 4 axes → `m24_*` verdict variables.
+- **Ch.2 closing:** `StoryDirector.chapter2GateMet` (3 district first-visits + `listenBeforeFixingDone`) → ensemble scene → `chapter3_unlocked`, `ruben_curious` (2nd setter), `chapter_advanced`.
+- **Ch.3 M1 (M31) "The First Promise":** Anna, 6 canon options mapped to registry promises (Tom/Ben/Lia/Gwen/Pablo/Sigrid); the choice activates exactly that promise; scoring rides `PromiseManager`.
+- **Ch.3 M2 (M32) "Make It Usable":** minigame trigger moved off `sigrid_n05` onto `sigrid_m32`; `minigames.json` gained `questId`/`objectiveId` (panel completion completes the mission); M24 sheet pre-fills flagged axes in the panel (`ui.minigame.prefill/axes`). Gate: chapter 3 + N05 completed.
+- **Ch.3 M3 (M33) "The Invitation Problem":** 3-step composer (tone/languages/channels → `m33_*`, `invitation_ready`); ✳ `invito_da_correggere` unlocks Samir signing (Voice +1).
+- **Ch.3 M4 (M34) "Care Is Infrastructure":** 4 kit elements, Care +1 each (attendance flows through assembly `invitedConditions` care thresholds); N10 hook in text; N02 completed → Ben builds the ramp (`careKit_ramp_by_ben`).
+- **Ch.3 M6 (M36) "Local Economy, Common Good":** Luca's limit — accept (+Commons, `shop_net_extended`) or push (`luca_pulled_back`).
+- **Ch.3 closing:** `StoryDirector.chapter3GateMet` (3 of `CH3_INTERVENTIONS` = M31/M32/M33/M34/M36/E01/N08) → §5.9 complication (rumor/OFFER/CLOSURE/HEATWAVE+FLOOD seeds as `crisis_seed` events; Giorgia beat: Care −1 unless N10 done) → **`crisis_week_ready` now set by content** (debug button remains a shortcut).
+- **✳ Elena's site visit as a played event:** `route_elena` pauses at the detour (`elena_route_stage="site_visit"`), only the Grey Yards bus runs early, the courtyard POI carries Ruben + the dilemma (`technical_grounded` avoids the PDF penalty); **Town Hall district scene** added (N03 + E01 knowledge table moved there, counter-hours barrier pin).
+- **Kept-promise triggers:** `crises.json keepsPromises` — a transformative outcome keeps ACTIVE promises of its buffer quests (HEATWAVE→elders, RUMOR→info point, OFFER→repair day+common room, CLOSURE→bus info, FLOOD→crossing+climate prep). Never keeps a promise that wasn't made.
+- **A11y:** HUD `aria-live="polite"` announcements for resource deltas and city-state transitions; `.visually-hidden` utility; checklist ticked.
 
-## Next work (no unchecked DEV_PLAN tasks — pick from here)
-1. **Push to GitHub** (user action: credentials) → Pages redeploy.
-2. **Supabase EU provisioning** + run `docs/mp/session_events.sql` + env vars → real 2-device test (MP-2/3 AC on hardware).
-3. **Content debt:** ch.2–3 mission structure (M1–M4, M7 beyond dialogues: M2 map-barrier overlay, M3 invitation composer, M4 care kit — the care kit feeds assembly attendance and Ben's ramp line); Elena's site visit as a Grey Yards event; kept-promise triggers (crisis transformative outcomes are the natural candidates); Town Hall scene; `ruben_curious` setter; ch.3 content to set `crisis_week_ready` and later host the minigame trigger (M2 "Make It Usable").
-4. **Assembly/endings polish:** the final map re-colour shot (§7.8 "a mirror, not a victory screen") — currently a text epilogue in the panel.
-5. **Art pipeline:** prompt list ready in `docs/art/PROMPT_LIST.md`; zip upload flow works.
-6. **A11y open items:** DOM mirror for canvas hotspots, aria-live resource announcements.
+## Next work (pick from here)
+1. **Supabase EU provisioning** (user action) + run `docs/mp/session_events.sql` + `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` → real 2-device test (MP-2/3 AC).
+2. **Content polish:** `promiseChildFriendlyMeeting` has no kept-trigger yet (natural candidate: an event held with `careKit_kids_space`); Ben's ramp line inside the assembly Phase 1 (read `careKit_ramp_by_ben`); Town Hall entry text is minimal connective tissue — replace if canon lands.
+3. **Assembly/endings polish:** the final map re-colour shot (§7.8 "a mirror, not a victory screen") — currently a text epilogue in the panel.
+4. **Art pipeline:** prompt list ready in `docs/art/PROMPT_LIST.md`; zip upload flow works. Town Hall needs a landmark/scene visual eventually.
+5. **A11y open item:** DOM mirror for canvas hotspots (barrier pins/POIs are canvas-only interactables).
 
 ## Architecture notes for the next agent
-- **Content is 100% data-driven** (zod at boot, loud failures): quests/dialogues/crises/schedule/promises/assembly/endings/minigames/balancing in `src/data/*.json`; every text is an i18n key (EN+IT full, 5 partner stubs synced by test).
-- **Assembly:** `AssemblyEngine` state lives in `variables.assemblyState` (JSON string); scalar summaries feed endings. The panel only issues engine calls — rules live in the engine.
-- **Endings:** pure functions; `endingId` computed once (sticky) when the pact is signed; thresholds in `endings.json`.
-- **MP:** the event log IS the city. `EffectResolver` emits `resource_delta`/`quest_completed`; `reduceSharedCity` folds any order into the same state; `applySharedCity` respects the shared/personal split (spec §3). Adapter selection is pure (`chooseRemoteAdapter`) — flag off = zero network.
-- **Instrumentation** flows through `progress_events` — report v2, class report and sync all read the same stream.
-- **Balancing:** every gameplay number is in a json file; tests pin code↔sheet.
+- **Content is 100% data-driven** (zod at boot, loud failures). New since last session: `districts.json` carries `barriers` (M22 pins) and `pois` (condition-gated hotspots); `minigames.json` can link a quest objective; `crises.json` can keep promises.
+- **StoryDirector** now drives ch.1 routes → assembly_v1 → **ch.2 closing gate** → **ch.3 closing gate** (constructor takes district ids + questStatus lookup).
+- **Missions are quests** (ids M22–M36) started/completed by dialogue effects; mechanics beyond dialogue live in `BarrierMap` (M22) and `DistrictScene.recordChoice` (pin documenting), the rest is pure data.
+- **Playable characters appear as mission-giver NPCs** at the Center (Samir/Maya/Luca placements) — same precedent as `elena_e01`.
+- **Assembly:** attendance/invite rules in `assembly.json`; the care kit feeds them through Care resource thresholds.
+- **Promises:** made by dialogue (`promiseX="active"`), kept by content or by transformative crisis outcomes, broken by deadline; `balancing.json` holds the scores.
 - **DebugPanel is i18n-exempt** (dev tool): arm Crisis Week, open Assembly, export playtest, clear DB.
 
 ## Asset pipeline (works)
