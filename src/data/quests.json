@@ -703,6 +703,26 @@
         "crisisLink": null,
         "registry": "Chapter 3 Mission 3 'The Invitation Problem' (Narrative v2 §5.3): compose the invitation — tone, languages, channels. If invito_da_correggere from ch.1, Samir signs the new version: Recognition + Voice +1."
       }
+    },
+    {
+      "id": "M34",
+      "title": "content.quests.M34.title",
+      "description": "content.quests.M34.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "design_care_kit",
+          "description": "content.quests.M34.objectives.design_care_kit",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Maya",
+        "abilityMatch": "Maya · Care as infrastructure",
+        "crisisLink": null,
+        "registry": "Chapter 3 Mission 4 'Care Is Infrastructure' (Narrative v2 §5.4): design the events care kit — schedules, kids' space, volunteer rest shifts (N10 hook), accessibility (N02 hook, Ben's ramp). Each active element: Care +1 — attendance flows through the assembly's invitedConditions care thresholds."
+      }
     }
   ]
 }

@@ -181,6 +181,27 @@
       ]
     },
     {
+      "npcId": "maya",
+      "scene": "community_center",
+      "position": {
+        "x": 800,
+        "y": 950
+      },
+      "dialogueId": "maya_m34",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter3_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M34",
+          "state": "locked"
+        }
+      ]
+    },
+    {
       "npcId": "elena",
       "scene": "community_center",
       "position": {

@@ -5491,6 +5491,249 @@
           ]
         }
       }
+    },
+    {
+      "id": "maya_m34",
+      "speakerId": "maya",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.maya_m34.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.maya_m34.start.choices.engage",
+              "next": "schedules"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.maya_m34.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "schedules": {
+          "text": "content.dialogues.maya_m34.schedules.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M34"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M34"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "include",
+              "label": "content.dialogues.maya_m34.schedules.choices.include",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "careKit_schedules",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "schedules"
+                  }
+                }
+              ],
+              "next": "kids_space"
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.maya_m34.schedules.choices.skip",
+              "next": "kids_space"
+            }
+          ]
+        },
+        "kids_space": {
+          "text": "content.dialogues.maya_m34.kids_space.text",
+          "choices": [
+            {
+              "id": "include",
+              "label": "content.dialogues.maya_m34.kids_space.choices.include",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "careKit_kids_space",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "kids_space"
+                  }
+                }
+              ],
+              "next": "rest_shifts"
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.maya_m34.kids_space.choices.skip",
+              "next": "rest_shifts"
+            }
+          ]
+        },
+        "rest_shifts": {
+          "text": "content.dialogues.maya_m34.rest_shifts.text",
+          "choices": [
+            {
+              "id": "include",
+              "label": "content.dialogues.maya_m34.rest_shifts.choices.include",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "careKit_rest_shifts",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "rest_shifts"
+                  }
+                }
+              ],
+              "next": "accessibility"
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.maya_m34.rest_shifts.choices.skip",
+              "next": "accessibility"
+            }
+          ]
+        },
+        "accessibility": {
+          "text": "content.dialogues.maya_m34.accessibility.text",
+          "choices": [
+            {
+              "id": "ben_ramp",
+              "label": "content.dialogues.maya_m34.accessibility.choices.ben_ramp",
+              "conditions": [
+                {
+                  "type": "questState",
+                  "questId": "N02",
+                  "state": "completed"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "careKit_accessibility",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "accessibility"
+                  }
+                },
+                {
+                  "type": "setVariable",
+                  "key": "careKit_ramp_by_ben",
+                  "value": true
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "ramp_by_ben"
+                  }
+                }
+              ],
+              "next": "done"
+            },
+            {
+              "id": "include",
+              "label": "content.dialogues.maya_m34.accessibility.choices.include",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "careKit_accessibility",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "care_kit_element",
+                  "payload": {
+                    "element": "accessibility"
+                  }
+                }
+              ],
+              "next": "done"
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.maya_m34.accessibility.choices.skip",
+              "next": "done"
+            }
+          ]
+        },
+        "done": {
+          "text": "content.dialogues.maya_m34.done.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "care_kit_ready",
+              "value": true
+            },
+            {
+              "type": "completeObjective",
+              "questId": "M34",
+              "objectiveId": "design_care_kit"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "care_kit_designed",
+              "payload": {
+                "missionId": "M34"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.maya_m34.done.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }
