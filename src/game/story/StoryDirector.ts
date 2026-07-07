@@ -13,6 +13,10 @@ const ROUTE_DIALOGUE: Record<string, string> = {
 /** §4 — chapter 2 closes after 3 districts visited + Mission 1 completed. */
 export const CH2_DISTRICTS_NEEDED = 3;
 
+/** §5 — the chapter-3 interventions; "you choose 3–4 — not everything". */
+export const CH3_INTERVENTIONS = ["M31", "M32", "M33", "M34", "E01", "N08"];
+export const CH3_INTERVENTIONS_NEEDED = 3;
+
 /**
  * Chapter-1 story flow (§3): after the prologue closes, the current
  * character's route runs; when the route completes, the first assembly
@@ -31,7 +35,9 @@ export class StoryDirector {
     private readonly isDialogueOpen: () => boolean,
     private readonly hasDialogue: (dialogueId: string) => boolean,
     /** District scene ids whose first visit counts toward the ch.2 gate. */
-    private readonly districtIds: string[] = []
+    private readonly districtIds: string[] = [],
+    /** Quest status lookup for the ch.3 gate (undefined disables it). */
+    private readonly questStatus?: (questId: string) => string
   ) {}
 
   /** Call whenever a dialogue ends or the game (re)enters a scene. */
@@ -63,6 +69,18 @@ export class StoryDirector {
       this.hasDialogue("chapter2_closing")
     ) {
       this.runDialogue("chapter2_closing", "Anna");
+      return;
+    }
+
+    // §5.9 — the Fragmentation reacts once 3 interventions landed; Anna's
+    // closing arms Crisis Week (the dialogue raises crisis_week_ready).
+    if (
+      vars.chapter3_unlocked === true &&
+      vars.chapter3_closing_seen !== true &&
+      this.chapter3GateMet() &&
+      this.hasDialogue("chapter3_closing")
+    ) {
+      this.runDialogue("chapter3_closing", "Anna");
     }
   }
 
@@ -72,5 +90,12 @@ export class StoryDirector {
     if (vars.listenBeforeFixingDone !== true) return false;
     const visited = this.districtIds.filter((id) => vars[`${id}IntroSeen`] === true).length;
     return visited >= CH2_DISTRICTS_NEEDED;
+  }
+
+  /** §5 constraint: 3–4 interventions, not everything — 3 completed close the chapter. */
+  chapter3GateMet(): boolean {
+    if (!this.questStatus) return false;
+    const completed = CH3_INTERVENTIONS.filter((questId) => this.questStatus?.(questId) === "completed").length;
+    return completed >= CH3_INTERVENTIONS_NEEDED;
   }
 }

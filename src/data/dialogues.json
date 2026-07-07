@@ -5734,6 +5734,187 @@
           ]
         }
       }
+    },
+    {
+      "id": "chapter3_closing",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.chapter3_closing.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "chapter3_closing_seen",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "crisis_seed",
+              "payload": {
+                "crisis": "CRISIS_RUMOR"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter3_closing.start.choices.continue",
+              "next": "tom"
+            }
+          ]
+        },
+        "tom": {
+          "text": "content.dialogues.chapter3_closing.tom.text",
+          "effects": [
+            {
+              "type": "createProgressEvent",
+              "eventType": "crisis_seed",
+              "payload": {
+                "crisis": "CRISIS_OFFER"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter3_closing.tom.choices.continue",
+              "next": "giorgia"
+            }
+          ]
+        },
+        "giorgia": {
+          "text": "content.dialogues.chapter3_closing.giorgia.text",
+          "choices": [
+            {
+              "id": "held",
+              "label": "content.dialogues.chapter3_closing.giorgia.choices.held",
+              "conditions": [
+                {
+                  "type": "questState",
+                  "questId": "N10",
+                  "state": "completed"
+                }
+              ],
+              "next": "gwen"
+            },
+            {
+              "id": "drop_locked",
+              "label": "content.dialogues.chapter3_closing.giorgia.choices.drop",
+              "conditions": [
+                {
+                  "type": "questState",
+                  "questId": "N10",
+                  "state": "locked"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": -1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "volunteers_drop",
+                  "payload": {
+                    "who": "piotr"
+                  }
+                }
+              ],
+              "next": "gwen"
+            },
+            {
+              "id": "drop_active",
+              "label": "content.dialogues.chapter3_closing.giorgia.choices.drop",
+              "conditions": [
+                {
+                  "type": "questState",
+                  "questId": "N10",
+                  "state": "active"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "care",
+                  "value": -1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "volunteers_drop",
+                  "payload": {
+                    "who": "piotr"
+                  }
+                }
+              ],
+              "next": "gwen"
+            }
+          ]
+        },
+        "gwen": {
+          "text": "content.dialogues.chapter3_closing.gwen.text",
+          "effects": [
+            {
+              "type": "createProgressEvent",
+              "eventType": "crisis_seed",
+              "payload": {
+                "crisis": "CRISIS_CLOSURE"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter3_closing.gwen.choices.continue",
+              "next": "siobhan"
+            }
+          ]
+        },
+        "siobhan": {
+          "text": "content.dialogues.chapter3_closing.siobhan.text",
+          "effects": [
+            {
+              "type": "createProgressEvent",
+              "eventType": "crisis_seed",
+              "payload": {
+                "crisis": "CRISIS_HEATWAVE_FLOOD"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "continue",
+              "label": "content.dialogues.chapter3_closing.siobhan.choices.continue",
+              "next": "anna"
+            }
+          ]
+        },
+        "anna": {
+          "text": "content.dialogues.chapter3_closing.anna.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "crisis_week_ready",
+              "value": true
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "chapter_advanced",
+              "payload": {
+                "chapter": 4
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.chapter3_closing.anna.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

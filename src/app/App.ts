@@ -367,7 +367,8 @@ export class App {
       (dialogueId, speakerLabel) => crisisRunner.run(dialogueId, speakerLabel),
       () => this.dialogueUI.isOpen,
       (dialogueId) => this.dialogueManager.has(dialogueId),
-      (districtsData.districts as DistrictConfig[]).map((district) => district.id)
+      (districtsData.districts as DistrictConfig[]).map((district) => district.id),
+      (questId) => this.questManager.getQuestStatus(questId)
     );
     const crisisWeek = new CrisisWeek(
       this.state,

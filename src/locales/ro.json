@@ -1241,6 +1241,45 @@
             "close": "“Care is infrastructure.”"
           }
         }
+      },
+      "chapter3_closing": {
+        "start": {
+          "text": "The repairs hold; a little colour is back. Then someone writes, online: “The Center's funds only go to friends of friends.” No name, many shares.",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "tom": {
+          "text": "TOM: “The courtyard permit is suspended — an ex officio review. Don't ask me who set it off.”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "giorgia": {
+          "text": "GIORGIA: “Piotr has quit. He's not angry — he's spent.”",
+          "choices": {
+            "held": "The rest shifts held the others. …",
+            "drop": "Others follow him out. …"
+          }
+        },
+        "gwen": {
+          "text": "GWEN: “Word of cuts on line 14. ‘Rationalisation’, they call it.”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "siobhan": {
+          "text": "SIOBHAN: “The forecasts speak of a strange week. Out-of-season heat, then heavy rain.”",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "anna": {
+          "text": "ANNA: “The repairs matter. But a week is coming that will tell us whether we've built bonds or stage sets.”",
+          "choices": {
+            "close": "Chapter 4 — Crisis Week."
+          }
+        }
       }
     },
     "quests": {

@@ -1241,6 +1241,45 @@
             "close": "«La cura è infrastruttura.»"
           }
         }
+      },
+      "chapter3_closing": {
+        "start": {
+          "text": "Le riparazioni reggono; un po' di colore è tornato. Poi qualcuno scrive, online: «I fondi del Centro vanno solo agli amici degli amici.» Nessun nome, molte condivisioni.",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "tom": {
+          "text": "TOM: «Il permesso per il cortile è sospeso. Verifica d'ufficio. Non chiedermi da chi parte.»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "giorgia": {
+          "text": "GIORGIA: «Piotr ha mollato. Non è arrabbiato — è finito.»",
+          "choices": {
+            "held": "I turni di riposo hanno tenuto gli altri. …",
+            "drop": "Altri lo seguono fuori. …"
+          }
+        },
+        "gwen": {
+          "text": "GWEN: «Voci di tagli sulla linea 14. “Razionalizzazione”, la chiamano.»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "siobhan": {
+          "text": "SIOBHAN: «Le previsioni parlano di una settimana strana. Caldo fuori stagione, poi pioggia forte.»",
+          "choices": {
+            "continue": "…"
+          }
+        },
+        "anna": {
+          "text": "ANNA: «Le riparazioni contano. Ma sta arrivando una settimana che ci dirà se abbiamo costruito legami o scenografie.»",
+          "choices": {
+            "close": "Capitolo 4 — Crisis Week."
+          }
+        }
       }
     },
     "quests": {
