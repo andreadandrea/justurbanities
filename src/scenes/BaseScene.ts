@@ -92,6 +92,8 @@ export abstract class BaseScene {
   private saveCooldown = 0;
   private playerSprite: AnimatedSprite | null = null;
   private facing: Direction = "down";
+  /** Click-to-move destination in WORLD coordinates (fixed at click time). */
+  private pointerWorldTarget: { x: number; y: number } | null = null;
 
   constructor(protected readonly deps: SceneDeps) {
     this.dialogueRunner = new DialogueRunner(
@@ -146,6 +148,8 @@ export abstract class BaseScene {
   /** Called when the player enters the scene (and on boot for the active scene). */
   enter(): void {
     this.npcDirector.setScene(this.sceneId);
+    // A destination from the previous scene must not survive the change.
+    this.pointerWorldTarget = null;
   }
 
   /** Scheduled NPCs as renderable entities (world space). */
@@ -184,19 +188,29 @@ export abstract class BaseScene {
     player.x += axis.x * PLAYER_SPEED * dt;
     player.y += axis.y * PLAYER_SPEED * dt;
 
-    const target = this.deps.input.pointerTarget;
+    // Click-to-move: the screen point converts to WORLD coordinates ONCE,
+    // at click time. Re-converting every frame re-anchors the target to
+    // the moving follow-camera, so the player chases a sliding point and
+    // always stops past the click (the down/right overshoot bug).
+    const clicked = this.deps.input.pointerTarget;
+    if (clicked) {
+      this.deps.input.pointerTarget = null;
+      this.pointerWorldTarget = { x: clicked.x + this.camera.x, y: clicked.y + this.camera.y };
+    }
+    // Keyboard input takes over: a stale destination must not rubber-band.
+    if (axis.x !== 0 || axis.y !== 0) this.pointerWorldTarget = null;
+
+    const target = this.pointerWorldTarget;
     if (target) {
-      // Pointer is in screen space; the world target adds the camera offset.
-      const worldX = target.x + this.camera.x;
-      const worldY = target.y + this.camera.y;
-      const dx = worldX - player.x;
-      const dy = worldY - player.y;
+      const dx = target.x - player.x;
+      const dy = target.y - player.y;
       const distance = Math.hypot(dx, dy);
       if (distance > 5) {
-        player.x += (dx / distance) * PLAYER_SPEED * dt;
-        player.y += (dy / distance) * PLAYER_SPEED * dt;
+        const step = Math.min(PLAYER_SPEED * dt, distance);
+        player.x += (dx / distance) * step;
+        player.y += (dy / distance) * step;
       } else {
-        this.deps.input.pointerTarget = null;
+        this.pointerWorldTarget = null;
       }
     }
 
@@ -215,6 +229,7 @@ export abstract class BaseScene {
         player.x = startX;
         player.y = startY;
         this.deps.input.pointerTarget = null;
+        this.pointerWorldTarget = null;
         this.onBlocked(blocker);
         break;
       }
