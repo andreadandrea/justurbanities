@@ -18,6 +18,8 @@ export type Crisis = {
   convergingNeeds: string[];
   bufferResources: string[];
   resultVariable: string;
+  /** Active promises a transformative outcome marks kept (buffer quests). */
+  keepsPromises?: string[];
   tiers: Record<CrisisTier, { conditions: Condition[]; effects?: Effect[] }>;
 };
 

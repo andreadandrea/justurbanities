@@ -270,6 +270,9 @@ export const crisisFileSchema = z.object({
       convergingNeeds: z.array(z.string()),
       bufferResources: z.array(z.string()),
       resultVariable: z.string().min(1),
+      // Kept-promise triggers: a transformative outcome keeps these
+      // promises when they are active (the community actually delivered).
+      keepsPromises: z.array(z.string().min(1)).optional(),
       tiers: z.object({
         transformative: crisisTierSchema,
         coordinated: crisisTierSchema,
