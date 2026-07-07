@@ -841,3 +841,20 @@ body,
   margin: 0;
   color: #6d6459;
 }
+
+.assembly-epilogue {
+  border-top: 1px solid #e2d3b3;
+  padding-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.assembly-epilogue h4 {
+  margin: 0;
+  font-size: 13px;
+  color: #6d4c1f;
+}
+
+.assembly-epilogue p {
+  margin: 0;
+}

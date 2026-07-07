@@ -33,6 +33,9 @@ import { AssemblyEngine, ASSEMBLY_READY_FLAG } from "../game/assembly/AssemblyEn
 import { AssemblyPanel } from "../ui/AssemblyPanel";
 import assemblyData from "../data/assembly.json";
 import type { AssemblyFile } from "../types/Assembly";
+import { computeEndingMetrics, resolveEnding, ENDING_VAR } from "../game/endings/EndingsEngine";
+import endingsData from "../data/endings.json";
+import type { EndingsFile } from "../types/Endings";
 import { StoryDirector } from "../game/story/StoryDirector";
 import { DialogueRunner } from "../game/dialogue/DialogueRunner";
 import type { CrisisFile } from "../types/Crisis";
@@ -60,6 +63,7 @@ import {
   animationsSchema,
   assemblyFileSchema,
   assetManifestSchema,
+  endingsFileSchema,
   charactersSchema,
   dialogueFileSchema,
   questFileSchema,
@@ -144,6 +148,7 @@ export class App {
     let crisisFile: CrisisFile;
     let promiseFile: PromiseFile;
     let assemblyFile: AssemblyFile;
+    let endingsFile: EndingsFile;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -156,6 +161,7 @@ export class App {
       scheduleFile = validateData("schedule.json", scheduleFileSchema, scheduleData) as ScheduleFile;
       promiseFile = validateData("promises.json", promiseFileSchema, promisesData) as PromiseFile;
       assemblyFile = validateData("assembly.json", assemblyFileSchema, assemblyData) as AssemblyFile;
+      endingsFile = validateData("endings.json", endingsFileSchema, endingsData) as EndingsFile;
       validateData("districts.json", districtFileSchema, districtsData);
     } catch (error) {
       console.error(error);
@@ -355,7 +361,23 @@ export class App {
       engine: assemblyEngine,
       i18n,
       npcName: (id) => displayNames.get(id) ?? id,
-      saveNow: () => void this.activeScene().saveNow()
+      saveNow: () => void this.activeScene().saveNow(),
+      // §9 — evaluated when the signed plan is on the table; the id lands
+      // in the save (report v2 reads it) and the panel shows the epilogue.
+      ending: () => {
+        // Computed once (§7.8): playing on after the pact never rewrites it.
+        const existing = this.state.variables[ENDING_VAR];
+        if (typeof existing === "string") return existing;
+        const metrics = computeEndingMetrics({
+          state: this.state,
+          questStatus: (questId) => this.questManager.getQuestStatus(questId),
+          promiseIds: promiseFile.promises.map((promise) => promise.id),
+          crisisResultVars: crisisFile.crises.map((crisis) => crisis.resultVariable)
+        });
+        const endingId = resolveEnding(endingsFile, metrics);
+        this.state.variables[ENDING_VAR] = endingId;
+        return endingId;
+      }
     });
 
     // Promises (ratified): dialogue effects make them, deadlines break them.

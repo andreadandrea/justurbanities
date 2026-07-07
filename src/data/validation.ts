@@ -337,6 +337,58 @@ export const assemblyFileSchema = z
     }
   });
 
+// ---------- endings.json (task 7.2) ----------
+
+const endingConditionSchema = z.object({
+  metric: z.string().min(1),
+  op: z.enum(["gte", "lte", "eq", "neq"]),
+  value: z.union([z.number(), z.string(), z.boolean()])
+});
+
+type EndingRuleShape =
+  | z.infer<typeof endingConditionSchema>
+  | { all: EndingRuleShape[] }
+  | { any: EndingRuleShape[] };
+
+const endingRuleSchema: z.ZodType<EndingRuleShape> = z.lazy(() =>
+  z.union([
+    endingConditionSchema,
+    z.object({ all: z.array(endingRuleSchema).nonempty() }),
+    z.object({ any: z.array(endingRuleSchema).nonempty() })
+  ])
+);
+
+export const endingsFileSchema = z
+  .object({
+    schema: z.string().optional(),
+    note: z.string().optional(),
+    endings: z
+      .array(
+        z.object({
+          id: z.string().min(1),
+          when: endingRuleSchema.optional(),
+          default: z.boolean().optional()
+        })
+      )
+      .min(1)
+  })
+  .superRefine((file, ctx) => {
+    if (!file.endings.some((ending) => ending.default === true)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "endings.json needs exactly one default ending (the catch-all)."
+      });
+    }
+    for (const ending of file.endings) {
+      if (!ending.when && ending.default !== true) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Ending "${ending.id}" has no conditions and is not the default.`
+        });
+      }
+    }
+  });
+
 // ---------- playable.json ----------
 
 export const playableSchema = z.object({
