@@ -731,14 +731,6 @@
             "cautious": "«Troverò una formula prudente.»"
           }
         },
-        "site_visit": {
-          "text": "Due ore all'assemblea. Grey Yards è a dieci minuti dal percorso — il cortile di cui parlerà è lì, dietro un lucchetto. SIGRID misura l'ingresso a spanne: «Tre giorni di lavoro e questo posto è una sala comune. Tre anni, se aspettiamo un bando.»",
-          "choices": {
-            "show_me": "«Mi faccia vedere cosa serve, esattamente.»",
-            "no_promises": "«Non posso promettere nulla.» — e ascolta comunque. («Meglio di chi promette e sparisce.»)",
-            "skip": "Niente tempo. Dritta all'assemblea, slide pronte."
-          }
-        },
         "ruben": {
           "text": "RUBEN, registratore in mano: «Una dichiarazione: il Comune crede in questo processo o è la solita vetrina?»",
           "choices": {
@@ -753,6 +745,13 @@
             "simplify": "Semplifica e rimanda i dettagli.",
             "technical": "Presentazione tecnica completa. (Precisa e fredda — qualcuno sussurra «parla come un PDF».)",
             "technical_saved": "Presentazione completa — ma apre col lucchetto, non con le slide."
+          }
+        },
+        "detour": {
+          "text": "Due ore all'assemblea. Grey Yards è a dieci minuti dal percorso — il cortile di cui parlerà è lì, dietro un lucchetto.",
+          "choices": {
+            "visit": "Prendi la deviazione di dieci minuti. Vederlo con i suoi occhi.",
+            "skip": "Niente tempo. Dritta all'assemblea, slide pronte."
           }
         }
       },
@@ -1280,6 +1279,28 @@
             "close": "Capitolo 4 — Crisis Week."
           }
         }
+      },
+      "elena_site_visit": {
+        "courtyard": {
+          "text": "Il lucchetto. La bacheca sbiadita. SIGRID, che misura l'ingresso a spanne: «Tre giorni di lavoro e questo posto è una sala comune. Tre anni, se aspettiamo un bando.»",
+          "choices": {
+            "show_me": "«Mi faccia vedere cosa serve, esattamente.»",
+            "no_promises": "«Non posso promettere nulla.» — e ascoltare comunque. («Meglio di chi promette e sparisce.»)"
+          }
+        },
+        "dilemma": {
+          "choices": {
+            "technical_grounded": "La presentazione tecnica completa — ma apre col lucchetto, non con le slide."
+          }
+        }
+      },
+      "district_town_hall_intro": {
+        "start": {
+          "text": "Il Town Hall. La distanza si misura in piani, non in strade.",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -1805,11 +1826,18 @@
       "office_forms": {
         "label": "Moduli in una lingua sola",
         "text": "Lo sportello comunale di Lake Edge. Moduli in una lingua sola; la fila ne parla cinque."
+      },
+      "counter_hours": {
+        "label": "Gli orari dello sportello",
+        "text": "Sportello 4, «aperto al pubblico 9–13». La fila alle 12:40 è più lunga della mattinata. La Poly Crisis ha orari d'ufficio."
       }
     },
     "pois": {
       "courtyard_17": {
         "label": "Cortile 17 — valutazione"
+      },
+      "site_visit": {
+        "label": "Il cortile — sopralluogo"
       }
     }
   }

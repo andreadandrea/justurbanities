@@ -76,6 +76,20 @@
               "value": true
             }
           ]
+        },
+        {
+          "id": "site_visit",
+          "x": 900,
+          "y": 420,
+          "labelKey": "content.pois.site_visit.label",
+          "dialogueId": "elena_site_visit",
+          "conditions": [
+            {
+              "type": "variableEquals",
+              "key": "elena_route_stage",
+              "value": "site_visit"
+            }
+          ]
         }
       ]
     },
@@ -190,6 +204,35 @@
           "layer": "language"
         }
       ]
+    },
+    {
+      "id": "town_hall",
+      "displayName": "Town Hall",
+      "world": {
+        "width": 1800,
+        "height": 1200
+      },
+      "ground": [
+        "#d8d3c8",
+        "#a9a396"
+      ],
+      "landmark": {
+        "x": 650,
+        "y": 260,
+        "width": 560,
+        "height": 240,
+        "color": "#8b8577",
+        "label": "Town Hall"
+      },
+      "barriers": [
+        {
+          "id": "counter_hours",
+          "x": 1300,
+          "y": 650,
+          "layer": "schedules"
+        }
+      ],
+      "pois": []
     }
   ]
 }

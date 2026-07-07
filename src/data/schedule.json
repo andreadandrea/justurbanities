@@ -203,10 +203,10 @@
     },
     {
       "npcId": "elena",
-      "scene": "community_center",
+      "scene": "town_hall",
       "position": {
-        "x": 850,
-        "y": 1150
+        "x": 800,
+        "y": 700
       },
       "dialogueId": "elena_e01",
       "conditions": [
@@ -482,10 +482,10 @@
     },
     {
       "npcId": "alexandria",
-      "scene": "community_center",
+      "scene": "town_hall",
       "position": {
-        "x": 700,
-        "y": 900
+        "x": 1000,
+        "y": 600
       },
       "dialogueId": "alexandria_n03",
       "timeParts": [

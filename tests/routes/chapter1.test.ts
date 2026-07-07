@@ -119,18 +119,36 @@ describe("Chapter 1 routes (§3)", () => {
     expect(dilemma.choices.map((c) => c.id)).not.toContain("name_barriers");
   });
 
-  it("Elena's route: commission + site visit set the ch.3/N08 seeds", () => {
+  it("Elena's route: commission + the played site visit set the ch.3/N08 seeds (✳ §3.3)", () => {
     const w = world("elena");
     w.state.variables.prologue_complete = true;
     w.director.check();
-    play(w, "route_elena", "commission", "show_me", "verifiable_dates", "state_limits");
+    // Beat 1 + detour: the route pauses — the world (Grey Yards) takes over.
+    play(w, "route_elena", "commission", "visit");
+    expect(w.state.variables.elena_route_stage).toBe("site_visit");
+    expect(w.state.variables.route_complete).toBeUndefined();
+    // On site: the courtyard event carries Ruben and the dilemma with it.
+    play(w, "elena_site_visit", "show_me", "verifiable_dates", "state_limits");
     expect(w.state.variables).toMatchObject({
       commission_started: true, // the N08 engage gate
       elena_saw_it: true,
+      elena_route_stage: "visited",
       elena_dates_promised: true,
       elena_stated_limits: true,
       route_complete: true
     });
+  });
+
+  it("Elena on site can go technical without the PDF penalty (the padlock, not the slides)", () => {
+    const w = world("elena");
+    w.dialogues.start("elena_site_visit");
+    w.dialogues.choose("no_promises");
+    w.dialogues.choose("no_statement");
+    const voiceBefore = w.state.resources.voice;
+    w.dialogues.choose("technical_grounded");
+    expect(w.state.resources.voice).toBe(voiceBefore); // no Voice −1
+    expect(w.state.variables.elena_technical_grounded).toBe(true);
+    expect(w.state.variables.route_complete).toBe(true);
   });
 
   it("Elena skipping the site visit talks like a PDF at the dilemma", () => {
