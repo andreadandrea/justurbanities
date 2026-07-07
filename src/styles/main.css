@@ -1114,3 +1114,16 @@ body.high-contrast .minigame-score,
 body.high-contrast .mp-badge {
   color: #333;
 }
+
+/* a11y (task 9.2 open item): screen-reader-only live announcements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
