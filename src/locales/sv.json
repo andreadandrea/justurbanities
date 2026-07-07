@@ -187,6 +187,14 @@
         "withinMeans": "The plan stays within the city's means.",
         "epilogueTitle": "Epilogue"
       }
+    },
+    "mp": {
+      "title": "Classroom session",
+      "codePlaceholder": "Session code (6 letters)",
+      "namePlaceholder": "Your name in class",
+      "join": "Join the city",
+      "invalid": "Check the code (6 characters, no 0/O/1/I) and your name.",
+      "joinedAs": "In session as"
     }
   },
   "content": {
