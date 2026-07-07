@@ -1,12 +1,23 @@
 import type { Dialogue, DialogueChoice, DialogueFile, DialogueNode } from "../../types/Dialogue";
 import { EffectResolver } from "../effects/EffectResolver";
 
+/** Task 9.3 — optional hooks so playtests can time every node. */
+export type DialogueInstrumentation = {
+  nodeEntered(dialogueId: string, nodeId: string): void;
+  choiceMade(dialogueId: string, nodeId: string, choiceId: string): void;
+};
+
 export class DialogueManager {
   private dialogues = new Map<string, Dialogue>();
   private activeDialogue: Dialogue | null = null;
   private activeNodeId: string | null = null;
+  private instrumentation?: DialogueInstrumentation;
 
   constructor(private readonly effectResolver: EffectResolver) {}
+
+  setInstrumentation(instrumentation: DialogueInstrumentation): void {
+    this.instrumentation = instrumentation;
+  }
 
   load(file: DialogueFile): void {
     this.dialogues.clear();
@@ -30,6 +41,7 @@ export class DialogueManager {
     this.activeDialogue = dialogue;
     this.activeNodeId = dialogue.startNode;
     this.applyNodeEntryEffects();
+    this.instrumentation?.nodeEntered(dialogue.id, dialogue.startNode);
 
     return this.getCurrentNode();
   }
@@ -56,6 +68,8 @@ export class DialogueManager {
 
     if (!choice) throw new Error(`Choice not available: ${choiceId}`);
 
+    const dialogueId = this.activeDialogue!.id;
+    this.instrumentation?.choiceMade(dialogueId, this.activeNodeId!, choiceId);
     this.effectResolver.applyAll(choice.effects);
 
     if (choice.end || !choice.next) {
@@ -66,6 +80,7 @@ export class DialogueManager {
 
     this.activeNodeId = choice.next;
     this.applyNodeEntryEffects();
+    this.instrumentation?.nodeEntered(dialogueId, this.activeNodeId);
     return { node: this.getCurrentNode(), ended: false, choice };
   }
 

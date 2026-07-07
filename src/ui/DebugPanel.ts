@@ -14,6 +14,7 @@ type DebugPanelDeps = {
   i18n: I18n;
   armCrisisWeek?: () => void;
   openAssembly?: () => void;
+  exportPlaytest?: () => void;
 };
 
 const REFRESH_MS = 500;
@@ -103,6 +104,7 @@ export class DebugPanel {
       ),
       this.crisisWeekButton(),
       this.assemblyButton(),
+      this.playtestExportButton(),
       this.clearButton()
     );
   }
@@ -137,6 +139,16 @@ export class DebugPanel {
     button.textContent = "Open the Assembly (ch.5, 🏛 button)";
     button.disabled = !this.deps.openAssembly;
     button.addEventListener("click", () => this.deps.openAssembly?.());
+    return button;
+  }
+
+  private playtestExportButton(): HTMLElement {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "debug-clear";
+    button.textContent = "Export playtest events (JSON)";
+    button.disabled = !this.deps.exportPlaytest;
+    button.addEventListener("click", () => this.deps.exportPlaytest?.());
     return button;
   }
 
