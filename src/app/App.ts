@@ -21,6 +21,10 @@ import {
 } from "../game/mp/MpConfig";
 import { MpJoinPanel } from "../ui/MpJoinPanel";
 import { FacilitatorPanel } from "../ui/FacilitatorPanel";
+import { SupabaseAuth, type AuthSession } from "../sync/SupabaseAuth";
+import { CloudSaves } from "../sync/CloudSaves";
+import { AccountPanel } from "../ui/AccountPanel";
+import { PlayerDashboard } from "../ui/PlayerDashboard";
 import { MinigamePanel } from "../ui/MinigamePanel";
 import { PlaytestInstrumentation } from "../game/playtest/PlaytestInstrumentation";
 import type { MinigameDefinition } from "../game/minigame/AllocationMinigame";
@@ -493,6 +497,85 @@ export class App {
     clock.on(() => promiseManager.evaluate());
     promiseManager.evaluate();
     new LogbookPanel(this.elements.appRoot, promiseManager, i18n);
+
+    // Accounts + player dashboard (ratified 2026-07-07). Additive: the
+    // single-player game never requires signing in (offline-first rule).
+    const authEnv = {
+      url: import.meta.env.VITE_SUPABASE_URL as string | undefined,
+      anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+    };
+    if (authEnv.url && authEnv.anonKey) {
+      const authConfig = { url: authEnv.url, anonKey: authEnv.anonKey };
+      const auth = new SupabaseAuth(authConfig, {
+        load: () => settings.get<AuthSession>("authSession"),
+        save: (session) => settings.set("authSession", session ?? null).then(() => undefined)
+      });
+      await auth.restore();
+      const cloudSaves = new CloudSaves(authConfig, auth);
+
+      // MP identity follows the account: a signed-in player owns their
+      // events under a stable id on every device.
+      const syncMpIdentity = async () => {
+        const user = auth.currentUser;
+        if (!user) return;
+        const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
+        if (joined && joined.playerId !== user.id) {
+          await settings.set(MP_SESSION_SETTING, { ...joined, playerId: user.id, displayName: user.displayName });
+        }
+      };
+      await syncMpIdentity();
+
+      new AccountPanel({
+        root: this.elements.appRoot,
+        i18n,
+        auth,
+        cloudSaves,
+        snapshot: () => ({ ...this.state.snapshot(), quests: this.questManager.snapshot() }),
+        applySnapshot: (snapshot) => {
+          const restored = snapshot as ReturnType<GameState["snapshot"]> & { quests?: QuestFile["quests"] };
+          this.state.restore(restored);
+          if (restored.quests?.length) this.questManager.restore(restored.quests);
+          if (!this.scenes[this.state.currentScene]) this.state.currentScene = "community_center";
+          this.changeScene(this.state.currentScene, this.state.player);
+          void this.activeScene().saveNow();
+        },
+        onAuthChanged: () => void syncMpIdentity()
+      });
+
+      const dashboardPlayerId = async (): Promise<string> => {
+        const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
+        return auth.currentUser?.id ?? joined?.playerId ?? "local-user";
+      };
+      let dashboardId = "local-user";
+      void dashboardPlayerId().then((id) => (dashboardId = id));
+      new PlayerDashboard({
+        root: this.elements.appRoot,
+        i18n,
+        gameState: this.state,
+        questManager: this.questManager,
+        promiseManager,
+        playerId: () => dashboardId,
+        loadEvents: async () => {
+          dashboardId = await dashboardPlayerId();
+          const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
+          if (joined && authEnv.url && authEnv.anonKey) {
+            try {
+              return await fetchSessionEvents({ url: authEnv.url, anonKey: authEnv.anonKey, sessionCode: joined.code });
+            } catch {
+              // Offline or expired session: fall back to the local log.
+            }
+          }
+          const local = await this.progressRepository.listBySession(session.id);
+          return local.map((event) => ({
+            id: event.id,
+            userId: event.userId,
+            type: event.type,
+            payload: event.payload,
+            createdAt: event.createdAt
+          }));
+        }
+      });
+    }
 
     // The time HUD lives at app level so every scene shows it; passing time
     // autosaves so the clock survives reloads.
