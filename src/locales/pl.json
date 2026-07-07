@@ -1160,6 +1160,43 @@
             "close": "“Useful. Not beautiful.”"
           }
         }
+      },
+      "samir_m33": {
+        "start": {
+          "text": "We rewrite the invitation — no “S.V.”, no articles of law. And not in one language only.",
+          "choices": {
+            "engage": "“Let's compose it together.”",
+            "later": "Not now."
+          }
+        },
+        "tone": {
+          "text": "The old invitation opens with a protocol number and closes with a legal reference. Samir flattens it on the table. “First decision: how does it speak?”",
+          "choices": {
+            "warm": "Like a neighbour at Amin's counter — plain words, a real question.",
+            "institutional": "Keep it official — people should know it's serious."
+          }
+        },
+        "languages": {
+          "text": "“Second decision: whose languages?” The queue at the Lake Edge desk speaks five; the invitation, so far, speaks one.",
+          "choices": {
+            "multi": "All the languages of the queue — Viveca's group and the kiosk help translate.",
+            "one": "One language, to keep it simple."
+          }
+        },
+        "channels": {
+          "text": "ANNA: “And we take it where people already are: Amin's bar, Abdullah's kiosk, the Youth Court wall.”",
+          "choices": {
+            "street": "Where people already are — the bar, the kiosk, the wall.",
+            "official": "The official noticeboard, like always."
+          }
+        },
+        "done": {
+          "text": "The new invitation sits on the table. No protocol number. A question people can answer.",
+          "choices": {
+            "sign": "Samir signs the new version — his name, first. (Voice +1)",
+            "close": "Send it out."
+          }
+        }
       }
     },
     "quests": {
@@ -1357,6 +1394,13 @@
         "description": "One Saturday, salvaged materials, four courtyard needs. A lot can be done, if nobody demands perfect.",
         "objectives": {
           "repair_saturday": "Run the repair Saturday at Courtyard 17."
+        }
+      },
+      "M33": {
+        "title": "The Invitation Problem",
+        "description": "Rewrite the invitation — tone, languages, channels — and take it where people already are.",
+        "objectives": {
+          "compose_invitation": "Compose the new invitation with Samir and Anna."
         }
       }
     },
