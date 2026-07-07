@@ -22,6 +22,7 @@ import {
 import { MpJoinPanel } from "../ui/MpJoinPanel";
 import { FacilitatorPanel } from "../ui/FacilitatorPanel";
 import { MinigamePanel } from "../ui/MinigamePanel";
+import { PlaytestInstrumentation } from "../game/playtest/PlaytestInstrumentation";
 import type { MinigameDefinition } from "../game/minigame/AllocationMinigame";
 import minigamesData from "../data/minigames.json";
 import { fetchSessionEvents } from "../sync/SupabaseRemoteApi";
@@ -409,6 +410,15 @@ export class App {
       }
     });
 
+    // Playtest instrumentation (task 9.3, M-E protocol): node timings and
+    // the per-day resource curve flow into progress_events like everything
+    // else — the report, the class export and the sync queue carry them.
+    const instrumentation = new PlaytestInstrumentation(logProgress);
+    this.dialogueManager.setInstrumentation(instrumentation);
+    clock.on((event) => {
+      if (event.type === "dayEnded") instrumentation.dayEnded(event.day, { ...this.state.resources });
+    });
+
     // Mini-games (task 9.1): dialogue effects raise the trigger variable;
     // the panel opens as soon as the conversation closes. Reusable module —
     // the pilot is Sigrid's Modular Repair (§5.2).
@@ -503,6 +513,22 @@ export class App {
       armCrisisWeek: () => crisisWeek.arm(),
       openAssembly: () => {
         this.state.variables[ASSEMBLY_READY_FLAG] = true;
+      },
+      // Task 9.3: raw playtest data for the M-E protocol spreadsheets.
+      exportPlaytest: () => {
+        void (async () => {
+          const events = await this.progressRepository.listBySession(session.id);
+          const blob = new Blob(
+            [JSON.stringify({ sessionId: session.id, exportedAt: new Date().toISOString(), events }, null, 2)],
+            { type: "application/json" }
+          );
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = `justurbanities-playtest-${session.id.slice(0, 8)}.json`;
+          link.click();
+          URL.revokeObjectURL(url);
+        })();
       }
     });
 
