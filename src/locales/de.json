@@ -731,14 +731,6 @@
             "cautious": "“I'll find a cautious wording.”"
           }
         },
-        "site_visit": {
-          "text": "Two hours before the assembly. Grey Yards is ten minutes off the route — the courtyard she will be talking about is there, behind a padlock. SIGRID is measuring the entrance in hand-spans: “Three days' work and this place is a common room. Three years, if we wait for a funding call.”",
-          "choices": {
-            "show_me": "“Show me what's needed — exactly.”",
-            "no_promises": "“I can't promise anything.” — and listen anyway. (“Better than the ones who promise and vanish.”)",
-            "skip": "No time. Straight to the assembly, slides ready."
-          }
-        },
         "ruben": {
           "text": "RUBEN, recorder out: “One statement: does the Council believe in this process, or is it the usual shop window?”",
           "choices": {
@@ -753,6 +745,13 @@
             "simplify": "Simplify and postpone the details.",
             "technical": "Full technical presentation. (Precise and cold — someone whispers “she talks like a PDF”.)",
             "technical_saved": "Full presentation — but she opens with the padlock, not the slides."
+          }
+        },
+        "detour": {
+          "text": "Two hours before the assembly. Grey Yards is ten minutes off the route — the courtyard she will be talking about is there, behind a padlock.",
+          "choices": {
+            "visit": "Take the ten-minute detour. See it with her own eyes.",
+            "skip": "No time. Straight to the assembly, slides ready."
           }
         }
       },
@@ -1280,6 +1279,28 @@
             "close": "Chapter 4 — Crisis Week."
           }
         }
+      },
+      "elena_site_visit": {
+        "courtyard": {
+          "text": "The padlock. The faded noticeboard. SIGRID, measuring the entrance in hand-spans: “Three days' work and this place is a common room. Three years, if we wait for a funding call.”",
+          "choices": {
+            "show_me": "“Show me what's needed — exactly.”",
+            "no_promises": "“I can't promise anything.” — and listen anyway. (“Better than the ones who promise and vanish.”)"
+          }
+        },
+        "dilemma": {
+          "choices": {
+            "technical_grounded": "The full technical presentation — but she opens with the padlock, not the slides."
+          }
+        }
+      },
+      "district_town_hall_intro": {
+        "start": {
+          "text": "The Town Hall. The distance is measured in floors, not in streets.",
+          "choices": {
+            "close": "…"
+          }
+        }
       }
     },
     "quests": {
@@ -1805,11 +1826,18 @@
       "office_forms": {
         "label": "Forms in one language",
         "text": "The municipal desk at Lake Edge. Forms in one language only; the queue speaks five."
+      },
+      "counter_hours": {
+        "label": "The counter hours",
+        "text": "Desk 4, “open to the public 9–13”. The queue at 12:40 is longer than the morning. The Poly Crisis has office hours."
       }
     },
     "pois": {
       "courtyard_17": {
         "label": "Courtyard 17 — assessment"
+      },
+      "site_visit": {
+        "label": "The courtyard — site visit"
       }
     }
   }

@@ -2917,56 +2917,12 @@
                   "value": true
                 }
               ],
-              "next": "site_visit"
+              "next": "detour"
             },
             {
               "id": "cautious",
               "label": "content.dialogues.route_elena.meeting.choices.cautious",
-              "next": "site_visit"
-            }
-          ]
-        },
-        "site_visit": {
-          "text": "content.dialogues.route_elena.site_visit.text",
-          "choices": [
-            {
-              "id": "show_me",
-              "label": "content.dialogues.route_elena.site_visit.choices.show_me",
-              "effects": [
-                {
-                  "type": "setVariable",
-                  "key": "elena_saw_it",
-                  "value": true
-                },
-                {
-                  "type": "addResource",
-                  "key": "trust",
-                  "value": 1
-                }
-              ],
-              "next": "ruben"
-            },
-            {
-              "id": "no_promises",
-              "label": "content.dialogues.route_elena.site_visit.choices.no_promises",
-              "effects": [
-                {
-                  "type": "setVariable",
-                  "key": "elena_saw_it",
-                  "value": true
-                },
-                {
-                  "type": "addResource",
-                  "key": "trust",
-                  "value": 1
-                }
-              ],
-              "next": "ruben"
-            },
-            {
-              "id": "skip",
-              "label": "content.dialogues.route_elena.site_visit.choices.skip",
-              "next": "ruben"
+              "next": "detour"
             }
           ]
         },
@@ -3098,6 +3054,35 @@
                 }
               ],
               "end": true
+            }
+          ]
+        },
+        "detour": {
+          "text": "content.dialogues.route_elena.detour.text",
+          "choices": [
+            {
+              "id": "visit",
+              "label": "content.dialogues.route_elena.detour.choices.visit",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_route_stage",
+                  "value": "site_visit"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "site_visit_detour",
+                  "payload": {
+                    "who": "elena"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "skip",
+              "label": "content.dialogues.route_elena.detour.choices.skip",
+              "next": "ruben"
             }
           ]
         }
@@ -5910,6 +5895,229 @@
             {
               "id": "close",
               "label": "content.dialogues.chapter3_closing.anna.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "elena_site_visit",
+      "speakerId": "sigrid",
+      "startNode": "courtyard",
+      "nodes": {
+        "courtyard": {
+          "text": "content.dialogues.elena_site_visit.courtyard.text",
+          "choices": [
+            {
+              "id": "show_me",
+              "label": "content.dialogues.elena_site_visit.courtyard.choices.show_me",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_saw_it",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_route_stage",
+                  "value": "visited"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "site_visit",
+                  "payload": {
+                    "who": "elena",
+                    "choice": "show_me"
+                  }
+                }
+              ],
+              "next": "ruben"
+            },
+            {
+              "id": "no_promises",
+              "label": "content.dialogues.elena_site_visit.courtyard.choices.no_promises",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_saw_it",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_route_stage",
+                  "value": "visited"
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "site_visit",
+                  "payload": {
+                    "who": "elena",
+                    "choice": "no_promises"
+                  }
+                }
+              ],
+              "next": "ruben"
+            }
+          ]
+        },
+        "ruben": {
+          "text": "content.dialogues.route_elena.ruben.text",
+          "choices": [
+            {
+              "id": "verifiable_dates",
+              "label": "content.dialogues.route_elena.ruben.choices.verifiable_dates",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "elena_dates_promised",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            },
+            {
+              "id": "no_statement",
+              "label": "content.dialogues.route_elena.ruben.choices.no_statement",
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "fragmentationGlobal",
+                  "value": 1
+                }
+              ],
+              "next": "dilemma"
+            }
+          ]
+        },
+        "dilemma": {
+          "text": "content.dialogues.route_elena.dilemma.text",
+          "choices": [
+            {
+              "id": "state_limits",
+              "label": "content.dialogues.route_elena.dilemma.choices.state_limits",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_stated_limits",
+                  "value": true
+                },
+                {
+                  "type": "addResource",
+                  "key": "trust",
+                  "value": 2
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "simplify",
+              "label": "content.dialogues.route_elena.dilemma.choices.simplify",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "overpromise_risk",
+                  "value": true
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "technical_grounded",
+              "label": "content.dialogues.elena_site_visit.dilemma.choices.technical_grounded",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "route_complete",
+                  "value": true
+                },
+                {
+                  "type": "setVariable",
+                  "key": "elena_technical_grounded",
+                  "value": true
+                }
+              ],
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "district_town_hall_intro",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.district_town_hall_intro.start.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "town_hallIntroSeen",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.district_town_hall_intro.start.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "barrier_counter_hours",
+      "speakerId": "narrator",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.barriers.counter_hours.text",
+          "choices": [
+            {
+              "id": "document",
+              "label": "content.barriers.choices.document",
+              "next": "done"
+            },
+            {
+              "id": "leave",
+              "label": "content.barriers.choices.leave",
+              "end": true
+            }
+          ]
+        },
+        "done": {
+          "text": "content.barriers.documented",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.barriers.choices.close",
               "end": true
             }
           ]

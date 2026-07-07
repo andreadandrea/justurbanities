@@ -22,7 +22,8 @@ const SCENES = [
   "youth_court",
   "coastline",
   "hill_gardens",
-  "lake_edge"
+  "lake_edge",
+  "town_hall"
 ];
 const ALL_QUESTS = Array.from({ length: 18 }, (_, i) => `N${String(i + 1).padStart(2, "0")}`);
 

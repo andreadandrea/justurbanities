@@ -66,6 +66,17 @@ export class CrossroadsScene extends BaseScene {
     return this.deps.gameState.variables.chapter2_unlocked === true;
   }
 
+  /** ✳ §3.3 Beat 2 — Elena's detour: only the Grey Yards bus runs early. */
+  private siteVisitDetour(): boolean {
+    return this.deps.gameState.variables.elena_route_stage === "site_visit";
+  }
+
+  private availableDoors(): RenderableEntity[] {
+    if (this.districtsUnlocked()) return this.districtDoors;
+    if (this.siteVisitDetour()) return this.districtDoors.filter((door) => door.id === "bus_grey_yards");
+    return [];
+  }
+
   override enter(): void {
     super.enter();
     if (this.deps.gameState.variables.crossroadsIntroSeen !== true) {
@@ -74,12 +85,10 @@ export class CrossroadsScene extends BaseScene {
   }
 
   protected interactables(): Interactable[] {
-    const doors = this.districtsUnlocked()
-      ? this.districtDoors.map((door) => ({
-          entity: door,
-          onInteract: () => this.deps.changeScene(door.id.replace("bus_", ""), { x: 260, y: 700 })
-        }))
-      : [];
+    const doors = this.availableDoors().map((door) => ({
+      entity: door,
+      onInteract: () => this.deps.changeScene(door.id.replace("bus_", ""), { x: 260, y: 700 })
+    }));
     return [
       ...this.npcInteractables(),
       ...this.pois.map((poi) => ({
@@ -125,7 +134,7 @@ export class CrossroadsScene extends BaseScene {
     const entities: RenderableEntity[] = [
       ...this.pois.map((poi) => poi.entity),
       ...this.npcEntities(),
-      ...(this.districtsUnlocked() ? this.districtDoors : []),
+      ...this.availableDoors(),
       this.returnDoor,
       this.playerEntity()
     ];
