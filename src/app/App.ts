@@ -171,7 +171,7 @@ export class App {
     let promiseFile: PromiseFile;
     let assemblyFile: AssemblyFile;
     let endingsFile: EndingsFile;
-    let minigameDefs: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string }>;
+    let minigameDefs: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string; questId?: string; objectiveId?: string }>;
     try {
       manifest = validateData("asset_manifest.json", assetManifestSchema, assetManifest) as AssetManifest;
       validateData("characters.json", charactersSchema, charactersData);
@@ -187,7 +187,7 @@ export class App {
       endingsFile = validateData("endings.json", endingsFileSchema, endingsData) as EndingsFile;
       minigameDefs = (
         validateData("minigames.json", minigamesFileSchema, minigamesData) as {
-          minigames: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string }>;
+          minigames: Array<MinigameDefinition & { triggerVariable: string; doneVariable: string; questId?: string; objectiveId?: string }>;
         }
       ).minigames;
       validateData("districts.json", districtFileSchema, districtsData);
@@ -441,10 +441,30 @@ export class App {
       logProgress,
       onFinished: (minigameId) => {
         const definition = minigameDefs.find((candidate) => candidate.id === minigameId);
-        if (definition) this.state.variables[definition.doneVariable] = true;
+        if (definition) {
+          this.state.variables[definition.doneVariable] = true;
+          // §5.2 — the Saturday IS the mission: finishing completes it.
+          if (definition.questId && definition.objectiveId) {
+            this.effectResolver.apply({
+              type: "completeObjective",
+              questId: definition.questId,
+              objectiveId: definition.objectiveId
+            });
+          }
+        }
         void this.activeScene().saveNow();
       }
     });
+    // §4.4 → §5.2: axes the chapter-2 sheet flagged as failing.
+    const assessmentPrefill = (): string | undefined => {
+      if (this.state.variables.m24_assessed !== true) return undefined;
+      const flagged = ["aesthetic", "social", "practical", "accessible"].filter(
+        (axis) => this.state.variables[`m24_${axis}`] === "fails"
+      );
+      if (!flagged.length) return undefined;
+      const names = flagged.map((axis) => i18n.t(`ui.minigame.axes.${axis}`)).join(", ");
+      return `${i18n.t("ui.minigame.prefill")} ${names}`;
+    };
     const checkMinigames = () => {
       if (minigamePanel.isOpen || this.dialogueUI.isOpen) return;
       for (const definition of minigameDefs) {
@@ -452,7 +472,7 @@ export class App {
           this.state.variables[definition.triggerVariable] === true &&
           this.state.variables[definition.doneVariable] !== true
         ) {
-          minigamePanel.open(definition);
+          minigamePanel.open(definition, assessmentPrefill());
           return;
         }
       }

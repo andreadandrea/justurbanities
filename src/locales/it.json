@@ -213,7 +213,14 @@
     "minigame": {
       "pileEmpty": "Il mucchio è vuoto.",
       "score": "Combinazioni valide",
-      "finish": "Chiudi il sabato"
+      "finish": "Chiudi il sabato",
+      "prefill": "Dalla scheda del capitolo 2 — segnalati:",
+      "axes": {
+        "aesthetic": "estetico",
+        "social": "sociale",
+        "practical": "pratico",
+        "accessible": "accessibile"
+      }
     }
   },
   "content": {
@@ -1130,6 +1137,29 @@
             "close": "«Ci sarò.»"
           }
         }
+      },
+      "sigrid_m32": {
+        "start": {
+          "text": "Budget: quasi zero. Materiali: quelli che vedi. Tempo: un sabato. Si può fare molto, se nessuno pretende il perfetto.",
+          "choices": {
+            "engage": "«Allora rendiamolo usabile.»",
+            "later": "Non questo sabato."
+          }
+        },
+        "saturday": {
+          "text": "Sigrid ti passa i guanti. «Il cortile non ha bisogno di bello. Ha bisogno di una panchina che regge, di ombra, di una fioriera che sta ferma e di una bacheca che la gente legge davvero. Usa quello che c'è nel mucchio.»",
+          "choices": {
+            "close": "Rimboccati le maniche."
+          }
+        }
+      },
+      "sigrid_m32_resolution": {
+        "start": {
+          "text": "Guardalo. Niente qui vincerebbe un premio — e tutto qui viene usato. È tutto il trucco. Sabato prossimo, i guanti li porta qualcun altro.",
+          "choices": {
+            "close": "«Utile. Non bello.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1320,6 +1350,13 @@
         "description": "Scegli un intervento su sei e promettilo con una data. Il quartiere ricorda se torni davvero giovedì.",
         "objectives": {
           "make_promise": "Scegli un intervento e mettilo nel logbook con una scadenza."
+        }
+      },
+      "M32": {
+        "title": "Renderlo usabile",
+        "description": "Un sabato, materiali di recupero, quattro bisogni del cortile. Si può fare molto, se nessuno pretende il perfetto.",
+        "objectives": {
+          "repair_saturday": "Fai il sabato delle riparazioni al Cortile 17."
         }
       }
     },

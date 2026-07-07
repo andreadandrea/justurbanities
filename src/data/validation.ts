@@ -408,6 +408,9 @@ export const minigamesFileSchema = z
         id: z.string().min(1),
         triggerVariable: z.string().min(1),
         doneVariable: z.string().min(1),
+        // §5.2 — finishing the mini-game completes this mission objective.
+        questId: z.string().min(1).optional(),
+        objectiveId: z.string().min(1).optional(),
         materials: z
           .array(z.object({ id: z.string().min(1), tags: z.array(z.string().min(1)).nonempty() }))
           .min(1),

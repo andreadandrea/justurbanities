@@ -7,22 +7,102 @@
       "triggerVariable": "minigame_repair_start",
       "doneVariable": "minigame_repair_done",
       "materials": [
-        { "id": "pallet_wood", "tags": ["wood"] },
-        { "id": "old_door", "tags": ["wood", "flat"] },
-        { "id": "tarp", "tags": ["cover"] },
-        { "id": "rope", "tags": ["fix", "cover"] },
-        { "id": "bricks", "tags": ["heavy"] },
-        { "id": "paint_cans", "tags": ["color", "flat"] },
-        { "id": "crates", "tags": ["wood", "heavy"] },
-        { "id": "net_curtain", "tags": ["cover", "color"] }
+        {
+          "id": "pallet_wood",
+          "tags": [
+            "wood"
+          ]
+        },
+        {
+          "id": "old_door",
+          "tags": [
+            "wood",
+            "flat"
+          ]
+        },
+        {
+          "id": "tarp",
+          "tags": [
+            "cover"
+          ]
+        },
+        {
+          "id": "rope",
+          "tags": [
+            "fix",
+            "cover"
+          ]
+        },
+        {
+          "id": "bricks",
+          "tags": [
+            "heavy"
+          ]
+        },
+        {
+          "id": "paint_cans",
+          "tags": [
+            "color",
+            "flat"
+          ]
+        },
+        {
+          "id": "crates",
+          "tags": [
+            "wood",
+            "heavy"
+          ]
+        },
+        {
+          "id": "net_curtain",
+          "tags": [
+            "cover",
+            "color"
+          ]
+        }
       ],
       "needs": [
-        { "id": "bench", "accepts": ["wood"], "required": 2 },
-        { "id": "shade", "accepts": ["cover", "fix"], "required": 2 },
-        { "id": "planter", "accepts": ["heavy", "wood"], "required": 2 },
-        { "id": "noticeboard", "accepts": ["flat", "color"], "required": 2 }
+        {
+          "id": "bench",
+          "accepts": [
+            "wood"
+          ],
+          "required": 2
+        },
+        {
+          "id": "shade",
+          "accepts": [
+            "cover",
+            "fix"
+          ],
+          "required": 2
+        },
+        {
+          "id": "planter",
+          "accepts": [
+            "heavy",
+            "wood"
+          ],
+          "required": 2
+        },
+        {
+          "id": "noticeboard",
+          "accepts": [
+            "flat",
+            "color"
+          ],
+          "required": 2
+        }
       ],
-      "rewardPerValidNeed": [{ "type": "addResource", "key": "commons", "value": 1 }]
+      "rewardPerValidNeed": [
+        {
+          "type": "addResource",
+          "key": "commons",
+          "value": 1
+        }
+      ],
+      "questId": "M32",
+      "objectiveId": "repair_saturday"
     }
   ]
 }
