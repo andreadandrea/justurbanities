@@ -213,7 +213,14 @@
     "minigame": {
       "pileEmpty": "The pile is empty.",
       "score": "Valid combinations",
-      "finish": "Finish the Saturday"
+      "finish": "Finish the Saturday",
+      "prefill": "From the chapter-2 sheet — flagged:",
+      "axes": {
+        "aesthetic": "aesthetic",
+        "social": "social",
+        "practical": "practical",
+        "accessible": "accessible"
+      }
     }
   },
   "content": {
@@ -1130,6 +1137,29 @@
             "close": "“I'll be there.”"
           }
         }
+      },
+      "sigrid_m32": {
+        "start": {
+          "text": "Budget: near zero; materials: what you see; time: one Saturday. A lot can be done, if nobody demands perfect.",
+          "choices": {
+            "engage": "“Then let's make it usable.”",
+            "later": "Not this Saturday."
+          }
+        },
+        "saturday": {
+          "text": "Sigrid hands you the gloves. “The courtyard doesn't need beautiful. It needs a bench that holds, shade, a planter that stays put and a board people actually read. Use what's in the pile.”",
+          "choices": {
+            "close": "Roll up your sleeves."
+          }
+        }
+      },
+      "sigrid_m32_resolution": {
+        "start": {
+          "text": "Look at it. Nothing here would win a prize — and everything here gets used. That's the whole trick. Next Saturday, someone else brings the gloves.",
+          "choices": {
+            "close": "“Useful. Not beautiful.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1320,6 +1350,13 @@
         "description": "Choose one intervention out of six and promise it with a date. The neighbourhood remembers whether you come back on Thursday.",
         "objectives": {
           "make_promise": "Choose one intervention and put it in the logbook with a deadline."
+        }
+      },
+      "M32": {
+        "title": "Make It Usable",
+        "description": "One Saturday, salvaged materials, four courtyard needs. A lot can be done, if nobody demands perfect.",
+        "objectives": {
+          "repair_saturday": "Run the repair Saturday at Courtyard 17."
         }
       }
     },

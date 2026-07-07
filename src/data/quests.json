@@ -663,6 +663,26 @@
         "crisisLink": null,
         "registry": "Chapter 3 Mission 1 'The First Promise' (Narrative v2 §5.1 ✳): choose ONE of 6 interventions; the promise enters the logbook with a deadline. Kept: Trust +3. Broken: Trust -2, frag +1 (PromiseManager)."
       }
+    },
+    {
+      "id": "M32",
+      "title": "content.quests.M32.title",
+      "description": "content.quests.M32.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "repair_saturday",
+          "description": "content.quests.M32.objectives.repair_saturday",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Sigrid",
+        "abilityMatch": "Luca · Resource Mobilizer",
+        "crisisLink": null,
+        "registry": "Chapter 3 Mission 2 'Make It Usable' (Narrative v2 §5.2): the Modular Repair mini-game IS the repair Saturday; trigger moved here from sigrid_n05 engage (task 9.1 note). The ch.2 M4 sheet pre-fills the flagged axes."
+      }
     }
   ]
 }

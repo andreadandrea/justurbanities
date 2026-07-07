@@ -24,6 +24,7 @@ export class MinigamePanel {
   private readonly body: HTMLElement;
   private game: AllocationMinigame | null = null;
   private selectedMaterial: string | null = null;
+  private prefillNote: string | null = null;
 
   constructor(private readonly deps: MinigamePanelDeps) {
     this.panel = document.createElement("aside");
@@ -40,9 +41,10 @@ export class MinigamePanel {
     return !this.panel.hidden;
   }
 
-  open(definition: MinigameDefinition): void {
+  open(definition: MinigameDefinition, prefillNote?: string): void {
     this.game = new AllocationMinigame(definition);
     this.selectedMaterial = null;
+    this.prefillNote = prefillNote ?? null;
     this.panel.hidden = false;
     this.render();
   }
@@ -58,6 +60,14 @@ export class MinigamePanel {
     const brief = document.createElement("p");
     brief.textContent = i18n.t(`content.minigames.${game.id}.brief`);
     this.body.append(title, brief);
+
+    // §4.4 → §5.2: the chapter-2 assessment sheet pre-fills the Saturday.
+    if (this.prefillNote) {
+      const prefill = document.createElement("p");
+      prefill.className = "minigame-prefill";
+      prefill.textContent = this.prefillNote;
+      this.body.appendChild(prefill);
+    }
 
     // The pile: unplaced materials (click to pick up).
     const pile = document.createElement("div");

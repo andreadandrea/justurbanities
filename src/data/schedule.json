@@ -527,6 +527,53 @@
         "x": 900,
         "y": 700
       },
+      "dialogueId": "sigrid_m32_resolution",
+      "conditions": [
+        {
+          "type": "questState",
+          "questId": "M32",
+          "state": "completed"
+        },
+        {
+          "type": "variableNotEquals",
+          "key": "m32_resolution_seen",
+          "value": true
+        }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "old_blocks",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
+      "dialogueId": "sigrid_m32",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter3_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M32",
+          "state": "locked"
+        },
+        {
+          "type": "questState",
+          "questId": "N05",
+          "state": "completed"
+        }
+      ]
+    },
+    {
+      "npcId": "sigrid",
+      "scene": "old_blocks",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
       "dialogueId": "sigrid_n05",
       "conditions": [
         {

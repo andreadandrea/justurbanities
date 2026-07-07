@@ -679,11 +679,6 @@
                 {
                   "type": "completeQuest",
                   "questId": "N05"
-                },
-                {
-                  "type": "setVariable",
-                  "key": "minigame_repair_start",
-                  "value": true
                 }
               ],
               "next": "resolution"
@@ -722,7 +717,8 @@
             {
               "id": "close",
               "label": "content.dialogues.sigrid_n05.resolution.choices.close",
-              "end": true
+              "end": true,
+              "effects": []
             }
           ]
         }
@@ -5186,6 +5182,80 @@
             {
               "id": "close",
               "label": "content.dialogues.anna_m31.sealed.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sigrid_m32",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.sigrid_m32.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.sigrid_m32.start.choices.engage",
+              "next": "saturday"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.sigrid_m32.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "saturday": {
+          "text": "content.dialogues.sigrid_m32.saturday.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M32"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M32"
+              }
+            },
+            {
+              "type": "setVariable",
+              "key": "minigame_repair_start",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.sigrid_m32.saturday.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sigrid_m32_resolution",
+      "speakerId": "sigrid",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.sigrid_m32_resolution.start.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.sigrid_m32_resolution.start.choices.close",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m32_resolution_seen",
+                  "value": true
+                }
+              ],
               "end": true
             }
           ]
