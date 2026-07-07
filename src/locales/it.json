@@ -965,6 +965,53 @@
             "close": "«La mappa non è il territorio.»"
           }
         }
+      },
+      "samir_m23": {
+        "start": {
+          "text": "Nelle vostre mappe ci sono le strade. Nei vostri elenchi, i “cittadini attivi”. Io voglio la lista di chi non compare mai, da nessuna parte.",
+          "choices": {
+            "engage": "«Allora costruiamo la lista di chi manca.»",
+            "later": "Non ora."
+          }
+        },
+        "brief": {
+          "text": "Tre persone vedono chi sparisce prima di chiunque altro. Pablo, nei suoi giri di posta. Gwen, al volante della 14. Amin, dietro il bancone. Chiedi a loro chi hanno smesso di vedere.",
+          "choices": {
+            "go": "«Chiederò a tutti e tre.»"
+          }
+        }
+      },
+      "pablo_m23_source": {
+        "start": {
+          "text": "Chi manca? Ti posso dire chi ha smesso di aprire la porta. Ultimi piani, soprattutto — l'ascensore si rompe e loro restano su. Io busso ancora. Certi giorni nessuno risponde.",
+          "choices": {
+            "note": "Aggiungili alla lista: gli anziani soli."
+          }
+        }
+      },
+      "gwen_m23_source": {
+        "start": {
+          "text": "La 14 ti racconta tutto. Le famiglie delle torri hanno smesso di salire quando è uscito il nuovo orario — solo cartaceo, in una lingua sola. Ora vanno a piedi. O non vanno.",
+          "choices": {
+            "note": "Aggiungile alla lista: le famiglie senza la lingua."
+          }
+        }
+      },
+      "amin_m23_source": {
+        "start": {
+          "text": "I ragazzi di Youth Court riempivano due tavoli dopo la scuola. Da quando il cancello chiude alle sei finiscono nel parcheggio. Nessuno gli ha fatto una sola domanda.",
+          "choices": {
+            "note": "Aggiungili alla lista: i ragazzi di Youth Court."
+          }
+        }
+      },
+      "samir_m23_resolution": {
+        "start": {
+          "text": "Anziani soli. Famiglie che la lingua lascia fuori. Ragazzi a cui nessuno chiede niente. È questa la vera mappa della città — quella con i buchi. D'ora in poi, ogni invito che scriviamo ha tre nomi che non può saltare.",
+          "choices": {
+            "close": "«Arrivare è già partecipare.»"
+          }
+        }
       }
     },
     "quests": {
@@ -1132,6 +1179,15 @@
         "description": "Sovrapponi alla mappa ufficiale i layer delle barriere vissute — scale, paura, lingua, costi, orari. Documentane tre.",
         "objectives": {
           "document_three": "Documenta 3 barriere vissute (la foto di Samir vale come primo pin)."
+        }
+      },
+      "M23": {
+        "title": "Chi manca?",
+        "description": "Incrocia tre fonti — i giri di posta di Pablo, il bus di Gwen, il bar di Amin — e costruisci la lista di chi non compare mai, da nessuna parte.",
+        "objectives": {
+          "source_pablo": "Chiedi a Pablo chi ha smesso di aprire la porta.",
+          "source_gwen": "Chiedi a Gwen chi non sale più sulla 14.",
+          "source_amin": "Chiedi ad Amin chi non entra più nel bar."
         }
       }
     },

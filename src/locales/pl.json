@@ -965,6 +965,53 @@
             "close": "“The map is not the territory.”"
           }
         }
+      },
+      "samir_m23": {
+        "start": {
+          "text": "Your maps show the streets, your lists the “active citizens”. I want the list of the people who never appear — anywhere.",
+          "choices": {
+            "engage": "“Then let's build the list of who's missing.”",
+            "later": "Not now."
+          }
+        },
+        "brief": {
+          "text": "Three people see who disappears before anyone else does. Pablo, on his mail rounds. Gwen, at the wheel of the 14. Amin, behind his counter. Ask them who they've stopped seeing.",
+          "choices": {
+            "go": "“I'll ask all three.”"
+          }
+        }
+      },
+      "pablo_m23_source": {
+        "start": {
+          "text": "Who's missing? I can tell you who stopped opening the door. Top floors, mostly — the lift breaks and they just stay up there. I still knock. Some days nobody knocks back.",
+          "choices": {
+            "note": "Add them to the list: the isolated elders."
+          }
+        }
+      },
+      "gwen_m23_source": {
+        "start": {
+          "text": "The 14 tells you everything. The families from the towers stopped boarding when the new timetable went up — paper only, one language only. Now they walk. Or they don't go at all.",
+          "choices": {
+            "note": "Add them to the list: the families the language leaves out."
+          }
+        }
+      },
+      "amin_m23_source": {
+        "start": {
+          "text": "The Youth Court kids used to fill two tables after school. Since the gate started closing at six they drift to the parking lot instead. Nobody has asked them a single question.",
+          "choices": {
+            "note": "Add them to the list: the Youth Court kids."
+          }
+        }
+      },
+      "samir_m23_resolution": {
+        "start": {
+          "text": "Isolated elders. Families the language leaves out. Kids nobody asks. That's the real map of this city — the one with the holes in it. From now on, every invitation we write has three names it is not allowed to skip.",
+          "choices": {
+            "close": "“Arriving is already participation.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1132,6 +1179,15 @@
         "description": "Overlay the official map with the layers of lived barriers — stairs, fear, language, costs, schedules. Document three of them.",
         "objectives": {
           "document_three": "Document 3 lived barriers (Samir's photo counts as the first pin)."
+        }
+      },
+      "M23": {
+        "title": "Who Is Missing?",
+        "description": "Cross-reference three sources — Pablo's mail rounds, Gwen's bus, Amin's bar — and build the list of the people who never appear anywhere.",
+        "objectives": {
+          "source_pablo": "Ask Pablo who stopped opening the door.",
+          "source_gwen": "Ask Gwen who no longer boards the 14.",
+          "source_amin": "Ask Amin who no longer comes into the bar."
         }
       }
     },
