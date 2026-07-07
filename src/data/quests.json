@@ -643,6 +643,26 @@
         "crisisLink": null,
         "registry": "Chapter 2 Mission 4 'Useful, Not Beautiful' (Narrative v2 §4.4): assess Courtyard 17 on 4 axes — aesthetic/social/practical/accessible; the sheet pre-fills ch.3 Mission 2 'Make It Usable'."
       }
+    },
+    {
+      "id": "M31",
+      "title": "content.quests.M31.title",
+      "description": "content.quests.M31.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "make_promise",
+          "description": "content.quests.M31.objectives.make_promise",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Anna",
+        "abilityMatch": "All · Keeping one's word",
+        "crisisLink": null,
+        "registry": "Chapter 3 Mission 1 'The First Promise' (Narrative v2 §5.1 ✳): choose ONE of 6 interventions; the promise enters the logbook with a deadline. Kept: Trust +3. Broken: Trust -2, frag +1 (PromiseManager)."
+      }
     }
   ]
 }

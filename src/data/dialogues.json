@@ -4955,6 +4955,242 @@
           ]
         }
       }
+    },
+    {
+      "id": "anna_m31",
+      "speakerId": "anna",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.anna_m31.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.anna_m31.start.choices.engage",
+              "next": "choose"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.anna_m31.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "choose": {
+          "text": "content.dialogues.anna_m31.choose.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M31"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M31"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "common_room",
+              "label": "content.dialogues.anna_m31.choose.choices.common_room",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseOpenCommonRoom",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "common_room"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseOpenCommonRoom",
+                    "missionId": "M31",
+                    "option": "common_room"
+                  }
+                }
+              ],
+              "next": "sealed"
+            },
+            {
+              "id": "crossing",
+              "label": "content.dialogues.anna_m31.choose.choices.crossing",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseSaferCrossing",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "crossing"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseSaferCrossing",
+                    "missionId": "M31",
+                    "option": "crossing"
+                  }
+                }
+              ],
+              "next": "sealed"
+            },
+            {
+              "id": "young_event",
+              "label": "content.dialogues.anna_m31.choose.choices.young_event",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseChildFriendlyMeeting",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "young_event"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseChildFriendlyMeeting",
+                    "missionId": "M31",
+                    "option": "young_event"
+                  }
+                }
+              ],
+              "next": "sealed"
+            },
+            {
+              "id": "translated_comms",
+              "label": "content.dialogues.anna_m31.choose.choices.translated_comms",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseAccessibleBusInfo",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "translated_comms"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseAccessibleBusInfo",
+                    "missionId": "M31",
+                    "option": "translated_comms"
+                  }
+                }
+              ],
+              "next": "sealed"
+            },
+            {
+              "id": "care_network",
+              "label": "content.dialogues.anna_m31.choose.choices.care_network",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseSupportLonelyElders",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "care_network"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseSupportLonelyElders",
+                    "missionId": "M31",
+                    "option": "care_network"
+                  }
+                }
+              ],
+              "next": "sealed"
+            },
+            {
+              "id": "courtyard",
+              "label": "content.dialogues.anna_m31.choose.choices.courtyard",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "promiseRepairDay",
+                  "value": "active"
+                },
+                {
+                  "type": "setVariable",
+                  "key": "m31_choice",
+                  "value": "courtyard"
+                },
+                {
+                  "type": "completeObjective",
+                  "questId": "M31",
+                  "objectiveId": "make_promise"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "promise_made",
+                  "payload": {
+                    "promiseId": "promiseRepairDay",
+                    "missionId": "M31",
+                    "option": "courtyard"
+                  }
+                }
+              ],
+              "next": "sealed"
+            }
+          ]
+        },
+        "sealed": {
+          "text": "content.dialogues.anna_m31.sealed.text",
+          "choices": [
+            {
+              "id": "close",
+              "label": "content.dialogues.anna_m31.sealed.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

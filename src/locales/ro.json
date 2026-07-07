@@ -1104,6 +1104,32 @@
             "close": "Chapter 3 — Small Repairs."
           }
         }
+      },
+      "anna_m31": {
+        "start": {
+          "text": "One promise, small, with a date. The neighbourhood doesn't remember projects: it remembers whether you actually come back on Thursday.",
+          "choices": {
+            "engage": "“One promise. Let's choose it.”",
+            "later": "Not yet."
+          }
+        },
+        "choose": {
+          "text": "Anna slides the list across the table. “Small repairs — concrete, visible, maintained. Pick ONE. The logbook gets the date; the neighbourhood gets the Thursday.”",
+          "choices": {
+            "common_room": "The common room — reopen it with Tom's paperwork done right.",
+            "crossing": "The crossing — make Ben's corner safe to cross.",
+            "young_event": "A young-led event — the Youth Court kids set the agenda.",
+            "translated_comms": "Communications people can read — timetables and notices, translated.",
+            "care_network": "A care network — someone knocks, the top floors answer.",
+            "courtyard": "The courtyard — a repair Saturday at Courtyard 17."
+          }
+        },
+        "sealed": {
+          "text": "It goes into the logbook, with a date. ANNA: “The neighbourhood doesn't remember projects. Come back on Thursday.”",
+          "choices": {
+            "close": "“I'll be there.”"
+          }
+        }
       }
     },
     "quests": {
@@ -1287,6 +1313,13 @@
         "description": "Assess Courtyard 17 on four axes — aesthetic, social, practical, accessible. The honest sheet pre-fills the repair Saturday.",
         "objectives": {
           "assess_courtyard": "Assess the courtyard through all four lenses."
+        }
+      },
+      "M31": {
+        "title": "The First Promise",
+        "description": "Choose one intervention out of six and promise it with a date. The neighbourhood remembers whether you come back on Thursday.",
+        "objectives": {
+          "make_promise": "Choose one intervention and put it in the logbook with a deadline."
         }
       }
     },
