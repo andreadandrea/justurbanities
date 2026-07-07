@@ -160,6 +160,27 @@
       ]
     },
     {
+      "npcId": "samir",
+      "scene": "community_center",
+      "position": {
+        "x": 1000,
+        "y": 950
+      },
+      "dialogueId": "samir_m33",
+      "conditions": [
+        {
+          "type": "variableEquals",
+          "key": "chapter3_unlocked",
+          "value": true
+        },
+        {
+          "type": "questState",
+          "questId": "M33",
+          "state": "locked"
+        }
+      ]
+    },
+    {
       "npcId": "elena",
       "scene": "community_center",
       "position": {

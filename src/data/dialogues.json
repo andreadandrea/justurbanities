@@ -5261,6 +5261,236 @@
           ]
         }
       }
+    },
+    {
+      "id": "samir_m33",
+      "speakerId": "samir",
+      "startNode": "start",
+      "nodes": {
+        "start": {
+          "text": "content.dialogues.samir_m33.start.text",
+          "choices": [
+            {
+              "id": "engage",
+              "label": "content.dialogues.samir_m33.start.choices.engage",
+              "next": "tone"
+            },
+            {
+              "id": "later",
+              "label": "content.dialogues.samir_m33.start.choices.later",
+              "end": true
+            }
+          ]
+        },
+        "tone": {
+          "text": "content.dialogues.samir_m33.tone.text",
+          "effects": [
+            {
+              "type": "startQuest",
+              "questId": "M33"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "mission_started",
+              "payload": {
+                "missionId": "M33"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "warm",
+              "label": "content.dialogues.samir_m33.tone.choices.warm",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_tone",
+                  "value": "warm"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "tone",
+                    "value": "warm"
+                  }
+                }
+              ],
+              "next": "languages"
+            },
+            {
+              "id": "institutional",
+              "label": "content.dialogues.samir_m33.tone.choices.institutional",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_tone",
+                  "value": "institutional"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "tone",
+                    "value": "institutional"
+                  }
+                }
+              ],
+              "next": "languages"
+            }
+          ]
+        },
+        "languages": {
+          "text": "content.dialogues.samir_m33.languages.text",
+          "choices": [
+            {
+              "id": "multi",
+              "label": "content.dialogues.samir_m33.languages.choices.multi",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_languages",
+                  "value": "multi"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "languages",
+                    "value": "multi"
+                  }
+                }
+              ],
+              "next": "channels"
+            },
+            {
+              "id": "one",
+              "label": "content.dialogues.samir_m33.languages.choices.one",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_languages",
+                  "value": "one"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "languages",
+                    "value": "one"
+                  }
+                }
+              ],
+              "next": "channels"
+            }
+          ]
+        },
+        "channels": {
+          "text": "content.dialogues.samir_m33.channels.text",
+          "choices": [
+            {
+              "id": "street",
+              "label": "content.dialogues.samir_m33.channels.choices.street",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_channels",
+                  "value": "street"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "channels",
+                    "value": "street"
+                  }
+                }
+              ],
+              "next": "done"
+            },
+            {
+              "id": "official",
+              "label": "content.dialogues.samir_m33.channels.choices.official",
+              "effects": [
+                {
+                  "type": "setVariable",
+                  "key": "m33_channels",
+                  "value": "official"
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_choice",
+                  "payload": {
+                    "step": "channels",
+                    "value": "official"
+                  }
+                }
+              ],
+              "next": "done"
+            }
+          ]
+        },
+        "done": {
+          "text": "content.dialogues.samir_m33.done.text",
+          "effects": [
+            {
+              "type": "setVariable",
+              "key": "invitation_ready",
+              "value": true
+            },
+            {
+              "type": "completeObjective",
+              "questId": "M33",
+              "objectiveId": "compose_invitation"
+            },
+            {
+              "type": "createProgressEvent",
+              "eventType": "invitation_composed",
+              "payload": {
+                "missionId": "M33"
+              }
+            }
+          ],
+          "choices": [
+            {
+              "id": "sign",
+              "label": "content.dialogues.samir_m33.done.choices.sign",
+              "conditions": [
+                {
+                  "type": "variableEquals",
+                  "key": "invito_da_correggere",
+                  "value": true
+                }
+              ],
+              "effects": [
+                {
+                  "type": "addResource",
+                  "key": "voice",
+                  "value": 1
+                },
+                {
+                  "type": "setVariable",
+                  "key": "invitation_signed_by_samir",
+                  "value": true
+                },
+                {
+                  "type": "createProgressEvent",
+                  "eventType": "invitation_signed",
+                  "payload": {
+                    "by": "samir"
+                  }
+                }
+              ],
+              "end": true
+            },
+            {
+              "id": "close",
+              "label": "content.dialogues.samir_m33.done.choices.close",
+              "end": true
+            }
+          ]
+        }
+      }
     }
   ]
 }

@@ -683,6 +683,26 @@
         "crisisLink": null,
         "registry": "Chapter 3 Mission 2 'Make It Usable' (Narrative v2 §5.2): the Modular Repair mini-game IS the repair Saturday; trigger moved here from sigrid_n05 engage (task 9.1 note). The ch.2 M4 sheet pre-fills the flagged axes."
       }
+    },
+    {
+      "id": "M33",
+      "title": "content.quests.M33.title",
+      "description": "content.quests.M33.description",
+      "status": "locked",
+      "objectives": [
+        {
+          "id": "compose_invitation",
+          "description": "content.quests.M33.objectives.compose_invitation",
+          "completed": false,
+          "required": true
+        }
+      ],
+      "meta": {
+        "npc": "Samir + Anna",
+        "abilityMatch": "Samir · Reaching the unreached",
+        "crisisLink": null,
+        "registry": "Chapter 3 Mission 3 'The Invitation Problem' (Narrative v2 §5.3): compose the invitation — tone, languages, channels. If invito_da_correggere from ch.1, Samir signs the new version: Recognition + Voice +1."
+      }
     }
   ]
 }

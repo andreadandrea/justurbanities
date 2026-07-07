@@ -1160,6 +1160,43 @@
             "close": "«Utile. Non bello.»"
           }
         }
+      },
+      "samir_m33": {
+        "start": {
+          "text": "Rifacciamo l'invito. Senza “S.V.”, senza articoli di legge. E non solo in una lingua.",
+          "choices": {
+            "engage": "«Componiamolo insieme.»",
+            "later": "Non ora."
+          }
+        },
+        "tone": {
+          "text": "Il vecchio invito si apre con un numero di protocollo e si chiude con un riferimento di legge. Samir lo spiana sul tavolo. «Prima decisione: come parla?»",
+          "choices": {
+            "warm": "Come un vicino al bancone di Amin — parole semplici, una domanda vera.",
+            "institutional": "Teniamolo ufficiale — la gente deve capire che è una cosa seria."
+          }
+        },
+        "languages": {
+          "text": "«Seconda decisione: le lingue di chi?» La fila allo sportello di Lake Edge ne parla cinque; l'invito, finora, una.",
+          "choices": {
+            "multi": "Tutte le lingue della fila — il gruppo di Viveca e l'edicola aiutano a tradurre.",
+            "one": "Una lingua sola, per semplicità."
+          }
+        },
+        "channels": {
+          "text": "ANNA: «E lo portiamo dove la gente sta già: il bar di Amin, l'edicola di Abdullah, il muro di Youth Court.»",
+          "choices": {
+            "street": "Dove la gente sta già — il bar, l'edicola, il muro.",
+            "official": "La bacheca ufficiale, come sempre."
+          }
+        },
+        "done": {
+          "text": "Il nuovo invito è sul tavolo. Niente numero di protocollo. Una domanda a cui la gente può rispondere.",
+          "choices": {
+            "sign": "Samir firma la nuova versione — il suo nome, per primo. (Voice +1)",
+            "close": "Mandalo in giro."
+          }
+        }
       }
     },
     "quests": {
@@ -1357,6 +1394,13 @@
         "description": "Un sabato, materiali di recupero, quattro bisogni del cortile. Si può fare molto, se nessuno pretende il perfetto.",
         "objectives": {
           "repair_saturday": "Fai il sabato delle riparazioni al Cortile 17."
+        }
+      },
+      "M33": {
+        "title": "Il problema dell'invito",
+        "description": "Rifai l'invito — tono, lingue, canali — e portalo dove la gente sta già.",
+        "objectives": {
+          "compose_invitation": "Componi il nuovo invito con Samir e Anna."
         }
       }
     },
