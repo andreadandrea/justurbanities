@@ -23,6 +23,7 @@ import { MpJoinPanel } from "../ui/MpJoinPanel";
 import { FacilitatorPanel } from "../ui/FacilitatorPanel";
 import { SupabaseAuth, type AuthSession } from "../sync/SupabaseAuth";
 import { CloudSaves } from "../sync/CloudSaves";
+import { MpSessions } from "../game/mp/MpSessions";
 import { AccountPanel } from "../ui/AccountPanel";
 import { PlayerDashboard } from "../ui/PlayerDashboard";
 import { MinigamePanel } from "../ui/MinigamePanel";
@@ -504,19 +505,25 @@ export class App {
       url: import.meta.env.VITE_SUPABASE_URL as string | undefined,
       anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
     };
+    let auth: SupabaseAuth | null = null;
+    let mpSessions: MpSessions | null = null;
+    /** MP block below re-applies the adapter on sign-in/out. */
+    let onAuthChangedHook: () => void = () => {};
     if (authEnv.url && authEnv.anonKey) {
       const authConfig = { url: authEnv.url, anonKey: authEnv.anonKey };
-      const auth = new SupabaseAuth(authConfig, {
+      auth = new SupabaseAuth(authConfig, {
         load: () => settings.get<AuthSession>("authSession"),
         save: (session) => settings.set("authSession", session ?? null).then(() => undefined)
       });
+      const boundAuth = auth;
       await auth.restore();
       const cloudSaves = new CloudSaves(authConfig, auth);
+      mpSessions = new MpSessions(authConfig, auth);
 
       // MP identity follows the account: a signed-in player owns their
       // events under a stable id on every device.
       const syncMpIdentity = async () => {
-        const user = auth.currentUser;
+        const user = boundAuth.currentUser;
         if (!user) return;
         const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
         if (joined && joined.playerId !== user.id) {
@@ -539,12 +546,13 @@ export class App {
           this.changeScene(this.state.currentScene, this.state.player);
           void this.activeScene().saveNow();
         },
-        onAuthChanged: () => void syncMpIdentity()
+        onAuthChanged: () => void syncMpIdentity().then(() => onAuthChangedHook()),
+        privacyUrl: `${import.meta.env.BASE_URL}privacy.html`
       });
 
       const dashboardPlayerId = async (): Promise<string> => {
         const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
-        return auth.currentUser?.id ?? joined?.playerId ?? "local-user";
+        return boundAuth.currentUser?.id ?? joined?.playerId ?? "local-user";
       };
       let dashboardId = "local-user";
       void dashboardPlayerId().then((id) => (dashboardId = id));
@@ -560,7 +568,12 @@ export class App {
           const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
           if (joined && authEnv.url && authEnv.anonKey) {
             try {
-              return await fetchSessionEvents({ url: authEnv.url, anonKey: authEnv.anonKey, sessionCode: joined.code });
+              return await fetchSessionEvents({
+                url: authEnv.url,
+                anonKey: authEnv.anonKey,
+                sessionCode: joined.code,
+                accessToken: () => boundAuth.accessToken
+              });
             } catch {
               // Offline or expired session: fall back to the local log.
             }
@@ -691,11 +704,18 @@ export class App {
         supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
       };
       const applyMpAdapter = (info: MpJoinInfo | undefined, boot: boolean) => {
-        const choice = chooseRemoteAdapter(window.location.search, info, mpEnv);
+        // Hardening v2: the account is the identity — writes carry the JWT.
+        const choice = chooseRemoteAdapter(window.location.search, info, mpEnv, auth?.currentUser?.id);
         if (choice.kind !== "supabase") return;
         this.syncEngine.stop();
-        this.syncEngine = new SyncEngine(this.syncQueue, new SupabaseRemoteApi(choice.config));
+        this.syncEngine = new SyncEngine(
+          this.syncQueue,
+          new SupabaseRemoteApi({ ...choice.config, accessToken: () => auth?.accessToken ?? null })
+        );
         if (boot) this.syncEngine.start();
+      };
+      onAuthChangedHook = () => {
+        void settings.get<MpJoinInfo>(MP_SESSION_SETTING).then((info) => applyMpAdapter(info, true));
       };
       const joined = await settings.get<MpJoinInfo>(MP_SESSION_SETTING);
       new MpJoinPanel({
@@ -722,7 +742,12 @@ export class App {
       const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
       const loadEvents = async (): Promise<CityEvent[]> => {
         if (supabaseUrl && supabaseAnonKey && facilitatorCode !== "LOCAL") {
-          return fetchSessionEvents({ url: supabaseUrl, anonKey: supabaseAnonKey, sessionCode: facilitatorCode });
+          return fetchSessionEvents({
+            url: supabaseUrl,
+            anonKey: supabaseAnonKey,
+            sessionCode: facilitatorCode,
+            accessToken: () => auth?.accessToken ?? null
+          });
         }
         const local = await this.progressRepository.listBySession(session.id);
         return local.map((event) => ({
@@ -739,7 +764,14 @@ export class App {
         sessionCode: () => facilitatorCode,
         loadEvents,
         playerName: (playerId) =>
-          joined && joined.playerId === playerId ? joined.displayName : displayNames.get(playerId) ?? playerId
+          joined && joined.playerId === playerId ? joined.displayName : displayNames.get(playerId) ?? playerId,
+        admin: mpSessions
+          ? {
+              signedIn: () => auth?.currentUser !== null && auth !== null,
+              createSession: () => mpSessions!.create(),
+              eraseSession: (code) => mpSessions!.erase(code)
+            }
+          : undefined
       });
     }
 

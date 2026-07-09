@@ -208,7 +208,14 @@
       "crises": "Esiti delle crisi",
       "plan": "Piano firmato",
       "export": "⬇ Report di classe (JSON)",
-      "loadFailed": "Impossibile caricare il log di sessione — controlla la connessione e riprova."
+      "loadFailed": "Impossibile caricare il log di sessione — controlla la connessione e riprova.",
+      "admin": "Sessioni di classe (docente)",
+      "needSignIn": "Accedi dal pannello Account per creare o cancellare le sessioni.",
+      "createSession": "Crea una sessione di classe",
+      "sessionCreated": "Sessione creata — condividi questo codice",
+      "erase": "Cancella i dati di questa sessione",
+      "eraseConfirm": "Sicuro? Clicca di nuovo per cancellare TUTTO",
+      "erased": "Sessione cancellata."
     },
     "minigame": {
       "pileEmpty": "Il mucchio è vuoto.",
@@ -241,7 +248,8 @@
       "pushOk": "Salvato sul cloud.",
       "pushFail": "Salvataggio cloud non riuscito — controlla la connessione.",
       "pullOk": "Partita ripristinata dal cloud.",
-      "pullNone": "Nessun salvataggio cloud — gioca, poi usa Salva sul cloud."
+      "pullNone": "Nessun salvataggio cloud — gioca, poi usa Salva sul cloud.",
+      "privacy": "Informativa privacy"
     },
     "dashboard": {
       "toggle": "📊 La mia dashboard",

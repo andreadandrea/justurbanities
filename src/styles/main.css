@@ -1275,3 +1275,27 @@ body.high-contrast .dashboard-panel {
   color: #000;
   border-color: #000;
 }
+
+.account-privacy {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: calc(12px * var(--font-scale, 1));
+  color: #6b5636;
+}
+
+.facilitator-admin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.facilitator-erase {
+  border-color: #8a4a3c;
+  color: #8a4a3c;
+}
+
+.facilitator-session-code {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}

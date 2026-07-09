@@ -156,3 +156,50 @@ describe("buildMyContribution — the personal slice of the shared city", () => 
     expect(other.resourcesContributed).toEqual({ care: 3 });
   });
 });
+
+describe("MpSessions — teacher-owned class sessions (hardening v2)", () => {
+  async function teacher() {
+    const { impl } = fetchStub([{ ok: true, status: 200, body: SESSION_BODY }]);
+    const auth = new SupabaseAuth(CONFIG, memoryStorage(), impl);
+    await auth.signIn("teacher@example.eu", "secret123");
+    return auth;
+  }
+
+  it("create inserts a valid 6-char session under the signed-in owner", async () => {
+    const { MpSessions } = await import("../../src/game/mp/MpSessions");
+    const { isValidSessionCode } = await import("../../src/game/mp/SessionModel");
+    const auth = await teacher();
+    const { impl, calls } = fetchStub([{ ok: true, status: 201 }]);
+    const sessions = new MpSessions(CONFIG, auth, impl, () => 0.42);
+    const code = await sessions.create();
+    expect(code).not.toBeNull();
+    expect(isValidSessionCode(code!)).toBe(true);
+    expect(calls[0].input).toContain("/rest/v1/sessions");
+    const body = JSON.parse(String(calls[0].init?.body));
+    expect(body).toMatchObject({ code, owner_id: "user-1" });
+    const headers = calls[0].init?.headers as Record<string, string>;
+    expect(headers.authorization).toBe("Bearer jwt-token");
+  });
+
+  it("erase deletes the event log first, then the session row", async () => {
+    const { MpSessions } = await import("../../src/game/mp/MpSessions");
+    const auth = await teacher();
+    const { impl, calls } = fetchStub([
+      { ok: true, status: 204 },
+      { ok: true, status: 204 }
+    ]);
+    const sessions = new MpSessions(CONFIG, auth, impl);
+    expect(await sessions.erase("ABC234")).toBe(true);
+    expect(calls[0].input).toContain("/rest/v1/session_events?session_code=eq.ABC234");
+    expect(calls[0].init?.method).toBe("DELETE");
+    expect(calls[1].input).toContain("/rest/v1/sessions?code=eq.ABC234");
+  });
+
+  it("signed-out: no creation, no erasure", async () => {
+    const { MpSessions } = await import("../../src/game/mp/MpSessions");
+    const auth = new SupabaseAuth(CONFIG, memoryStorage(), fetchStub([]).impl);
+    const sessions = new MpSessions(CONFIG, auth, fetchStub([]).impl);
+    expect(await sessions.create()).toBeNull();
+    expect(await sessions.erase("ABC234")).toBe(false);
+  });
+});

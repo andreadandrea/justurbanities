@@ -38,23 +38,28 @@ export function sessionCodeFromUrl(search: string): string | undefined {
 
 /**
  * The remote adapter to use. Supabase only when: flag on, session joined,
- * and the build ships the EU-project config. Everything else stays on the
- * fake adapter (in-memory, no network).
+ * the build ships the EU-project config, AND the player is signed in —
+ * hardening v2 made writes authenticated-only, so an anonymous adapter
+ * would only queue failures. Everything else stays on the fake adapter
+ * (in-memory, no network).
  */
 export function chooseRemoteAdapter(
   search: string,
   joinInfo: MpJoinInfo | undefined,
-  env: MpEnv
+  env: MpEnv,
+  authUserId?: string
 ): { kind: "supabase"; config: SupabaseConfig } | { kind: "fake" } {
   if (!mpEnabled(search)) return { kind: "fake" };
   if (!joinInfo || !env.supabaseUrl || !env.supabaseAnonKey) return { kind: "fake" };
+  if (!authUserId) return { kind: "fake" };
   return {
     kind: "supabase",
     config: {
       url: env.supabaseUrl,
       anonKey: env.supabaseAnonKey,
       sessionCode: joinInfo.code,
-      playerId: joinInfo.playerId
+      // The account IS the identity: RLS rejects events signed otherwise.
+      playerId: authUserId
     }
   };
 }

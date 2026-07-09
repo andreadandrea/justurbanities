@@ -18,9 +18,19 @@ export type SupabaseConfig = {
   anonKey: string;
   /** 6-char classroom session code (SessionModel). */
   sessionCode: string;
-  /** Pseudonymous device key for this player (SessionModel). */
+  /** The player's auth user id (accounts decision — RLS checks it). */
   playerId: string;
+  /**
+   * Signed-in user's JWT, refreshed by SupabaseAuth. Hardening v2 makes
+   * writes authenticated-only, so requests send this when available.
+   */
+  accessToken?: () => string | null;
 };
+
+function authHeaders(config: Pick<SupabaseConfig, "anonKey" | "accessToken">): Record<string, string> {
+  const token = config.accessToken?.() ?? config.anonKey;
+  return { apikey: config.anonKey, authorization: `Bearer ${token}` };
+}
 
 export type FetchLike = (input: string, init?: RequestInit) => Promise<Pick<Response, "ok" | "status">>;
 
@@ -32,7 +42,7 @@ export const SESSION_EVENTS_TABLE = "session_events";
  * the dashboard can show a retry state.
  */
 export async function fetchSessionEvents(
-  config: Pick<SupabaseConfig, "url" | "anonKey" | "sessionCode">,
+  config: Pick<SupabaseConfig, "url" | "anonKey" | "sessionCode" | "accessToken">,
   fetchImpl: (input: string, init?: RequestInit) => Promise<Pick<Response, "ok" | "status" | "json">> = (
     input,
     init
@@ -41,7 +51,7 @@ export async function fetchSessionEvents(
   const base = config.url.replace(/\/$/, "");
   const query = `session_code=eq.${encodeURIComponent(config.sessionCode)}&order=seq.asc&select=entity_id,player_id,payload,ts`;
   const response = await fetchImpl(`${base}/rest/v1/${SESSION_EVENTS_TABLE}?${query}`, {
-    headers: { apikey: config.anonKey, authorization: `Bearer ${config.anonKey}` }
+    headers: authHeaders(config)
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const rows = (await response.json()) as Array<{
@@ -92,8 +102,7 @@ export class SupabaseRemoteApi implements RemoteApiAdapter {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            apikey: this.config.anonKey,
-            authorization: `Bearer ${this.config.anonKey}`,
+            ...authHeaders(this.config),
             // Duplicate entity ids are replays: the server keeps the first.
             prefer: "resolution=ignore-duplicates"
           },
