@@ -13,6 +13,8 @@ type AccountPanelDeps = {
   applySnapshot: (snapshot: Record<string, unknown>) => void;
   /** Fired on sign-in/out so MP identity can follow the account. */
   onAuthChanged: (user: AuthUser | null) => void;
+  /** Privacy notice URL (GDPR — linked next to the registration form). */
+  privacyUrl: string;
 };
 
 /**
@@ -150,6 +152,14 @@ export class AccountPanel {
     form.appendChild(actions);
     form.addEventListener("submit", (event) => event.preventDefault());
     this.body.appendChild(form);
+
+    const privacy = document.createElement("a");
+    privacy.className = "account-privacy";
+    privacy.href = this.deps.privacyUrl;
+    privacy.target = "_blank";
+    privacy.rel = "noopener";
+    privacy.textContent = i18n.t("ui.account.privacy");
+    this.body.appendChild(privacy);
   }
 
   private input(type: string, label: string): { wrap: HTMLElement; field: HTMLInputElement } {

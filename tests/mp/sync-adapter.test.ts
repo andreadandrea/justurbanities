@@ -91,18 +91,23 @@ describe("MP-2 adapter selection (zero network with the flag off)", () => {
   });
 
   it("flag on but not joined or not configured → still fake", () => {
-    expect(chooseRemoteAdapter("?mp=1", undefined, env)).toEqual({ kind: "fake" });
-    expect(chooseRemoteAdapter("?mp=1", joined, {})).toEqual({ kind: "fake" });
+    expect(chooseRemoteAdapter("?mp=1", undefined, env, "user-1")).toEqual({ kind: "fake" });
+    expect(chooseRemoteAdapter("?mp=1", joined, {}, "user-1")).toEqual({ kind: "fake" });
   });
 
-  it("flag on + joined + configured → supabase with the session identity", () => {
-    expect(chooseRemoteAdapter("?mp=1", joined, env)).toEqual({
+  it("hardening v2: signed-out players stay on the fake adapter", () => {
+    expect(chooseRemoteAdapter("?mp=1", joined, env)).toEqual({ kind: "fake" });
+    expect(chooseRemoteAdapter("?mp=1", joined, env, undefined)).toEqual({ kind: "fake" });
+  });
+
+  it("flag on + joined + configured + signed in → supabase with the ACCOUNT identity", () => {
+    expect(chooseRemoteAdapter("?mp=1", joined, env, "user-1")).toEqual({
       kind: "supabase",
       config: {
         url: "https://eu-project.supabase.co",
         anonKey: "anon-key",
         sessionCode: "ABC234",
-        playerId: "player-a"
+        playerId: "user-1"
       }
     });
   });

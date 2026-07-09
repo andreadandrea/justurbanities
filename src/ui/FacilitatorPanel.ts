@@ -10,6 +10,12 @@ type FacilitatorPanelDeps = {
   loadEvents: () => Promise<CityEvent[]>;
   /** Pseudonym for a device key, when known (SessionModel players). */
   playerName: (playerId: string) => string;
+  /** Session ownership (hardening v2): create/erase, teacher signed in. */
+  admin?: {
+    signedIn: () => boolean;
+    createSession: () => Promise<string | null>;
+    eraseSession: (code: string) => Promise<boolean>;
+  };
 };
 
 /**
@@ -22,6 +28,8 @@ type FacilitatorPanelDeps = {
 export class FacilitatorPanel {
   private readonly panel: HTMLElement;
   private readonly body: HTMLElement;
+  /** Two-click erase: the first click arms, the second executes. */
+  private eraseArmed = false;
 
   constructor(private readonly deps: FacilitatorPanelDeps) {
     const { root, i18n } = deps;
@@ -109,6 +117,67 @@ export class FacilitatorPanel {
       URL.revokeObjectURL(url);
     });
     this.body.appendChild(download);
+
+    this.renderAdmin();
+  }
+
+  /** Session ownership: the signed-in teacher creates and erases sessions. */
+  private renderAdmin(): void {
+    const admin = this.deps.admin;
+    if (!admin) return;
+    const { i18n } = this.deps;
+
+    const heading = document.createElement("h4");
+    heading.textContent = i18n.t("ui.facilitator.admin");
+    this.body.appendChild(heading);
+
+    if (!admin.signedIn()) {
+      const hint = document.createElement("p");
+      hint.textContent = i18n.t("ui.facilitator.needSignIn");
+      this.body.appendChild(hint);
+      return;
+    }
+
+    const actions = document.createElement("div");
+    actions.className = "facilitator-admin";
+
+    const create = document.createElement("button");
+    create.type = "button";
+    create.textContent = i18n.t("ui.facilitator.createSession");
+    create.addEventListener("click", () => {
+      create.disabled = true;
+      void admin.createSession().then((code) => {
+        create.disabled = false;
+        const note = document.createElement("p");
+        note.className = "facilitator-session-code";
+        note.textContent = code
+          ? `${i18n.t("ui.facilitator.sessionCreated")}: ${code}`
+          : i18n.t("ui.facilitator.loadFailed");
+        actions.appendChild(note);
+      });
+    });
+
+    const erase = document.createElement("button");
+    erase.type = "button";
+    erase.className = "facilitator-erase";
+    erase.textContent = i18n.t("ui.facilitator.erase");
+    erase.addEventListener("click", () => {
+      if (!this.eraseArmed) {
+        this.eraseArmed = true;
+        erase.textContent = i18n.t("ui.facilitator.eraseConfirm");
+        return;
+      }
+      this.eraseArmed = false;
+      erase.disabled = true;
+      void admin.eraseSession(this.deps.sessionCode()).then((ok) => {
+        erase.disabled = false;
+        erase.textContent = i18n.t(ok ? "ui.facilitator.erased" : "ui.facilitator.loadFailed");
+        if (ok) void this.refresh();
+      });
+    });
+
+    actions.append(create, erase);
+    this.body.appendChild(actions);
   }
 
   private section(title: string, lines: string[]): void {

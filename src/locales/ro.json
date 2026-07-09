@@ -208,7 +208,14 @@
       "crises": "Crisis tiers",
       "plan": "Signed plan",
       "export": "⬇ Class report (JSON)",
-      "loadFailed": "Could not load the session log — check the connection and retry."
+      "loadFailed": "Could not load the session log — check the connection and retry.",
+      "admin": "Class sessions (teacher)",
+      "needSignIn": "Sign in from the Account panel to create or erase sessions.",
+      "createSession": "Create a class session",
+      "sessionCreated": "Session created — share this code",
+      "erase": "Erase this session's data",
+      "eraseConfirm": "Are you sure? Click again to erase EVERYTHING",
+      "erased": "Session erased."
     },
     "minigame": {
       "pileEmpty": "The pile is empty.",
@@ -241,7 +248,8 @@
       "pushOk": "Saved to the cloud.",
       "pushFail": "Cloud save failed — check the connection.",
       "pullOk": "Game restored from the cloud.",
-      "pullNone": "No cloud save yet — play, then use Save to cloud."
+      "pullNone": "No cloud save yet — play, then use Save to cloud.",
+      "privacy": "Privacy notice"
     },
     "dashboard": {
       "toggle": "📊 My dashboard",
